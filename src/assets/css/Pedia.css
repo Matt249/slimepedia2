@@ -1,0 +1,405 @@
+.slimes-menu {
+    display: flex;
+    flex-flow: row nowrap;
+    overflow-y: scroll;
+    align-items: stretch;
+    height: 100%;
+}
+
+.list-slime,
+.list-food {
+    flex: 0 0 auto;
+    margin: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+}
+
+.list-slime {
+    flex: 0 0 auto;
+    margin: 10px;
+}
+
+.list-food {
+    margin: 0;
+}
+
+@media (max-width: 1600px) {
+
+    .list-slime,
+    .list-food {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 2000px) {
+
+    .list-slime,
+    .list-food {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+.slime-presentation {
+    flex-grow: 2;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.slime-infos {
+    display: grid;
+    overflow: hidden;
+    height: 100%;
+    transition: height .5s;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "image food fav"
+        "image largo toy"
+        "image spawn spawn";
+    gap: 20px;
+}
+
+.food-presentation.hidden-infos,
+.slime-infos.hidden-infos {
+    height: 0;
+}
+
+.image-title {
+    position: relative;
+    background-color: var(--item-color);
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    grid-area: image;
+}
+
+.info-title>h1,
+.info-title>h2 {
+    margin: 10px;
+}
+
+.info-title>h2 {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.image-container {
+    flex: 0 1;
+    position: relative;
+}
+
+.img-plort {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 5vw;
+    height: auto;
+}
+
+.img-main {
+    width: 100%;
+    flex: 1 1;
+    transform: scale(.75) translate(0, -15%);
+}
+
+.little-box {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--item-color);
+    padding: 20px;
+    border-radius: 20px;
+    height: fit-content;
+    grid-area: info;
+    overflow: hidden;
+}
+
+.little-box>img {
+    width: 50px;
+    height: 50px;
+}
+
+.little-box>div {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.little-box>div>h3,
+.little-box>div>h4 {
+    text-align: left;
+    margin: 0;
+}
+
+.little-box>div>h4 {
+    font-weight: 500;
+}
+
+.infos-box>div>p {
+    margin: 10px 0;
+    text-align: justify;
+    line-height: 1;
+}
+
+.box-food {
+    grid-area: food;
+}
+
+.box-fav {
+    grid-area: fav;
+}
+
+.link-to-food {
+    cursor: pointer;
+    transition: border-radius .3s;
+}
+
+.link-to-food:hover {
+    border-radius: 10px;
+}
+
+.link-to-food>img {
+    transition: transform .3s;
+}
+
+.link-to-food h3,
+.link-to-food h4 {
+    transition: color .3s;
+}
+
+.link-to-food:hover h3,
+.link-to-food:hover h4 {
+    color: #444;
+}
+
+.link-to-food:hover>img {
+    transform: scale(1.2);
+}
+
+.box-largo {
+    grid-area: largo;
+}
+
+.box-toy {
+    grid-area: toy;
+}
+
+.newbuck {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    margin-top: 0;
+}
+
+
+.arrow-btn {
+    --taille-btn: 25px;
+    width: var(--taille-btn);
+    height: var(--taille-btn);
+    padding: 10px;
+    background-color: var(--menu-color-1);
+    border-radius: var(--taille-btn);
+    position: absolute;
+    left: calc(50% - 10px);
+    transition: all .3s;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.arrow-btn:hover {
+    background-color: var(--item-color);
+}
+
+.arrow-btn:hover>img {
+    filter: brightness(.7);
+}
+
+.arrow-btn>img {
+    transform: translateY(50%) scale(1.1);
+    width: 100%;
+    height: auto;
+}
+
+.top-btn {
+    bottom: 100%;
+    transform: translate(-50%, 50%) rotate(180deg);
+}
+
+.bot-btn {
+    bottom: 0;
+    transform: translate(-50%, 50%) rotate(0deg);
+}
+
+.desc {
+    background-color: var(--item-color);
+    flex-grow: 10;
+    margin: 20px 0 0 0;
+    border-radius: 20px;
+    transition: height .5s, padding .5s .2s;
+    overflow: scroll;
+    text-align: justify;
+    font-size: 20px;
+}
+
+.desc-title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 0 5px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #45537A;
+}
+
+.desc-title>img {
+    height: 30px;
+}
+
+.desc-title>* {
+    color: white;
+}
+
+.desc>p {
+    margin: 0;
+    overflow: hidden;
+
+}
+
+.desc-title>h3 {
+    margin: 0;
+}
+
+br {
+    margin: 10px 0;
+
+}
+
+.shown-desc,
+.shown-desc>p {
+    height: fit-content;
+    padding: 20px;
+}
+
+.hidden-desc,
+.hidden-desc>p {
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.list-container {
+    flex: 0 0 auto;
+    margin: 10px;
+    width: fit-content;
+    overflow: scroll;
+    border-radius: 20px;
+}
+
+
+
+.food-tabs {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+    padding: 20px 0 0 0;
+}
+
+.food-container {
+    flex-grow: 10;
+    width: 100%;
+    position: relative;
+}
+
+.food-presentation {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transition: height .5s;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "image type fav"
+        "image spawn spawn";
+    gap: 20px;
+}
+
+.presentation {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transition: height .5s;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 20px;
+}
+
+.presentation-resources {
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "image desc desc"
+        "image spawn spawn";
+}
+
+.presentation-toys {
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "image desc desc"
+        "image price fav"
+        "image spawn spawn";
+}
+
+.food-type {
+    grid-area: type;
+}
+
+.food-fav {
+    grid-area: fav;
+    cursor: pointer;
+}
+
+.spawn-list-container {
+    grid-area: spawn;
+}
+
+.infos-box {
+    grid-area: desc;
+}
+
+.toy {
+    overflow: hidden;
+    height: 100%;
+    transition: height .5s ease-in-out,
+        margin .5s ease-in-out,
+        padding .5s ease-in-out;
+}
+
+.toy-price {
+    grid-area: price;
+}
+
+.toy-fav {
+    grid-area: fav;
+}
+
+.toy-hide {
+    display: none;
+}

@@ -1,0 +1,88 @@
+:root {
+    --img-size: 100px;
+    --padding-btn: 10px;
+    --padding-image: 15px;
+    --title-size: calc(var(var(--img-size) * 0.17))
+}
+
+/* @media (max-width: 600px) and (resolution: 96dpi) {
+    :root {
+        --img-size: 50px;
+    }
+}
+
+@media (max-width: 600px) and (min-resolution: 192dpi) {
+    :root {
+        --img-size: 50px;
+    }
+}
+
+@media (min-width: 1600px) and (resolution: 96dpi) {
+    :root {
+        --img-size: 100px;
+    }
+}
+
+@media (min-width: 1600px) and (min-resolution: 192dpi) {
+    :root {
+        --img-size: 150px;
+    }
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --img-size: 150px;
+    }
+} */
+
+.bouton {
+    position: relative;
+    background-color: #0000;
+    transition: background-color .5s;
+    padding: var(--padding-btn);
+    width: calc(var(--img-size) + 30px);
+    border-radius: calc(var(--img-size)/5);
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-frame {
+    width: fit-content;
+    height: fit-content;
+    background-color: var(--item-color);
+    transition: border-radius .2s;
+}
+
+.bouton:hover {
+    background-color: var(--menu-color-1);
+}
+
+.bouton:hover>.image-frame,
+.selected>.image-frame {
+    border-radius: calc(var(--img-size)/ 5);
+}
+
+.bouton:hover>div>.img-btn-0,
+.selected>div>.img-btn-0 {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+.bouton:hover>div>.img-btn-1 {
+    transform: rotate(0deg) scale(1.1);
+}
+
+.bouton:hover>div>.img-btn-2 {
+    transform: rotate(5deg) scale(1.1);
+}
+
+.image-bouton {
+    width: var(--img-size);
+    height: var(--img-size);
+    margin: 0;
+    transition: transform .25s;
+}
+
+.btn-name {
+    white-space: nowrap;
+    font-weight: bold;
+}

@@ -1,0 +1,44 @@
+.buildings-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    height: 100%;
+}
+
+.buildings-list {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+    align-items: stretch;
+    overflow-y: scroll;
+}
+
+.building-item {
+    display: grid;
+    border-radius: 20px;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+        'image title'
+        'list list'
+    ;
+    background-color: var(--menu-color-1);
+    padding: 20px;
+}
+
+.building-item>img {
+    grid-area: image;
+    width: 70px;
+    height: auto;
+    border-radius: 20px 0 0 20px;
+}
+
+.building-item>h1 {
+    grid-area: title;
+    text-align: left;
+    margin: auto 0 auto 15px;
+    font-weight: 30px;
+}
+
+.upgrade-list {
+    grid-area: list;
+}
