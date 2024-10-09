@@ -22,8 +22,8 @@ function App() {
   });
   const themeIcon = 'misc/' + (darkMode ? 'moon' : 'sun');
   const [tabToRender, setTabToRender] = useState(null);
-
-  const tabList = useMemo(() => ['slimes', 'food', 'items', 'regions', 'weather', 'blueprints', 'buildings', 'map'], []); const toggleTheme = () => { setDarkMode(!darkMode); };
+  const tabs = ['slimes', 'food', 'items', 'regions', 'weather', 'blueprints', 'buildings'];
+  const tabList = useMemo(() => tabs, []); const toggleTheme = () => { setDarkMode(!darkMode); };
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
@@ -85,7 +85,6 @@ function App() {
         <NavButton name="Weather" icon="misc/weather" action={() => handleTabClick('weather')} selected={activeTab === 'weather'} />
         <NavButton name="Blueprints" icon="misc/blueprint" action={() => handleTabClick('blueprints')} selected={activeTab === 'blueprints'} />
         <NavButton name="Buildings" icon="misc/building" action={() => handleTabClick('buildings')} selected={activeTab === 'buildings'} />
-        {/*<BoutonNav name="World Map" icon="misc/map" action={() => handleTabClick('map')} selected={activeTab === 'map'} />*/}
         <div className="theme-btn-container">
           <NavButton name="Switch Theme" icon={themeIcon} action={() => toggleTheme()} />
         </div>

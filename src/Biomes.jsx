@@ -6,8 +6,10 @@ import { videosList } from './videosList';
 const light = true;
 const videoPath = './assets/videos/';
 var videos = []
+
 for (let video of videosList)
     videos.push([video, require('' + video)]);
+
 const findVideo = (biome) => {
     for (let video of videos)
         if (video[0] === biome)
@@ -29,7 +31,7 @@ export const Biomes = (props) => {
             lastSpawnListRef.current = spawnList;
             videoRefs.current.forEach((ref, index) => {
                 if (ref.current) {
-                    ref.current.src = findVideo(videoPath + spawnList[index]  + (light ? '.light' : '') + '.webm');
+                    ref.current.src = findVideo(videoPath + spawnList[index] + (light ? '.light' : '') + '.webm');
                 }
             });
         }
@@ -52,10 +54,8 @@ export const Biomes = (props) => {
                                 videoRefs.current[index].current.play();
 
                             } catch (e) {
-                                alert('An error occurred, check logs for more information');
-                                console.log('Erreur : ==========================================');
-                                console.log(e);
-                                console.log(videoRefs, index);
+                                console.error(e);
+                                console.error(videoRefs, index);
 
                             }
                         }}
