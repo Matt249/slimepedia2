@@ -22,8 +22,8 @@ function App() {
   });
   const themeIcon = 'misc/' + (darkMode ? 'moon' : 'sun');
   const [tabToRender, setTabToRender] = useState(null);
-  const tabs = ['slimes', 'food', 'items', 'regions', 'weather', 'blueprints', 'buildings'];
-  const tabList = useMemo(() => tabs, []); const toggleTheme = () => { setDarkMode(!darkMode); };
+  const tabList = useMemo(() => ['slimes', 'food', 'items', 'regions', 'weather', 'blueprints', 'buildings'], []);
+  const toggleTheme = () => { setDarkMode(!darkMode); };
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
