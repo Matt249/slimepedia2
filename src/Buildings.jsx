@@ -44,7 +44,7 @@ export const Buildings = () => {
 
             </div>
             <div>
-                <h1>zgeg</h1>
+                <h1>test</h1>
             </div>
         </div>
     );
