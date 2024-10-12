@@ -5,7 +5,7 @@
 
 @media (min-width: 2000px) {
     :root {
-        --hover-size: 500px;
+        --hover-size: 250px;
     }
 
 }
