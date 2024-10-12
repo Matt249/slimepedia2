@@ -8,5 +8,5 @@ export const toyDesc = {
     'worm': 'Reduces agitation of nearby slimes, especially Flutter Slimes who find it even more soothing than themselves.',
     'moon': 'Reduces agitation of nearby slimes, especially Batty Slimes who see the night as their only true friend.',
     'bomb': 'Reduces agitation of nearby slimes, especially Boom Slimes who probably think this sort of thing is funny.',
-    'fox': 'Greatly reduces agitation of all nearby slimes. Perfect for slimes getting into mischief.'
+    'fox': 'Greatly reduces agitation of all nearby slimes. Perfect for slimes getting into mischief.\nNote: Steam-exclusive toy.'
 }
