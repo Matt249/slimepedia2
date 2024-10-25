@@ -51,7 +51,7 @@ export const Slimes = ({
                     <div className="image-title">
                         <div className="info-title">
                             <h1>{slimeName}</h1>
-                            <h2>{slimesText[currentSlime[0]] ? slimesText[currentSlime[0]] : slimesText['lorem']}</h2>
+                            <h2>{slimesText[currentSlime[0]] ? slimesText[currentSlime[0]] : ''}</h2>
                         </div>
                         <div className='image-container'>
                             <img src={slimeIcon} className='img-main' alt={'Picture of ' + slimeName} />

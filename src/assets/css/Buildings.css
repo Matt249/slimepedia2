@@ -1,44 +1,277 @@
 .buildings-menu {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: minmax(0, 1fr);
-    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    gap: 20px;
+    min-height: 0;
 }
 
 .buildings-list {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 20px;
-    align-items: stretch;
-    overflow-y: scroll;
+    display: grid;
+    margin: 0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
-.building-item {
+.building-presentation {
+    height: 100%;
     display: grid;
-    border-radius: 20px;
-    grid-template-columns: auto 1fr;
+    gap: 10px;
+    grid-template-columns: minmax(0, 2fr) 1fr 1fr;
+    grid-template-rows: 2fr auto 2fr 2fr;
     grid-template-areas:
-        'image title'
-        'list list'
-    ;
+        "title desc desc"
+        "title cost use"
+        "title upgrade upgrade"
+        "upgrade-list upgrade upgrade";
+}
+
+.building-title {
+    grid-area: title;
+    z-index: 12;
+    margin: 0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+}
+
+.building-title>h1 {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.building-title>h2 {
+    font-size: 1.5em;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.building-title>img {
+    width: auto;
+    height: 65%;
+}
+
+.building-description {
+    grid-area: desc;
+    margin: 0;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px
+}
+
+.building-description>p {
+    font-size: 1em;
+    font-weight: normal;
+    font-style: normal;
+    text-align: justify;
+}
+
+.building-description>img {
+    width: auto;
+    height: 50px;
+}
+
+.little-box-buildings {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
     background-color: var(--menu-color-1);
     padding: 20px;
+    border-radius: 20px;
+    height: fit-content;
+    grid-area: info;
+    overflow: hidden;
 }
 
-.building-item>img {
-    grid-area: image;
-    width: 70px;
-    height: auto;
-    border-radius: 20px 0 0 20px;
+.little-box-buildings>img {
+    width: 50px;
+    height: 50px;
 }
 
-.building-item>h1 {
-    grid-area: title;
+.little-box-buildings>div {
+    width: 100%;
+    margin-left: 20px;
+}
+
+.little-box-buildings>div>h3,
+.little-box-buildings>div>h4 {
     text-align: left;
-    margin: auto 0 auto 15px;
-    font-weight: 30px;
+    margin: 0;
+}
+
+.little-box-buildings>div>h4 {
+    font-weight: 500;
+}
+
+.building-cost {
+    grid-area: cost;
+}
+
+.building-use {
+    grid-area: use;
 }
 
 .upgrade-list {
-    grid-area: list;
+    position: relative;
+    grid-area: upgrade-list;
+    margin: 0 -10px 0 0;
+    padding: 10px;
+    border-radius: 20px 0 0 20px;
+    background-color: var(--menu-color-1);
+    overflow: visible;
+}
+
+.upgrade-list>div:not(.fake-border) {
+    /* position: relative; */
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    gap: 10px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.upgrade-list>div>h2 {
+    margin: auto 10px;
+    font-size: 1.5em;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fake-border {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+}
+
+.fb-0 {
+    z-index: 10;
+    border-radius: 0;
+    background-color: var(--menu-color-1);
+}
+
+.fb-1 {
+    z-index: 11;
+    border-radius: 0 0 20px 0;
+    background-color: var(--menu-color-0);
+}
+
+.upgrade-infos {
+    grid-area: upgrade;
+    margin: 0;
+    padding: 20px;
+    border-radius: 20px 20px 20px 0;
+    background-color: var(--menu-color-1);
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas:
+        'image title cost'
+        'image desc desc';
+}
+
+.upgrade-infos>div {
+    padding: 20px;
+}
+
+.upgrade-img {
+    grid-area: image;
+    position: relative;
+    margin: 0;
+    border-radius: 20px;
+    background-color: var(--item-color);
+}
+
+.upgrade-img>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: auto;
+}
+
+.upgrade-title {
+    grid-area: title;
+    position: relative;
+    border-radius: 20px;
+    background-color: var(--item-color);
+}
+
+.upgrade-title>h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center;
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.upgrade-cost {
+    grid-area: cost;
+    border-radius: 20px;
+    background-color: var(--item-color);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.upgrade-cost>p {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.upgrade-cost>img {
+    width: auto;
+    height: 30px;
+}
+
+.upgrade-price>p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.upgrade-price>img {
+    width: auto;
+    height: 50px;
+}
+
+.upgrade-desc {
+    grid-area: desc;
+    border-radius: 20px;
+    background-color: var(--item-color);
+}
+
+.upgrade-desc>h4 {
+    margin: 0 0 10px 0;
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.upgrade-desc>p {
+    margin: 0;
+    font-size: 1em;
+    font-weight: normal;
+    font-style: normal;
+    text-align: justify;
 }

@@ -51,22 +51,22 @@ function App() {
         setTabToRender(<Header dark={darkMode} />);
         break;
       case 'slimes':
-        setTabToRender(<Slimes slime={targetTab === null ? "pink" : targetTab} changePage={handleTabClick} />);
+        setTabToRender(<Slimes slime={targetTab === null ? "pink" : targetTab} changePage={handleTabClick} tilting="left" />);
         break;
       case 'food':
-        setTabToRender(<Food food={targetElement === null ? "carrot" : targetElement} tab={targetTab === null ? "food" : targetTab} changePage={handleTabClick} />);
+        setTabToRender(<Food food={targetElement === null ? "carrot" : targetElement} tab={targetTab === null ? "food" : targetTab} changePage={handleTabClick} tilting="right" />);
         break;
       case 'items':
-        setTabToRender(<Items item={targetElement === null ? "brine" : targetElement} tab={targetTab === null ? "resources" : targetTab} changePage={handleTabClick} />);
+        setTabToRender(<Items item={targetElement === null ? "brine" : targetElement} tab={targetTab === null ? "resources" : targetTab} changePage={handleTabClick} tilting="left" />);
         break;
       case 'regions':
-        setTabToRender(<Regions />);
+        setTabToRender(<Regions tilting="left" />);
         break;
       case 'buildings':
-        setTabToRender(<Buildings />);
+        setTabToRender(<Buildings tilting="none" />);
         break;
       default:
-        setTabToRender(<Header />);
+        setTabToRender(<Header tilting="none" />);
     }
   }, [activeTab, targetTab, darkMode, handleTabClick, targetElement]);
 
@@ -78,15 +78,15 @@ function App() {
   return (
     <div className="App">
       <nav className="box-layout">
-        <NavButton name="Slimes" icon="slimes/pink" action={() => handleTabClick('slimes')} selected={activeTab === 'slimes'} />
-        <NavButton name="Food" icon="food/food" action={() => handleTabClick('food')} selected={activeTab === 'food'} />
-        <NavButton name="Items" icon="misc/res" action={() => handleTabClick('items')} selected={activeTab === 'items'} />
-        <NavButton name="Regions" icon="misc/world" action={() => handleTabClick('regions')} selected={activeTab === 'regions'} />
-        <NavButton name="Weather" icon="misc/weather" action={() => handleTabClick('weather')} selected={activeTab === 'weather'} />
-        <NavButton name="Blueprints" icon="misc/blueprint" action={() => handleTabClick('blueprints')} selected={activeTab === 'blueprints'} />
-        <NavButton name="Buildings" icon="misc/building" action={() => handleTabClick('buildings')} selected={activeTab === 'buildings'} />
+        <NavButton name="Slimes" icon="slimes/pink" action={() => handleTabClick('slimes')} selected={activeTab === 'slimes'} tilting="left" />
+        <NavButton name="Food" icon="food/food" action={() => handleTabClick('food')} selected={activeTab === 'food'} tilting="right" />
+        <NavButton name="Items" icon="misc/res" action={() => handleTabClick('items')} selected={activeTab === 'items'} tilting="left" />
+        <NavButton name="Regions" icon="misc/world" action={() => handleTabClick('regions')} selected={activeTab === 'regions'} tilting="left" />
+        <NavButton name="Weather" icon="misc/weather" action={() => handleTabClick('weather')} selected={activeTab === 'weather'} tilting="none" />
+        <NavButton name="Blueprints" icon="misc/blueprint" action={() => handleTabClick('blueprints')} selected={activeTab === 'blueprints'} tilting="none" />
+        <NavButton name="Buildings" icon="misc/patch" action={() => handleTabClick('buildings')} selected={activeTab === 'buildings'} tilting="none" />
         <div className="theme-btn-container">
-          <NavButton name="Switch Theme" icon={themeIcon} action={() => toggleTheme()} />
+          <NavButton name="Switch Theme" icon={themeIcon} action={() => toggleTheme()} tilting="random" />
         </div>
       </nav>
       {tabToRender}

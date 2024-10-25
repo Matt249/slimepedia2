@@ -2,10 +2,9 @@
     --img-size: 100px;
     --padding-btn: 10px;
     --padding-image: 15px;
-    --title-size: calc(var(var(--img-size) * 0.17))
 }
 
-.bouton {
+.button {
     position: relative;
     background-color: #0000;
     transition: background-color .5s;
@@ -17,31 +16,31 @@
 }
 
 .image-frame {
-    width: fit-content;
-    height: fit-content;
     background-color: var(--item-color);
     transition: border-radius .2s;
+    width: fit-content;
+    height: fit-content;
 }
 
-.bouton:hover {
+.button:hover {
     background-color: var(--menu-color-1);
 }
 
-.bouton:hover>.image-frame,
+.button:hover>.image-frame,
 .selected>.image-frame {
     border-radius: calc(var(--img-size)/ 5);
 }
 
-.bouton:hover>div>.img-btn-0,
+.button:hover>div>.img-btn-0,
 .selected>div>.img-btn-0 {
     transform: rotate(-5deg) scale(1.1);
 }
 
-.bouton:hover>div>.img-btn-1 {
+.button:hover>div>.img-btn-1 {
     transform: rotate(0deg) scale(1.1);
 }
 
-.bouton:hover>div>.img-btn-2 {
+.button:hover>div>.img-btn-2 {
     transform: rotate(5deg) scale(1.1);
 }
 
@@ -55,4 +54,5 @@
 .btn-name {
     white-space: nowrap;
     font-weight: bold;
+    font-size: calc(var(--img-size)/5);
 }

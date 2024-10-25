@@ -58,7 +58,8 @@ export const foodTypes = {
     'water': ["Water", false],
     'ash': ["Ash", false],
     'nectar': ["Nectar", false],
-    'ranchersnslimes': ["Ranchers and Slimes", false]
+    'ranchersnslimes': ["Ranchers and Slimes", false],
+    'none': ["None", false]
 };
 
 export const foodList = [
