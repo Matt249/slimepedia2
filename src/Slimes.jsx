@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './assets/css/Pedia.css';
 import { NavButton } from './NavButton.jsx';
 import { Biomes } from './Biomes.jsx';
@@ -33,6 +33,19 @@ export const Slimes = ({
         : foodList.find(food => food[0] === currentSlime[3]);
     const currentFood = foodCheck ? foodCheck[1] : 'None';
     const slimepediaEntry = slimepedia[currentSlime[0]] ? slimepedia[currentSlime[0]] : slimepedia['lorem'];
+    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
+    useEffect(() => {
+        const handleResize = () => {
+            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call initially to set the state based on the current window size
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-slime'>
@@ -40,6 +53,7 @@ export const Slimes = ({
                     <NavButton
                         key={slime[0]}
                         icon={`slimes/${slime[0]}`}
+                        size={wideScreen ? 125 : 100}
                         name={slime[1]}
                         action={() => updateSlime(slime[0])}
                         selected={slimeActuel === slime[0]}

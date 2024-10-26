@@ -1,13 +1,18 @@
 :root {
     --animation-speed: .2s;
-    --hover-size: 150px;
+    --hover-size: 15vh;
+    --small-text-size: 20px;
 }
 
 @media (min-width: 2000px) {
     :root {
-        --hover-size: 250px;
+        --hover-size: 20vh;
     }
 
+    .spawn-list-container.spawn-list-container>h3 {
+        font-size: 40px;
+        height: 40px;
+    }
 }
 
 @media (max-width: 1000px) {
@@ -18,7 +23,7 @@
 
 .spawn-list-container {
     background-color: var(--item-color);
-    padding: 20px;
+    padding: 15px;
     border-radius: 20px;
     grid-area: spawn;
     overflow-x: hidden;
@@ -28,9 +33,9 @@
 .spawn-list-container>h3 {
     text-align: left;
     margin: 0 0 10px 15px;
-    font-size: 30px;
+    font-size: 25px;
     overflow: hidden;
-    height: 30px;
+    height: 25px;
     transition:
         margin var(--animation-speed) ease-in-out,
         font-size var(--animation-speed) ease-in-out,
@@ -94,13 +99,6 @@
     margin-right: 10px;
 }
 
-.spawn-item>div>h4 {
-    margin: auto auto auto 10px;
-    width: 100%;
-    font-size: 20px;
-}
-
-
 .biome-list-video {
     position: absolute;
     top: 50%;
@@ -126,6 +124,8 @@
 }
 
 .biome-item h4 {
+    margin: auto auto auto 10px;
+    width: 100%;
     font-size: 20px;
     color: var(--text-color);
     text-shadow: none;
@@ -162,7 +162,7 @@
     transition: filter var(--animation-speed) ease-in-out;
 }
 
-.biome-item:hover h4 {
+.biome-item:hover>div>h4 {
     color: white;
     font-size: 25px;
     margin-top: 10px;

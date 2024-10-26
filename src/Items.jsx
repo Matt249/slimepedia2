@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './assets/css/Pedia.css';
 import { NavButton } from './NavButton';
 import { Biomes } from './Biomes';
@@ -89,6 +89,20 @@ export const Items = ({
         setItem(matchMainList(newFilter)[0][0]);
     }
 
+    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
+    useEffect(() => {
+        const handleResize = () => {
+            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
@@ -112,6 +126,7 @@ export const Items = ({
                                 key={resId}
                                 icon={filter + '/' + resId}
                                 name={name}
+                                size={wideScreen ? 125 : 100}
                                 action={() => updateItem(resId)}
                                 selected={actualItem === resId}
                             />

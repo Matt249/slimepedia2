@@ -17,13 +17,9 @@ export const NavButton = ({
     }, [tilting]);
 
     const paddingBtn = size / 10;
-    const paddingImg = size / 6.66;
+    const paddingFrame = size / 6.66;
     const buttonStyle = {
         padding: paddingBtn + 'px'
-    }
-    const frameStyle = {
-        padding: paddingImg + 'px',
-        borderRadius: size / 3 + 'px'
     }
     const imgStyle = {
         width: size + 'px',
@@ -31,8 +27,8 @@ export const NavButton = ({
     }
     const titleStyle = {
         margin: "5px -" + paddingBtn + "px 0 -" + paddingBtn + "px",
-        width: (Number(size) + (2 * (paddingImg + paddingBtn))) + 'px',
-        fontSize: (size / 5) + 'px',
+        width: (Number(size) + (2 * (paddingFrame + paddingBtn))) + 'px',
+        fontSize: (size / 6) + 'px',
     }
     const randomHandler = () => {
         switch (tiltingSafe) {
@@ -50,8 +46,8 @@ export const NavButton = ({
     const image = require(`./assets/${icon}.png`);
     return (
         <div className={"button" + (selected ? " selected" : "")} onClick={action} onMouseLeave={() => setRandomNumber(randomHandler())} style={buttonStyle}>
-            <div className='image-frame' style={frameStyle}>
-                <img src={image} alt={name} className={'image-bouton img-btn-' + randomNumber} style={imgStyle} />
+            <div className='image-frame'>
+                <img src={image} alt={name} className={'image-button img-btn-' + randomNumber} style={imgStyle} />
             </div>
             <p className='btn-name' style={titleStyle}>{name}</p>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './assets/css/Buildings.css';
 import { NavButton } from './NavButton';
 import { buildingPedia, buildingUpgrades, usageList } from './assets/text/buildings';
@@ -10,35 +10,60 @@ export const Buildings = () => {
     const [activeBuilding, setActiveBuilding] = useState(defaultBuilding);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentUpgrade, setCurrentUpgrade] = useState(null);
-    const actualBuildingHandler = (building, index) => {
-        setActiveBuilding(buildingList.includes(building) ? building : defaultBuilding);
-        setCurrentIndex(index);
-        setCurrentUpgrade(null);
-    }
     const buildingsButtons = () => {
         return buildingPedia.map((building, index) => {
-            return <NavButton key={index} icon={'buildings/' + building[0]} name={building[1]} tilting='none' size={100} action={() => actualBuildingHandler(building[0], index)} />
+            return <NavButton
+                key={index}
+                icon={'buildings/' + building[0]}
+                name={building[1]}
+                tilting='none'
+                size={wideScreen ? 150 : 100}
+                action={() => {
+                    setActiveBuilding(buildingList.includes(building) ? building : defaultBuilding);
+                    setCurrentIndex(index);
+                    setCurrentUpgrade(null);
+                }}
+            />
         });
     }
     const upgradeList = () => {
         if (buildingUpgrades[activeBuilding].length === 0)
-            return <h2>No upgrades available for this building.</h2>;
+            return <h2 className='no-upgrades'>No upgrades available for this building.</h2>;
         return buildingUpgrades[activeBuilding].map((upgrade, index) => {
-            return <NavButton key={index} icon={'buildings/' + upgrade[0]} name={upgrade[1]} tilting='none' size={75} action={() => setCurrentUpgrade(upgrade[0])} />
+            return <NavButton
+                key={index}
+                icon={'buildings/' + upgrade[0]}
+                name={upgrade[1]}
+                tilting='none'
+                size={wideScreen ? 100 : 75}
+                action={() => setCurrentUpgrade(upgrade[0] === currentUpgrade ? null : upgrade[0])}
+            />
         });
     }
+    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
+    useEffect(() => {
+        const handleResize = () => {
+            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
+        };
 
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Call initially to set the state based on the current window size
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     const upgradeInfo = () => {
         if (currentUpgrade === null || buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade) === undefined)
             return (
-                <div className='upgrade-infos'>
+                <div className='upgrade-infos upgrade-no-infos'>
                     <h3>Upgrade Information</h3>
                     <p>Click on an upgrade to see more information about it.</p>
                 </div>
             );
         var upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
         return (
-            <div className='upgrade-infos'>
+            <div className='upgrade-infos upgrade-infos-available'>
                 <div className='upgrade-title'>
                     <h3>{upgrade[1]}</h3>
                 </div>

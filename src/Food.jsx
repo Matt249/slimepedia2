@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavButton } from './NavButton.jsx';
 import { Biomes } from './Biomes';
 import { foodList, foodTypes, slimesList } from './listeSlimes';
@@ -50,6 +50,20 @@ export const Food = ({
         'ash': "Ash",
         'nectar': "Nectar"
     }
+    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
+    useEffect(() => {
+        const handleResize = () => {
+            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     for (let foodToSearch of sortedFoodList)
         for (let slime in slimesList)
             if (slimesList[slime][3] === foodToSearch[0])
@@ -84,6 +98,8 @@ export const Food = ({
                                 key={foodId}
                                 icon={imagePath}
                                 name={name}
+                                size={wideScreen ? 125 : 100}
+                                tilting={['ash', 'water'].includes(foodId) ? 'none' : 'random'}
                                 action={() => updateFood(foodId)}
                                 selected={actualFood === foodId}
                             />
@@ -102,7 +118,7 @@ export const Food = ({
                             <img src={foodIcon} className='img-main' alt="pink slime" />
                         </div>
                     </div>
-                    <div className='little-box food-type link-to-food' onClick={() => {setFilter(['veggies', 'meat', 'fruits'].includes(currentFood[2]) ? currentFood[2] : 'honey')}}>
+                    <div className='little-box food-type link-to-food' onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(currentFood[2]) ? currentFood[2] : 'honey') }}>
                         <img src={foodType} alt="veggies" />
                         <div>
                             <h3>Food type</h3>

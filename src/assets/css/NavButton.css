@@ -1,24 +1,20 @@
-:root {
-    --img-size: 100px;
-    --padding-btn: 10px;
-    --padding-image: 15px;
-}
-
 .button {
     position: relative;
     background-color: #0000;
     transition: background-color .5s;
-    padding: var(--padding-btn);
+    padding: 10px;
     width: fit-content;
     height: fit-content;
-    border-radius: calc(var(--img-size)/5);
+    border-radius: 10%;
     text-align: center;
     cursor: pointer;
 }
 
 .image-frame {
+    padding: 12%;
     background-color: var(--item-color);
     transition: border-radius .2s;
+    border-radius: 25%;
     width: fit-content;
     height: fit-content;
 }
@@ -27,17 +23,21 @@
     background-color: var(--menu-color-1);
 }
 
-.button:hover>.image-frame,
-.selected>.image-frame {
-    border-radius: calc(var(--img-size)/ 5);
+.button:hover>p {
+    transform: scale(1.1);
 }
 
-.button:hover>div>.img-btn-0,
-.selected>div>.img-btn-0 {
+.button:hover>.image-frame,
+.selected>.image-frame {
+    border-radius: 15%;
+}
+
+.button:hover>div>.img-btn-0 {
     transform: rotate(-5deg) scale(1.1);
 }
 
-.button:hover>div>.img-btn-1 {
+.button:hover>div>.img-btn-1,
+.selected>div>.image-button {
     transform: rotate(0deg) scale(1.1);
 }
 
@@ -45,9 +45,9 @@
     transform: rotate(5deg) scale(1.1);
 }
 
-.image-bouton {
-    width: var(--img-size);
-    height: var(--img-size);
+.image-button {
+    width: 100px;
+    height: auto;
     margin: 0;
     transition: transform .25s;
 }
@@ -55,5 +55,6 @@
 .btn-name {
     white-space: nowrap;
     font-weight: bold;
-    font-size: calc(var(--img-size)/5);
+    font-size: 1.5em;
+    transition: transform .25s;
 }

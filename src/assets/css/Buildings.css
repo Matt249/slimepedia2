@@ -19,9 +19,10 @@
 .building-presentation {
     height: 100%;
     display: grid;
-    gap: 10px;
+    --gap-presentation: 20px;
+    gap: var(--gap-presentation);
     grid-template-columns: minmax(0, 2fr) 1fr 1fr;
-    grid-template-rows: 2fr auto 2fr 2fr;
+    grid-template-rows: 2fr auto 2fr auto;
     grid-template-areas:
         "title desc desc"
         "title cost use"
@@ -74,8 +75,8 @@
 }
 
 .building-description>img {
-    width: auto;
-    height: 50px;
+    width: 50px;
+    height: auto;
 }
 
 .little-box-buildings {
@@ -122,7 +123,7 @@
 .upgrade-list {
     position: relative;
     grid-area: upgrade-list;
-    margin: 0 -10px 0 0;
+    margin: 0 calc(-1 * var(--gap-presentation)) 0 0;
     padding: 10px;
     border-radius: 20px 0 0 20px;
     background-color: var(--menu-color-1);
@@ -130,7 +131,6 @@
 }
 
 .upgrade-list>div:not(.fake-border) {
-    /* position: relative; */
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
@@ -140,7 +140,7 @@
 }
 
 .upgrade-list>div>h2 {
-    margin: auto 10px;
+    margin: 40px 0;
     font-size: 1.5em;
     width: 100%;
     font-weight: bold;
@@ -174,6 +174,10 @@
     padding: 20px;
     border-radius: 20px 20px 20px 0;
     background-color: var(--menu-color-1);
+}
+
+.upgrade-infos-available {
+    grid-area: upgrade;
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -181,6 +185,22 @@
     grid-template-areas:
         'image title cost'
         'image desc desc';
+}
+
+.upgrade-no-infos {
+    display: inline-block;
+}
+
+.upgrade-no-infos>h3 {
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.upgrade-no-infos>p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.5em;
 }
 
 .upgrade-infos>div {
@@ -245,16 +265,6 @@
     height: 30px;
 }
 
-.upgrade-price>p {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.upgrade-price>img {
-    width: auto;
-    height: 50px;
-}
-
 .upgrade-desc {
     grid-area: desc;
     border-radius: 20px;
@@ -274,4 +284,45 @@
     font-weight: normal;
     font-style: normal;
     text-align: justify;
+}
+
+@media (min-width: 2560px) {
+    .building-description {
+        padding: 40px;
+        gap: 30px;
+    }
+
+    .building-description>p {
+        font-size: 1.5em;
+    }
+
+    .building-description>img {
+        width: 100px;
+    }
+
+    .little-box-buildings>div>h3,
+    .little-box-buildings>div>h4 {
+        font-size: 1.5em;
+    }
+
+    .upgrade-list>div>h2 {
+        margin: 60px 0;
+        font-size: 2em;
+    }
+
+    .upgrade-desc>p {
+        font-size: 1.5em;
+    }
+
+    .upgrade-desc>h4 {
+        font-size: 2em;
+    }
+
+    .upgrade-title>h3 {
+        font-size: 2em;
+    }
+
+    .upgrade-cost>p {
+        font-size: 2em;
+    }
 }
