@@ -23,10 +23,6 @@
     background-color: var(--menu-color-1);
 }
 
-.button:hover>p {
-    transform: scale(1.1);
-}
-
 .button:hover>.image-frame,
 .selected>.image-frame {
     border-radius: 15%;
@@ -52,9 +48,8 @@
     transition: transform .25s;
 }
 
-.btn-name {
+.button>p {
     white-space: nowrap;
     font-weight: bold;
     font-size: 1.5em;
-    transition: transform .25s;
 }
