@@ -72,12 +72,3 @@ nav {
   padding: 20px;
   border-radius: 20px;
 }
-
-.upgrade-list {
-  display: flex;
-  flex-flow: row nowrap;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  gap: 10px;
-  margin: 10px -10px;
-}
