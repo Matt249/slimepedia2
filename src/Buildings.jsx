@@ -47,7 +47,7 @@ export const Buildings = () => {
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); // Call initially to set the state based on the current window size
+        handleResize();
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -57,8 +57,11 @@ export const Buildings = () => {
         if (currentUpgrade === null || buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade) === undefined)
             return (
                 <div className='upgrade-infos upgrade-no-infos'>
-                    <h3>Upgrade Information</h3>
-                    <p>Click on an upgrade to see more information about it.</p>
+                    <div>
+                        <img src={require('./assets/misc/upgrade.png')} alt="Upgrade Icon" />
+                        <h3>Upgrade Information</h3>
+                        <p>Click on an upgrade to see more information about it.</p>
+                    </div>
                 </div>
             );
         var upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
