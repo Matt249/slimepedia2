@@ -71,9 +71,10 @@ export const Buildings = () => {
                 <div className='upgrade-list'>
                     <div>
                         {upgradeList()}
-                        <div className='fake-border fb-0'></div>
-                        <div className='fake-border fb-1'></div>
+
                     </div>
+                    <div className='fake-border fb-0'></div>
+                    <div className='fake-border fb-1'></div>
                 </div>
                 <div className='building-description'>
                     <img src={require('./assets/misc/pediatut.png')} alt="Informations about the building" />
