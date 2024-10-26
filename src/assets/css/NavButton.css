@@ -9,7 +9,8 @@
     background-color: #0000;
     transition: background-color .5s;
     padding: var(--padding-btn);
-    width: calc(var(--img-size) + 30px);
+    width: fit-content;
+    height: fit-content;
     border-radius: calc(var(--img-size)/5);
     text-align: center;
     cursor: pointer;
