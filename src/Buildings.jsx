@@ -19,7 +19,7 @@ export const Buildings = () => {
                 tilting='none'
                 size={wideScreen ? 150 : 100}
                 action={() => {
-                    setActiveBuilding(buildingList.includes(building) ? building : defaultBuilding);
+                    setActiveBuilding(buildingList.includes(building[0]) ? building[0] : defaultBuilding);
                     setCurrentIndex(index);
                     setCurrentUpgrade(null);
                 }}
@@ -99,7 +99,6 @@ export const Buildings = () => {
                 <div className='upgrade-list'>
                     <div>
                         {upgradeList()}
-
                     </div>
                     <div className='fake-border fb-0'></div>
                     <div className='fake-border fb-1'></div>
