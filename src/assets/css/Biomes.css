@@ -1,17 +1,16 @@
 :root {
     --animation-speed: .2s;
-    --hover-size: 15vh;
+    --hover-size: 150px;
     --small-text-size: 20px;
 }
 
 @media (min-width: 2000px) {
     :root {
-        --hover-size: 20vh;
+        --hover-size: 250px;
     }
 
-    .spawn-list-container.spawn-list-container>h3 {
-        font-size: 40px;
-        height: 40px;
+    .spawn-list-container>h3 {
+        font-size: 3em;
     }
 }
 
@@ -99,6 +98,13 @@
     margin-right: 10px;
 }
 
+.spawn-item>div>h4 {
+    margin: auto auto auto 10px;
+    width: 100%;
+    font-size: 20px;
+}
+
+
 .biome-list-video {
     position: absolute;
     top: 50%;
@@ -124,8 +130,6 @@
 }
 
 .biome-item h4 {
-    margin: auto auto auto 10px;
-    width: 100%;
     font-size: 20px;
     color: var(--text-color);
     text-shadow: none;
@@ -162,7 +166,7 @@
     transition: filter var(--animation-speed) ease-in-out;
 }
 
-.biome-item:hover>div>h4 {
+.biome-item:hover h4 {
     color: white;
     font-size: 25px;
     margin-top: 10px;
