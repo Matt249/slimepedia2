@@ -1,23 +1,10 @@
 :root {
     --animation-speed: .2s;
     --hover-size: 150px;
-    --small-text-size: 20px;
-}
-
-@media (min-width: 2000px) {
-    :root {
-        --hover-size: 250px;
-    }
-
-    .spawn-list-container>h3 {
-        font-size: 3em;
-    }
-}
-
-@media (max-width: 1000px) {
-    :root {
-        --hover-size: 100px;
-    }
+    --small-text-size: 1.1em;
+    --normal-text-size: 1.5em;
+    --big-text-size: 2em;
+    --img-size: 40px;
 }
 
 .spawn-list-container {
@@ -32,9 +19,9 @@
 .spawn-list-container>h3 {
     text-align: left;
     margin: 0 0 10px 15px;
-    font-size: 25px;
+    font-size: var(--big-text-size);
     overflow: hidden;
-    height: 25px;
+    height: 1lh;
     transition:
         margin var(--animation-speed) ease-in-out,
         font-size var(--animation-speed) ease-in-out,
@@ -45,15 +32,15 @@
     position: relative;
     display: flex;
     background-color: var(--item-color);
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 5px 10px;
+    align-items: flex-start;
+    height: var(--img-size);
+    overflow: hidden;
+    cursor: pointer;
     transition:
         height var(--animation-speed) ease-in-out,
         padding var(--animation-speed) ease-in-out;
-    align-items: flex-start;
-    height: 40px;
-    overflow: hidden;
-    cursor: pointer;
 }
 
 .biome-list-overlay {
@@ -61,15 +48,23 @@
     height: fit-content;
     flex-flow: row nowrap;
     align-items: stretch;
+    gap: 7px;
     transition: margin-top var(--animation-speed) ease-in-out;
 }
 
 .biome-name {
+    font-size: var(--normal-text-size);
     margin: auto 0;
-    transition: font-size var(--animation-speed) ease-in-out;
+    text-shadow: none;
+    vertical-align: middle;
+    transition:
+        color var(--animation-speed) ease-in-out,
+        text-shadow var(--animation-speed) ease-in-out,
+        font-size var(--animation-speed) ease-in-out,
+        margin-top var(--animation-speed) ease-in-out;
 }
 
-.spawn-list-container h3.hidden-title {
+.spawn-list-container .hidden-title {
     font-size: 0px;
     height: 0;
     margin: 0;
@@ -83,27 +78,29 @@
     gap: 0;
 }
 
-.spawn-list-hover:hover .biome-item {
-    height: 20px;
+.biome-image {
+    width: var(--img-size);
+    height: var(--img-size);
+    transform: scale(1);
+    transition: transform var(--animation-speed) ease-in-out;
+}
+
+.spawn-list-hover:hover>.biome-item {
+    padding: 0;
+}
+
+.spawn-list-hover:hover>div>div>.biome-image {
+    transform: scale(.7);
+}
+
+.biome-item.biome-item-hover:hover>div>.biome-image {
+    transform: scale(1.2);
 }
 
 .biome-item:hover>.biome-list-overlay {
     margin: 0;
     align-items: flex-start;
 }
-
-.biome-list-image {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-.spawn-item>div>h4 {
-    margin: auto auto auto 10px;
-    width: 100%;
-    font-size: 20px;
-}
-
 
 .biome-list-video {
     position: absolute;
@@ -129,32 +126,6 @@
     pointer-events: none;
 }
 
-.biome-item h4 {
-    font-size: 20px;
-    color: var(--text-color);
-    text-shadow: none;
-    transition:
-        color var(--animation-speed) ease-in-out,
-        text-shadow var(--animation-speed) ease-in-out,
-        font-size var(--animation-speed) ease-in-out,
-        margin-top var(--animation-speed) ease-in-out;
-    ;
-}
-
-.biome-list-image {
-    width: 40px;
-    height: 40px;
-    transition:
-        height var(--animation-speed) ease-in-out,
-        width .2s ease-in-out;
-}
-
-.spawn-list-hover:hover .biome-list-image {
-    --img-size: 23px;
-    width: var(--img-size);
-    height: var(--img-size);
-}
-
 .biome-item:hover.biome-item {
     height: var(--hover-size);
     padding: 10px;
@@ -166,21 +137,29 @@
     transition: filter var(--animation-speed) ease-in-out;
 }
 
-.biome-item:hover h4 {
+.biome-item.biome-item-hover:hover>div>.biome-name {
     color: white;
-    font-size: 25px;
-    margin-top: 10px;
+    font-size: var(--big-text-size);
+    margin: auto 0;
     text-shadow: 0px 0px 5px #000;
 }
 
-.biome-item:hover .biome-list-image {
-    width: 50px;
-    height: 50px;
-    transition:
-        height var(--animation-speed) ease-in-out,
-        width var(--animation-speed) ease-in-out;
+.spawn-list-hover:hover>div>div>.biome-name {
+    font-size: var(--small-text-size);
 }
 
-.spawn-list-container:hover>div.biome-item {
-    height: 20px;
+@media (min-width: 2000px) {
+    :root {
+        --hover-size: 250px;
+        --small-text-size: 1.5em;
+        --normal-text-size: 2em;
+        --big-text-size: 2.5em;
+        --img-size: 70px;
+    }
+}
+
+@media (max-width: 1000px) {
+    :root {
+        --hover-size: 100px;
+    }
 }

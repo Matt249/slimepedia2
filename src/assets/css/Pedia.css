@@ -1,3 +1,15 @@
+:root {
+    --object-name-size: 2.5em;
+    --object-subname-size: 1.3em;
+    --little-box-title-size: 1.2em;
+    --little-box-subtitle-size: 1em;
+    --little-box-image-size: 50px;
+    --little-box-gap: 15px;
+    --pedia-title-size: 1.5em;
+    --pedia-paragrah-size: 1em;
+    --desc-title-img-size: 30px;
+}
+
 .slimes-menu {
     display: flex;
     flex-flow: row nowrap;
@@ -27,20 +39,6 @@
 
 .list-food {
     margin: 0;
-}
-
-@media (max-width: 1600px) {
-
-    .list-slime,
-    .list-food {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media (min-width: 2000px) {
-    .info-title>h1 {
-        font-size: 40px;
-    }
 }
 
 .slime-presentation {
@@ -88,12 +86,12 @@
 }
 
 .info-title>h1 {
-    font-size: 2.5em;
+    font-size: var(--object-name-size);
     font-weight: bold;
 }
 
 .info-title>h2 {
-    font-size: 1.5em;
+    font-size: var(--object-subname-size);
     font-weight: normal;
     font-style: italic;
 }
@@ -122,6 +120,7 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+    gap: var(--little-box-gap);
     background-color: var(--item-color);
     padding: 20px;
     border-radius: 20px;
@@ -131,13 +130,12 @@
 }
 
 .little-box>img {
-    width: 50px;
-    height: 50px;
+    width: var(--little-box-image-size);
+    height: auto;
 }
 
 .little-box>div {
     width: 100%;
-    margin-left: 20px;
 }
 
 .little-box>div>h3,
@@ -146,7 +144,13 @@
     margin: 0;
 }
 
+.little-box>div>h3 {
+    font-size: var(--little-box-title-size);
+    font-weight: 700;
+}
+
 .little-box>div>h4 {
+    font-size: var(--little-box-subtitle-size);
     font-weight: 500;
 }
 
@@ -256,26 +260,32 @@
     font-size: 20px;
 }
 
+.desc:last-child {
+    padding-bottom: 0;
+}
+
 .desc-title {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     gap: 10px;
-    padding: 0 5px;
-    height: 40px;
-    border-radius: 20px;
+    padding: 2px 5px;
+    height: fit-content;
+    border-radius: 1000px;
     background-color: #45537A;
 }
 
 .desc-title>img {
-    height: 30px;
+    height: var(--desc-title-img-size);
 }
 
-.desc-title>* {
+.desc-title>h3 {
+    font-size: var(--pedia-title-size);
     color: white;
 }
 
 .desc>p {
+    font-size: var(--pedia-paragrah-size);
     margin: 0;
     overflow: hidden;
 
@@ -405,4 +415,26 @@ br {
 
 .toy-hide {
     display: none;
+}
+
+@media (max-width: 1600px) {
+
+    .list-slime,
+    .list-food {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --object-name-size: 3.5em;
+        --object-subname-size: 1.8em;
+        --little-box-title-size: 1.7em;
+        --little-box-subtitle-size: 1.4em;
+        --little-box-image-size: 75px;
+        --little-box-gap: 25px;
+        --pedia-title-size: 2.1em;
+        --pedia-paragrah-size: 1.5em;
+        --desc-title-img-size: 40px;
+    }
 }

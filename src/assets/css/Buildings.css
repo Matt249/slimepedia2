@@ -1,3 +1,9 @@
+:root {
+    --infos-title-size: 1.2em;
+    --infos-desc-size: 1em;
+    --infos-gap: 10px;
+}
+
 .buildings-menu {
     display: flex;
     flex-flow: row nowrap;
@@ -68,7 +74,7 @@
 }
 
 .building-description>p {
-    font-size: 1em;
+    font-size: var(--infos-desc-size);
     font-weight: normal;
     font-style: normal;
     text-align: justify;
@@ -84,6 +90,7 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+    gap: var(--infos-gap);
     background-color: var(--menu-color-1);
     padding: 20px;
     border-radius: 20px;
@@ -99,7 +106,6 @@
 
 .little-box-buildings>div {
     width: 100%;
-    margin-left: 20px;
 }
 
 .little-box-buildings>div>h3,
@@ -108,7 +114,13 @@
     margin: 0;
 }
 
+.little-box-buildings>div>h3 {
+    font-size: var(--infos-title-size);
+    font-weight: 700;
+}
+
 .little-box-buildings>div>h4 {
+    font-size: var(--infos-desc-size);
     font-weight: 500;
 }
 
@@ -197,6 +209,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
     padding: 0;
 }
 
@@ -208,13 +221,13 @@
 .upgrade-no-infos>div>h3 {
     margin: 20px 0;
     font-weight: bold;
-    font-size: 2em;
+    font-size: calc(var(--infos-title-size) * 1.5);
 }
 
 .upgrade-no-infos>div>p {
     margin: 0;
     font-weight: 500;
-    font-size: 1.5em;
+    font-size: calc(var(--infos-desc-size) * 1.2);
 }
 
 .upgrade-infos>div {
@@ -301,6 +314,12 @@
 }
 
 @media (min-width: 2560px) {
+    :root {
+        --infos-title-size: 2em;
+        --infos-desc-size: 1.5em;
+        --infos-gap: 20px;
+    }
+    
     .building-description {
         padding: 40px;
         gap: 30px;
@@ -312,11 +331,6 @@
 
     .building-description>img {
         width: 100px;
-    }
-
-    .little-box-buildings>div>h3,
-    .little-box-buildings>div>h4 {
-        font-size: 1.5em;
     }
 
     .upgrade-list>div>h2 {
