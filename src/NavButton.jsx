@@ -6,7 +6,7 @@ export const NavButton = ({
     name = "Slimes",
     icon = "slimes/pink",
     size = 100,
-    action = () => console.log("ça a cliqué"),
+    action = () => console.log("It works!"),
     selected = false,
     tilting = "random"
 }) => {
