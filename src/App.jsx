@@ -39,7 +39,6 @@ function App() {
 	}, [darkMode]);
 
 	const handleTabClick = useCallback((tab, target, element) => {
-		console.log(tab, tabList.includes(tab), tabList);
 		if (tabList.includes(tab))
 			setActiveTab(tab !== activeTab ? tab : 'main');
 		else
