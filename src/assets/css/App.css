@@ -60,9 +60,12 @@ body {
 }
 
 nav {
+  flex-shrink: 0;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
+  overflow-x: scroll;
+  height: fit-content;
 }
 
 
