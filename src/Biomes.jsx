@@ -48,7 +48,7 @@ export const Biomes = (props) => {
                 {spawnList.map((biome, index) => (
                     <div
                         key={index}
-                        className="biome-item"
+                        className="biome-item biome-item-hover"
                         onMouseEnter={() => {
                             try {
                                 videoRefs.current[index].current.play();
@@ -85,7 +85,7 @@ export const Biomes = (props) => {
                         />
                         <div className='biome-list-overlay'>
                             <img
-                                className="biome-list-image"
+                                className="biome-image"
                                 src={require('./assets/world/' + worldList[biome][0] + '.png')}
                                 alt={worldList[biome][1]}
                             />
