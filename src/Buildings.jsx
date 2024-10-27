@@ -16,13 +16,14 @@ export const Buildings = () => {
                 key={index}
                 icon={'buildings/' + building[0]}
                 name={building[1]}
-                tilting='none'
                 size={wideScreen ? 150 : 100}
                 action={() => {
                     setActiveBuilding(buildingList.includes(building[0]) ? building[0] : defaultBuilding);
                     setCurrentIndex(index);
                     setCurrentUpgrade(null);
                 }}
+                selected={building[0] === activeBuilding}
+                tilting='none'
             />
         });
     }
@@ -34,9 +35,10 @@ export const Buildings = () => {
                 key={index}
                 icon={'buildings/' + upgrade[0]}
                 name={upgrade[1]}
-                tilting='none'
                 size={wideScreen ? 100 : 75}
                 action={() => setCurrentUpgrade(upgrade[0] === currentUpgrade ? null : upgrade[0])}
+                selected={upgrade[0] === currentUpgrade}
+                tilting='none'
             />
         });
     }
