@@ -16,11 +16,6 @@ function findFirstMatchingArray(list, element, nth) {
     return undefined;
 }
 
-const tabsList = [
-    ['resources', 'Crafting Resources', 'misc/res'],
-    ['toys', 'Slime Toys', 'misc/toys']
-];
-
 const matchMainList = (list) => {
     switch (list) {
         case 'resources':
@@ -61,11 +56,11 @@ const matchPediaList = (list) => {
 }
 
 export const Items = ({
-    item = 'diamond',
+    item = 'brine',
     tab = 'resources',
     changePage = () => { console.log('changePage not defined') }
 }) => {
-    const firstOption = tabsList[0][0];
+    const firstOption = 'resources';
     const [filter, setFilter] = useState(tab);
     const [actualItem, setItem] = useState(item);
     const [listItems, setListItems] = useState(matchMainList(filter));
@@ -107,17 +102,18 @@ export const Items = ({
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
                 <div className='food-tabs'>
-                    {tabsList.map((tabFilter) => {
-                        return (
-                            <Tab
-                                key={tabFilter[0]}
-                                title={tabFilter[1]}
-                                icon={tabFilter[2]}
-                                action={() => { updateTab(tabFilter[0]) }}
-                                selected={filter === tabFilter[0]}
-                            />
-                        )
-                    })}
+                    <Tab
+                        title='Resources'
+                        icon='misc/res'
+                        action={() => { updateTab('resources') }}
+                        selected={filter === 'resources'}
+                    />
+                    <Tab
+                        title='Toys'
+                        icon='misc/toys'
+                        action={() => { updateTab('toys') }}
+                        selected={filter === 'toys'}
+                    />
                 </div>
                 <div className='list-food' style={{ borderRadius: (filter === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
                     {listItems.map(([resId, name]) => {
@@ -182,7 +178,7 @@ export const Items = ({
                         </div>
                     )
                     }
-                    <Biomes spawnList={filter !== 'toys' ? itemArray[2] : ['pm']} />
+                    <Biomes spawnList={filter !== 'toys' ? itemArray[2] : ['pm']} changePage={changePage} />
 
                 </div>
             </div>

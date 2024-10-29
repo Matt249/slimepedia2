@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './assets/css/Biomes.css';
-import { worldList } from './listeSlimes';
+import { spawnLocationsList } from './listeSlimes';
 import { videosList } from './videosList';
+import { regionsIds } from './assets/text/regions';
 
 const light = true;
 const videoPath = './assets/videos/';
@@ -17,8 +18,10 @@ const findVideo = (biome) => {
     return videos[1][1];
 }
 
-export const Biomes = (props) => {
-    const { spawnList } = props;
+export const Biomes = ({
+    spawnList = [],
+    changePage = ({ args }) => { console.log('changePage not defined, args={', args, '}') }
+}) => {
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef(new Array(spawnList.length).fill().map(() => React.createRef()));
     const lastSpawnListRef = useRef(spawnList);
@@ -70,6 +73,7 @@ export const Biomes = (props) => {
 
                             }
                         }}
+                        onClick={() => changePage('regions', regionsIds.includes(spawnLocationsList[biome][0]) ? 'regions' : 'ranch', spawnLocationsList[biome][0])}
                     >
                         <video
                             ref={videoRefs.current[index]}
@@ -86,10 +90,10 @@ export const Biomes = (props) => {
                         <div className='biome-list-overlay'>
                             <img
                                 className="biome-image"
-                                src={require('./assets/world/' + worldList[biome][0] + '.png')}
-                                alt={worldList[biome][1]}
+                                src={require('./assets/world/' + spawnLocationsList[biome][0] + '.png')}
+                                alt={spawnLocationsList[biome][1]}
                             />
-                            <h4 className='biome-name'>{worldList[biome][1]}</h4>
+                            <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>
                         </div>
                     </div>
                 ))}

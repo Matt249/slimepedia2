@@ -40,7 +40,7 @@ export const Slimes = ({
         };
 
         window.addEventListener('resize', handleResize);
-        handleResize(); // Call initially to set the state based on the current window size
+        handleResize();
 
         return () => {
             window.removeEventListener('resize', handleResize);
@@ -109,7 +109,7 @@ export const Slimes = ({
                             <h4>{toys[currentSlime[6]]}</h4>
                         </div>
                     </div>
-                    <Biomes spawnList={currentSlime[5]} />
+                    <Biomes spawnList={currentSlime[5]} changePage={changePage}/>
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='Expand arrow' />

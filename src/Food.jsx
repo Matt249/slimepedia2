@@ -20,7 +20,7 @@ function findFirstMatchingArray(list, element) {
 export const Food = ({
     food = 'carrot',
     tab = 'food',
-    changePage = () => { console.log('changePage not defined') }
+    changePage = ({ args }) => { console.log('changePage not defined, args={', args, '}') }
 }) => {
     const [topBtn, setTopBtn] = useState(false);
     const [actualFood, setFood] = useState(food);
@@ -73,9 +73,6 @@ export const Food = ({
     const foodType = require('./assets/food/' + currentFood[2] + '.png');
     const favSlime = (actualFood in slimePerFavFood) ? slimePerFavFood[actualFood] : "none";
     const favSlimeIcon = require('./assets/' + (favSlime === "none" ? "misc/none" : "slimes/" + favSlime) + '.png');
-    const goToNewPage = () => {
-        changePage('slimes', favSlime);
-    };
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
@@ -125,14 +122,14 @@ export const Food = ({
                             <h4>{foodSingular[currentFood[2]]}</h4>
                         </div>
                     </div>
-                    <div className={'little-box food-fav' + (favSlime === "none" ? '' : ' link-to-food')} onClick={() => { if (currentFood[3] !== 'none') goToNewPage() }}>
+                    <div className={'little-box food-fav' + (favSlime === "none" ? '' : ' link-to-food')} onClick={() => { if (currentFood[3] !== 'none') changePage('slimes', favSlime) }}>
                         <img src={favSlimeIcon} alt='none' />
                         <div>
                             <h3>Favorite of</h3>
                             <h4>{(favSlime === "none" ? "Nobody" : slimesList[favSlime][1])}</h4>
                         </div>
                     </div>
-                    <Biomes spawnList={currentFood[3]} />
+                    <Biomes spawnList={currentFood[3]} changePage={changePage} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={require('./assets/misc/arrow.png')} alt='arrow' />

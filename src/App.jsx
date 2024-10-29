@@ -10,6 +10,7 @@ import { Items } from './Items';
 import { Map } from './Map';
 import './assets/css/App.css';
 import { Buildings } from './Buildings';
+import { Regions } from './Regions';
 
 function App() {
 	document.title = "Slimepedia 2";
@@ -24,7 +25,7 @@ function App() {
 	});
 	const themeIcon = 'misc/' + (darkMode ? 'moon' : 'sun');
 	const [tabToRender, setTabToRender] = useState(null);
-	const tabList = useMemo(() => ['slimes', 'food', 'items', 'map', 'weather', 'blueprints', 'buildings'], []);
+	const tabList = useMemo(() => ['slimes', 'food', 'items', 'map', 'regions', 'weather', 'blueprints', 'buildings'], []);
 
 	const toggleTheme = () => { setDarkMode(!darkMode); };
 	useEffect(() => {
@@ -79,6 +80,9 @@ function App() {
 				break;
 			case 'map':
 				setTabToRender(<Map tilting="left" />);
+				break;
+			case 'regions':
+				setTabToRender(<Regions region={targetElement === null ? "fields" : targetElement} changePage={handleTabClick} />);
 				break;
 			case 'buildings':
 				setTabToRender(<Buildings tilting="none" />);

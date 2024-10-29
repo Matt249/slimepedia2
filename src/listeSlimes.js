@@ -87,21 +87,21 @@ export const foodList = [
     ['ash', "Ash", 'ash', ['ev']],
 ];
 
-export const worldList = {
-    'co': ['conservatory', 'The Conservatory (ranch)'],
-    'td': ['den', 'The Den (ranch)'],
-    'gu': ['gully', 'The Gully (ranch)'],
-    'ar': ['archway', 'The Archway (ranch)'],
-    'tp': ['tidepools', 'The Tidepools (ranch)'],
-    'ds': ['digsite', 'The Digsite (ranch)'],
-    'rf': ['fields', 'Rainbow Fields'],
-    'ss': ['strand', 'Starlight Strand'],
-    'ev': ['valley', 'Ember Valley'],
-    'pb': ['bluffs', 'Powderfall Bluffs'],
-    'ws': ['tornado', 'Level 3 Wind Storm'],
-    'ps': ['vines', 'Level 3 Pollen Storm'],
-    'ls': ['lightning', 'Level 3 Thunderstorm'],
-    'pm': ['shop', 'Pronto Mart']
+export const spawnLocationsList = {
+    'co': ['conservatory', 'The Conservatory', true],
+    'td': ['den', 'The Den', true],
+    'gu': ['gully', 'The Gully', true],
+    'ar': ['archway', 'The Archway', true],
+    'tp': ['tidepools', 'The Tidepools', true],
+    'ds': ['digsite', 'The Digsite', true],
+    'rf': ['fields', 'Rainbow Fields', false],
+    'ss': ['strand', 'Starlight Strand', false],
+    'ev': ['valley', 'Ember Valley', false],
+    'pb': ['bluffs', 'Powderfall Bluffs', false],
+    'ws': ['tornado', 'Level 3 Wind Storm', false],
+    'ps': ['vines', 'Level 3 Pollen Storm', false],
+    'ls': ['lightning', 'Level 3 Thunderstorm', false],
+    'pm': ['shop', 'Pronto Mart', false]
 };
 
 export const weatherList = [

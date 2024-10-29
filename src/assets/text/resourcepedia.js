@@ -60,3 +60,39 @@ export const resPedia = {
         'Just like bees on Earth, bees on the Far, Far Range produce a waxy substance that they use to form their hives. Buzz wax is still malleable deposits of unused wax found in apiaries. It has many practical uses ranging from building materials to medicines. You can also chew it as the worst gum in the world.'
     ]
 }
+
+export const resourcesNames = [
+    'brine',
+    'diamond',
+    'drift',
+    'fossil',
+    'glass',
+    'honey',
+    'jelly',
+    'lava',
+    'mote',
+    'primordy',
+    'radiant',
+    'sand',
+    'snowflake',
+    'sunsap',
+    'wax'
+]
+
+export const resourceList = {
+    'brine': ['Deep Brine', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
+    'lava': ['Lava Dust', ['ev']],
+    'primordy': ['Primordy Oil', ['ev']],
+    'sand': ['Silky Sand', ['ss', 'ev']],
+    'jelly': ['Jellystone', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
+    'radiant': ['Radiant Ore', ['ss', 'ev']],
+    'diamond': ['Strange Diamond', ['rf', 'ss', 'ev', 'pb']],
+    'wax': ['Buzz Wax', ['ss', 'ev']],
+    'honey': ['Wild Honey', ['ss']],
+    'fossil': ['Slime Fossil', ['pb']],
+    'snowflake': ['Perfect Snowflake', ['pb']],
+    'sunsap': ['Sun Sap', ['pb']],
+    'drift': ['Drift Crystal', ['ws']],
+    'glass': ['Storm Glass', ['ls']],
+    'mote': ['Lightning Mote', ['ls']]
+};

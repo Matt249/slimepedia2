@@ -1,10 +1,15 @@
 import "./assets/css/Tab.css";
 
-export const Tab = (props) => {
+export const Tab = ({
+    title = 'Default Title',
+    icon = 'misc/pediaquestion',
+    selected = false,
+    action = () => {},
+}) => {
     return (
-        <div className={"tab" + (props.selected ? " selected-tab" : "")} onClick={props.action}>
-            <img src={require(`./assets/${props.icon}.png`)} alt={props.name} />
-            <p>{props.title}</p>
+        <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
+            <img src={require(`./assets/${icon}.png`)} alt={title} />
+            <p>{title}</p>
         </div>
     );
 }

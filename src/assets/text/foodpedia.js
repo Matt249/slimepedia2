@@ -1,3 +1,36 @@
+export const foodNames = ['ash', 'beet', 'carrot', 'lettuce', 'beet', 'onion', 'pogo', 'cuberry', 'mango', 'granite', 'pear', 'hen', 'henStony', 'henSea', 'henBriar', 'henCluck', 'henPainted', 'rooster', 'henElder', 'roosterElder', 'water', 'nectar'];
+
+export const foodListBis = {
+    'ranchersnslimes': ['Ranchers and Slimes', 'ranchersnslimes', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf', 'ss', 'ev', 'pb']],
+    'carrot': ['Carrot', 'veggies', ['ar', 'rf', 'ss', 'ev', 'pb']],
+    'lettuce': ["Water Lettuce", 'veggies', ['rf', 'ss', 'ev']],
+    'beet': ["Heart Beet", 'veggies', ['ss', 'ev', 'pb']],
+    'onion': ["Odd Onion", 'veggies', ['ev', 'pb']],
+    'pogo': ['Pogofruit', 'fruits', ['ar', 'rf', 'ss', 'ev', 'pb']],
+    'cuberry': ["Cuberry", 'fruits', ['rf', 'ev', 'ss', 'pb']],
+    'mango': ["Mint Mango", 'fruits', ['ss']],
+    'granite': ["Pomegranite", 'fruits', ['ss', 'ev']],
+    'pear': ["Prickle Pear", 'fruits', ['ev']],
+    'chick': ['Chickadoo', 'none', ['rf', 'ss', 'ev', 'pb']],
+    'chickBriar': ['Briar Chickadoo', 'none', ['ev']],
+    'chickCluck': ['Thundercluck Chickadoo', 'none', ['pb']],
+    'chickPainted': ['Painted Chickadoo', 'none', ['ss']],
+    'chickSea': ['Sea Chickadoo', 'none', ['ss', 'ev']],
+    'chickStony': ['Stony Chickadoo', 'none', ['rf', 'ev']],
+    'hen': ['Hen Hen', 'meat', ['gu', 'rf', 'ss', 'ev', 'pb']],
+    'henStony': ["Stony Hen", 'meat', ['rf', 'ev']],
+    'henSea': ["Sea Hen", 'meat', ['ss', 'ev']],
+    'henBriar': ["Briar Hen", 'meat', ['ev']],
+    'henCluck': ["Thundercluck Hen", 'meat', ['pb']],
+    'henPainted': ["Painted Hen", 'meat', ['ss']],
+    'rooster': ["Rooster", 'meat', ['gu', 'rf', 'ss', 'ev', 'pb']],
+    'henElder': ['Elder Hen', 'meat', ['rf', 'ss', 'ev', 'pb']],
+    'roosterElder': ['Elder Rooster', 'meat', ['rf', 'ss', 'ev', 'pb']],
+    'water': ["Water", 'water', ['tp', 'ds', 'ss', 'ev', 'pb']],
+    'nectar': ["Moondew Nectar", 'nectar', ['ss']],
+    'ash': ["Ash", 'ash', ['ev']],
+};
+
 export const foodDescription = {
     'lorem': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     'carrot': 'Next to a vacpack, it\'s a rancher\'s best friend.',
