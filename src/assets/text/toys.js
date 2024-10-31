@@ -1,3 +1,29 @@
+export const toys = {
+    'ball': 'Beach Ball',
+    'bouncy': 'Bouncy Ball',
+    'yarn': 'Yarn Ball',
+    'none': 'None',
+    'puffer': 'Plushie Puffer Fish',
+    'duck': 'Rubber Ducky',
+    'trash': 'Trashcan',
+    'worm': 'Glowbug',
+    'moon': 'Full Moon Ball',
+    'bomb': 'Bomb Ball'
+}
+
+export const toysList = [
+    ['ball', 'Beach Ball', 'pink'],
+    ['bouncy', 'Bouncy Ball', 'cotton'],
+    ['yarn', 'Yarn Ball', 'tabby'],
+    ['puffer', 'Plushie Puffer Fish', 'angler'],
+    ['duck', 'Rubber Ducky', 'puddle'],
+    ['trash', 'Trashcan', 'ringtail'],
+    ['worm', 'Glowbug', 'flutter'],
+    ['moon', 'Full Moon Ball', 'batty'],
+    ['bomb', 'Bomb Ball', 'boom'],
+    ['fox', 'Glo Glo Foxifur', 'none']
+];
+
 export const toyDesc = {
     'ball': 'Reduces agitation of nearby slimes, especially Pink Slimes who enjoy fun in the sun.',
     'bouncy': 'Reduces agitation of nearby slimes, especially Cotton Slimes who see it as serious competition.',

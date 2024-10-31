@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import './assets/css/Regions.css';
 import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from './assets/text/regions';
 import { Tab } from './Tab';
-import { slimesList } from './listeSlimes';
-import { foodListBis } from './assets/text/foodpedia';
+import { foodList } from './assets/text/food';
 import Down from './Down';
+import { slimesList } from './assets/text/slimes';
 
 export const Regions = ({
     region = 'fields',
@@ -138,8 +138,8 @@ export const Regions = ({
                         >
                             <img
                                 src={require('./assets/food/' + food + '.png')}
-                                alt={foodListBis[food][0]}
-                                title={foodListBis[food][0]}
+                                alt={foodList[food][0]}
+                                title={foodList[food][0]}
                             />
                         </div>
                     </div>

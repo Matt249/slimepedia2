@@ -8,6 +8,7 @@
     --pedia-title-size: 1.5em;
     --pedia-paragrah-size: 1em;
     --desc-title-img-size: 30px;
+    --pedia-paragrah-size: 1em;
 }
 
 .slimes-menu {
@@ -158,6 +159,7 @@
     margin: 10px 0;
     text-align: justify;
     line-height: 1;
+    font-size: var(--pedia-paragrah-size);
 }
 
 .box-food {
@@ -436,5 +438,6 @@ br {
         --pedia-title-size: 2.1em;
         --pedia-paragrah-size: 1.5em;
         --desc-title-img-size: 40px;
+        --pedia-paragrah-size: 1.5em;
     }
 }

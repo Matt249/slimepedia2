@@ -1,21 +1,12 @@
 import { useState, useEffect } from 'react';
 import { NavButton } from './NavButton.jsx';
-import { Biomes } from './Biomes';
-import { foodList, foodTypes, slimesList } from './listeSlimes';
-import { foodpedia, foodDescription } from './assets/text/foodpedia.js';
-import { Tab } from './Tab';
+import { Biomes } from './Biomes.jsx';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from './assets/text/food.js';
+import { Tab } from './Tab.jsx';
 import './assets/css/Pedia.css';
 import pediaAbout from './assets/misc/pediaabout.png';
 import pediaQuestion from './assets/misc/pediaquestion.png';
-
-function findFirstMatchingArray(list, element) {
-    for (let array of list) {
-        if (array[0] === element) {
-            return array;
-        }
-    }
-    return undefined;
-}
+import { slimesList } from './assets/text/slimes.js';
 
 export const Food = ({
     food = 'carrot',
@@ -29,27 +20,7 @@ export const Food = ({
         setFood(food);
         setTopBtn(false);
     }
-    const foodListBis = foodList.slice(1);
-    const sortedFoodList = false ? foodListBis.sort((a, b) => a[1].localeCompare(b[1])) : foodListBis;
-    var foodToList = [];
-    if (['veggies', 'fruits', 'meat'].includes(filter))
-        foodToList = sortedFoodList.filter(food => food[2] === filter);
-    else if (filter === 'honey')
-        foodToList = sortedFoodList.filter(food => !['veggies', 'fruits', 'meat'].includes(food[2]));
-    else
-        foodToList = sortedFoodList;
-    var firstOption = Object.keys(foodTypes)[0];
-    const foodListSorted = Object.keys(foodTypes).slice(0, 5);
-    const currentFood = findFirstMatchingArray(sortedFoodList, actualFood);
-    const slimePerFavFood = {};
-    const foodSingular = {
-        'meat': "Meat",
-        'fruits': "Fruit",
-        'veggies': "Veggie",
-        'water': "Water",
-        'ash': "Ash",
-        'nectar': "Nectar"
-    }
+
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
         const handleResize = () => {
@@ -64,37 +35,75 @@ export const Food = ({
         };
     }, []);
 
-    for (let foodToSearch of sortedFoodList)
-        for (let slime in slimesList)
-            if (slimesList[slime][3] === foodToSearch[0])
-                slimePerFavFood[foodToSearch[0]] = slimesList[slime][0];
-    const foodName = currentFood[1];
-    const foodIcon = require('./assets/food/' + currentFood[0] + '.png');
-    const foodType = require('./assets/food/' + currentFood[2] + '.png');
-    const favSlime = (actualFood in slimePerFavFood) ? slimePerFavFood[actualFood] : "none";
-    const favSlimeIcon = require('./assets/' + (favSlime === "none" ? "misc/none" : "slimes/" + favSlime) + '.png');
+    var actualFoodList = [];
+    switch (filter) {
+        case 'fruits':
+            actualFoodList = foodNames.filter(food => foodList[food][1] === 'fruits');
+            break;
+        case 'veggies':
+            actualFoodList = foodNames.filter(food => foodList[food][1] === 'veggies');
+            break;
+        case 'meat':
+            actualFoodList = foodNames.filter(food => foodList[food][1] === 'meat');
+            break;
+        case 'special':
+            actualFoodList = foodNames.filter(food => !['veggies', 'fruits', 'meat'].includes(foodList[food][1]));
+            break;
+        default:
+            actualFoodList = foodNames;
+            break;
+    }
+
+    var favSlime = [];
+    for (let slime in slimesList)
+        if (slimesList[slime][2] === actualFood) {
+            favSlime = slime;
+            break;
+        }
+
+
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
                 <div className='food-tabs'>
-                    {foodListSorted.map(food => (
-                        <Tab
-                            key={food}
-                            title={foodTypes[food][0]}
-                            icon={`food/${food}`}
-                            action={() => setFilter(food)}
-                            {...(filter === food ? { 'selected': true } : {})}
-                        />
-                    ))}
+                    <Tab
+                        title='All'
+                        icon={`food/food`}
+                        action={() => setFilter('any')}
+                        selected={filter === 'any'}
+                    />
+                    <Tab
+                        title='Fruits'
+                        icon={`food/fruits`}
+                        action={() => setFilter('fruits')}
+                        selected={filter === 'fruits'}
+                    />
+                    <Tab
+                        title='Veggies'
+                        icon={`food/veggies`}
+                        action={() => setFilter('veggies')}
+                        selected={filter === 'veggies'}
+                    />
+                    <Tab
+                        title='Meat'
+                        icon={`food/meat`}
+                        action={() => setFilter('meat')}
+                        selected={filter === 'meat'}
+                    />
+                    <Tab
+                        title='Special'
+                        icon={`food/honey`}
+                        action={() => setFilter('special')}
+                        selected={filter === 'special'}
+                    />
                 </div>
-                <div className='list-food' style={{ borderRadius: (filter === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
-                    {foodToList.map(([foodId, name]) => {
-                        const imagePath = `food/${foodId}`;
+                <div className='list-food' style={{ borderRadius: (filter === 'any' ? '0' : '20px') + ' 20px 20px 20px' }}>
+                    {actualFoodList.map((foodId) => {
                         return (
                             <NavButton
                                 key={foodId}
-                                icon={imagePath}
-                                name={name}
+                                icon={`food/${foodId}`}
+                                name={foodList[foodId][0]}
                                 size={wideScreen ? 125 : 100}
                                 tilting={['ash', 'water'].includes(foodId) ? 'none' : 'random'}
                                 action={() => updateFood(foodId)}
@@ -108,28 +117,28 @@ export const Food = ({
                 <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
                     <div className="image-title">
                         <div className="info-title">
-                            <h1>{foodName}</h1>
-                            <h2>{foodDescription[currentFood[0]] ? foodDescription[currentFood[0]] : foodDescription['lorem']}</h2>
+                            <h1>{foodList[actualFood][0]}</h1>
+                            <h2>{foodDescription[actualFood]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={foodIcon} className='img-main' alt="pink slime" />
+                            <img src={require('./assets/food/' + actualFood + '.png')} className='img-main' alt={foodList[actualFood][0]} />
                         </div>
                     </div>
-                    <div className='little-box food-type link-to-food' onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(currentFood[2]) ? currentFood[2] : 'honey') }}>
-                        <img src={foodType} alt="veggies" />
+                    <div className='little-box food-type link-to-food' onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(actualFood) ? actualFood : 'honey') }}>
+                        <img src={require('./assets/food/' + foodList[actualFood][1] + '.png')} alt={foodSingular[foodList[actualFood][1]]} />
                         <div>
                             <h3>Food type</h3>
-                            <h4>{foodSingular[currentFood[2]]}</h4>
+                            <h4>{foodSingular[foodList[actualFood][1]]}</h4>
                         </div>
                     </div>
-                    <div className={'little-box food-fav' + (favSlime === "none" ? '' : ' link-to-food')} onClick={() => { if (currentFood[3] !== 'none') changePage('slimes', favSlime) }}>
-                        <img src={favSlimeIcon} alt='none' />
+                    <div className={'little-box food-fav' + (favSlime.length ? ' link-to-food' : '')} onClick={() => { if (favSlime.length) changePage('slimes', favSlime) }}>
+                        <img src={require('./assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png')} alt='none' />
                         <div>
                             <h3>Favorite of</h3>
-                            <h4>{(favSlime === "none" ? "Nobody" : slimesList[favSlime][1])}</h4>
+                            <h4>{(favSlime.length ? slimesList[favSlime][0] : 'Nobody')}</h4>
                         </div>
                     </div>
-                    <Biomes spawnList={currentFood[3]} changePage={changePage} />
+                    <Biomes spawnList={foodList[actualFood][2]} changePage={changePage} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={require('./assets/misc/arrow.png')} alt='arrow' />
@@ -139,12 +148,12 @@ export const Food = ({
                         <img src={pediaAbout} alt='Slimeology' />
                         <h3>About</h3>
                     </div>
-                    <p>{foodpedia[currentFood[0]] ? foodpedia[currentFood[0]][0] : foodpedia['lorem'][0]}</p>
+                    <p>{foodpedia[actualFood][0]}</p>
                     <div className='desc-title'>
                         <img src={pediaQuestion} alt='Rancher Risks' />
                         <h3>On the ranch</h3>
                     </div>
-                    <p>{foodpedia[currentFood[0]] ? foodpedia[currentFood[0]][1] : foodpedia['lorem'][1]}</p>
+                    <p>{foodpedia[actualFood][1]}</p>
                 </div>
             </div>
         </div>

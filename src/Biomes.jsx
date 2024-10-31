@@ -1,8 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './assets/css/Biomes.css';
-import { spawnLocationsList } from './listeSlimes';
 import { videosList } from './videosList';
-import { regionsIds } from './assets/text/regions';
+import { regionsIds, spawnLocationsList } from './assets/text/regions';
 
 const light = true;
 const videoPath = './assets/videos/';
@@ -25,6 +24,8 @@ export const Biomes = ({
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef(new Array(spawnList.length).fill().map(() => React.createRef()));
     const lastSpawnListRef = useRef(spawnList);
+
+    const biomeBlacklist = ['pm', 'ps', 'ws']
 
     useEffect(() => {
         if (videoRefs.current.length !== spawnList.length)
@@ -73,7 +74,10 @@ export const Biomes = ({
 
                             }
                         }}
-                        onClick={() => changePage('regions', regionsIds.includes(spawnLocationsList[biome][0]) ? 'regions' : 'ranch', spawnLocationsList[biome][0])}
+                        onClick={() => {
+                            if (!biomeBlacklist.includes(biome))
+                                changePage('regions', regionsIds.includes(spawnLocationsList[biome][0]) ? 'regions' : 'ranch', spawnLocationsList[biome][0]);
+                        }}
                     >
                         <video
                             ref={videoRefs.current[index]}

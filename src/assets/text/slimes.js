@@ -1,3 +1,63 @@
+export const slimeNames = [
+    'pink',
+    'cotton',
+    'tabby',
+    'phosphor',
+    'rock',
+    'hunter',
+    'angler',
+    'puddle',
+    'ringtail',
+    'honey',
+    'flutter',
+    'batty',
+    'boom',
+    'crystal',
+    'fire',
+    'saber',
+    'dervish',
+    'tangle',
+    'yolky',
+    'lucky',
+    'gold',
+    'tarr'
+];
+
+export const slimesList = {
+    'pink': ['Pink Slime', 'food', 'none', true, ['rf', 'ss', 'ev', 'pb'], 'ball'],
+    'cotton': ['Cotton Slime', 'veggies', 'lettuce', true, ['rf', 'ss', 'pb'], 'bouncy'],
+    'tabby': ['Tabby Slime', 'meat', 'henStony', true, ['rf', 'ss', 'ev'], 'yarn'],
+    'phosphor': ['Phosphor Slime', 'fruits', 'cuberry', true, ['rf', 'ss', 'ev', 'pb'], 'none'],
+    'rock': ['Rock Slime', 'veggies', 'beet', true, ['ss', 'ev', 'pb'], 'none'],
+    'hunter': ['Hunter Slime', 'meat', 'rooster', true, ['ss', 'pb'], 'none'],
+    'angler': ['Angler Slime', 'meat', 'henSea', true, ['ss', 'ev'], 'puffer'],
+    'puddle': ['Puddle Slime', 'water', 'water', false, ['ss', 'ev', 'pb'], 'duck'],
+    'ringtail': ['Ringtail Slime', 'food', 'none', true, ['ss', 'ev', 'pb'], 'trash'],
+    'honey': ['Honey Slime', 'fruits', 'mango', true, ['ss'], 'none'],
+    'flutter': ['Flutter Slime', 'nectar', 'nectar', true, ['ss'], 'worm'],
+    'batty': ['Batty Slime', 'fruits', 'granite', true, ['ev'], 'moon'],
+    'boom': ['Boom Slime', 'meat', 'henBriar', true, ['ev', 'pb'], 'bomb'],
+    'crystal': ['Crystal Slime', 'veggies', 'onion', true, ['ev', 'pb'], 'none'],
+    'fire': ['Fire Slime', 'ash', 'ash', false, ['ev'], 'none'],
+    'saber': ['Saber Slime', 'meat', 'henCluck', true, ['pb'], 'none'],
+    'dervish': ['Dervish Slime', 'fruits', 'pear', true, ['ws'], 'none'],
+    'tangle': ['Tangle Slime', 'meat', 'henPainted', true, ['ps'], 'none'],
+    'yolky': ['Yolky Slime', 'none', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
+    'lucky': ['Lucky Slime', 'meat', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
+    'gold': ['Gold Slime', 'food', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
+    'tarr': ['Tarr Slime', 'ranchersnslimes', 'ranchersnslimes', false, ['co', 'rf', 'ss', 'ev', 'pb'], 'none']
+};
+
+export const foodTypes = {
+    'food': "Any",
+    'meat': "Meat",
+    'fruits': "Fruits",
+    'veggies': "Veggies",
+    'water': "Water",
+    'ash': "Ash",
+    'nectar': "Nectar"
+};
+
 export const slimesText = {
     'lorem': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     'pink': 'Their coral hue is scientifically proven to be the color of cheer.',
@@ -22,7 +82,7 @@ export const slimesText = {
     'lucky': 'Oooh, shiny!',
     'gold': 'Get rich or die sliming.',
     'tarr': 'Those awful, ravenous rainbows.'
-}
+};
 
 export const slimepedia = {
     'lorem': [

@@ -1,3 +1,21 @@
+export const resourcesList = [
+    ['brine', 'Deep Brine', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
+    ['lava', 'Lava Dust', ['ev']],
+    ['primordy', 'Primordy Oil', ['ev']],
+    ['sand', 'Silky Sand', ['ss', 'ev']],
+    ['jelly', 'Jellystone', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
+    ['radiant', 'Radiant Ore', ['ss', 'ev']],
+    ['diamond', 'Strange Diamond', ['rf', 'ss', 'ev', 'pb']],
+    ['wax', 'Buzz Wax', ['ss', 'ev']],
+    ['honey', 'Wild Honey', ['ss']],
+    ['fossil', 'Slime Fossil', ['pb']],
+    ['snowflake', 'Perfect Snowflake', ['pb']],
+    ['sunsap', 'Sun Sap', ['pb']],
+    ['drift', 'Drift Crystal', ['ws']],
+    ['glass', 'Storm Glass', ['ls']],
+    ['mote', 'Lightning Mote', ['ls']]
+];
+
 export const resPedia = {
     'brine': [
         'Salt of the earth kind of stuff.',

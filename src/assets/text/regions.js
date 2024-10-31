@@ -15,6 +15,22 @@ export const regionInfos = {
     'digsite': ['The Digsite', 'world/digsite', 'videos/ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 5, 4500]
 };
 
+export const spawnLocationsList = {
+    'co': ['conservatory', 'The Conservatory', true],
+    'td': ['den', 'The Den', true],
+    'gu': ['gully', 'The Gully', true],
+    'ar': ['archway', 'The Archway', true],
+    'tp': ['tidepools', 'The Tidepools', true],
+    'ds': ['digsite', 'The Digsite', true],
+    'rf': ['fields', 'Rainbow Fields', false],
+    'ss': ['strand', 'Starlight Strand', false],
+    'ev': ['valley', 'Ember Valley', false],
+    'pb': ['bluffs', 'Powderfall Bluffs', false],
+    'ws': ['tornado', 'Level 3 Wind Storm', false],
+    'ps': ['vines', 'Level 3 Pollen Storm', false],
+    'ls': ['lightning', 'Level 3 Thunderstorm', false],
+    'pm': ['shop', 'Pronto Mart', false]
+};
 
 export const regionElements = {
     'fields': [['pink', 'cotton', 'tabby', 'phosphor'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],

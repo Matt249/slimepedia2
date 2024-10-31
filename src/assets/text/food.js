@@ -1,6 +1,38 @@
-export const foodNames = ['ash', 'beet', 'carrot', 'lettuce', 'beet', 'onion', 'pogo', 'cuberry', 'mango', 'granite', 'pear', 'hen', 'henStony', 'henSea', 'henBriar', 'henCluck', 'henPainted', 'rooster', 'henElder', 'roosterElder', 'water', 'nectar'];
+export const foodNames = [
+    'carrot',
+    'lettuce',
+    'beet',
+    'onion',
+    'pogo',
+    'cuberry',
+    'mango',
+    'granite',
+    'pear',
+    'hen',
+    'henStony',
+    'henSea',
+    'henBriar',
+    'henCluck',
+    'henPainted',
+    'rooster',
+    'henElder',
+    'roosterElder',
+    'ash',
+    'nectar',
+    'water'
+];
 
-export const foodListBis = {
+export const foodSingular = {
+    'meat': "Meat",
+    'fruits': "Fruit",
+    'veggies': "Veggie",
+    'water': "Water",
+    'ash': "Ash",
+    'nectar': "Nectar"
+}
+
+export const foodList = {
+    'none': ['None', 'none', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf', 'ss', 'ev', 'pb']],
     'ranchersnslimes': ['Ranchers and Slimes', 'ranchersnslimes', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf', 'ss', 'ev', 'pb']],
     'carrot': ['Carrot', 'veggies', ['ar', 'rf', 'ss', 'ev', 'pb']],
     'lettuce': ["Water Lettuce", 'veggies', ['rf', 'ss', 'ev']],
@@ -55,6 +87,8 @@ export const foodDescription = {
     'water': 'Give your slimes a bath, they really need it.',
     'ash': 'A fine powder that\'s great for making slimes sneeze.'
 }
+
+
 
 export const foodpedia = {
     'carrot': [

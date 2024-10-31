@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import './assets/css/Pedia.css';
 import { NavButton } from './NavButton';
 import { Biomes } from './Biomes';
-import { resourcesList, toysList, slimesList } from './listeSlimes';
 import { Tab } from './Tab';
 import pedia from './assets/misc/pediatut.png';
 import buck from './assets/misc/buck.png';
-import { resPedia } from './assets/text/resourcepedia';
-import { toyDesc } from './assets/text/toypedia';
+import { resourcesList, resPedia } from './assets/text/resources';
+import { toyDesc, toysList } from './assets/text/toys';
+import { slimesList } from './assets/text/slimes';
 
 function findFirstMatchingArray(list, element, nth) {
     for (let array of list)
@@ -165,7 +165,7 @@ export const Items = ({
                             <img src={itemArray[2] === 'none' ? require('./assets/misc/none.png') : require('./assets/slimes/' + itemArray[2] + '.png')} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
-                                <h4>{itemArray[2] === 'none' ? 'None' : slimesList[itemArray[2]][1]}</h4>
+                                <h4>{itemArray[2] === 'none' ? 'None' : slimesList[itemArray[2]][0]}</h4>
                             </div>
                         </div>
                     ) : (
