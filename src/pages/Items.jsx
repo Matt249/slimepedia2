@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import './assets/css/Pedia.css';
-import { NavButton } from './NavButton';
-import { Biomes } from './Biomes';
-import { Tab } from './Tab';
-import pedia from './assets/misc/pediatut.png';
-import buck from './assets/misc/buck.png';
-import noneIcon from './assets/misc/none.png';
-import { resourcesList, resourcesNames, resPedia } from './assets/text/resources';
-import { toyNames, toysList, toyDesc } from './assets/text/toys';
-import { slimesList } from './assets/text/slimes';
+import '../assets/css/Pedia.css';
+import { NavButton } from '../NavButton';
+import { Biomes } from '../Biomes';
+import { Tab } from '../Tab';
+import pedia from '../assets/misc/pediatut.png';
+import buck from '../assets/misc/buck.png';
+import noneIcon from '../assets/misc/none.png';
+import { resourcesList, resourcesNames, resPedia } from '../assets/text/resources';
+import { toyNames, toysList, toyDesc } from '../assets/text/toys';
+import { slimesList } from '../assets/text/slimes';
 
 const matchMainList = (list) => {
     switch (list) {
@@ -106,7 +106,7 @@ export const Items = ({
                             <h2>{filter === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[actualItem][0]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={require('./assets/' + filter + '/' + actualItem + '.png')} className='img-main' alt="pink slime" />
+                            <img src={require('../assets/' + filter + '/' + actualItem + '.png')} className='img-main' alt="pink slime" />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
@@ -130,7 +130,7 @@ export const Items = ({
                     </div>
                     {(filter === 'toys') ? (
                         <div className={'little-box toy-fav' + (infosItems[actualItem][1] === "none" ? '' : ' link-to-food') + (filter !== 'toys' ? ' toy-hide' : '')} onClick={() => changePage('slimes', infosItems[actualItem][1])}>
-                            <img src={infosItems[actualItem][2] === 'none' ? noneIcon : require('./assets/slimes/' + infosItems[actualItem][1] + '.png')} alt='none' />
+                            <img src={infosItems[actualItem][2] === 'none' ? noneIcon : require('../assets/slimes/' + infosItems[actualItem][1] + '.png')} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
                                 <h4>{infosItems[actualItem][2] === 'none' ? 'None' : slimesList[infosItems[actualItem][1]][0]}</h4>

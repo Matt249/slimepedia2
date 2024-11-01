@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { NavButton } from './NavButton.jsx';
-import { Biomes } from './Biomes.jsx';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from './assets/text/food.js';
-import { Tab } from './Tab.jsx';
-import './assets/css/Pedia.css';
-import pediaAbout from './assets/misc/pediaabout.png';
-import pediaQuestion from './assets/misc/pediaquestion.png';
-import { slimesList } from './assets/text/slimes.js';
+import { NavButton } from '../NavButton.jsx';
+import { Biomes } from '../Biomes.jsx';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../assets/text/food.js';
+import { Tab } from '../Tab.jsx';
+import '../assets/css/Pedia.css';
+import pediaAbout from '../assets/misc/pediaabout.png';
+import pediaQuestion from '../assets/misc/pediaquestion.png';
+import { slimesList } from '../assets/text/slimes.js';
 
 export const Food = ({
     food = 'carrot',
@@ -121,18 +121,18 @@ export const Food = ({
                             <h2>{foodDescription[actualFood]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={require('./assets/food/' + actualFood + '.png')} className='img-main' alt={foodList[actualFood][0]} />
+                            <img src={require('../assets/food/' + actualFood + '.png')} className='img-main' alt={foodList[actualFood][0]} />
                         </div>
                     </div>
                     <div className='little-box food-type link-to-food' onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(actualFood) ? actualFood : 'honey') }}>
-                        <img src={require('./assets/food/' + foodList[actualFood][1] + '.png')} alt={foodSingular[foodList[actualFood][1]]} />
+                        <img src={require('../assets/food/' + foodList[actualFood][1] + '.png')} alt={foodSingular[foodList[actualFood][1]]} />
                         <div>
                             <h3>Food type</h3>
                             <h4>{foodSingular[foodList[actualFood][1]]}</h4>
                         </div>
                     </div>
                     <div className={'little-box food-fav' + (favSlime.length ? ' link-to-food' : '')} onClick={() => { if (favSlime.length) changePage('slimes', favSlime) }}>
-                        <img src={require('./assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png')} alt='none' />
+                        <img src={require('../assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png')} alt='none' />
                         <div>
                             <h3>Favorite of</h3>
                             <h4>{(favSlime.length ? slimesList[favSlime][0] : 'Nobody')}</h4>
@@ -141,7 +141,7 @@ export const Food = ({
                     <Biomes spawnList={foodList[actualFood][2]} changePage={changePage} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={require('./assets/misc/arrow.png')} alt='arrow' />
+                    <img src={require('../assets/misc/arrow.png')} alt='arrow' />
                 </div>
                 <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
                     <div className='desc-title'>

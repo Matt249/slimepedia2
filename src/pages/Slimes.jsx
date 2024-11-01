@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import './assets/css/Pedia.css';
-import { NavButton } from './NavButton.jsx';
-import { Biomes } from './Biomes.jsx';
-import { slimeNames, slimesList, slimesText, slimepedia, foodTypes } from './assets/text/slimes.js';
-import { foodList } from './assets/text/food.js';
-import largo from './assets/misc/largo.png';
-import none from './assets/misc/none.png';
-import pediaSlime from './assets/misc/pediaslime.png';
-import pediaRisks from './assets/misc/pediarisks.png';
-import pediaPlort from './assets/misc/pediaplort.png';
-import arrow from './assets/misc/arrow.png';
-import { toysList } from './assets/text/toys.js';
+import '../assets/css/Pedia.css';
+import { NavButton } from '../NavButton.jsx';
+import { Biomes } from '../Biomes.jsx';
+import { slimeNames, slimesList, slimesText, slimepedia, foodTypes } from '../assets/text/slimes.js';
+import { foodList } from '../assets/text/food.js';
+import largo from '../assets/misc/largo.png';
+import none from '../assets/misc/none.png';
+import pediaSlime from '../assets/misc/pediaslime.png';
+import pediaRisks from '../assets/misc/pediarisks.png';
+import pediaPlort from '../assets/misc/pediaplort.png';
+import arrow from '../assets/misc/arrow.png';
+import { toysList } from '../assets/text/toys.js';
 
 export const Slimes = ({
     slime = 'pink',
@@ -24,13 +24,14 @@ export const Slimes = ({
     }
     const currentSlimeList = slimesList[currentSlime];
     const slimeName = currentSlimeList[0];
-    const slimeIcon = require('./assets/' + (currentSlime === "none" ? "misc/none" : "slimes/" + currentSlime) + '.png');
-    const plortIcon = require('./assets/' + (["none", "lucky", "tarr"].includes(currentSlime) ? "misc/none" : "plorts/" + currentSlime) + '.png');
-    const foodTypeIcon = require('./assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png');
-    const favFoodIcon = require('./assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png');
-    const favToyIcon = require('./assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png');
+    const slimeIcon = require('../assets/' + (currentSlime === "none" ? "misc/none" : "slimes/" + currentSlime) + '.png');
+    const plortIcon = require('../assets/' + (["none", "lucky", "tarr"].includes(currentSlime) ? "misc/none" : "plorts/" + currentSlime) + '.png');
+    const foodTypeIcon = require('../assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png');
+    const favFoodIcon = require('../assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png');
+    const favToyIcon = require('../assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png');
     const slimepediaEntry = slimepedia[currentSlime] ? slimepedia[currentSlime] : slimepedia['lorem'];
-    
+    const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
+
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
         const handleResize = () => {
@@ -44,6 +45,7 @@ export const Slimes = ({
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+    console.log(slimeToy);
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-slime'>
@@ -101,13 +103,13 @@ export const Slimes = ({
                         className={'little-box box-toy' + (currentSlimeList[6] === 'none' ? '' : ' link-to-food')}
                         onClick={() => { if (currentSlimeList[6] !== 'none') changePage('items', 'toysList', currentSlimeList[5]) }}
                     >
-                        <img src={favToyIcon} alt={toysList[currentSlimeList[5]][0]} />
+                        <img src={favToyIcon} alt={slimeToy[0]} />
                         <div>
                             <h3>Favorite Toy</h3>
-                            <h4>{toysList[currentSlimeList[5]][0]}</h4>
+                            <h4>{slimeToy[0]}</h4>
                         </div>
                     </div>
-                    <Biomes spawnList={currentSlimeList[4]} changePage={changePage}/>
+                    <Biomes spawnList={currentSlimeList[4]} changePage={changePage} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='Expand arrow' />

@@ -64,7 +64,7 @@ nav {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  overflow-x: scroll;
+  overflow-x: hidden;
   height: fit-content;
 }
 

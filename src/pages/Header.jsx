@@ -1,6 +1,6 @@
 import React from "react";
-import pink from "./assets/slimes/pink.png";
-import phosphor from "./assets/slimes/phosphor.png";
+import pink from "../assets/slimes/pink.png";
+import phosphor from "../assets/slimes/phosphor.png";
 
 export const Header = (props) => {
     return (

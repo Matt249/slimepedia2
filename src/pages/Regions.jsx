@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
-import './assets/css/Regions.css';
-import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from './assets/text/regions';
-import { Tab } from './Tab';
-import { foodList } from './assets/text/food';
-import Down from './Down';
-import { slimesList } from './assets/text/slimes';
+import '../assets/css/Regions.css';
+import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../assets/text/regions';
+import { Tab } from '../Tab';
+import { foodList } from '../assets/text/food';
+import Down from '../Down';
+import { slimesList } from '../assets/text/slimes';
 
 export const Regions = ({
     region = 'fields',
@@ -27,8 +27,6 @@ export const Regions = ({
         setSelection(tab);
         setRegion(regionArg ? regionArg : tab === 'regions' ? 'fields' : 'conservatory');
     };
-
-    
 
     var listOfRegions = [];
     switch (actualSelection) {
@@ -86,7 +84,7 @@ export const Regions = ({
                     >
                         <div className="region-element-content">
                             <img
-                                src={require('./assets/slimes/' + slime + '.png')}
+                                src={require('../assets/slimes/' + slime + '.png')}
                                 alt={slimesList[slime][1]}
                                 title={slimesList[slime][1]}
                             />
@@ -99,20 +97,20 @@ export const Regions = ({
                 <div className='region-from'>
                     {(regionsConnections[actualRegion][0].length) ? regionsConnections[actualRegion][0].map(regionArg => (
                         <img
-                            src={require('./assets/world/' + regionArg + '.png')}
+                            src={require('../assets/world/' + regionArg + '.png')}
                             alt='Portal'
                             onClick={() => goToRegion(regionArg)}
                             key={regionArg}
                         />
                     )) : (
-                        <img src={require('./assets/misc/none.png')} alt='Portal' />
+                        <img src={require('../assets/misc/none.png')} alt='Portal' />
                     )}
                 </div>
                 <div className='region-connection-separator'>
                     <Down />
                 </div>
                 <div>
-                    <img className='no-hover' src={require('./assets/world/' + actualRegion + '.png')} alt='Current Biome' />
+                    <img className='no-hover' src={require('../assets/world/' + actualRegion + '.png')} alt='Current Biome' />
                 </div>
                 <div className='region-connection-separator'>
                     <Down />
@@ -120,13 +118,13 @@ export const Regions = ({
                 <div className='region-from'>
                     {(regionsConnections[actualRegion][1].length) ? regionsConnections[actualRegion][1].map(regionArg => (
                         <img
-                            src={require('./assets/world/' + regionArg + '.png')}
+                            src={require('../assets/world/' + regionArg + '.png')}
                             alt='Portal'
                             onClick={() => setRegion(regionArg)}
                             key={regionArg}
                         />
                     )) : (
-                        <img className='no-hover' src={require('./assets/misc/none.png')} alt='Portal' />
+                        <img className='no-hover' src={require('../assets/misc/none.png')} alt='Portal' />
                     )}
                 </div>
             </div>
@@ -139,7 +137,7 @@ export const Regions = ({
                             onClick={() => goToNewPage('food', 'any', food)}
                         >
                             <img
-                                src={require('./assets/food/' + food + '.png')}
+                                src={require('../assets/food/' + food + '.png')}
                                 alt={foodList[food][0]}
                                 title={foodList[food][0]}
                             />
@@ -159,7 +157,7 @@ export const Regions = ({
                         key={resource}
                     >
                         <img
-                            src={require('./assets/' + regionsResourcesInfos[resource][1] + '.png')}
+                            src={require('../assets/' + regionsResourcesInfos[resource][1] + '.png')}
                             alt={regionsResourcesInfos[resource][0]}
                             title={regionsResourcesInfos[resource][0]}
                         />
@@ -168,7 +166,7 @@ export const Regions = ({
             </div>
             <div className='region-pods'>
                 <h2 className='box-title'>Available Pods</h2>
-                <img src={require('./assets/misc/pod.png')} alt='Pods' />
+                <img src={require('../assets/misc/pod.png')} alt='Pods' />
                 <p>{regionInfos[actualRegion][5]}</p>
             </div>
         </div>
@@ -199,7 +197,7 @@ export const Regions = ({
                         >
                             <div className="region-element-content">
                                 <img
-                                    src={require('./assets/' + regionInfos[place][1] + '.png')}
+                                    src={require('../assets/' + regionInfos[place][1] + '.png')}
                                     alt={regionInfos[place][0]}
                                     title={regionInfos[place][0]}
                                 />
@@ -220,7 +218,7 @@ export const Regions = ({
                     >
                         <div className="region-element-content">
                             <img
-                                src={require('./assets/' + regionInfos[place][1] + '.png')}
+                                src={require('../assets/' + regionInfos[place][1] + '.png')}
                                 alt={regionInfos[place][0]}
                                 title={regionInfos[place][0]}
                             />
@@ -233,17 +231,17 @@ export const Regions = ({
             <div className='ranch-box ranch-cost'>
                 <h2 className='box-title'>Expansion Cost</h2>
                 <h3>{regionInfos[actualRegion][7]}</h3>
-                <img src={require('./assets/misc/buck.png')} alt='Newbucks' />
+                <img src={require('../assets/misc/buck.png')} alt='Newbucks' />
             </div>
             <div className='ranch-box ranch-slots'>
                 <h2 className='box-title'>Available Slots</h2>
                 <h3>{regionInfos[actualRegion][6]}</h3>
-                <img src={require('./assets/misc/patch.png')} alt='Slots' />
+                <img src={require('../assets/misc/patch.png')} alt='Slots' />
             </div>
             <div className='ranch-box ranch-pods'>
                 <h2 className='box-title'>Pod in this Expansion</h2>
                 <h3>{regionInfos[actualRegion][5]}</h3>
-                <img src={require('./assets/misc/pod.png')} alt='Slots' />
+                <img src={require('../assets/misc/pod.png')} alt='Slots' />
             </div>
             <div className='ranch-box ranch-special'>
                 <h2 className='box-title'>Special Features</h2>
@@ -256,7 +254,7 @@ export const Regions = ({
                                 goToNewPage(regionsResourcesInfos[feature][2][0], regionsResourcesInfos[feature][2][1], regionsResourcesInfos[feature][2][2]);
                         }}
                     >
-                        <img src={require('./assets/' + regionsResourcesInfos[feature][1] + '.png')} alt='Slots' />
+                        <img src={require('../assets/' + regionsResourcesInfos[feature][1] + '.png')} alt='Slots' />
                         <h3>{regionsResourcesInfos[feature][0]}</h3>
                     </div>
                 ))}
@@ -291,14 +289,14 @@ export const Regions = ({
                         >
                             <video
                                 className='region-video'
-                                src={require('./assets/' + regionInfos[region][2] + '.light.webm')}
+                                src={require('../assets/' + regionInfos[region][2] + '.light.webm')}
                                 onMouseEnter={e => handleMouseEnter(e, region)}
                                 onMouseLeave={e => handleMouseLeave(e, region)}
                                 disablePictureInPicture loop muted
                             >
                                 {regionInfos[region][0]} Video
                             </video>
-                            <img className='region-icon' src={require('./assets/' + regionInfos[region][1] + '.png')} alt='Rainbow Fields Logo' />
+                            <img className='region-icon' src={require('../assets/' + regionInfos[region][1] + '.png')} alt='Rainbow Fields Logo' />
                             <h2 className='region-name'>{regionInfos[region][0]}</h2>
                         </div>
                     ))}
@@ -308,10 +306,9 @@ export const Regions = ({
                 <div className='region-background'>
                     <video
                         className='region-background-video'
-                        src={require('./assets/' + regionInfos[actualRegion][2] + '.webm')}
+                        src={require('../assets/' + regionInfos[actualRegion][2] + '.webm')}
                         disablePictureInPicture autoPlay loop muted
                         onLoadedData={e => {
-                            console.log('Background video loaded for', actualRegion);
                             e.target.play();
                         }}
                     >
@@ -321,7 +318,7 @@ export const Regions = ({
                 <div className='region-container'>
                     <div className='region-main-page-frame'>
                         <div className='region-main-page'>
-                            <img src={require('./assets/world/' + actualRegion + '.png')} alt='Region Icon' />
+                            <img src={require('../assets/world/' + actualRegion + '.png')} alt='Region Icon' />
                             <h1>{regionInfos[actualRegion][0]}</h1>
                             <h2>{regionInfos[actualRegion][3]}</h2>
                         </div>

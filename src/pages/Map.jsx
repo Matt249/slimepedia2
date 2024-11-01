@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import worldImg from './assets/map/output.png';
-import './assets/css/Map.css';
+import worldImg from '../assets/map/output.png';
+import '../assets/css/Map.css';
 
 export const Map = () => {
     const [center, setCenter] = useState([0, 0]);
@@ -11,10 +11,10 @@ export const Map = () => {
     const bounds = [[-90, -180], [90, 180]];
 
     useEffect(() => {
-        if (mapRef.current) {
-            const map = mapRef.current;
-            map.setView(center, zoom, { animate: false });
-        }
+        if (!mapRef.current) return; 
+        
+        const map = mapRef.current;
+        map.setView(center, zoom, { animate: false });
     }, [center, zoom]);
 
     const handleMoveEnd = () => {

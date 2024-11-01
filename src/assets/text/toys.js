@@ -20,7 +20,8 @@ export const toysList = {
     'worm': ['Glowbug', 'flutter'],
     'moon': ['Full Moon Ball', 'batty'],
     'bomb': ['Bomb Ball', 'boom'],
-    'fox': ['Glo Glo Foxifur', 'none']
+    'fox': ['Glo Glo Foxifur', 'none'],
+    'none': ['None', 'none']
 };
 
 export const toyDesc = {
