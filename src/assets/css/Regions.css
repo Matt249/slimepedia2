@@ -10,6 +10,7 @@
     --special-size: 1em;
     --region-pedia-size: 1.1em;
     --ranch-pedia-size: 1.5em;
+    --special-margin: 20px 0 0 0;
 }
 
 @media (min-width: 2000px) {
@@ -20,9 +21,11 @@
         --main-menu-icon-size: 300px;
         --main-menu-title-size: 4em;
         --main-menu-subtitle-size: 2.5em;
-        --special-img-scale: .8;
+        --special-img-scale: .9;
+        --special-size: 1.3em;
         --region-pedia-size: 1.7em;
         --ranch-pedia-size: 2em;
+        --special-margin: 40px 0 10px 0;
     }
 
 }
@@ -82,6 +85,8 @@
 
 .region-tab>*:not(video) {
     z-index: 10;
+    pointer-events: none;
+    cursor: pointer;
 }
 
 .region-video {
@@ -557,10 +562,12 @@
 
 .ranch-special-feature {
     display: flex;
+    box-sizing: border-box;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding: var(--special-margin);
 }
 
 .ranch-special-feature>img {

@@ -28,6 +28,8 @@ export const Regions = ({
         setRegion(regionArg ? regionArg : tab === 'regions' ? 'fields' : 'conservatory');
     };
 
+    
+
     var listOfRegions = [];
     switch (actualSelection) {
         case 'ranch':
@@ -262,6 +264,17 @@ export const Regions = ({
         </div>
     );
 
+    const handleMouseEnter = (e, region) => {
+        if (e.target.readyState >= 3)
+            e.target.play();
+    };
+
+    const handleMouseLeave = (e, region) => {
+        if (e.target.readyState >= 3)
+            if (actualRegion !== region)
+                e.target.pause();
+    };
+
     return (
         <div className='regions'>
             <div className='regions-menu'>
@@ -278,8 +291,10 @@ export const Regions = ({
                         >
                             <video
                                 className='region-video'
-                                src={require('./assets/' + regionInfos[region][2] + '.webm')}
-                                disablePictureInPicture autoPlay loop muted
+                                src={require('./assets/' + regionInfos[region][2] + '.light.webm')}
+                                onMouseEnter={e => handleMouseEnter(e, region)}
+                                onMouseLeave={e => handleMouseLeave(e, region)}
+                                disablePictureInPicture loop muted
                             >
                                 {regionInfos[region][0]} Video
                             </video>
@@ -295,6 +310,10 @@ export const Regions = ({
                         className='region-background-video'
                         src={require('./assets/' + regionInfos[actualRegion][2] + '.webm')}
                         disablePictureInPicture autoPlay loop muted
+                        onLoadedData={e => {
+                            console.log('Background video loaded for', actualRegion);
+                            e.target.play();
+                        }}
                     >
                         Video Background
                     </video>
