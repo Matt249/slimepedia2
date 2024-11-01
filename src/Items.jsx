@@ -5,18 +5,23 @@ import { Biomes } from './Biomes';
 import { Tab } from './Tab';
 import pedia from './assets/misc/pediatut.png';
 import buck from './assets/misc/buck.png';
-import { resourcesList, resPedia } from './assets/text/resources';
-import { toyDesc, toysList } from './assets/text/toys';
+import noneIcon from './assets/misc/none.png';
+import { resourcesList, resourcesNames, resPedia } from './assets/text/resources';
+import { toyNames, toysList, toyDesc } from './assets/text/toys';
 import { slimesList } from './assets/text/slimes';
 
-function findFirstMatchingArray(list, element, nth) {
-    for (let array of list)
-        if (array[nth] === element)
-            return array;
-    return undefined;
+const matchMainList = (list) => {
+    switch (list) {
+        case 'resources':
+            return resourcesNames;
+        case 'toys':
+            return toyNames;
+        default:
+            return resourcesNames;
+    }
 }
 
-const matchMainList = (list) => {
+const matchInfosList = (list) => {
     switch (list) {
         case 'resources':
             return resourcesList;
@@ -24,34 +29,6 @@ const matchMainList = (list) => {
             return toysList;
         default:
             return resourcesList;
-    }
-}
-
-const matchInfosList = (list) => {
-    switch (list) {
-        case 'resources':
-            let newDesc = {};
-            for (let key in resPedia)
-                newDesc[key] = resPedia[key][0];
-            return newDesc;
-        case 'toys':
-            return toyDesc;
-        default:
-            return resPedia;
-    }
-}
-
-const matchPediaList = (list) => {
-    switch (list) {
-        case 'resources':
-            let newPedia = {};
-            for (let key in resPedia)
-                newPedia[key] = resPedia[key][1];
-            return newPedia;
-        case 'toys':
-            return toyDesc;
-        default:
-            return resPedia;
     }
 }
 
@@ -63,25 +40,14 @@ export const Items = ({
     const firstOption = 'resources';
     const [filter, setFilter] = useState(tab);
     const [actualItem, setItem] = useState(item);
-    const [listItems, setListItems] = useState(matchMainList(filter));
+    const [itemsNames, setListItems] = useState(matchMainList(filter));
     const [infosItems, setInfosItems] = useState(matchInfosList(filter));
-    const [pediaItems, setPediaItems] = useState(matchPediaList(filter));
-    const [itemArray, setItemArray] = useState(findFirstMatchingArray(listItems, actualItem, 0));
-
-    const updateItem = (idToSwitch) => {
-        setItem(idToSwitch);
-        setItemArray(findFirstMatchingArray(listItems, idToSwitch, 0));
-        setInfosItems(matchInfosList(filter));
-        setPediaItems(matchPediaList(filter));
-    }
 
     const updateTab = (newFilter) => {
         setFilter(newFilter);
         setListItems(matchMainList(newFilter));
-        setItemArray(matchMainList(newFilter)[0]);
         setInfosItems(matchInfosList(newFilter));
-        setPediaItems(matchPediaList(newFilter));
-        setItem(matchMainList(newFilter)[0][0]);
+        setItem(matchMainList(newFilter)[0]);
     }
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
@@ -97,7 +63,6 @@ export const Items = ({
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
     return (
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
@@ -116,15 +81,18 @@ export const Items = ({
                     />
                 </div>
                 <div className='list-food' style={{ borderRadius: (filter === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
-                    {listItems.map(([resId, name]) => {
+                    {itemsNames.map((item) => {
                         return (
                             <NavButton
-                                key={resId}
-                                icon={filter + '/' + resId}
-                                name={name}
+                                key={item}
+                                icon={filter + '/' + item}
+                                name={infosItems[item][0]}
                                 size={wideScreen ? 125 : 100}
-                                action={() => updateItem(resId)}
-                                selected={actualItem === resId}
+                                action={() => {
+                                    setItem(item);
+                                    setInfosItems(matchInfosList(filter));
+                                }}
+                                selected={actualItem === item}
                             />
                         );
                     })}
@@ -134,17 +102,17 @@ export const Items = ({
                 <div className={'presentation presentation-' + filter}>
                     <div className="image-title">
                         <div className="info-title">
-                            <h1>{itemArray[1]}</h1>
-                            <h2>{filter === 'toys' ? 'Playtime gets the wiggles out.' : infosItems[itemArray[0]]}</h2>
+                            <h1>{infosItems[actualItem][0]}</h1>
+                            <h2>{filter === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[actualItem][0]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={require('./assets/' + filter + '/' + itemArray[0] + '.png')} className='img-main' alt="pink slime" />
+                            <img src={require('./assets/' + filter + '/' + actualItem + '.png')} className='img-main' alt="pink slime" />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
                         <img src={pedia} alt="Pedia Informations Icon" />
                         <div>
-                            {pediaItems[actualItem].split("\n").map(function (item, idx) {
+                            {(filter === 'resources' ? resPedia[actualItem][1] : toyDesc[actualItem]).split("\n").map((item, idx) => {
                                 return (
                                     <p key={idx}>
                                         {item}
@@ -161,25 +129,24 @@ export const Items = ({
                         </div>
                     </div>
                     {(filter === 'toys') ? (
-                        <div className={'little-box toy-fav' + (itemArray[2] === "none" ? '' : ' link-to-food') + (filter !== 'toys' ? ' toy-hide' : '')} onClick={() => changePage('slimes', itemArray[2])}>
-                            <img src={itemArray[2] === 'none' ? require('./assets/misc/none.png') : require('./assets/slimes/' + itemArray[2] + '.png')} alt='none' />
+                        <div className={'little-box toy-fav' + (infosItems[actualItem][1] === "none" ? '' : ' link-to-food') + (filter !== 'toys' ? ' toy-hide' : '')} onClick={() => changePage('slimes', infosItems[actualItem][1])}>
+                            <img src={infosItems[actualItem][2] === 'none' ? noneIcon : require('./assets/slimes/' + infosItems[actualItem][1] + '.png')} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
-                                <h4>{itemArray[2] === 'none' ? 'None' : slimesList[itemArray[2]][0]}</h4>
+                                <h4>{infosItems[actualItem][2] === 'none' ? 'None' : slimesList[infosItems[actualItem][1]][0]}</h4>
                             </div>
                         </div>
                     ) : (
                         <div className="little-box toy-fav toy-hide">
-                            <img src={require('./assets/misc/none.png')} alt='none' />
+                            {/* <img src={noneIcon} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
                                 <h4>None</h4>
-                            </div>
+                            </div> */}
                         </div>
                     )
                     }
-                    <Biomes spawnList={filter !== 'toys' ? itemArray[2] : ['pm']} changePage={changePage} />
-
+                    <Biomes spawnList={filter !== 'toys' ? resourcesList[actualItem][1] : ['pm']} changePage={changePage} />
                 </div>
             </div>
         </div>

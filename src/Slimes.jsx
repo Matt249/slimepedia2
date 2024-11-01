@@ -10,7 +10,7 @@ import pediaSlime from './assets/misc/pediaslime.png';
 import pediaRisks from './assets/misc/pediarisks.png';
 import pediaPlort from './assets/misc/pediaplort.png';
 import arrow from './assets/misc/arrow.png';
-import { toys } from './assets/text/toys.js';
+import { toysList } from './assets/text/toys.js';
 
 export const Slimes = ({
     slime = 'pink',
@@ -30,6 +30,7 @@ export const Slimes = ({
     const favFoodIcon = require('./assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png');
     const favToyIcon = require('./assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png');
     const slimepediaEntry = slimepedia[currentSlime] ? slimepedia[currentSlime] : slimepedia['lorem'];
+    
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
         const handleResize = () => {
@@ -98,12 +99,12 @@ export const Slimes = ({
                     </div>
                     <div
                         className={'little-box box-toy' + (currentSlimeList[6] === 'none' ? '' : ' link-to-food')}
-                        onClick={() => { if (currentSlimeList[6] !== 'none') changePage('items', 'toys', currentSlimeList[5]) }}
+                        onClick={() => { if (currentSlimeList[6] !== 'none') changePage('items', 'toysList', currentSlimeList[5]) }}
                     >
-                        <img src={favToyIcon} alt={toys[currentSlimeList[5]]} />
+                        <img src={favToyIcon} alt={toysList[currentSlimeList[5]][0]} />
                         <div>
                             <h3>Favorite Toy</h3>
-                            <h4>{toys[currentSlimeList[5]]}</h4>
+                            <h4>{toysList[currentSlimeList[5]][0]}</h4>
                         </div>
                     </div>
                     <Biomes spawnList={currentSlimeList[4]} changePage={changePage}/>
