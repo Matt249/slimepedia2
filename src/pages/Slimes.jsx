@@ -100,8 +100,8 @@ export const Slimes = ({
                         </div>
                     </div>
                     <div
-                        className={'little-box box-toy' + (currentSlimeList[6] === 'none' ? '' : ' link-to-food')}
-                        onClick={() => { if (currentSlimeList[6] !== 'none') changePage('items', 'toysList', currentSlimeList[5]) }}
+                        className={'little-box box-toy' + (currentSlimeList[5] === 'none' ? '' : ' link-to-food')}
+                        onClick={() => { if (currentSlimeList[5] !== 'none') changePage('items', 'toys', currentSlimeList[5]) }}
                     >
                         <img src={favToyIcon} alt={slimeToy[0]} />
                         <div>
