@@ -1,16 +1,16 @@
-import houseDay from './assets/wallpapers/houseDay.png';
-import houseNight from './assets/wallpapers/houseNight.png';
 import { Header } from './pages/Header';
-import { NavButton } from './NavButton';
+import { NavButton } from './components/NavButton.jsx';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Slimes } from './pages/Slimes';
 import { Food } from './pages/Food.jsx';
 import { slimeNames } from './assets/text/slimes';
 import { Items } from './pages/Items';
 import { Map } from './pages/Map';
-import './assets/css/App.css';
 import { Buildings } from './pages/Buildings';
 import { Regions } from './pages/Regions';
+import houseDay from './assets/wallpapers/houseDay.png';
+import houseNight from './assets/wallpapers/houseNight.png';
+import './css/App.css';
 
 function App() {
     document.title = "Slimepedia 2";

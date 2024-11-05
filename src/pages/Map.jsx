@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import worldImg from '../assets/map/output.png';
-import '../assets/css/Map.css';
+import 'leaflet/dist/leaflet.css';
+import '../css/Map.css';
 
 export const Map = () => {
     const [center, setCenter] = useState([0, 0]);

@@ -1,4 +1,4 @@
-import "./assets/css/Tab.css";
+import "../css/Tab.css";
 
 export const Tab = ({
     title = 'Default Title',
@@ -8,7 +8,7 @@ export const Tab = ({
 }) => {
     return (
         <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
-            <img src={require(`./assets/${icon}.png`)} alt={title} />
+            <img src={require(`../assets/${icon}.png`)} alt={title} />
             <p>{title}</p>
         </div>
     );

@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { NavButton } from '../NavButton.jsx';
-import { Biomes } from '../Biomes.jsx';
+import { NavButton } from '../components/NavButton.jsx';
+import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../assets/text/food.js';
-import { Tab } from '../Tab.jsx';
-import '../assets/css/Pedia.css';
+import { Tab } from '../components/Tab.jsx';
+import { slimesList } from '../assets/text/slimes.js';
 import pediaAbout from '../assets/misc/pediaabout.png';
 import pediaQuestion from '../assets/misc/pediaquestion.png';
-import { slimesList } from '../assets/text/slimes.js';
+import '../css/Pedia.css';
 
 const FoodTabs = ({ filter, setFilter }) => (
     <div className='food-tabs'>
@@ -158,7 +158,7 @@ export const Food = ({
         <div className='box-layout slimes-menu'>
             <div className='list-container'>
                 <FoodTabs filter={filter} setFilter={setFilter} />
-                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} updateFood={updateFood} actualFood={actualFood} filter={filter}/>
+                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} updateFood={updateFood} actualFood={actualFood} filter={filter} />
             </div>
             <div className='food-container box-layout-secondary'>
                 <FoodDetails actualFood={actualFood} favSlime={favSlime} changePage={changePage} topBtn={topBtn} setFilter={setFilter} />

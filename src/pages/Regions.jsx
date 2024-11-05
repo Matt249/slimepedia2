@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
-import '../assets/css/Regions.css';
 import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../assets/text/regions';
-import { Tab } from '../Tab';
+import { Tab } from '../components/Tab';
 import { foodList } from '../assets/text/food';
-import Down from '../Down';
 import { slimesList } from '../assets/text/slimes';
+import Down from '../Down';
+import '../css/Regions.css';
 
 export const Regions = ({
     region = 'fields',

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './assets/css/Biomes.css';
-import { regionsIds, spawnLocationsList } from './assets/text/regions';
+import { regionsIds, spawnLocationsList } from '../assets/text/regions';
+import '../css/Biomes.css';
 
 const light = false;
 
@@ -59,7 +59,7 @@ export const Biomes = ({
                         <video
                             ref={videoRefs.current[index]}
                             className="biome-list-video"
-                            src={require('./assets/videos/' + biome + (light ? '.light' : '') + '.webm')}
+                            src={require('../assets/videos/' + biome + (light ? '.light' : '') + '.webm')}
                             preload='auto'
                             loop
                             muted
@@ -68,7 +68,7 @@ export const Biomes = ({
                         <div className='biome-list-overlay'>
                             <img
                                 className="biome-image"
-                                src={require('./assets/world/' + spawnLocationsList[biome][0] + '.png')}
+                                src={require('../assets/world/' + spawnLocationsList[biome][0] + '.png')}
                                 alt={spawnLocationsList[biome][1]}
                             />
                             <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>

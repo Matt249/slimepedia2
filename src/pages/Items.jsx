@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import '../assets/css/Pedia.css';
-import { NavButton } from '../NavButton';
-import { Biomes } from '../Biomes';
-import { Tab } from '../Tab';
-import pedia from '../assets/misc/pediatut.png';
-import buck from '../assets/misc/buck.png';
-import noneIcon from '../assets/misc/none.png';
+import { NavButton } from '../components/NavButton';
+import { Biomes } from '../components/Biomes';
+import { Tab } from '../components/Tab';
 import { resourcesList, resourcesNames, resPedia } from '../assets/text/resources';
 import { toyNames, toysList, toyDesc } from '../assets/text/toys';
 import { slimesList } from '../assets/text/slimes';
+import pedia from '../assets/misc/pediatut.png';
+import buck from '../assets/misc/buck.png';
+import noneIcon from '../assets/misc/none.png';
+import '../css/Pedia.css';
 
 const matchMainList = (list) => {
     switch (list) {
