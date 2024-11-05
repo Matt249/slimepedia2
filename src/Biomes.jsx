@@ -1,44 +1,20 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './assets/css/Biomes.css';
-import { videosList } from './videosList';
 import { regionsIds, spawnLocationsList } from './assets/text/regions';
 
-const light = true;
-const videoPath = './assets/videos/';
-var videos = []
-
-for (let video of videosList)
-    videos.push([video, require('' + video)]);
-
-const findVideo = (biome) => {
-    for (let video of videos)
-        if (video[0] === biome)
-            return video[1];
-    return videos[1][1];
-}
+const light = false;
 
 export const Biomes = ({
     spawnList = [],
     changePage = ({ args }) => { console.log('changePage not defined, args={', args, '}') }
 }) => {
     const [listHovered, setListHovered] = useState(false);
-    const videoRefs = useRef(new Array(spawnList.length).fill().map(() => React.createRef()));
-    const lastSpawnListRef = useRef(spawnList);
-
-    const biomeBlacklist = ['pm', 'ps', 'ws']
+    const videoRefs = useRef([]);
+    const biomeBlacklist = ['pm', 'ps', 'ws'];
 
     useEffect(() => {
-        if (videoRefs.current.length !== spawnList.length)
-            videoRefs.current = new Array(spawnList.length).fill().map((_, i) => videoRefs.current[i] || React.createRef());
-        const hasSpawnListChanged = spawnList.some((biome, index) => biome !== lastSpawnListRef.current[index]);
-        if (hasSpawnListChanged) {
-            lastSpawnListRef.current = spawnList;
-            videoRefs.current.forEach((ref, index) => {
-                if (ref.current) {
-                    ref.current.src = findVideo(videoPath + spawnList[index] + (light ? '.light' : '') + '.webm');
-                }
-            });
-        }
+        // Mettre à jour les références des vidéos lorsque spawnList change
+        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || React.createRef());
     }, [spawnList]);
 
     return (
@@ -54,24 +30,25 @@ export const Biomes = ({
                         key={index}
                         className="biome-item biome-item-hover"
                         onMouseEnter={() => {
-                            try {
-                                videoRefs.current[index].current.play();
-
-                            } catch (e) {
-                                console.error(e);
-                                console.error(videoRefs, index);
-
+                            const videoRef = videoRefs.current[index];
+                            if (videoRef && videoRef.current) {
+                                try {
+                                    videoRef.current.play();
+                                } catch (e) {
+                                    console.error(e);
+                                    console.error(videoRefs, index);
+                                }
                             }
                         }}
                         onMouseLeave={() => {
-                            try {
-                                videoRefs.current[index].current.pause();
-
-                            } catch (e) {
-                                alert('An error occurred, check logs for more information');
-                                console.log(e);
-                                console.log(videoRefs, index);
-
+                            const videoRef = videoRefs.current[index];
+                            if (videoRef && videoRef.current) {
+                                try {
+                                    videoRef.current.pause();
+                                } catch (e) {
+                                    console.error(e);
+                                    console.error(videoRefs, index);
+                                }
                             }
                         }}
                         onClick={() => {
@@ -82,14 +59,11 @@ export const Biomes = ({
                         <video
                             ref={videoRefs.current[index]}
                             className="biome-list-video"
-                            src={findVideo('./assets/videos/' + biome + '.webm')}
+                            src={require('./assets/videos/' + biome + (light ? '.light' : '') + '.webm')}
                             preload='auto'
-                            autoPlay
                             loop
                             muted
                             disablePictureInPicture
-                            onMouseEnter={() => videoRefs.current[index].current.play()}
-                            onMouseLeave={() => videoRefs.current[index].current.pause()}
                         />
                         <div className='biome-list-overlay'>
                             <img
