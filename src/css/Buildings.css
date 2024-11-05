@@ -147,7 +147,7 @@
     flex-flow: row nowrap;
     width: 100%;
     gap: 10px;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 

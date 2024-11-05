@@ -23,8 +23,7 @@ body {
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .App-logo {

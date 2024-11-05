@@ -14,7 +14,7 @@
 .slimes-menu {
     display: flex;
     flex-flow: row nowrap;
-    overflow-y: scroll;
+    overflow: hidden;
     align-items: stretch;
     height: 100%;
 }
@@ -28,7 +28,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 10px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: var(--menu-color-1);
     border-radius: 20px;
 }
@@ -257,7 +257,7 @@
     margin: 0;
     border-radius: 20px;
     transition: height .5s, padding .5s .2s;
-    overflow: scroll;
+    overflow: auto;
     text-align: justify;
     font-size: 20px;
 }
@@ -319,7 +319,7 @@ br {
     flex: 0 0 auto;
     margin: 10px;
     width: fit-content;
-    overflow: scroll;
+    overflow: auto;
     border-radius: 20px;
 }
 

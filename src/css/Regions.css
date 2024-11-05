@@ -318,7 +318,7 @@
     grid-gap: 10px;
     grid-auto-rows: max-content;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .region-element {

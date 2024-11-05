@@ -13,7 +13,7 @@
     border-radius: 20px;
     grid-area: spawn;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .spawn-list-container>h3 {
