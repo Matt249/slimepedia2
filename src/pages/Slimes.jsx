@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { slimeNames, slimesList, slimesText, slimepedia, foodTypes } from '../assets/text/slimes.js';
+import { slimeNames, slimesList, slimesText, slimepedia, foodTypes } from '../text/slimes.js';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodList } from '../assets/text/food.js';
-import { toysList } from '../assets/text/toys.js';
+import { foodList } from '../text/food.js';
+import { toysList } from '../text/toys.js';
 import largo from '../assets/misc/largo.png';
 import none from '../assets/misc/none.png';
 import arrow from '../assets/misc/arrow.png';

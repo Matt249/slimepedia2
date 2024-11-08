@@ -1,4 +1,4 @@
-export const regionsIds = ['fields', 'strand', 'valley', 'bluffs'];
+export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
 
 export const regionInfos = {
@@ -26,6 +26,7 @@ export const spawnLocationsList = {
     'ss': ['strand', 'Starlight Strand', false],
     'ev': ['valley', 'Ember Valley', false],
     'pb': ['bluffs', 'Powderfall Bluffs', false],
+    'se': ['sea', 'The Slime Sea', false],
     'ws': ['tornado', 'Level 3 Wind Storm', false],
     'ps': ['vines', 'Level 3 Pollen Storm', false],
     'ls': ['lightning', 'Level 3 Thunderstorm', false],
@@ -36,7 +37,8 @@ export const regionElements = {
     'fields': [['pink', 'cotton', 'tabby', 'phosphor'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],
     'strand': [['pink', 'cotton', 'rock', 'phosphor', 'hunter', 'honey', 'angler', 'flutter', 'ringtail', 'puddle'], ['pogo', 'cuberry', 'mango', 'granite', 'carrot', 'beet', 'nectar', 'hen', 'henPainted', 'henSea', 'henStony', 'rooster', 'chick', 'chickPainted', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'honey', 'diamond', 'gordoHunter', 'gordoHoney', 'gordoRingtail', 'gordoAngler', 'gordoFlutter']],
     'valley': [['pink', 'cotton', 'rock', 'phosphor', 'tabby', 'angler', 'crystal', 'boom', 'fire', 'puddle', 'ringtail', 'batty'], ['pogo', 'cuberry', 'pear', 'granite', 'carrot', 'onion', 'beet', 'lettuce', 'hen', 'henBriar', 'henSea', 'henStony', 'rooster', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'diamond', 'primordy', 'lava', 'gordoBatty', 'gordoBoom', 'gordoCrystal', 'gordoRock', 'gordoTabby']],
-    'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']]
+    'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']],
+    'sea': [[], [], []]
 }
 
 export const ranchSpecials = {
@@ -72,7 +74,8 @@ export const regionsConnections = {
     'fields': [['conservatory'], ['strand', 'valley']],
     'strand': [['fields'], []],
     'valley': [['fields'], ['bluffs']],
-    'bluffs': [['valley'], []]
+    'bluffs': [['valley'], []],
+    'sea': [['conservatory', 'fields', 'strand', 'valley', 'bluffs'], []]
 }
 
 export const regionsResourcesInfos = {

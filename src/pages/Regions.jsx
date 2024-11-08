@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
-import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../assets/text/regions';
+import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../text/regions';
 import { Tab } from '../components/Tab';
-import { foodList } from '../assets/text/food';
-import { slimesList } from '../assets/text/slimes';
+import { foodList } from '../text/food';
+import { slimesList } from '../text/slimes';
 import Down from '../Down';
 import '../css/Regions.css';
 
@@ -103,7 +103,7 @@ export const Regions = ({
                             key={regionArg}
                         />
                     )) : (
-                        <img src={require('../assets/misc/none.png')} alt='Portal' />
+                        <img className='region-no-connection' src={require('../assets/misc/none.png')} alt='Portal' />
                     )}
                 </div>
                 <div className='region-connection-separator'>
@@ -149,7 +149,7 @@ export const Regions = ({
                 <h2 className='box-title'>Available Resources</h2>
                 {regionElements[actualRegion][2].map(resource => (
                     <div
-                        className="region-element-resource"
+                        className={"region-element-resource" + (regionsResourcesInfos[resource][2].length !== 0 ? ' resource-hover' : '')}
                         onClick={() => {
                             if (regionsResourcesInfos[resource][2].length !== 0)
                                 goToNewPage(regionsResourcesInfos[resource][2][0], regionsResourcesInfos[resource][2][1], regionsResourcesInfos[resource][2][2]);

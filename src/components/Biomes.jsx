@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { regionsIds, spawnLocationsList } from '../assets/text/regions';
+import { regionsIds, spawnLocationsList } from '../text/regions';
 import '../css/Biomes.css';
 
 const light = false;

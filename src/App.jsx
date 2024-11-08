@@ -3,7 +3,7 @@ import { NavButton } from './components/NavButton.jsx';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Slimes } from './pages/Slimes';
 import { Food } from './pages/Food.jsx';
-import { slimeNames } from './assets/text/slimes';
+import { slimeNames } from './text/slimes.js';
 import { Items } from './pages/Items';
 import { Map } from './pages/Map';
 import { Buildings } from './pages/Buildings';

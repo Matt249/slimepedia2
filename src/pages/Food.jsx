@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../assets/text/food.js';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
-import { slimesList } from '../assets/text/slimes.js';
+import { slimesList } from '../text/slimes.js';
 import pediaAbout from '../assets/misc/pediaabout.png';
 import pediaQuestion from '../assets/misc/pediaquestion.png';
 import '../css/Pedia.css';

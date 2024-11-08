@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
-import { buildingPedia, buildingUpgrades, usageList } from '../assets/text/buildings';
+import { buildingPedia, buildingUpgrades, usageList } from '../text/buildings';
 import '../css/Buildings.css';
 
 const defaultBuilding = 'corral';
