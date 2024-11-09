@@ -2,7 +2,7 @@ export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
 
 export const regionInfos = {
-    'sea': ['The Slime Sea', 'world/sea', 'videos/ss', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],
+    'sea': ['The Slime Sea', 'world/sea', 'videos/se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],
     'fields': ['Rainbow Fields', 'world/fields', 'videos/rf', 'Shifting colors like a dream, fading just as quickly.', 'rf', 16, 0],
     'strand': ['Starlight Strand', 'world/strand', 'videos/ss', 'A vision of dusk and dawn together as one.', 'ss', 31, 0],
     'valley': ['Ember Valley', 'world/valley', 'videos/ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0],
