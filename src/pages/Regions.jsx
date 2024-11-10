@@ -64,6 +64,7 @@ export const Regions = ({
     const regionDescription = () => (
         <div className='region-description' ref={regionDescriptionRef}>
             <div className='region-pedia'>
+                <h2 className='box-title'>Slimepedia Entry</h2>
                 <p>
                     {regionPedia[actualRegion].split("\n").map(function (item, idx) {
                         return (
@@ -175,6 +176,7 @@ export const Regions = ({
     const ranchDescription = () => (
         <div className={`ranch-description${actualRegion === 'conservatory' ? ' ranch-conservatory' : ''}`} ref={regionDescriptionRef}>
             <div className='ranch-pedia'>
+                <h2 className='box-title'>Slimepedia Entry</h2>
                 <p>
                     {regionPedia[actualRegion].split("\n").map(function (item, idx) {
                         return (
