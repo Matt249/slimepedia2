@@ -45,6 +45,19 @@ body {
   transition: height .5s;
 }
 
+.App>div:not(.pin-list) {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  height: 100%;
+  background-color: var(--menu-color-0);
+  border-radius: 20px;
+  padding: 20px;
+  min-height: 0;
+}
+
 .box-layout {
   border-radius: 20px;
   background-color: var(--menu-color-0);

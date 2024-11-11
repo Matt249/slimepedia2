@@ -64,7 +64,7 @@ export const Items = ({
         };
     }, []);
     return (
-        <div className='box-layout slimes-menu'>
+        <div>
             <div className='list-container'>
                 <div className='food-tabs'>
                     <Tab

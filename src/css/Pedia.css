@@ -11,14 +11,6 @@
     --pedia-paragrah-size: 1em;
 }
 
-.slimes-menu {
-    display: flex;
-    flex-flow: row nowrap;
-    overflow: hidden;
-    align-items: stretch;
-    height: 100%;
-}
-
 .list-slime,
 .list-food {
     flex: 0 0 auto;

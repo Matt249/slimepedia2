@@ -1,8 +1,261 @@
-<div className="blueprints-page">
-    <div className="blueprints-types">
-    <div>Upgrades</div>
-    <div>Utilities</div>
-    <div>Warp Tech</div>
-    <div>Decorations</div>
-    </div>
-</div>
+import { useState } from 'react';
+import { Down } from '../components/Down';
+import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList } from '../text/blueprints';
+import upgradeImg from '../assets/misc/upgrade.png';
+import utilitiesImg from '../assets/misc/utilities.png';
+import warpImg from '../assets/misc/warp.png';
+import decorationsImg from '../assets/misc/decorations.png';
+import buck from '../assets/misc/buck.png';
+import shopImg from '../assets/misc/shop.png';
+import crossImg from '../assets/misc/cross.png';
+import trashImg from '../assets/misc/trash.png';
+import '../css/Blueprints.css';
+
+const UpgradeItemList = ({
+    selected = false,
+    upgradePack,
+    selectedCallback
+}) => {
+    const [upgradeLevel, setUpgradeLevel] = useState(1);
+
+    const upgrade = () => {
+        setUpgradeLevel(prevLevel => {
+            const newLevel = prevLevel + 1;
+            if (newLevel <= upgradePack[2]) {
+                selectedCallback(upgradePack[0], newLevel);
+                return newLevel;
+            }
+            return prevLevel;
+        });
+    };
+
+    const downgrade = () => {
+        setUpgradeLevel(prevLevel => {
+            const newLevel = prevLevel - 1;
+            if (newLevel >= 1) {
+                selectedCallback(upgradePack[0], newLevel);
+                return newLevel;
+            }
+            return prevLevel;
+        });
+    };
+
+    return (
+        <div
+            className={'vac-upgrade-item' + (selected === upgradePack[0] ? ' selected' : '')}
+            key={upgradePack[0]}
+        >
+            <div
+                className='vac-upgrade-pack'
+                onClick={() => selectedCallback(upgradePack[0], upgradeLevel)}
+            >
+                <img src={require(`../assets/upgrades/${upgradePack[0]}.png`)} alt={upgradePack[0][1]} />
+                <h2>{upgradePack[1]}</h2>
+            </div>
+            <div className='vac-upgrade-tiers'>
+                <div
+                    className={'arrow-left' + (upgradeLevel <= 1 || upgradePack[2] === 1 ? ' disabled' : '')}
+                    onClick={downgrade}
+                ><Down /></div>
+                <img src={require(`../assets/upgrades/${upgradePack[0] + (upgradePack[2] !== 1 ? upgradeLevel : '')}.png`)} alt={upgradePack[1]} />
+                <div
+                    className={'arrow-right' + (upgradeLevel >= upgradePack[2] || upgradePack[2] === 1 ? ' disabled' : '')}
+                    onClick={upgrade}
+                ><Down /></div>
+            </div>
+        </div>
+    );
+};
+
+const UpgradesPage = ({ recipeListAdder }) => {
+    const [selectedUpgrade, setSelectedUpgrade] = useState(null);
+    const [selectedTier, setSelectedTier] = useState(1);
+    const upgradeSelection = (upgrade, tier) => {
+        if (upgrade === selectedUpgrade && tier === selectedTier) {
+            setSelectedUpgrade(null);
+            setSelectedTier(1);
+        }
+        else {
+            setSelectedTier(tier);
+            setSelectedUpgrade(upgrade);
+        }
+    }
+
+    return (
+        <>
+            <div className='vac-upgrade-list'>
+                {upgradeNames.map((upgradeName) => (
+                    <UpgradeItemList
+                        key={upgradeName}
+                        upgradePack={[upgradeName, upgradePacks[upgradeName][0], upgradePacks[upgradeName][1]]}
+                        selectedCallback={upgradeSelection}
+                    />
+                ))}
+            </div >
+            <div className='vac-upgrade-info'>
+                <div className='vac-upgrade-title-box'>
+                    <img src={selectedUpgrade === null ? upgradeImg : require(`../assets/upgrades/${selectedUpgrade + (upgradePacks[selectedUpgrade][1] === 1 ? '' : selectedTier)}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <h1>{selectedUpgrade === null ? 'Select an upgrade' : upgradesList[selectedUpgrade + selectedTier][0]}</h1>
+                    <h3>{selectedUpgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[selectedUpgrade + selectedTier]}</h3>
+                </div>
+                <div className='vac-upgrade-recipe-box'>
+                    <h2>Recipe</h2>
+                    <div className='vac-upgrade-recipe-list'>
+                        {selectedUpgrade !== null && (
+                            <>
+                                <div
+                                    onClick={() => recipeListAdder(upgradesList[selectedUpgrade + selectedTier][3])}
+                                >
+                                    add items
+                                </div>
+                                <div>
+                                    <img
+                                        src={buck}
+                                        alt='Newbucks'
+                                        title='Newbucks'
+                                    />
+                                    <p>Newbucks: </p>
+                                    <h3>{upgradesList[selectedUpgrade + selectedTier][2]}</h3>
+                                </div>
+                                {Object.keys(upgradesList[selectedUpgrade + selectedTier][3]).map((ingredient) => (
+                                    <div key={ingredient}>
+                                        <img
+                                            src={require(`../assets/${recipeElements[ingredient][1]}.png`)}
+                                            alt={recipeElements[ingredient][0]}
+                                            title={recipeElements[ingredient][0]}
+                                        />
+                                        <p>{recipeElements[ingredient][0]}: </p>
+                                        <h3>{upgradesList[selectedUpgrade + selectedTier][3][ingredient]}</h3>
+                                    </div>
+                                ))}
+                            </>
+                        )}
+                    </div>
+                </div>
+                <div className='vac-upgrade-effect-box'>
+                    <img src={selectedUpgrade === null ? '' : require(`../assets/${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][0][1]}</p>
+                    <Down />
+                    <img src={selectedUpgrade === null ? '' : require(`../assets/${upgradeEffects[selectedUpgrade + selectedTier][1][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][1][1]}</p>
+                </div>
+                <div className='vac-upgrade-requirements-box'>
+                    <h2>Requirements</h2>
+                    {(selectedUpgrade === null) ? '' : (<>
+                        <img src={require(`../assets/${unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][1]}.png`)} alt={selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]} />
+                        <p>{selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]}</p>
+                    </>)}
+                </div>
+            </div>
+        </>
+    );
+};
+
+const UtilitiesPage = () => {
+    return (
+        <div>
+            <h1>Utilities Page</h1>
+        </div>
+    );
+};
+
+const WarpPage = () => {
+    return (
+        <div>
+            <h1>Warp Tech Page</h1>
+        </div>
+    );
+};
+
+const DecorationsPage = () => {
+    return (
+        <div>
+            <h1>Decorations Page</h1>
+        </div>
+    );
+};
+
+export const Blueprints = () => {
+    const [selectedTab, setSelectedTab] = useState('upgrades');
+    const changeTab = (tab) => setSelectedTab(tab === selectedTab ? null : tab);
+    const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
+    const [recipeList, setRecipeList] = useState({});
+    const addToRecipeList = (items) => {
+        setRecipeList(prevList => {
+            const newList = { ...prevList };
+            for (let item in items) {
+                if (newList[item] === undefined)
+                    newList[item] = items[item];
+                else
+                    newList[item] += items[item];
+            }
+            return newList;
+        });
+    };
+
+    const renderPage = () => {
+        switch (selectedTab) {
+            case 'upgrades':
+                return <UpgradesPage recipeListAdder={addToRecipeList} />;
+            case 'utilities':
+                return <UtilitiesPage />;
+            case 'warp':
+                return <WarpPage />;
+            case 'decorations':
+                return <DecorationsPage />;
+            default:
+                return <></>;
+        }
+    };
+
+    return (
+        <>
+            <div>
+                <div className='blueprints-category'>
+                    <div className={'blueprints-tab' + (selectedTab === 'upgrades' ? ' selected' : '')} onClick={() => changeTab('upgrades')}>
+                        <img src={upgradeImg} alt="Upgrade Icon" />
+                        <h1>Upgrades</h1>
+                    </div>
+                    <div className={'blueprints-tab' + (selectedTab === 'utilities' ? ' selected' : '')} onClick={() => changeTab('utilities')}>
+                        <img src={utilitiesImg} alt="Utilities" />
+                        <h1>Utilities</h1>
+                    </div>
+                    <div className={'blueprints-tab' + (selectedTab === 'warp' ? ' selected' : '')} onClick={() => changeTab('warp')}>
+                        <img src={warpImg} alt="Warp Tech" />
+                        <h1>Warp Tech</h1>
+                    </div>
+                    <div className={'blueprints-tab' + (selectedTab === 'decorations' ? ' selected' : '')} onClick={() => changeTab('decorations')}>
+                        <img src={decorationsImg} alt="Decorations" />
+                        <h1>Decorations</h1>
+                    </div>
+                </div>
+                {renderPage()}
+            </div>
+            <div className='pin-list'>
+                <img src={shopImg} alt='Shop icon' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+                <div className={'pin-list-recipe' + (recipeMenuToggle ? '' : ' disabled')}>
+                    <div className='pin-header'>
+                        <h1>Recipes Ingredients List</h1>
+                        <img src={trashImg} alt='Clear' onClick={() => setRecipeList({})} />
+                        <img src={crossImg} alt='Close' onClick={() => setRecipeMenuToggle(false)} />
+                    </div>
+                    <div className='pin-item-list'>
+                        {Object.keys(recipeList).map((item) => (
+                            <div
+                                key={item}
+                                className='pin-item-element'
+                            >
+                                <img
+                                    src={require(`../assets/${recipeElements[item][1]}.png`)}
+                                    alt={recipeElements[item][0]}
+                                    title={recipeElements[item][0]}
+                                />
+                                <p>{recipeElements[item][0]}: </p>
+                                <h3>{recipeList[item]}</h3>
+                            </div>))}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};

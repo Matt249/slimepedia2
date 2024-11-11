@@ -4,14 +4,6 @@
     --infos-gap: 10px;
 }
 
-.buildings-menu {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: stretch;
-    gap: 20px;
-    min-height: 0;
-}
-
 .buildings-list {
     display: grid;
     margin: 0;

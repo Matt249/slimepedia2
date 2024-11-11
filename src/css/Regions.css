@@ -30,18 +30,6 @@
 
 }
 
-.regions {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    gap: 20px;
-    height: 100%;
-    background-color: var(--menu-color-0);
-    border-radius: 20px;
-    padding: 20px;
-    min-height: 0;
-}
-
 .regions-menu {
     display: grid;
     grid-template-rows: auto 1fr;

@@ -155,7 +155,7 @@ export const Food = ({
     }, [actualFood]);
 
     return (
-        <div className='box-layout slimes-menu'>
+        <div>
             <div className='list-container'>
                 <FoodTabs filter={filter} setFilter={setFilter} />
                 <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} updateFood={updateFood} actualFood={actualFood} filter={filter} />

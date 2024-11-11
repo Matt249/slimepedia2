@@ -88,7 +88,7 @@ export const Buildings = () => {
     }
 
     return (
-        <div className='box-layout buildings-menu'>
+        <div>
             <div className='buildings-list'>
                 {buildingsButtons()}
             </div>

@@ -3,7 +3,7 @@ import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesI
 import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
-import Down from '../Down';
+import Down from '../components/Down';
 import '../css/Regions.css';
 
 export const Regions = ({
@@ -276,8 +276,8 @@ export const Regions = ({
     };
 
     return (
-        <div className='regions'>
-            <div className='regions-menu'>
+        <div>
+            <div>
                 <div className='regions-tab-selector'>
                     <Tab title='World Regions' icon='misc/world' selected={actualSelection === 'regions'} action={() => tabChange('regions')} />
                     <Tab title='Ranch' icon='misc/patch' selected={actualSelection === 'ranch'} action={() => tabChange('ranch')} />

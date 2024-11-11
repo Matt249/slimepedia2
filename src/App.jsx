@@ -1,13 +1,14 @@
 import { Header } from './pages/Header';
 import { NavButton } from './components/NavButton.jsx';
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { slimeNames } from './text/slimes.js';
 import { Slimes } from './pages/Slimes';
 import { Food } from './pages/Food.jsx';
-import { slimeNames } from './text/slimes.js';
 import { Items } from './pages/Items';
 import { Map } from './pages/Map';
-import { Buildings } from './pages/Buildings';
 import { Regions } from './pages/Regions';
+import { Blueprints } from './pages/Blueprints';
+import { Buildings } from './pages/Buildings';
 import houseDay from './assets/wallpapers/houseDay.png';
 import houseNight from './assets/wallpapers/houseNight.png';
 import './css/App.css';
@@ -84,8 +85,11 @@ function App() {
             case 'regions':
                 setTabToRender(<Regions region={targetElement === null ? "fields" : targetElement} changePage={handleTabClick} />);
                 break;
+            case 'blueprints':
+                setTabToRender(<Blueprints />);
+                break;
             case 'buildings':
-                setTabToRender(<Buildings tilting="none" />);
+                setTabToRender(<Buildings />);
                 break;
             default:
                 setTabToRender(<Header tilting="none" />);

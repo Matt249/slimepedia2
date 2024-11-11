@@ -1,0 +1,435 @@
+:root {
+    --pink-slime: #f45d8c;
+}
+
+.pin-list {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    bottom: 10px;
+    right: 10px;
+    background-color: var(--pink-slime);
+    border-radius: 100%;
+    transition: border-radius .2s ease-in-out;
+}
+
+.pin-list>img {
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+    cursor: pointer;
+    transform: scale(1) rotate(0);
+    transition: transform .2s ease-in-out;
+    z-index: 15;
+}
+
+.pin-list:hover>img {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.pin-list:hover {
+    border-radius: 25px;
+}
+
+.pin-list-recipe {
+    position: absolute;
+    width: 700px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    transform: scale(1);
+    border-radius: 25px;
+    background-color: var(--menu-color-0);
+    transition:
+        transform .25s ease-in-out 0s,
+        width .25s ease-in-out .25s,
+        height .25s ease-in-out .25s;
+    z-index: 10;
+    box-shadow: 0px 0px 5px #000;
+    overflow: hidden;
+}
+
+.pin-list-recipe.disabled {
+    width: 50px;
+    height: 50px;
+    transform: scale(0);
+    transition:
+        transform .25s ease-in-out .25s,
+        width .25s ease-in-out 0s,
+        height .25s ease-in-out 0s;
+}
+
+.pin-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+    padding: 10px;
+    border-radius: 25px 25px 0 0;
+    background-color: var(--item-color);
+}
+
+.pin-header>img {
+    height: 30px;
+    width: 30px;
+}
+
+.pin-header>h1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+}
+
+.pin-item-list {
+    padding: 0 20px;
+}
+
+.pin-item-element {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.pin-item-element>img {
+    height: 50px;
+    width: 50px;
+}
+
+.pin-item-element>p {
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.pin-item-element>p::after {
+    content: "...................................................................................................................................................................................................................";
+    font-weight: 100;
+}
+
+/* Blueprint Styles */
+
+.blueprints-category {
+    width: auto;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.blueprints-tab {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 40px;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+    cursor: pointer;
+    transition: background-color .5s;
+}
+
+.blueprints-tab.selected,
+.blueprints-tab:hover {
+    background-color: var(--item-color);
+}
+
+.blueprints-tab.selected>img,
+.blueprints-tab:hover>img {
+    transform: scale(1.2);
+}
+
+.blueprints-tab>img {
+    height: 75px;
+    border-radius: 20px;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
+}
+
+.blueprints-tab>h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.blueprints-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.upgrade-info,
+.blueprints-info {
+    flex: 1;
+}
+
+.vac-upgrade-list {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 1fr);
+    gap: 10px;
+    overflow-y: auto;
+}
+
+.vac-upgrade-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0;
+    border-radius: 20px;
+    transition: background-color .2s ease-in-out;
+}
+
+.vac-upgrade-item>div {
+    padding: 10px;
+}
+
+.vac-upgrade-item:hover {
+    background-color: var(--menu-color-1);
+}
+
+.vac-upgrade-pack {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    min-height: fit-content;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color .2s ease-in-out;
+}
+
+.vac-upgrade-item.selected>.vac-upgrade-pack {
+    background-color: var(--item-color);
+}
+
+.vac-upgrade-pack>img {
+    height: 50px;
+    border-radius: 20px;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
+}
+
+.vac-upgrade-pack:hover>img,
+.vac-upgrade-item.selected>.vac-upgrade-pack>img {
+    transform: scale(1.2);
+}
+
+.vac-upgrade-pack>h2 {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.vac-upgrade-tiers {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
+
+}
+
+.vac-upgrade-tiers>img {
+    height: 50px;
+    border-radius: 20px;
+}
+
+.arrow-left>svg {
+    transform: rotate(90deg) scale(.8);
+}
+
+.arrow-left:hover>svg {
+    transform: rotate(90deg) scale(1);
+}
+
+.arrow-right>svg {
+    transform: rotate(-90deg) scale(.8);
+}
+
+.arrow-right:hover>svg {
+    transform: rotate(-90deg) scale(1);
+}
+
+.arrow-left>svg,
+.arrow-right>svg {
+    height: 50px;
+    width: 50px;
+    fill: var(--text-color);
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.arrow-left.disabled>svg,
+.arrow-right.disabled>svg {
+    visibility: hidden;
+    fill: var(--text-color-2);
+    cursor: pointer;
+}
+
+.vac-upgrade-info {
+    flex: 10;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "header header"
+        "effect recipe"
+        "unlock recipe"
+    ;
+    gap: 20px;
+}
+
+.vac-upgrade-info>div {
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.vac-upgrade-info>div>h2 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.vac-upgrade-title-box {
+    grid-area: header;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "icon title"
+        "icon description"
+    ;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+
+}
+
+.vac-upgrade-title-box>img {
+    grid-area: icon;
+    height: 100%;
+    width: 100%;
+}
+
+.vac-upgrade-title-box>h1 {
+    grid-area: title;
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.vac-upgrade-title-box>h3 {
+    grid-area: description;
+    font-size: 1.7em;
+    font-weight: normal;
+    margin: 0;
+    text-align: center;
+}
+
+.vac-upgrade-recipe-box {
+    grid-area: recipe;
+    align-items: center;
+}
+
+.vac-upgrade-recipe-box img {
+    height: 1.7em;
+}
+
+.vac-upgrade-info>div>h2 {
+    font-size: 1.7em;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+/* .vac-upgrade-info>div>p {
+    font-size: 1em;
+    margin: 0;
+} */
+
+.vac-upgrade-recipe-list {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0;
+    margin: 0;
+}
+
+.vac-upgrade-recipe-list>div {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.vac-upgrade-recipe-list>div>p {
+    font-size: 1.5em;
+    margin: 0;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.vac-upgrade-recipe-list>div>p::after {
+    content: "............................................................................................................................";
+    font-weight: 100;
+}
+
+.vac-upgrade-recipe-list>div>h3 {
+    font-size: 1.5em;
+    margin: 0;
+}
+
+.vac-upgrade-effect-box {
+    grid-area: effect;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.vac-upgrade-effect-box>img {
+    height: 2em;
+}
+
+.vac-upgrade-effect-box>svg {
+    height: 4em;
+    fill: var(--text-color);
+    transform: rotate(-90deg);
+}
+
+.vac-effect-desc {
+    font-size: 1em;
+    margin: 0;
+    text-align: left;
+}
+
+.vac-upgrade-requirements-box {
+    position: relative;
+    grid-area: unlock;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px !important;
+}
+
+.vac-upgrade-requirements-box>h2 {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.vac-upgrade-requirements-box>img {
+    height: 3em;
+}

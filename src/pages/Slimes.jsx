@@ -123,7 +123,7 @@ export const Slimes = ({
     }, []);
 
     return (
-        <div className='box-layout slimes-menu'>
+        <div>
             <div className='list-slime'>
                 {slimeNames.map((slime) => (
                     <NavButton
