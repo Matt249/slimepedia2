@@ -60,7 +60,7 @@ export const Biomes = ({
                         <video
                             ref={videoRefs.current[index]}
                             className="biome-list-video"
-                            src={'../assets/videos/' + biome + (light ? '.light' : '') + '.webm'}
+                            src={'/src/assets/videos/' + biome + (light ? '.light' : '') + '.webm'}
                             preload='auto'
                             loop
                             muted
@@ -69,7 +69,7 @@ export const Biomes = ({
                         <div className='biome-list-overlay'>
                             <img
                                 className="biome-image"
-                                src={'../assets/world/' + spawnLocationsList[biome][0] + '.png'}
+                                src={'/src/assets/world/' + spawnLocationsList[biome][0] + '.png'}
                                 alt={spawnLocationsList[biome][1]}
                             />
                             <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>

@@ -9,7 +9,7 @@ export const Tab = ({
 }) => {
     return (
         <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
-            <img src={`../assets/${icon}.png`} alt={title} />
+            <img src={`/src/assets/${icon}.png`} alt={title} />
             <p>{title}</p>
         </div>
 )}

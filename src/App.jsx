@@ -9,10 +9,10 @@ import { Regions } from './pages/Regions';
 import { Blueprints } from './pages/Blueprints';
 import { Buildings } from './pages/Buildings';
 import PropTypes from 'prop-types';
-import houseDay from './assets/wallpapers/houseDay.png';
-import houseNight from './assets/wallpapers/houseNight.png';
-import pink from './assets/slimes/pink.png';
-import phosphor from './assets/slimes/phosphor.png';
+import houseDay from '/src/assets/wallpapers/houseDay.png';
+import houseNight from '/src/assets/wallpapers/houseNight.png';
+import pink from '/src/assets/slimes/pink.png';
+import phosphor from '/src/assets/slimes/phosphor.png';
 import './css/App.css';
 
 const Header = ({ dark }) => {
@@ -113,7 +113,7 @@ function App() {
 
     useEffect(() => {
         const randomSlimeKey = slimeNames[Math.floor(Math.random() * Object.keys(slimeNames).length)];
-        document.querySelector('link[rel="icon"]').href = `./assets/slimes/${randomSlimeKey}.png`;
+        document.querySelector('link[rel="icon"]').href = `/src/assets/slimes/${randomSlimeKey}.png`;
     }, []);
 
     return (

@@ -5,21 +5,21 @@ import { Biomes } from '../components/Biomes.jsx';
 import { foodList } from '../text/food.js';
 import { toysList } from '../text/toys.js';
 import PropTypes from 'prop-types';
-import largo from '../assets/misc/largo.png';
-import none from '../assets/misc/none.png';
-import arrow from '../assets/misc/arrow.png';
-import pediaSlime from '../assets/misc/pediaslime.png';
-import pediaRisks from '../assets/misc/pediarisks.png';
-import pediaPlort from '../assets/misc/pediaplort.png';
+import largo from '/src/assets/misc/largo.png';
+import none from '/src/assets/misc/none.png';
+import arrow from '/src/assets/misc/arrow.png';
+import pediaSlime from '/src/assets/misc/pediaslime.png';
+import pediaRisks from '/src/assets/misc/pediarisks.png';
+import pediaPlort from '/src/assets/misc/pediaplort.png';
 import '../css/Pedia.css';
 
 const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
     const slimeName = currentSlimeList[0];
-    const slimeIcon = (selectedSlime === "none" ? none : '../assets/slimes/' + selectedSlime + '.png');
-    const plortIcon = '../assets/' + (["none", "lucky", "tarr"].includes(selectedSlime) ? "misc/none" : "plorts/" + selectedSlime) + '.png';
-    const foodTypeIcon = '../assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png';
-    const favFoodIcon = '../assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png';
-    const favToyIcon = '../assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png';
+    const slimeIcon = (selectedSlime === "none" ? none : '/src/assets/slimes/' + selectedSlime + '.png');
+    const plortIcon = '/src/assets/' + (["none", "lucky", "tarr"].includes(selectedSlime) ? "misc/none" : "plorts/" + selectedSlime) + '.png';
+    const foodTypeIcon = '/src/assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png';
+    const favFoodIcon = '/src/assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png';
+    const favToyIcon = '/src/assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png';
     const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
 
     return (

@@ -5,9 +5,9 @@ import { Tab } from '../components/Tab';
 import { resourcesList, resourcesNames, resPedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
-import pedia from '../assets/misc/pediatut.png';
-import buck from '../assets/misc/buck.png';
-import noneIcon from '../assets/misc/none.png';
+import pedia from '/src/assets/misc/pediatut.png';
+import buck from '/src/assets/misc/buck.png';
+import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
 
 const matchMainList = (list) => {
@@ -106,7 +106,7 @@ export const Items = ({
                             <h2>{filter === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[actualItem][0]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={'../assets/' + filter + '/' + actualItem + '.png'} className='img-main' alt="pink slime" />
+                            <img src={'/src/assets/' + filter + '/' + actualItem + '.png'} className='img-main' alt="pink slime" />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
@@ -130,7 +130,7 @@ export const Items = ({
                     </div>
                     {(filter === 'toys') ? (
                         <div className={'little-box toy-fav' + (infosItems[actualItem][1] === "none" ? '' : ' link-to-food') + (filter !== 'toys' ? ' toy-hide' : '')} onClick={() => changePage('slimes', infosItems[actualItem][1])}>
-                            <img src={infosItems[actualItem][2] === 'none' ? noneIcon : '../assets/slimes/' + infosItems[actualItem][1] + '.png'} alt='none' />
+                            <img src={infosItems[actualItem][2] === 'none' ? noneIcon : '/src/assets/slimes/' + infosItems[actualItem][1] + '.png'} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
                                 <h4>{infosItems[actualItem][2] === 'none' ? 'None' : slimesList[infosItems[actualItem][1]][0]}</h4>

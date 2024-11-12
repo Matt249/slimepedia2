@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
-import worldImg from '../assets/map/output.png';
+import worldImg from '/src/assets/map/output.png';
 import 'leaflet/dist/leaflet.css';
 import '../css/Map.css';
 

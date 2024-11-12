@@ -6,7 +6,7 @@ import { slimesList } from '../text/slimes';
 import Down from '../components/Down';
 import '../css/Regions.css';
 import PropTypes from 'prop-types';
-import podImg from '../assets/misc/pod.png';
+import podImg from '/src/assets/misc/pod.png';
 
 export const Regions = ({ region, changePage }) => {
     const [actualRegion, setRegion] = useState(regionsIds.includes(region) ? region : ranchIds.includes(region) ? region : 'fields');
@@ -84,7 +84,7 @@ export const Regions = ({ region, changePage }) => {
                     >
                         <div className="region-element-content">
                             <img
-                                src={'../assets/slimes/' + slime + '.png'}
+                                src={'/src/assets/slimes/' + slime + '.png'}
                                 alt={slimesList[slime][1]}
                                 title={slimesList[slime][1]}
                             />
@@ -97,20 +97,20 @@ export const Regions = ({ region, changePage }) => {
                 <div className='region-from'>
                     {(regionsConnections[actualRegion][0].length) ? regionsConnections[actualRegion][0].map(regionArg => (
                         <img
-                            src={'../assets/world/' + regionArg + '.png'}
+                            src={'/src/assets/world/' + regionArg + '.png'}
                             alt='Portal'
                             onClick={() => goToRegion(regionArg)}
                             key={regionArg}
                         />
                     )) : (
-                        <img className='region-no-connection' src={'../assets/misc/none.png'} alt='Portal' />
+                        <img className='region-no-connection' src={'/src/assets/misc/none.png'} alt='Portal' />
                     )}
                 </div>
                 <div className='region-connection-separator'>
                     <Down />
                 </div>
                 <div>
-                    <img className='no-hover' src={'../assets/world/' + actualRegion + '.png'} alt='Current Biome' />
+                    <img className='no-hover' src={'/src/assets/world/' + actualRegion + '.png'} alt='Current Biome' />
                 </div>
                 <div className='region-connection-separator'>
                     <Down />
@@ -118,13 +118,13 @@ export const Regions = ({ region, changePage }) => {
                 <div className='region-from'>
                     {(regionsConnections[actualRegion][1].length) ? regionsConnections[actualRegion][1].map(regionArg => (
                         <img
-                            src={'../assets/world/' + regionArg + '.png'}
+                            src={'/src/assets/world/' + regionArg + '.png'}
                             alt='Portal'
                             onClick={() => setRegion(regionArg)}
                             key={regionArg}
                         />
                     )) : (
-                        <img className='no-hover' src={'../assets/misc/none.png'} alt='Portal' />
+                        <img className='no-hover' src={'/src/assets/misc/none.png'} alt='Portal' />
                     )}
                 </div>
             </div>
@@ -137,7 +137,7 @@ export const Regions = ({ region, changePage }) => {
                             onClick={() => goToNewPage('food', 'any', food)}
                         >
                             <img
-                                src={'../assets/food/' + food + '.png'}
+                                src={'/src/assets/food/' + food + '.png'}
                                 alt={foodList[food][0]}
                                 title={foodList[food][0]}
                             />
@@ -157,7 +157,7 @@ export const Regions = ({ region, changePage }) => {
                         key={resource}
                     >
                         <img
-                            src={'../assets/' + regionsResourcesInfos[resource][1] + '.png'}
+                            src={'/src/assets/' + regionsResourcesInfos[resource][1] + '.png'}
                             alt={regionsResourcesInfos[resource][0]}
                             title={regionsResourcesInfos[resource][0]}
                         />
@@ -198,7 +198,7 @@ export const Regions = ({ region, changePage }) => {
                         >
                             <div className="region-element-content">
                                 <img
-                                    src={'../assets/' + regionInfos[place][1] + '.png'}
+                                    src={'/src/assets/' + regionInfos[place][1] + '.png'}
                                     alt={regionInfos[place][0]}
                                     title={regionInfos[place][0]}
                                 />
@@ -219,7 +219,7 @@ export const Regions = ({ region, changePage }) => {
                     >
                         <div className="region-element-content">
                             <img
-                                src={'../assets/' + regionInfos[place][1] + '.png'}
+                                src={'/src/assets/' + regionInfos[place][1] + '.png'}
                                 alt={regionInfos[place][0]}
                                 title={regionInfos[place][0]}
                             />
@@ -232,17 +232,17 @@ export const Regions = ({ region, changePage }) => {
             <div className='ranch-box ranch-cost'>
                 <h2 className='box-title'>Expansion Cost</h2>
                 <h3>{regionInfos[actualRegion][7]}</h3>
-                <img src={'../assets/misc/buck.png'} alt='Newbucks' />
+                <img src={'/src/assets/misc/buck.png'} alt='Newbucks' />
             </div>
             <div className='ranch-box ranch-slots'>
                 <h2 className='box-title'>Available Slots</h2>
                 <h3>{regionInfos[actualRegion][6]}</h3>
-                <img src={'../assets/misc/patch.png'} alt='Slots' />
+                <img src={'/src/assets/misc/patch.png'} alt='Slots' />
             </div>
             <div className='ranch-box ranch-pods'>
                 <h2 className='box-title'>Pod in this Expansion</h2>
                 <h3>{regionInfos[actualRegion][5]}</h3>
-                <img src={'../assets/misc/pod.png'} alt='Slots' />
+                <img src={'/src/assets/misc/pod.png'} alt='Slots' />
             </div>
             <div className='ranch-box ranch-special'>
                 <h2 className='box-title'>Special Features</h2>
@@ -255,7 +255,7 @@ export const Regions = ({ region, changePage }) => {
                                 goToNewPage(regionsResourcesInfos[feature][2][0], regionsResourcesInfos[feature][2][1], regionsResourcesInfos[feature][2][2]);
                         }}
                     >
-                        <img src={'../assets/' + regionsResourcesInfos[feature][1] + '.png'} alt='Slots' />
+                        <img src={'/src/assets/' + regionsResourcesInfos[feature][1] + '.png'} alt='Slots' />
                         <h3>{regionsResourcesInfos[feature][0]}</h3>
                     </div>
                 ))}
@@ -290,14 +290,14 @@ export const Regions = ({ region, changePage }) => {
                         >
                             <video
                                 className='region-video'
-                                src={'../assets/' + regionInfos[region][2] + '.light.webm'}
+                                src={'/src/assets/' + regionInfos[region][2] + '.light.webm'}
                                 onMouseEnter={e => handleMouseEnter(e, region)}
                                 onMouseLeave={e => handleMouseLeave(e, region)}
                                 disablePictureInPicture loop muted
                             >
                                 {regionInfos[region][0]} Video
                             </video>
-                            <img className='region-icon' src={'../assets/' + regionInfos[region][1] + '.png'} alt='Rainbow Fields Logo' />
+                            <img className='region-icon' src={'/src/assets/' + regionInfos[region][1] + '.png'} alt='Rainbow Fields Logo' />
                             <h2 className='region-name'>{regionInfos[region][0]}</h2>
                         </div>
                     ))}
@@ -307,7 +307,7 @@ export const Regions = ({ region, changePage }) => {
                 <div className='region-background'>
                     <video
                         className='region-background-video'
-                        src={'../assets/' + regionInfos[actualRegion][2] + '.webm'}
+                        src={'/src/assets/' + regionInfos[actualRegion][2] + '.webm'}
                         disablePictureInPicture autoPlay loop muted
                         onLoadedData={e => {
                             e.target.play();
@@ -319,7 +319,7 @@ export const Regions = ({ region, changePage }) => {
                 <div className='region-container'>
                     <div className='region-main-page-frame'>
                         <div className='region-main-page'>
-                            <img src={'../assets/world/' + actualRegion + '.png'} alt='Region Icon' />
+                            <img src={'/src/assets/world/' + actualRegion + '.png'} alt='Region Icon' />
                             <h1>{regionInfos[actualRegion][0]}</h1>
                             <h2>{regionInfos[actualRegion][3]}</h2>
                         </div>

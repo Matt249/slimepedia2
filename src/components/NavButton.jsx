@@ -43,11 +43,10 @@ export const NavButton = ({
         }
     }
     const [randomNumber, setRandomNumber] = useState(randomHandler());
-    const image = `../assets/${icon}.png`;
     return (
         <div className={"button" + (selected ? " btn-selected" : "")} onClick={action} onMouseLeave={() => setRandomNumber(randomHandler())} style={buttonStyle}>
             <div className='image-frame'>
-                <img src={image} alt={name} className={'image-button img-btn-' + randomNumber} style={imgStyle} />
+                <img src={`/src/assets/${icon}.png`} alt={name} className={'image-button img-btn-' + randomNumber} style={imgStyle} />
             </div>
             <p className='btn-name' style={titleStyle}>{name}</p>
         </div>
