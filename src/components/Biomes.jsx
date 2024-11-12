@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { regionsIds, spawnLocationsList } from '../text/regions';
 import PropTypes from 'prop-types';
 import '../css/Biomes.css';
+import { mediaFetcher } from '../media-manager';
 
 const light = true;
 
@@ -60,7 +61,7 @@ export const Biomes = ({
                         <video
                             ref={videoRefs.current[index]}
                             className="biome-list-video"
-                            src={'/src/assets/videos/' + biome + (light ? '.light' : '') + '.webm'}
+                            src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
                             preload='auto'
                             loop
                             muted
@@ -69,7 +70,7 @@ export const Biomes = ({
                         <div className='biome-list-overlay'>
                             <img
                                 className="biome-image"
-                                src={'/src/assets/world/' + spawnLocationsList[biome][0] + '.png'}
+                                src={mediaFetcher(`world/${spawnLocationsList[biome][0]}.png`)}
                                 alt={spawnLocationsList[biome][1]}
                             />
                             <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>

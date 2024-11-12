@@ -7,7 +7,8 @@ export const toyNames = [
     'trash',
     'worm',
     'moon',
-    'bomb'
+    'bomb',
+    'fox'
 ]
 
 export const toysList = {

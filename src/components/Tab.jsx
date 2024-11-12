@@ -1,5 +1,6 @@
 import "../css/Tab.css";
 import PropTypes from 'prop-types';
+import { mediaFetcher } from "../media-manager";
 
 export const Tab = ({
     title = 'Default Title',
@@ -9,7 +10,7 @@ export const Tab = ({
 }) => {
     return (
         <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
-            <img src={`/src/assets/${icon}.png`} alt={title} />
+            <img src={mediaFetcher(`${icon}.png`)} alt={title} />
             <p>{title}</p>
         </div>
 )}

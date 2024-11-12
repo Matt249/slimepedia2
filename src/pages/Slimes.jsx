@@ -12,14 +12,15 @@ import pediaSlime from '/src/assets/misc/pediaslime.png';
 import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
 import '../css/Pedia.css';
+import { mediaFetcher } from '../media-manager.js';
 
 const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
     const slimeName = currentSlimeList[0];
-    const slimeIcon = (selectedSlime === "none" ? none : '/src/assets/slimes/' + selectedSlime + '.png');
-    const plortIcon = '/src/assets/' + (["none", "lucky", "tarr"].includes(selectedSlime) ? "misc/none" : "plorts/" + selectedSlime) + '.png';
-    const foodTypeIcon = '/src/assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png';
-    const favFoodIcon = '/src/assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png';
-    const favToyIcon = '/src/assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png';
+    const slimeIcon = selectedSlime === "none" ? none : mediaFetcher(`slimes/${selectedSlime}.png`);
+    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? none : mediaFetcher(`plorts/${selectedSlime}.png`);
+    const foodTypeIcon = currentSlimeList[1] === "none" ? none : mediaFetcher(`food/${currentSlimeList[1]}.png`);
+    const favFoodIcon = currentSlimeList[2] === "none" ? none : mediaFetcher(`food/${currentSlimeList[2]}.png`);
+    const favToyIcon = currentSlimeList[5] === "none" ? none : mediaFetcher(`toys/${currentSlimeList[5]}.png`);
     const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
 
     return (

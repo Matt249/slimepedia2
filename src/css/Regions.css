@@ -30,11 +30,6 @@
 
 }
 
-.regions-menu {
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
-
 .regions-list.not-rounded {
     border-top-left-radius: 0;
 }

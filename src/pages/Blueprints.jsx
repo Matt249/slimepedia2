@@ -11,6 +11,7 @@ import shopImg from '/src/assets/misc/shop.png';
 import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import '../css/Blueprints.css';
+import { mediaFetcher } from '../media-manager';
 
 const UpgradeItemList = ({
     selected = false,
@@ -50,7 +51,7 @@ const UpgradeItemList = ({
                 className='vac-upgrade-pack'
                 onClick={() => selectedCallback(upgradePack[0], upgradeLevel)}
             >
-                <img src={`/src/assets/upgrades/${upgradePack[0]}.png`} alt={upgradePack[0][1]} />
+                <img src={mediaFetcher(`upgrades/${upgradePack[0]}.png`)} alt={upgradePack[1]} />
                 <h2>{upgradePack[1]}</h2>
             </div>
             <div className='vac-upgrade-tiers'>
@@ -58,7 +59,7 @@ const UpgradeItemList = ({
                     className={'arrow-left' + (upgradeLevel <= 1 || upgradePack[2] === 1 ? ' disabled' : '')}
                     onClick={downgrade}
                 ><Down /></div>
-                <img src={`/src/assets/upgrades/${upgradePack[0] + (upgradePack[2] !== 1 ? upgradeLevel : '')}.png`} alt={upgradePack[1]} />
+                <img src={mediaFetcher(`upgrades/${upgradePack[0] + (upgradePack[2] !== 1 ? upgradeLevel : '')}.png`)} alt={upgradePack[1]} />
                 <div
                     className={'arrow-right' + (upgradeLevel >= upgradePack[2] || upgradePack[2] === 1 ? ' disabled' : '')}
                     onClick={upgrade}
@@ -91,7 +92,7 @@ const UpgradesPage = ({ recipeListAdder }) => {
     UpgradesPage.propTypes = {
         recipeListAdder: PropTypes.func.isRequired
     };
-    
+
 
     return (
         <>
@@ -106,7 +107,7 @@ const UpgradesPage = ({ recipeListAdder }) => {
             </div >
             <div className='vac-upgrade-info'>
                 <div className='vac-upgrade-title-box'>
-                    <img src={selectedUpgrade === null ? upgradeImg : `/src/assets/upgrades/${selectedUpgrade + (upgradePacks[selectedUpgrade][1] === 1 ? '' : selectedTier)}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? upgradeImg : mediaFetcher(`upgrades/${selectedUpgrade + (upgradePacks[selectedUpgrade][1] === 1 ? '' : selectedTier)}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <h1>{selectedUpgrade === null ? 'Select an upgrade' : upgradesList[selectedUpgrade + selectedTier][0]}</h1>
                     <h3>{selectedUpgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[selectedUpgrade + selectedTier]}</h3>
                 </div>
@@ -132,7 +133,7 @@ const UpgradesPage = ({ recipeListAdder }) => {
                                 {Object.keys(upgradesList[selectedUpgrade + selectedTier][3]).map((ingredient) => (
                                     <div key={ingredient}>
                                         <img
-                                            src={`/src/assets/${recipeElements[ingredient][1]}.png`}
+                                            src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
                                             alt={recipeElements[ingredient][0]}
                                             title={recipeElements[ingredient][0]}
                                         />
@@ -145,16 +146,16 @@ const UpgradesPage = ({ recipeListAdder }) => {
                     </div>
                 </div>
                 <div className='vac-upgrade-effect-box'>
-                    <img src={selectedUpgrade === null ? '' : `/src/assets/${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? '' : mediaFetcher(`${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][0][1]}</p>
                     <Down />
-                    <img src={selectedUpgrade === null ? '' : `/src/assets/${upgradeEffects[selectedUpgrade + selectedTier][1][0]}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? '' : mediaFetcher(`${upgradeEffects[selectedUpgrade + selectedTier][1][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][1][1]}</p>
                 </div>
                 <div className='vac-upgrade-requirements-box'>
                     <h2>Requirements</h2>
                     {(selectedUpgrade === null) ? '' : (<>
-                        <img src={`/src/assets/${unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][1]}.png`} alt={selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]} />
+                        <img src={mediaFetcher(`${unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][1]}.png`)} alt={selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]} />
                         <p>{selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]}</p>
                     </>)}
                 </div>
@@ -258,7 +259,7 @@ export const Blueprints = () => {
                                 className='pin-item-element'
                             >
                                 <img
-                                    src={`/src/assets/${recipeElements[item][1]}.png`}
+                                    src={mediaFetcher(`${recipeElements[item][1]}.png`)}
                                     alt={recipeElements[item][0]}
                                     title={recipeElements[item][0]}
                                 />

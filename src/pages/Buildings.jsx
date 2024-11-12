@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
 import { buildingPedia, buildingUpgrades, usageList } from '../text/buildings';
+import { mediaFetcher } from '../media-manager';
+import upgradeImg from '/src/assets/misc/upgrade.png';
+import buck from '/src/assets/misc/buck.png';
+import pediaTut from '/src/assets/misc/pediatut.png';
 import '../css/Buildings.css';
 
 const defaultBuilding = 'corral';
@@ -60,7 +64,7 @@ export const Buildings = () => {
             return (
                 <div className='upgrade-infos upgrade-no-infos'>
                     <div>
-                        <img src={'/src/assets/misc/upgrade.png'} alt="Upgrade Icon" />
+                        <img src={upgradeImg} alt="Upgrade Icon" />
                         <h3>Upgrade Information</h3>
                         <p>Click on an upgrade to see more information about it.</p>
                     </div>
@@ -74,10 +78,10 @@ export const Buildings = () => {
                 </div>
                 <div className='upgrade-cost'>
                     <p>Cost: {upgrade[2]}</p>
-                    <img src={'/src/assets/misc/buck.png'} alt='Newbucks' />
+                    <img src={buck} alt='Newbucks' />
                 </div>
                 <div className="upgrade-img">
-                    <img src={'/src/assets/buildings/' + upgrade[0] + '.png'} alt={upgrade[1]} />
+                    <img src={mediaFetcher(`buildings/${upgrade[0]}.png`)} alt={upgrade[1]} />
                 </div>
                 <div className='upgrade-desc'>
                     <h4>Description</h4>
@@ -96,7 +100,7 @@ export const Buildings = () => {
                 <div className='building-title'>
                     <h1>{buildingPedia[currentIndex][1]}</h1>
                     <h2>{buildingPedia[currentIndex][2]}</h2>
-                    <img className='building-image' src={'/src/assets/buildings/' + buildingPedia[currentIndex][0] + '.png'} alt='Corral' />
+                    <img className='building-image' src={mediaFetcher(`buildings/${buildingPedia[currentIndex][0]}.png`)} alt='Corral' />
                 </div>
                 <div className='upgrade-list'>
                     <div>
@@ -106,18 +110,18 @@ export const Buildings = () => {
                     <div className='fake-border fb-1'></div>
                 </div>
                 <div className='building-description'>
-                    <img src={'/src/assets/misc/pediatut.png'} alt="Informations about the building" />
+                    <img src={pediaTut} alt="Informations about the building" />
                     <p>{buildingPedia[currentIndex][4]}</p>
                 </div>
                 <div className='little-box-buildings building-cost'>
-                    <img src={'/src/assets/misc/buck.png'} alt='Newbuck coin' />
+                    <img src={buck} alt='Newbuck coin' />
                     <div>
                         <h3>Cost</h3>
                         <h4>{buildingPedia[currentIndex][3]}</h4>
                     </div>
                 </div>
                 <div className='little-box-buildings building-use'>
-                    <img src={'/src/assets/' + usageList[buildingPedia[currentIndex][5]][1] + '.png'} alt='Usage' />
+                    <img src={mediaFetcher(usageList[buildingPedia[currentIndex][5]][1] + '.png')} alt='Usage' />
                     <div>
                         <h3>Usage</h3>
                         <h4>{usageList[buildingPedia[currentIndex][5]][0]}</h4>

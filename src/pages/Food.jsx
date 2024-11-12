@@ -4,10 +4,12 @@ import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
 import { slimesList } from '../text/slimes.js';
+import { mediaFetcher } from '../media-manager.js';
 import PropTypes from 'prop-types';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
+import arrow from '/src/assets/misc/arrow.png';
 import '../css/Pedia.css';
 
 const FoodTabs = ({ filter, setFilter }) => (
@@ -82,18 +84,18 @@ const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) =>
                 <h2>{foodDescription[actualFood]}</h2>
             </div>
             <div className="image-container">
-                <img src={'/src/assets/food/' + actualFood + '.png'} className='img-main' alt={foodList[actualFood][0]} />
+                <img src={mediaFetcher(`food/${actualFood}.png`)} className='img-main' alt={foodList[actualFood][0]} />
             </div>
         </div>
         <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(actualFood) ? actualFood : 'honey') }}>
-            <img src={'/src/assets/food/' + foodList[actualFood][1] + '.png'} alt={foodSingular[foodList[actualFood][1]]} />
+            <img src={mediaFetcher(`food/${foodList[actualFood][1]}.png`)} alt={foodSingular[foodList[actualFood][1]]} />
             <div>
                 <h3>Food type</h3>
                 <h4>{foodSingular[foodList[actualFood][1]]}</h4>
             </div>
         </div>
         <div className={'little-box food-fav' + (favSlime === 'none' ? '' : ' link-to-food')} onClick={() => { if (favSlime !== 'none') changePage('slimes', favSlime) }}>
-            <img src={favSlime === 'none' ? noneImg : ('/src/assets/slimes/' + favSlime + '.png')} alt='none' />
+            <img src={favSlime === 'none' ? noneImg : mediaFetcher(`slimes/${favSlime}.png`)} alt='none' />
             <div>
                 <h3>Favorite of</h3>
                 <h4>{(favSlime === 'none' ? 'Nobody' : slimesList[favSlime][0])}</h4>
@@ -189,7 +191,7 @@ export const Food = ({
             <div className='food-container box-layout-secondary'>
                 <FoodDetails actualFood={actualFood} favSlime={favSlime} changePage={changePage} topBtn={topBtn} setFilter={setFilter} />
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={'/src/assets/misc/arrow.png'} alt='arrow' />
+                    <img src={arrow} alt='arrow' />
                 </div>
                 <FoodDescription actualFood={actualFood} topBtn={topBtn} />
             </div>

@@ -2,17 +2,17 @@ export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
 
 export const regionInfos = {
-    'sea': ['The Slime Sea', 'world/sea', 'videos/se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],
-    'fields': ['Rainbow Fields', 'world/fields', 'videos/rf', 'Shifting colors like a dream, fading just as quickly.', 'rf', 16, 0],
-    'strand': ['Starlight Strand', 'world/strand', 'videos/ss', 'A vision of dusk and dawn together as one.', 'ss', 31, 0],
-    'valley': ['Ember Valley', 'world/valley', 'videos/ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0],
-    'bluffs': ['Powderfall Bluffs', 'world/bluffs', 'videos/pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0],
-    'conservatory': ['The Conservatory', 'world/conservatory', 'videos/co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
-    'den': ['The Den', 'world/den', 'videos/td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
-    'gully': ['The Gully', 'world/gully', 'videos/gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
-    'archway': ['The Archway', 'world/archway', 'videos/ar', 'An expansion to the conservatory set amongst ancient ruins and fields of rainbow grass.', 'ar', 1, 5, 1800],
-    'tidepools': ['The Tidepools', 'world/tidepools', 'videos/tp', 'A costal sanctuary for coral lifeforms and seaweed, this expansion to the conservatory is guaranteed to fill your shoes with sand.', 'tp', 0, 5, 3500],
-    'digsite': ['The Digsite', 'world/digsite', 'videos/ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 5, 4500]
+    'sea': ['The Slime Sea', 'sea', 'se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],
+    'fields': ['Rainbow Fields', 'fields', 'rf', 'Shifting colors like a dream, fading just as quickly.', 'rf', 16, 0],
+    'strand': ['Starlight Strand', 'strand', 'ss', 'A vision of dusk and dawn together as one.', 'ss', 31, 0],
+    'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0],
+    'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0],
+    'conservatory': ['The Conservatory', 'conservatory', 'co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
+    'den': ['The Den', 'den', 'td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
+    'gully': ['The Gully', 'gully', 'gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
+    'archway': ['The Archway', 'archway', 'ar', 'An expansion to the conservatory set amongst ancient ruins and fields of rainbow grass.', 'ar', 1, 5, 1800],
+    'tidepools': ['The Tidepools', 'tidepools', 'tp', 'A costal sanctuary for coral lifeforms and seaweed, this expansion to the conservatory is guaranteed to fill your shoes with sand.', 'tp', 0, 5, 3500],
+    'digsite': ['The Digsite', 'digsite', 'ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 5, 4500]
 };
 
 export const spawnLocationsList = {

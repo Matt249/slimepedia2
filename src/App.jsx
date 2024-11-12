@@ -14,6 +14,7 @@ import houseNight from '/src/assets/wallpapers/houseNight.png';
 import pink from '/src/assets/slimes/pink.png';
 import phosphor from '/src/assets/slimes/phosphor.png';
 import './css/App.css';
+import { mediaFetcher } from './media-manager.js';
 
 const Header = ({ dark }) => {
     return (
@@ -113,7 +114,7 @@ function App() {
 
     useEffect(() => {
         const randomSlimeKey = slimeNames[Math.floor(Math.random() * Object.keys(slimeNames).length)];
-        document.querySelector('link[rel="icon"]').href = `/src/assets/slimes/${randomSlimeKey}.png`;
+        document.querySelector('link[rel="icon"]').href = mediaFetcher(`slimes/${randomSlimeKey}.png`);
     }, []);
 
     return (
