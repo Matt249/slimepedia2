@@ -3,7 +3,7 @@ let folders = {};
 export const initializeFolders = () => {
     const createFolderObject = (globResult) => {
         return Object.entries(globResult).reduce((acc, [path, module]) => {
-            const fileName = path.split('/').pop().split('?')[0]; // Extract the file name
+            const fileName = path.split('/').pop().split('?')[0];
             acc[fileName] = module;
             return acc;
         }, {});
@@ -28,11 +28,6 @@ export const initializeFolders = () => {
         wallpapers: createFolderObject(import.meta.glob('/src/assets/wallpapers/*', { eager: true, query: '?url', import: 'default' })),
         world: createFolderObject(import.meta.glob('/src/assets/world/*', { eager: true, query: '?url', import: 'default' }))
     };
-
-    // Log the contents of each folder for debugging
-    for (const [key, value] of Object.entries(folders)) {
-        console.log(`Contents of ${key}:`, value);
-    }
 };
 
 export const mediaFetcher = (path) => {
@@ -45,9 +40,6 @@ export const mediaFetcher = (path) => {
         return null;
     }
     const cleanedFile = requiredFile.replace(/\?.*$/, '');
-    console.log(`Looking for file: ${cleanedFile}`);
     return folder[cleanedFile] || null;
 };
-
-// Initialize folders when the module is loaded
 initializeFolders();
