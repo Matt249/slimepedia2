@@ -45,8 +45,8 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
                 </div>
             </div>
             <div
-                className={'little-box box-fav' + (['none', 'ranchersnslimes'].includes(currentSlimeList[3]) ? '' : ' link-to-food')}
-                onClick={() => { if (!['none', 'ranchersnslimes'].includes(currentSlimeList[3])) changePage('food', 'food', currentSlimeList[2]) }}
+                className={'little-box box-fav' + (['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ? '' : ' link-to-food')}
+                onClick={() => { if (!['none', 'ranchersnslimes'].includes(currentSlimeList[2])) changePage('food', 'food', currentSlimeList[2]); }}
             >
                 <img src={favFoodIcon} alt={'Picture of ' + foodList[currentSlimeList[2]][0]} />
                 <div>
@@ -77,7 +77,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
 };
 
 SlimeDetails.propTypes = {
-    currentSlimeList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    currentSlimeList: PropTypes.arrayOf(PropTypes.any).isRequired,
     selectedSlime: PropTypes.string.isRequired,
     changePage: PropTypes.func.isRequired
 };

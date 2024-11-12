@@ -7,6 +7,7 @@ import { slimesList } from '../text/slimes.js';
 import PropTypes from 'prop-types';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
+import noneImg from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
 
 const FoodTabs = ({ filter, setFilter }) => (
@@ -66,7 +67,7 @@ const FoodList = ({ actualFoodList, wideScreen, updateFood, actualFood, filter }
 );
 
 FoodList.propTypes = {
-    actualFoodList: PropTypes.array.isRequired,
+    actualFoodList: PropTypes.arrayOf(PropTypes.any).isRequired,
     wideScreen: PropTypes.bool.isRequired,
     updateFood: PropTypes.func.isRequired,
     actualFood: PropTypes.string.isRequired,
@@ -91,11 +92,11 @@ const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) =>
                 <h4>{foodSingular[foodList[actualFood][1]]}</h4>
             </div>
         </div>
-        <div className={'little-box food-fav' + (favSlime.length ? ' link-to-food' : '')} onClick={() => { if (favSlime.length) changePage('slimes', favSlime) }}>
-            <img src={'/src/assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png'} alt='none' />
+        <div className={'little-box food-fav' + (favSlime === 'none' ? '' : ' link-to-food')} onClick={() => { if (favSlime !== 'none') changePage('slimes', favSlime) }}>
+            <img src={favSlime === 'none' ? noneImg : ('/src/assets/slimes/' + favSlime + '.png')} alt='none' />
             <div>
                 <h3>Favorite of</h3>
-                <h4>{(favSlime.length ? slimesList[favSlime][0] : 'Nobody')}</h4>
+                <h4>{(favSlime === 'none' ? 'Nobody' : slimesList[favSlime][0])}</h4>
             </div>
         </div>
         <Biomes spawnList={foodList[actualFood][2]} changePage={changePage} />
@@ -173,12 +174,10 @@ export const Food = ({
     }, [filter]);
 
     const favSlime = useMemo(() => {
-        for (let slime in slimesList) {
-            if (slimesList[slime][2] === actualFood) {
+        for (let slime in slimesList) 
+            if (slimesList[slime][2] === actualFood)
                 return slime;
-            }
-        }
-        return [];
+        return 'none';
     }, [actualFood]);
 
     return (

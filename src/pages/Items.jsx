@@ -5,6 +5,7 @@ import { Tab } from '../components/Tab';
 import { resourcesList, resourcesNames, resPedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
+import PropTypes from 'prop-types';
 import pedia from '/src/assets/misc/pediatut.png';
 import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
@@ -138,11 +139,11 @@ export const Items = ({
                         </div>
                     ) : (
                         <div className="little-box toy-fav toy-hide">
-                            {/* <img src={noneIcon} alt='none' />
+                            <img src={noneIcon} alt='none' />
                             <div>
                                 <h3>Favorite of</h3>
                                 <h4>None</h4>
-                            </div> */}
+                            </div>
                         </div>
                     )
                     }
@@ -154,7 +155,7 @@ export const Items = ({
 };
 
 Items.propTypes = {
-    item: String,
-    tab: String,
-    changePage: Function
+    item: PropTypes.string,
+    tab: PropTypes.string,
+    changePage: PropTypes.func
 };

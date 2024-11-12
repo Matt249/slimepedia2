@@ -3,7 +3,7 @@ import { regionsIds, spawnLocationsList } from '../text/regions';
 import PropTypes from 'prop-types';
 import '../css/Biomes.css';
 
-const light = false;
+const light = true;
 
 export const Biomes = ({
     spawnList = [],

@@ -86,16 +86,16 @@ function App() {
                 setTabToRender(<Header dark={darkMode} />);
                 break;
             case 'slimes':
-                setTabToRender(<Slimes slime={targetTab === null ? "pink" : targetTab} changePage={handleTabClick} tilting="left" />);
+                setTabToRender(<Slimes slime={targetTab === null ? "pink" : targetTab} changePage={handleTabClick} />);
                 break;
             case 'food':
-                setTabToRender(<Food food={targetElement === null ? "carrot" : targetElement} tab={targetTab === null ? "food" : targetTab} changePage={handleTabClick} tilting="right" />);
+                setTabToRender(<Food food={targetElement === null ? "carrot" : targetElement} tab={targetTab === null ? "food" : targetTab} changePage={handleTabClick} />);
                 break;
             case 'items':
-                setTabToRender(<Items item={targetElement === null ? "brine" : targetElement} tab={targetTab === null ? "resources" : targetTab} changePage={handleTabClick} tilting="left" />);
+                setTabToRender(<Items item={targetElement === null ? "brine" : targetElement} tab={targetTab === null ? "resources" : targetTab} changePage={handleTabClick} />);
                 break;
             case 'map':
-                setTabToRender(<Map tilting="left" />);
+                setTabToRender(<Map />);
                 break;
             case 'regions':
                 setTabToRender(<Regions region={targetElement === null ? "fields" : targetElement} changePage={handleTabClick} />);
@@ -107,7 +107,7 @@ function App() {
                 setTabToRender(<Buildings />);
                 break;
             default:
-                setTabToRender(<Header tilting="none" />);
+                setTabToRender(<Header />);
         }
     }, [activeTab, targetTab, darkMode, handleTabClick, targetElement]);
 

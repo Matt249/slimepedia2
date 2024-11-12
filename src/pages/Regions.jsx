@@ -333,12 +333,8 @@ export const Regions = ({ region, changePage }) => {
         </div>
     );
 }
+
 Regions.propTypes = {
     region: PropTypes.string,
     changePage: PropTypes.func
-};
-
-Regions.defaultProps = {
-    region: 'fields',
-    changePage: () => { console.log('changePage not defined') }
 };
