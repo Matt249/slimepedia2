@@ -43,7 +43,7 @@ export const NavButton = ({
         }
     }
     const [randomNumber, setRandomNumber] = useState(randomHandler());
-    const image = require(`../assets/${icon}.png`);
+    const image = `../assets/${icon}.png`;
     return (
         <div className={"button" + (selected ? " btn-selected" : "")} onClick={action} onMouseLeave={() => setRandomNumber(randomHandler())} style={buttonStyle}>
             <div className='image-frame'>

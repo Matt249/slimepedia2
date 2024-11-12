@@ -4,6 +4,7 @@ import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
 import { slimesList } from '../text/slimes.js';
+import PropTypes from 'prop-types';
 import pediaAbout from '../assets/misc/pediaabout.png';
 import pediaQuestion from '../assets/misc/pediaquestion.png';
 import '../css/Pedia.css';
@@ -43,6 +44,11 @@ const FoodTabs = ({ filter, setFilter }) => (
     </div>
 );
 
+FoodTabs.propTypes = {
+    filter: PropTypes.string.isRequired,
+    setFilter: PropTypes.func.isRequired
+};
+
 const FoodList = ({ actualFoodList, wideScreen, updateFood, actualFood, filter }) => (
     <div className='list-food' style={{ borderRadius: (filter === 'any' ? '0' : '20px') + ' 20px 20px 20px' }}>
         {actualFoodList.map((foodId) => (
@@ -59,6 +65,14 @@ const FoodList = ({ actualFoodList, wideScreen, updateFood, actualFood, filter }
     </div>
 );
 
+FoodList.propTypes = {
+    actualFoodList: PropTypes.array.isRequired,
+    wideScreen: PropTypes.bool.isRequired,
+    updateFood: PropTypes.func.isRequired,
+    actualFood: PropTypes.string.isRequired,
+    filter: PropTypes.string.isRequired
+};
+
 const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) => (
     <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
         <div className="image-title">
@@ -67,18 +81,18 @@ const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) =>
                 <h2>{foodDescription[actualFood]}</h2>
             </div>
             <div className="image-container">
-                <img src={require('../assets/food/' + actualFood + '.png')} className='img-main' alt={foodList[actualFood][0]} />
+                <img src={'../assets/food/' + actualFood + '.png'} className='img-main' alt={foodList[actualFood][0]} />
             </div>
         </div>
         <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(actualFood) ? actualFood : 'honey') }}>
-            <img src={require('../assets/food/' + foodList[actualFood][1] + '.png')} alt={foodSingular[foodList[actualFood][1]]} />
+            <img src={'../assets/food/' + foodList[actualFood][1] + '.png'} alt={foodSingular[foodList[actualFood][1]]} />
             <div>
                 <h3>Food type</h3>
                 <h4>{foodSingular[foodList[actualFood][1]]}</h4>
             </div>
         </div>
         <div className={'little-box food-fav' + (favSlime.length ? ' link-to-food' : '')} onClick={() => { if (favSlime.length) changePage('slimes', favSlime) }}>
-            <img src={require('../assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png')} alt='none' />
+            <img src={'../assets/' + (favSlime.length ? 'slimes/' + favSlime : 'misc/none') + '.png'} alt='none' />
             <div>
                 <h3>Favorite of</h3>
                 <h4>{(favSlime.length ? slimesList[favSlime][0] : 'Nobody')}</h4>
@@ -87,6 +101,14 @@ const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) =>
         <Biomes spawnList={foodList[actualFood][2]} changePage={changePage} />
     </div>
 );
+
+FoodDetails.propTypes = {
+    actualFood: PropTypes.string.isRequired,
+    favSlime: PropTypes.string.isRequired,
+    changePage: PropTypes.func.isRequired,
+    topBtn: PropTypes.bool.isRequired,
+    setFilter: PropTypes.func.isRequired
+};
 
 const FoodDescription = ({ actualFood, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
@@ -102,6 +124,11 @@ const FoodDescription = ({ actualFood, topBtn }) => (
         <p>{foodpedia[actualFood][1]}</p>
     </div>
 );
+
+FoodDescription.propTypes = {
+    actualFood: PropTypes.string.isRequired,
+    topBtn: PropTypes.bool.isRequired
+};
 
 export const Food = ({
     food = 'carrot',
@@ -163,10 +190,16 @@ export const Food = ({
             <div className='food-container box-layout-secondary'>
                 <FoodDetails actualFood={actualFood} favSlime={favSlime} changePage={changePage} topBtn={topBtn} setFilter={setFilter} />
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={require('../assets/misc/arrow.png')} alt='arrow' />
+                    <img src={'../assets/misc/arrow.png'} alt='arrow' />
                 </div>
                 <FoodDescription actualFood={actualFood} topBtn={topBtn} />
             </div>
         </div>
     );
+};
+
+Food.propTypes = {
+    food: PropTypes.string,
+    tab: PropTypes.string,
+    changePage: PropTypes.func
 };

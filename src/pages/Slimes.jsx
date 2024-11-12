@@ -4,6 +4,7 @@ import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
 import { foodList } from '../text/food.js';
 import { toysList } from '../text/toys.js';
+import PropTypes from 'prop-types';
 import largo from '../assets/misc/largo.png';
 import none from '../assets/misc/none.png';
 import arrow from '../assets/misc/arrow.png';
@@ -14,11 +15,11 @@ import '../css/Pedia.css';
 
 const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
     const slimeName = currentSlimeList[0];
-    const slimeIcon = (selectedSlime === "none" ? none : require('../assets/slimes/' + selectedSlime + '.png'));
-    const plortIcon = require('../assets/' + (["none", "lucky", "tarr"].includes(selectedSlime) ? "misc/none" : "plorts/" + selectedSlime) + '.png');
-    const foodTypeIcon = require('../assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png');
-    const favFoodIcon = require('../assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png');
-    const favToyIcon = require('../assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png');
+    const slimeIcon = (selectedSlime === "none" ? none : '../assets/slimes/' + selectedSlime + '.png');
+    const plortIcon = '../assets/' + (["none", "lucky", "tarr"].includes(selectedSlime) ? "misc/none" : "plorts/" + selectedSlime) + '.png';
+    const foodTypeIcon = '../assets/' + (currentSlimeList[1] === "none" ? "misc/none" : "food/" + currentSlimeList[1]) + '.png';
+    const favFoodIcon = '../assets/' + (currentSlimeList[2] === "none" ? "misc/none" : "food/" + currentSlimeList[2]) + '.png';
+    const favToyIcon = '../assets/' + (currentSlimeList[5] === "none" ? "misc/none" : "toys/" + currentSlimeList[5]) + '.png';
     const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
 
     return (
@@ -75,6 +76,13 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
     );
 };
 
+SlimeDetails.propTypes = {
+    currentSlimeList: PropTypes.arrayOf(PropTypes.string).isRequired,
+    selectedSlime: PropTypes.string.isRequired,
+    changePage: PropTypes.func.isRequired
+};
+
+
 const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
@@ -94,6 +102,11 @@ const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
         <p>{slimepediaEntry[2]}</p>
     </div>
 );
+
+SlimeDescription.propTypes = {
+    slimepediaEntry: PropTypes.arrayOf(PropTypes.string).isRequired,
+    topBtn: PropTypes.bool.isRequired
+};
 
 export const Slimes = ({
     slime = 'pink',
@@ -147,4 +160,9 @@ export const Slimes = ({
             </div>
         </div>
     );
+};
+
+Slimes.propTypes = {
+    slime: PropTypes.string,
+    changePage: PropTypes.func
 };

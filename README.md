@@ -1,15 +1,8 @@
-# Slimepedia 2
-A web equivalent of the Slimepedia in Slime Rancher 2 :)
+# React + Vite
 
-# Runing locally
-Don't forget to install packages first before running with `npm install`.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Then you can run the app with `npm start`, and will be accessible to `localhot:3000`. If anything Node will tell you what is the app's adress.
+Currently, two official plugins are available:
 
-# Build/Publish
-You can build this app with `npm run build`, wich will create a version usable with any web page provider such as Apache2 or Nginx.
-By default, it will be located in a build/ folder, but you can override with a .env file (already in the .gitignore) and specify your path for this with this:
-```
-BUILD_PATH='your/path/to/build/location/'
-PUBLIC_URL='url/of/the/target'
-```
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

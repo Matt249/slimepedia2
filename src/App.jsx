@@ -1,4 +1,3 @@
-import { Header } from './pages/Header';
 import { NavButton } from './components/NavButton.jsx';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { slimeNames } from './text/slimes.js';
@@ -9,9 +8,25 @@ import { Map } from './pages/Map';
 import { Regions } from './pages/Regions';
 import { Blueprints } from './pages/Blueprints';
 import { Buildings } from './pages/Buildings';
+import PropTypes from 'prop-types';
 import houseDay from './assets/wallpapers/houseDay.png';
 import houseNight from './assets/wallpapers/houseNight.png';
+import pink from './assets/slimes/pink.png';
+import phosphor from './assets/slimes/phosphor.png';
 import './css/App.css';
+
+const Header = ({ dark }) => {
+    return (
+        <header className="App-header">
+            <img src={dark ? phosphor : pink} className="App-logo" alt="logo" />
+            <h1>Slimepedia 2</h1>
+        </header>
+    );
+}
+
+Header.propTypes = {
+    dark: PropTypes.bool
+};
 
 function App() {
     document.title = "Slimepedia 2";
@@ -98,7 +113,7 @@ function App() {
 
     useEffect(() => {
         const randomSlimeKey = slimeNames[Math.floor(Math.random() * Object.keys(slimeNames).length)];
-        document.querySelector('link[rel="icon"]').href = require(`./assets/slimes/${randomSlimeKey}.png`);
+        document.querySelector('link[rel="icon"]').href = `./assets/slimes/${randomSlimeKey}.png`;
     }, []);
 
     return (

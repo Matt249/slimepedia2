@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Down } from '../components/Down';
 import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList } from '../text/blueprints';
+import PropTypes from 'prop-types';
 import upgradeImg from '../assets/misc/upgrade.png';
 import utilitiesImg from '../assets/misc/utilities.png';
 import warpImg from '../assets/misc/warp.png';
@@ -49,7 +50,7 @@ const UpgradeItemList = ({
                 className='vac-upgrade-pack'
                 onClick={() => selectedCallback(upgradePack[0], upgradeLevel)}
             >
-                <img src={require(`../assets/upgrades/${upgradePack[0]}.png`)} alt={upgradePack[0][1]} />
+                <img src={`../assets/upgrades/${upgradePack[0]}.png`} alt={upgradePack[0][1]} />
                 <h2>{upgradePack[1]}</h2>
             </div>
             <div className='vac-upgrade-tiers'>
@@ -57,7 +58,7 @@ const UpgradeItemList = ({
                     className={'arrow-left' + (upgradeLevel <= 1 || upgradePack[2] === 1 ? ' disabled' : '')}
                     onClick={downgrade}
                 ><Down /></div>
-                <img src={require(`../assets/upgrades/${upgradePack[0] + (upgradePack[2] !== 1 ? upgradeLevel : '')}.png`)} alt={upgradePack[1]} />
+                <img src={`../assets/upgrades/${upgradePack[0] + (upgradePack[2] !== 1 ? upgradeLevel : '')}.png`} alt={upgradePack[1]} />
                 <div
                     className={'arrow-right' + (upgradeLevel >= upgradePack[2] || upgradePack[2] === 1 ? ' disabled' : '')}
                     onClick={upgrade}
@@ -65,6 +66,12 @@ const UpgradeItemList = ({
             </div>
         </div>
     );
+};
+
+UpgradeItemList.propTypes = {
+    selected: PropTypes.bool,
+    upgradePack: PropTypes.array.isRequired,
+    selectedCallback: PropTypes.func.isRequired
 };
 
 const UpgradesPage = ({ recipeListAdder }) => {
@@ -81,6 +88,11 @@ const UpgradesPage = ({ recipeListAdder }) => {
         }
     }
 
+    UpgradesPage.propTypes = {
+        recipeListAdder: PropTypes.func.isRequired
+    };
+    
+
     return (
         <>
             <div className='vac-upgrade-list'>
@@ -94,7 +106,7 @@ const UpgradesPage = ({ recipeListAdder }) => {
             </div >
             <div className='vac-upgrade-info'>
                 <div className='vac-upgrade-title-box'>
-                    <img src={selectedUpgrade === null ? upgradeImg : require(`../assets/upgrades/${selectedUpgrade + (upgradePacks[selectedUpgrade][1] === 1 ? '' : selectedTier)}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? upgradeImg : `../assets/upgrades/${selectedUpgrade + (upgradePacks[selectedUpgrade][1] === 1 ? '' : selectedTier)}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <h1>{selectedUpgrade === null ? 'Select an upgrade' : upgradesList[selectedUpgrade + selectedTier][0]}</h1>
                     <h3>{selectedUpgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[selectedUpgrade + selectedTier]}</h3>
                 </div>
@@ -120,7 +132,7 @@ const UpgradesPage = ({ recipeListAdder }) => {
                                 {Object.keys(upgradesList[selectedUpgrade + selectedTier][3]).map((ingredient) => (
                                     <div key={ingredient}>
                                         <img
-                                            src={require(`../assets/${recipeElements[ingredient][1]}.png`)}
+                                            src={`../assets/${recipeElements[ingredient][1]}.png`}
                                             alt={recipeElements[ingredient][0]}
                                             title={recipeElements[ingredient][0]}
                                         />
@@ -133,16 +145,16 @@ const UpgradesPage = ({ recipeListAdder }) => {
                     </div>
                 </div>
                 <div className='vac-upgrade-effect-box'>
-                    <img src={selectedUpgrade === null ? '' : require(`../assets/${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? '' : `../assets/${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][0][1]}</p>
                     <Down />
-                    <img src={selectedUpgrade === null ? '' : require(`../assets/${upgradeEffects[selectedUpgrade + selectedTier][1][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
+                    <img src={selectedUpgrade === null ? '' : `../assets/${upgradeEffects[selectedUpgrade + selectedTier][1][0]}.png`} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
                     <p className='vac-effect-desc'>{selectedUpgrade === null ? '' : upgradeEffects[selectedUpgrade + selectedTier][1][1]}</p>
                 </div>
                 <div className='vac-upgrade-requirements-box'>
                     <h2>Requirements</h2>
                     {(selectedUpgrade === null) ? '' : (<>
-                        <img src={require(`../assets/${unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][1]}.png`)} alt={selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]} />
+                        <img src={`../assets/${unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][1]}.png`} alt={selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]} />
                         <p>{selectedUpgrade === null ? '' : unlockRequirements[upgradesList[selectedUpgrade + selectedTier][1]][0]}</p>
                     </>)}
                 </div>
@@ -246,7 +258,7 @@ export const Blueprints = () => {
                                 className='pin-item-element'
                             >
                                 <img
-                                    src={require(`../assets/${recipeElements[item][1]}.png`)}
+                                    src={`../assets/${recipeElements[item][1]}.png`}
                                     alt={recipeElements[item][0]}
                                     title={recipeElements[item][0]}
                                 />
