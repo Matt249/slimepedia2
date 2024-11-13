@@ -22,6 +22,18 @@ export const foodNames = [
     'water'
 ];
 
+export const foodTypes = {
+    'food': "Any",
+    'meat': "Meat",
+    'fruits': "Fruits",
+    'veggies': "Veggies",
+    'water': "Water",
+    'ash': "Ash",
+    'nectar': "Nectar",
+    'ranchersnslimes': "Ranchers and Slimes",
+    'none': "None"
+};
+
 export const foodSingular = {
     'meat': "Meat",
     'fruits': "Fruit",

@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import { slimeNames, slimesList, slimesText, slimepedia, foodTypes } from '../text/slimes.js';
+import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodList } from '../text/food.js';
+import { foodList, foodTypes } from '../text/food.js';
 import { toysList } from '../text/toys.js';
 import PropTypes from 'prop-types';
 import largo from '/src/assets/misc/largo.png';

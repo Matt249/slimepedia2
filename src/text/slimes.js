@@ -48,18 +48,8 @@ export const slimesList = {
     'tarr': ['Tarr Slime', 'ranchersnslimes', 'ranchersnslimes', false, ['co', 'rf', 'ss', 'ev', 'pb'], 'none']
 };
 
-export const foodTypes = {
-    'food': "Any",
-    'meat': "Meat",
-    'fruits': "Fruits",
-    'veggies': "Veggies",
-    'water': "Water",
-    'ash': "Ash",
-    'nectar': "Nectar"
-};
 
 export const slimesText = {
-    'lorem': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     'pink': 'Their coral hue is scientifically proven to be the color of cheer.',
     'cotton': 'A hop, a skip, a jump and- oh, it\'s gone.',
     'tabby': 'Those stripes, that tail, that wiggle, wiggle, wiggle.',
@@ -85,11 +75,6 @@ export const slimesText = {
 };
 
 export const slimepedia = {
-    'lorem': [
-        "The Lorem Slime is a mysterious creature that has been known to exist on the Far, Far Range for centuries. It is said that the Lorem Slime is the key to unlocking the secrets of the universe, but no one has ever been able to prove this.",
-        "The Lorem Slime is a rare and elusive creature that is said to possess the power of the cosmos. It is said that the Lorem Slime can grant wishes to those who are able to capture it, but no one has ever been able to do so.",
-        "The Lorem Slime is a creature of legend that is said to possess the power of creation itself. It is said that the Lorem Slime can bring anything into existence with a mere thought, but no one has ever been able to witness this power."
-    ],
     'pink': [
         "Pink Slimes are the most common slime found on the Far, Far Range. They're cheerful, docile, and the easiest of all slimes to ranch. A pink slime will eat anything you put in front of it, though they have no favorite food, and their plorts are the least valuable of all slimes.",
         "Not much to worry about with a pink slime. They're soft, squishy, very happy to be around a rancher, and found all over the Range. But because of this, a rancher won't go far without finding a few pink plorts, which can lead to largos, and then...",
