@@ -30,6 +30,13 @@
 
 }
 
+.region-tab-list {
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0;
+}
+
 .regions-list.not-rounded {
     border-top-left-radius: 0;
 }
@@ -46,7 +53,7 @@
     border-radius: 20px;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .region-tab {
