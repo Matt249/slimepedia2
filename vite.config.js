@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
 import process from 'process';
 import dotenv from 'dotenv';
 
@@ -12,11 +11,11 @@ export default defineConfig({
   build: {
     outDir: process.env.VITE_BUILD_PATH || 'dist',
   },
-  resolve: {
+/*   resolve: {
     alias: {
       '@': path.resolve(path.dirname(import.meta.url), './src'),
     },
-  },
+  }, */
   server: {
     port: 3000
   },
