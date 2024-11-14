@@ -33,13 +33,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      "no-unused-vars": ["warn", {
-        "vars": "all",
-        "args": "after-used",
-        "caughtErrors": "all",
-        "ignoreRestSiblings": false,
-        "reportUsedIgnorePattern": false
-      }],
+      "no-unused-vars": ["warn"],
+      "no-constant-condition": ["warn"],
     },
   },
 ]

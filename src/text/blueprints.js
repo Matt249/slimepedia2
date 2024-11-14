@@ -42,6 +42,17 @@ export const recipeElements = {
     'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', []]
 }
 
+export const unlockRequirements = {
+    'start': ['Available at the start', 'misc/check'],
+    'pod': ['Unlocked via a Pod', 'misc/pod'],
+    'polestar': ['Unlocked via Polestar Provisions', 'misc/polestar'],
+    'mochi': ['Given by Mochi Miles', 'ranchers/mochi'],
+    'viktor': ['Given by Viktor Humphries', 'ranchers/viktor'],
+    'ogden': ['Given by Ogden Ortiz', 'ranchers/ogden'],
+    'bob': ['Given by Bob', 'ranchers/bob'],
+    'thora': ['Given by Thora West', 'ranchers/thora'],
+}
+
 export const upgradeNames = [
     'harvester',
     'health',
@@ -100,12 +111,6 @@ export const upgradesList = {
     'sureshot1': ['Golden Sureshot I', 'pod', 1500, { 'fire': 20, 'gold': 1, 'snowflake': 10, 'sunsap': 1, 'sureshotModule:': 1 }],
     'sureshot2': ['Golden Sureshot II', 'pod', 3000, { 'saber': 30, 'gold': 2, 'snowflake': 20, 'sunsap': 2, 'sureshotModule:': 1 }],
     'sureshot3': ['Golden Sureshot III', 'pod', 6000, { 'saber': 40, 'gold': 3, 'snowflake': 30, 'sunsap': 3, 'sureshotModule:': 1 }],
-}
-
-export const unlockRequirements = {
-    'start': ['Available at the start', 'misc/check'],
-    'pod': ['Unlocked via a Pod', 'misc/pod'],
-    'mochi': ['Given by Mochi Miles', 'ranchers/mochi']
 }
 
 export const upgradeDescriptions = {
@@ -169,7 +174,54 @@ export const upgradeEffects = {
 }
 
 export const warpGadgets = {
-    'greenHomePortal': ['Green Return Home Portal', 'viktor', 800, {'angler': 20, 'radiant': 10, 'wax': 10, 'wildHoney': 5}],
-    'blueHomePortal': ['Green Return Home Portal', 'viktor', 250, {'rock': 10, 'radiant': 10, 'primordy': 5}],
-    'redHomePortal': ['Red Return Home Portal', 'viktor', 800, {'boom': 20, 'jelly': 10, 'primordy': 10, 'lava': 5}],
+    'teleporthomegreen': ['Green Home Portal', 'viktor', 800, { 'angler': 20, 'radiant': 10, 'wax': 10, 'wildHoney': 5 }, null],
+    'teleporthomeblue': ['Blue Home Portal', 'viktor', 250, { 'rock': 10, 'radiant': 10, 'primordy': 5 }, null],
+    'teleporthomered': ['Red Home Portal', 'viktor', 800, { 'boom': 20, 'jelly': 10, 'primordy': 10, 'lava': 5 }, null],
+    'teleporthomeyellow': ['Yellow Home Portal', 'viktor', 250, { 'cotton': 10, 'jelly': 10, 'brine': 10 }, null],
+    'teleportev': ['Ember Valley Portal', 'pod', 1000, { 'fire': 20, 'crystal': 10, 'radiant': 10, 'primordy': 10, 'diamond': 1 }, null],
+    'teleportss': ['Starlight Strand Portal', 'pod', 1000, { 'hunter': 20, 'honey': 10, 'radiant': 10, 'wax': 10, 'diamond': 1 }, null],
+    'teleportpb': ['Powderfall Bluffs Portal', 'pod', 1000, { 'saber': 20, 'puddle': 5, 'radiant': 10, 'fossil': 10, 'diamond': 1 }, null],
+    'teleportblue': ['Blue Teleporter', 'viktor', 1200, { 'rock': 30, 'brine': 20, 'radiant': 20, 'honey': 10, 'diamond': 2 }, 'teleportblue'],
+    'teleportgrey': ['Grey Teleporter', 'viktor', 1200, { 'tabby': 30, 'wax': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }, 'teleportgrey'],
+    'teleportpink': ['Pink Teleporter', 'viktor', 1200, { 'pink': 30, 'jelly': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }, 'teleportpink'],
+    'teleportviolet': ['Violet Teleporter', 'viktor', 1200, { 'phosphor': 30, 'primordy': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }, 'teleportviolet'],
+    'teleportwhite': ['Snowy Teleporter', 'viktor', 1200, { 'saber': 30, 'fossil': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }, 'teleportwhite'],
+    'warpdepotblue': ['Blue Warp Depot', 'pod', 250, { 'rock': 20, 'wax': 10, 'radiant': 3, 'sand': 3 }, 'warpdepotblue'],
+    'warpdepotgrey': ['Grey Warp Depot', 'pod', 250, { 'tabby': 20, 'brine': 10, 'radiant': 5, 'lava': 3 }, 'warpdepotgrey'],
+    'warpdepotpink': ['Pink Warp Depot', 'pod', 250, { 'pink': 20, 'primordy': 10, 'radiant': 5, 'sand': 3 }, 'warpdepotpink'],
+    'warpdepotviolet': ['Violet Warp Depot', 'pod', 250, { 'batty': 20, 'jelly': 10, 'radiant': 5, 'wildHoney': 3 }, 'warpdepotviolet'],
+    'warpdepotwhite': ['Snowy Warp Depot', 'pod', 250, { 'saber': 20, 'snowflake': 10, 'radiant': 5, 'wildHoney': 3 }, 'warpdepotwhite'],
+    'marketlink': ['Market Link', 'mochi', 250, { 'pink': 20, 'wax': 10, 'primordy': 10, 'sand': 5 }, null],
+    'refinerylink': ['Refinery Link', 'mochi', 250, { 'phosphor': 10, 'jelly': 10, 'brine': 5 }, null],
+    'linkedcannonblue': ['Blue Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannonblueout'],
+    'linkedcannongrey': ['Grey Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannongreyout'],
+    'linkedcannonpink': ['Pink Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannonpinkout'],
+    'linkedcannonblueout': ['Blue Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
+    'linkedcannongreyout': ['Grey Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
+    'linkedcannonpinkout': ['Pink Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
 }
+
+export const warpNames = [
+    "teleporthomegreen",
+    "teleporthomeblue",
+    "teleporthomered",
+    "teleporthomeyellow",
+    "teleportev",
+    "teleportss",
+    "teleportpb",
+    "teleportblue",
+    "teleportgrey",
+    "teleportpink",
+    "teleportviolet",
+    "teleportwhite",
+    "warpdepotblue",
+    "warpdepotgrey",
+    "warpdepotpink",
+    "warpdepotviolet",
+    "warpdepotwhite",
+    "marketlink",
+    "refinerylink",
+    "linkedcannonblue",
+    "linkedcannongrey",
+    "linkedcannonpink"
+];

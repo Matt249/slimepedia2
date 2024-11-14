@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Down } from '../components/Down';
-import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList } from '../text/blueprints';
+import { mediaFetcher } from '../media-manager';
+import { NavButton } from '../components/NavButton';
+import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, warpGadgets, warpNames } from '../text/blueprints';
 import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
@@ -11,7 +13,6 @@ import shopImg from '/src/assets/misc/shop.png';
 import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import '../css/Blueprints.css';
-import { mediaFetcher } from '../media-manager';
 
 const UpgradeItemList = ({
     selected = false,
@@ -67,6 +68,7 @@ const UpgradeItemList = ({
             </div>
         </div>
     );
+
 };
 
 UpgradeItemList.propTypes = {
@@ -165,19 +167,82 @@ const UpgradesPage = ({ recipeListAdder }) => {
 };
 
 const UtilitiesPage = () => {
-    return (
+    (
         <div>
-            <h1>Utilities Page</h1>
+            <h1>Utilites Page</h1>
         </div>
+
     );
 };
 
-const WarpPage = () => {
+const WarpPage = ({ recipeListAdder }) => {
+    const [selectedWarp, setSelectedWarp] = useState(null);
     return (
-        <div>
-            <h1>Warp Tech Page</h1>
-        </div>
+        <>
+            <div className='warp-list'>
+                {warpNames.map((warpName) => (
+                    <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} action={setSelectedWarp(warpName)} />
+                ))}
+            </div>
+            <div className='warp-info'>
+                <div className='vac-upgrade-info'>
+                    <div className='vac-upgrade-title-box'>
+                        <img src={selectedWarp === null ? upgradeImg : mediaFetcher(`gadgets/${selectedWarp}.png`)} alt={selectedWarp === null ? '' : warpGadgets[selectedWarp][0]} />
+                        <h1>{selectedWarp === null ? 'Select an upgrade' : warpGadgets[selectedWarp][0]}</h1>
+                        <h3>{selectedWarp === null ? 'Select an upgrade to view its details' : warpGadgets[selectedWarp]}</h3>
+                    </div>
+                    <div className='vac-upgrade-recipe-box'>
+                        <h2>Recipe</h2>
+                        <div className='vac-upgrade-recipe-list'>
+                            {selectedWarp !== null && (
+                                <>
+                                    <div
+                                        onClick={() => recipeListAdder(warpGadgets[selectedWarp][3])}
+                                    >
+                                        add items
+                                    </div>
+                                    <div>
+                                        <img
+                                            src={buck}
+                                            alt='Newbucks'
+                                            title='Newbucks'
+                                        />
+                                        <p>Newbucks: </p>
+                                        <h3>{warpGadgets[selectedWarp][2]}</h3>
+                                    </div>
+                                    {Object.keys(warpGadgets[selectedWarp][3]).map((ingredient) => (
+                                        <div key={ingredient}>
+                                            <img
+                                                src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
+                                                alt={recipeElements[ingredient][0]}
+                                                title={recipeElements[ingredient][0]}
+                                            />
+                                            <p>{recipeElements[ingredient][0]}: </p>
+                                            <h3>{warpGadgets[selectedWarp][3][ingredient]}</h3>
+                                        </div>
+                                    ))}
+                                </>
+                            )}
+                        </div>
+                    </div>
+                    <div className='vac-upgrade-effect-box'>
+
+                    </div>
+                    <div className='vac-upgrade-requirements-box'>
+                        <h2>Requirements</h2>
+                        {(selectedWarp === null) ? '' : (<>{console.log(warpGadgets[selectedWarp][1])}
+                            <img src={mediaFetcher(`${unlockRequirements[warpGadgets[selectedWarp][1]][1]}.png`)} alt={selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]} />
+                            <p>{selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]}</p>
+                        </>)}
+                    </div>
+                </div>
+            </div>
+        </>
     );
+};
+
+WarpPage.propTypes = {
+    recipeListAdder: PropTypes.func.isRequired
 };
 
 const DecorationsPage = () => {
@@ -190,7 +255,11 @@ const DecorationsPage = () => {
 
 export const Blueprints = () => {
     const [selectedTab, setSelectedTab] = useState('upgrades');
-    const changeTab = (tab) => setSelectedTab(tab === selectedTab ? null : tab);
+    const changeTab = (tab) => {
+        if (tab !== selectedTab) {
+            setSelectedTab(tab);
+        }
+    };
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     const [recipeList, setRecipeList] = useState({});
     const addToRecipeList = (items) => {
@@ -213,7 +282,7 @@ export const Blueprints = () => {
             case 'utilities':
                 return <UtilitiesPage />;
             case 'warp':
-                return <WarpPage />;
+                return <WarpPage recipeListAdder={addToRecipeList} />;
             case 'decorations':
                 return <DecorationsPage />;
             default:
