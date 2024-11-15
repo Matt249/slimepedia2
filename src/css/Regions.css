@@ -37,6 +37,12 @@
     gap: 0;
 }
 
+.regions-list {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
 .regions-list.not-rounded {
     border-top-left-radius: 0;
 }
