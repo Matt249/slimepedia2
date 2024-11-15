@@ -24,16 +24,16 @@ export const NavBar = () => {
             <NavLink style={noLink} to="/slimes/pink">
                 <NavButton name="Slimes" icon="slimes/pink" size={navBtnSize} tilting="left" />
             </NavLink>
-            <NavLink style={noLink} to="/food">
+            <NavLink style={noLink} to="/food/carrot">
                 <NavButton name="Food" icon="food/food" size={navBtnSize} tilting="right" />
             </NavLink>
-            <NavLink style={noLink} to="/items">
+            <NavLink style={noLink} to="/items/resources/brine">
                 <NavButton name="Items" icon="misc/res" size={navBtnSize} tilting="left" />
             </NavLink>
             <NavLink style={noLink} to="/map">
                 <NavButton name="Interactive Map" icon="misc/map" size={navBtnSize} tilting="none" />
             </NavLink>
-            <NavLink style={noLink} to="/regions">
+            <NavLink style={noLink} to="/regions/fields">
                 <NavButton name="Regions" icon="misc/world" size={navBtnSize} tilting="left" />
             </NavLink>
             <NavLink style={noLink} to="/weather">
@@ -42,7 +42,7 @@ export const NavBar = () => {
             <NavLink style={noLink} to="/blueprints">
                 <NavButton name="Blueprints" icon="misc/blueprint" size={navBtnSize} tilting="none" />
             </NavLink>
-            <NavLink style={noLink} to="/buildings">
+            <NavLink style={noLink} to="/buildings/corral">
                 <NavButton name="Buildings" icon="misc/patch" size={navBtnSize} tilting="none" />
             </NavLink>
 
