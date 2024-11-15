@@ -1,51 +1,55 @@
 import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
-import { buildingPedia, buildingUpgrades, usageList } from '../text/buildings';
+import { buildingNames, buildingList, buildingUpgrades, usageList } from '../text/buildings';
 import { mediaFetcher } from '../media-manager';
-import { useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import buck from '/src/assets/misc/buck.png';
 import pediaTut from '/src/assets/misc/pediatut.png';
 import '../css/Buildings.css';
 
 const defaultBuilding = 'corral';
+const linkStyle = {
+    textDecoration: 'none',
+    color: 'var(--text-color)'
+}
 
 export const Buildings = () => {
     const { building, upgrade } = useParams();
-    const buildingList = buildingPedia.map(building => building[0]);
-    const [activeBuilding, setActiveBuilding] = useState(building ? building : defaultBuilding);
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [currentUpgrade, setCurrentUpgrade] = useState(upgrade ? upgrade : null);
+    const activeBuilding = building ? building : defaultBuilding;
+    const currentUpgrade = upgrade ? upgrade : null;
+    console.log(activeBuilding, currentUpgrade);
     const buildingsButtons = () => {
-        return buildingPedia.map((building, index) => {
-            return <NavButton
-                key={index}
-                icon={'buildings/' + building[0]}
-                name={building[1]}
-                size={wideScreen ? 150 : 100}
-                action={() => {
-                    setActiveBuilding(buildingList.includes(building[0]) ? building[0] : defaultBuilding);
-                    setCurrentIndex(index);
-                    setCurrentUpgrade(null);
-                }}
-                selected={building[0] === activeBuilding}
-                tilting='none'
-            />
+        return buildingNames.map((building) => {
+            return (
+                <NavLink key={building} to={`/buildings/${building}`} style={linkStyle}>
+                    <NavButton
+                        icon={'buildings/' + building}
+                        name={buildingList[building][0]}
+                        size={wideScreen ? 150 : 100}
+                        selected={building[0] === activeBuilding}
+                        tilting='none'
+                    />
+                </NavLink>
+            )
         });
     }
     const upgradeList = () => {
         if (buildingUpgrades[activeBuilding].length === 0)
             return <h2 className='no-upgrades'>No upgrades available for this building.</h2>;
         return buildingUpgrades[activeBuilding].map((upgrade, index) => {
-            return <NavButton
-                key={index}
-                icon={'buildings/' + upgrade[0]}
-                name={upgrade[1]}
-                size={wideScreen ? 100 : 75}
-                action={() => setCurrentUpgrade(upgrade[0] === currentUpgrade ? null : upgrade[0])}
-                selected={upgrade[0] === currentUpgrade}
-                tilting='none'
-            />
+            return (
+                <NavLink key={index} to={`/buildings/${activeBuilding}/${upgrade[0]}`} style={linkStyle}>
+                    <NavButton
+                        key={index}
+                        icon={'buildings/' + upgrade[0]}
+                        name={upgrade[1]}
+                        size={wideScreen ? 100 : 75}
+                        selected={upgrade[0] === currentUpgrade}
+                        tilting='none'
+                    />
+                </NavLink>
+            )
         });
     }
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
@@ -100,9 +104,9 @@ export const Buildings = () => {
             </div>
             <div className='building-presentation'>
                 <div className='building-title'>
-                    <h1>{buildingPedia[currentIndex][1]}</h1>
-                    <h2>{buildingPedia[currentIndex][2]}</h2>
-                    <img className='building-image' src={mediaFetcher(`buildings/${buildingPedia[currentIndex][0]}.png`)} alt='Corral' />
+                    <h1>{buildingList[activeBuilding][0]}</h1>
+                    <h2>{buildingList[activeBuilding][1]}</h2>
+                    <img className='building-image' src={mediaFetcher(`buildings/${activeBuilding}.png`)} alt='Corral' />
                 </div>
                 <div className='upgrade-list'>
                     <div>
@@ -113,20 +117,20 @@ export const Buildings = () => {
                 </div>
                 <div className='building-description'>
                     <img src={pediaTut} alt="Informations about the building" />
-                    <p>{buildingPedia[currentIndex][4]}</p>
+                    <p>{buildingList[activeBuilding][3]}</p>
                 </div>
                 <div className='little-box-buildings building-cost'>
                     <img src={buck} alt='Newbuck coin' />
                     <div>
                         <h3>Cost</h3>
-                        <h4>{buildingPedia[currentIndex][3]}</h4>
+                        <h4>{buildingList[activeBuilding][2]}</h4>
                     </div>
                 </div>
                 <div className='little-box-buildings building-use'>
-                    <img src={mediaFetcher(usageList[buildingPedia[currentIndex][5]][1] + '.png')} alt='Usage' />
+                    <img src={mediaFetcher(usageList[buildingList[activeBuilding][4]][1] + '.png')} alt='Usage' />
                     <div>
                         <h3>Usage</h3>
-                        <h4>{usageList[buildingPedia[currentIndex][5]][0]}</h4>
+                        <h4>{usageList[buildingList[activeBuilding][4]][0]}</h4>
                     </div>
                 </div>
                 {upgradeInfo()}

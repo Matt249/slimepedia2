@@ -4,6 +4,7 @@ import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
+import { NavLink, useParams } from 'react-router-dom';
 import Down from '../components/Down';
 import PropTypes from 'prop-types';
 import podImg from '/src/assets/misc/pod.png';
@@ -11,11 +12,10 @@ import noneImg from '/src/assets/misc/none.png';
 import buckImg from '/src/assets/misc/buck.png';
 import patchImg from '/src/assets/misc/patch.png';
 import '../css/Regions.css';
-import { NavLink } from 'react-router-dom';
 
-export const Regions = ({
-    region = 'fields'
-}) => {
+export const Regions = () => {
+    const { region: regionName } = useParams();
+    const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
     const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
     const regionDescriptionRef = useRef(null);
 

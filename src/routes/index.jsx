@@ -8,10 +8,6 @@ import { Regions } from "../pages/Regions";
 import { Header } from "../components/Header";
 import { Blueprints } from "../pages/Blueprints";
 import { Buildings } from "../pages/Buildings";
-import { foodNames } from "../text/food";
-import { resourcesNames } from "../text/resources";
-import { toyNames } from "../text/toys";
-import { RegAndRanchIds } from "../text/regions";
 
 
 export default function index() {
@@ -24,18 +20,18 @@ export default function index() {
                 <Route path="/slimes" element={<Slimes />} />
                 <Route path="/slimes/:slime" element={<Slimes />} />
                 <Route path="/food" element={<Food />} />
-                <Route path="/food/" element={<Food />} />
-                {foodNames.map((food) => (<Route key={food} path={`/food/${food}`} element={<Food food={food} />} />))}
-                <Route path="/resources" element={<Items tab='resources' />} />
-                <Route path="/toys" element={<Items tab='toys' />} />
-                {resourcesNames.map((resource) => (<Route key={resource} path={`/resources/${resource}`} element={<Items item={resource} tab='resources' />} />))}
-                {toyNames.map((toy) => (<Route key={toy} path={`/toys/${toy}`} element={<Items item={toy} tab='toys' />} />))}
-                <Route path="/map" element={<Map />} />
+                <Route path="/food/:food" element={<Food />} />
+                <Route path="/items/" element={<Items />} />
+                <Route path="/items/:tab" element={<Items />} />
+                <Route path="/items/:tab/:item" element={<Items />} />
+                <Route path="/map/*" element={<Map />} />
                 <Route path="/regions" element={<Regions />} />
-                {RegAndRanchIds.map((region) => (<Route key={region} path={`/regions/${region}`} element={<Regions region={region} />} />))}
+                <Route path="/regions/:region" element={<Regions />} />
                 <Route path="/weather" element={<Header />} />
                 <Route path="/blueprints" element={<Blueprints />} />
                 <Route path="/buildings" element={<Buildings />} />
+                <Route path="/buildings/:building" element={<Buildings />} />
+                <Route path="/buildings/:building/:upgrade" element={<Buildings />} />
             </Routes>
         </BrowserRouter>
     );

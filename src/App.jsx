@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { slimeNames } from './text/slimes.js';
-import './css/App.css';
 import { mediaFetcher } from './media-manager.js';
 import Routes from './routes/index.jsx';
 import houseDay from './assets/wallpapers/houseDay.png';
+import './css/App.css';
 
 function App() {
     document.title = "Slimepedia 2";

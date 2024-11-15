@@ -11,7 +11,7 @@ import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
 import { mediaFetcher } from '../media-manager';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const matchMainList = (list) => {
     switch (list) {
@@ -35,22 +35,13 @@ const matchInfosList = (list) => {
     }
 }
 
-export const Items = ({
-    item = 'brine',
-    tab = 'resources',
-}) => {
+export const Items = () => {
     const firstOption = 'resources';
-    const [filter, setFilter] = useState(tab);
-    const [actualItem, setItem] = useState(item);
-    const [itemsNames, setListItems] = useState(matchMainList(filter));
-    const [infosItems, setInfosItems] = useState(matchInfosList(filter));
-
-    const updateTab = (newFilter) => {
-        setFilter(newFilter);
-        setListItems(matchMainList(newFilter));
-        setInfosItems(matchInfosList(newFilter));
-        setItem(matchMainList(newFilter)[0]);
-    }
+    const {tab: tabName, item: itemName} = useParams();
+    const tab = (tabName && ['resources', 'toys'].includes(tabName)) ? tabName : firstOption;
+    const item = (itemName && matchMainList(tab).includes(itemName)) ? itemName : matchMainList(tab)[0];
+    const itemsNames = matchMainList(tab);
+    const infosItems = matchInfosList(tab);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -69,56 +60,52 @@ export const Items = ({
         <div>
             <div className='list-container'>
                 <div className='food-tabs'>
-                    <NavLink to='/resources' style={{ textDecoration: 'none' }}>
+                    <NavLink to='/items/resources' style={{ textDecoration: 'none' }}>
                         <Tab
                             title='Resources'
                             icon='misc/res'
-                            action={() => { updateTab('resources') }}
-                            selected={filter === 'resources'}
+                            selected={tab === 'resources'}
                         />
                     </NavLink>
-                    <NavLink to='/toys' style={{ textDecoration: 'none' }}>
+                    <NavLink to='/items/toys' style={{ textDecoration: 'none' }}>
                         <Tab
                             title='Toys'
                             icon='misc/toys'
-                            action={() => { updateTab('toys') }}
-                            selected={filter === 'toys'}
+                            selected={tab === 'toys'}
                         />
                     </NavLink>
                 </div>
-                <div className='list-food' style={{ borderRadius: (filter === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
-                    {itemsNames.map((item) => {
+                <div className='list-food' style={{ borderRadius: (tab === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
+                    {itemsNames.map((itemName) => {
                         return (
+                            <NavLink key={itemName} to={`/items/${tab}/${itemName}`} style={{ textDecoration: 'none' }}>
                             <NavButton
-                                key={item}
-                                icon={filter + '/' + item}
-                                name={infosItems[item][0]}
+                                key={itemName}
+                                icon={tab + '/' + itemName}
+                                name={infosItems[itemName][0]}
                                 size={wideScreen ? 125 : 100}
-                                action={() => {
-                                    setItem(item);
-                                    setInfosItems(matchInfosList(filter));
-                                }}
-                                selected={actualItem === item}
+                                selected={itemName === item}
                             />
+                            </NavLink>
                         );
                     })}
                 </div>
             </div>
             <div className='food-container box-layout-secondary'>
-                <div className={'presentation presentation-' + filter}>
+                <div className={'presentation presentation-' + tab}>
                     <div className="image-title">
                         <div className="info-title">
-                            <h1>{infosItems[actualItem][0]}</h1>
-                            <h2>{filter === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[actualItem][0]}</h2>
+                            <h1>{infosItems[item][0]}</h1>
+                            <h2>{tab === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[item][0]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={mediaFetcher(`${filter}/${actualItem}.png`)} className='img-main' alt="pink slime" />
+                            <img src={mediaFetcher(`${tab}/${item}.png`)} className='img-main' alt="pink slime" />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
                         <img src={pedia} alt="Pedia Informations Icon" />
                         <div>
-                            {(filter === 'resources' ? resPedia[actualItem][1] : toyDesc[actualItem]).split("\n").map((item, idx) => {
+                            {(tab === 'resources' ? resPedia[item][1] : toyDesc[item]).split("\n").map((item, idx) => {
                                 return (
                                     <p key={idx}>
                                         {item}
@@ -127,14 +114,14 @@ export const Items = ({
                             })}
                         </div>
                     </div>
-                    <div className={'little-box toy-price' + (filter !== 'toys' ? ' toy-hide' : '')}>
+                    <div className={'little-box toy-price' + (tab !== 'toys' ? ' toy-hide' : '')}>
                         <img src={buck} alt='none' />
                         <div>
                             <h3>Price</h3>
                             <h4>500</h4>
                         </div>
                     </div>
-                    {(filter === 'toys') ? infosItems[actualItem][1] === "none" ?
+                    {(tab === 'toys') ? infosItems[item][1] === "none" ?
                         <div className='little-box toy-fav'>
                             <img src={noneIcon} alt='None' />
                             <div>
@@ -143,12 +130,12 @@ export const Items = ({
                             </div>
                         </div>
                         :
-                        <NavLink to={`/slimes/${infosItems[actualItem][1]}`} style={{ textDecoration: 'none' }}>
+                        <NavLink to={`/slimes/${infosItems[item][1]}`} style={{ textDecoration: 'none' }}>
                             <div className='little-box toy-fav link-to-food'>
-                                <img src={mediaFetcher(`slimes/${infosItems[actualItem][1]}.png`)} alt='none' />
+                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt='none' />
                                 <div>
                                     <h3>Favorite of</h3>
-                                    <h4>{slimesList[infosItems[actualItem][1]][0]}</h4>
+                                    <h4>{slimesList[infosItems[item][1]][0]}</h4>
                                 </div>
                             </div>
                         </NavLink>
@@ -161,7 +148,7 @@ export const Items = ({
                             </div>
                         </div>
                     }
-                    <Biomes spawnList={filter !== 'toys' ? resourcesList[actualItem][1] : ['pm']} />
+                    <Biomes spawnList={tab !== 'toys' ? resourcesList[item][1] : ['pm']} />
                 </div>
             </div>
         </div>
