@@ -1,5 +1,6 @@
 export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
+export const RegAndRanchIds = regionsIds.concat(ranchIds);
 
 export const regionInfos = {
     'sea': ['The Slime Sea', 'sea', 'se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],

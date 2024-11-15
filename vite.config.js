@@ -7,7 +7,7 @@ dotenv.config();
 
 export default defineConfig({
   plugins: [react()],
-  base: process.env.VITE_PUBLIC_URL || '/',
+  base: process.env.VITE_PUBLIC_URL || '/slimepedia/',
   build: {
     outDir: process.env.VITE_BUILD_PATH || 'dist',
   },

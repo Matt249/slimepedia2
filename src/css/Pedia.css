@@ -135,6 +135,7 @@
 .little-box>div>h4 {
     text-align: left;
     margin: 0;
+    color: var(--text-color)
 }
 
 .little-box>div>h3 {

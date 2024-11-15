@@ -11,6 +11,7 @@ import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
 import { mediaFetcher } from '../media-manager';
+import { NavLink } from 'react-router-dom';
 
 const matchMainList = (list) => {
     switch (list) {
@@ -37,7 +38,6 @@ const matchInfosList = (list) => {
 export const Items = ({
     item = 'brine',
     tab = 'resources',
-    changePage = () => { console.log('changePage not defined') }
 }) => {
     const firstOption = 'resources';
     const [filter, setFilter] = useState(tab);
@@ -69,18 +69,22 @@ export const Items = ({
         <div>
             <div className='list-container'>
                 <div className='food-tabs'>
-                    <Tab
-                        title='Resources'
-                        icon='misc/res'
-                        action={() => { updateTab('resources') }}
-                        selected={filter === 'resources'}
-                    />
-                    <Tab
-                        title='Toys'
-                        icon='misc/toys'
-                        action={() => { updateTab('toys') }}
-                        selected={filter === 'toys'}
-                    />
+                    <NavLink to='/resources' style={{ textDecoration: 'none' }}>
+                        <Tab
+                            title='Resources'
+                            icon='misc/res'
+                            action={() => { updateTab('resources') }}
+                            selected={filter === 'resources'}
+                        />
+                    </NavLink>
+                    <NavLink to='/toys' style={{ textDecoration: 'none' }}>
+                        <Tab
+                            title='Toys'
+                            icon='misc/toys'
+                            action={() => { updateTab('toys') }}
+                            selected={filter === 'toys'}
+                        />
+                    </NavLink>
                 </div>
                 <div className='list-food' style={{ borderRadius: (filter === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
                     {itemsNames.map((item) => {
@@ -130,15 +134,25 @@ export const Items = ({
                             <h4>500</h4>
                         </div>
                     </div>
-                    {(filter === 'toys') ? (
-                        <div className={'little-box toy-fav' + (infosItems[actualItem][1] === "none" ? '' : ' link-to-food') + (filter !== 'toys' ? ' toy-hide' : '')} onClick={() => changePage('slimes', infosItems[actualItem][1])}>
-                            <img src={infosItems[actualItem][1] === 'none' ? noneIcon : mediaFetcher(`slimes/${infosItems[actualItem][1]}.png`)} alt='none' />
+                    {(filter === 'toys') ? infosItems[actualItem][1] === "none" ?
+                        <div className='little-box toy-fav'>
+                            <img src={noneIcon} alt='None' />
                             <div>
                                 <h3>Favorite of</h3>
-                                <h4>{infosItems[actualItem][1] === 'none' ? 'None' : slimesList[infosItems[actualItem][1]][0]}</h4>
+                                <h4>Nobody</h4>
                             </div>
                         </div>
-                    ) : (
+                        :
+                        <NavLink to={`/slimes/${infosItems[actualItem][1]}`} style={{ textDecoration: 'none' }}>
+                            <div className='little-box toy-fav link-to-food'>
+                                <img src={mediaFetcher(`slimes/${infosItems[actualItem][1]}.png`)} alt='none' />
+                                <div>
+                                    <h3>Favorite of</h3>
+                                    <h4>{slimesList[infosItems[actualItem][1]][0]}</h4>
+                                </div>
+                            </div>
+                        </NavLink>
+                        :
                         <div className="little-box toy-fav toy-hide">
                             <img src={noneIcon} alt='none' />
                             <div>
@@ -146,9 +160,8 @@ export const Items = ({
                                 <h4>None</h4>
                             </div>
                         </div>
-                    )
                     }
-                    <Biomes spawnList={filter !== 'toys' ? resourcesList[actualItem][1] : ['pm']} changePage={changePage} />
+                    <Biomes spawnList={filter !== 'toys' ? resourcesList[actualItem][1] : ['pm']} />
                 </div>
             </div>
         </div>
@@ -158,5 +171,4 @@ export const Items = ({
 Items.propTypes = {
     item: PropTypes.string,
     tab: PropTypes.string,
-    changePage: PropTypes.func
 };

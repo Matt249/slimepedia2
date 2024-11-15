@@ -371,14 +371,16 @@
     justify-content: center;
 }
 
-.region-connections>div>img {
+.region-connections>div>img,
+.region-connections>div>a>img {
     width: calc(var(--element-size) * .8);
     height: calc(var(--element-size) * .8);
     transform: scale(.8);
     transition: transform .2s ease-in-out;
 }
 
-.region-connections>div>img:hover:not(.no-hover) {
+.region-connections>div>img:hover:not(.no-hover),
+.region-connections>div>a>img:hover:not(.no-hover) {
     transform: scale(1);
     cursor: pointer;
 }
@@ -572,6 +574,10 @@
     height: auto;
     transform: scale(var(--special-img-scale));
     transition: transform .2s ease-in-out;
+}
+
+.ranch-special-feature>h3 {
+    color: var(--text-color);
 }
 
 .special-hover:hover>img {

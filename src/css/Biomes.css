@@ -57,6 +57,7 @@
     margin: auto 0;
     text-shadow: none;
     vertical-align: middle;
+    color: var(--text-color);
     transition:
         color var(--animation-speed) ease-in-out,
         text-shadow var(--animation-speed) ease-in-out,

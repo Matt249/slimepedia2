@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useRef, } from 'react';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
@@ -11,6 +11,7 @@ import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
 import '../css/Pedia.css';
+import { NavLink } from 'react-router-dom';
 
 const FoodTabs = ({ filter, setFilter }) => (
     <div className='food-tabs'>
@@ -52,18 +53,19 @@ FoodTabs.propTypes = {
     setFilter: PropTypes.func.isRequired
 };
 
-const FoodList = ({ actualFoodList, wideScreen, updateFood, actualFood, filter }) => (
+const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
     <div className='list-food' style={{ borderRadius: (filter === 'any' ? '0' : '20px') + ' 20px 20px 20px' }}>
         {actualFoodList.map((foodId) => (
-            <NavButton
-                key={foodId}
-                icon={`food/${foodId}`}
-                name={foodList[foodId][0]}
-                size={wideScreen ? 125 : 100}
-                tilting={['ash', 'water'].includes(foodId) ? 'none' : 'random'}
-                action={() => updateFood(foodId)}
-                selected={actualFood === foodId}
-            />
+            <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
+                <NavButton
+                    key={foodId}
+                    icon={`food/${foodId}`}
+                    name={foodList[foodId][0]}
+                    size={wideScreen ? 125 : 100}
+                    tilting={['ash', 'water'].includes(foodId) ? 'none' : 'random'}
+                    selected={food === foodId}
+                />
+            </NavLink>
         ))}
     </div>
 );
@@ -72,79 +74,130 @@ FoodList.propTypes = {
     actualFoodList: PropTypes.arrayOf(PropTypes.any).isRequired,
     wideScreen: PropTypes.bool.isRequired,
     updateFood: PropTypes.func.isRequired,
-    actualFood: PropTypes.string.isRequired,
+    food: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired
 };
 
-const FoodDetails = ({ actualFood, favSlime, changePage, topBtn, setFilter }) => (
-    <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
-        <div className="image-title">
-            <div className="info-title">
-                <h1>{foodList[actualFood][0]}</h1>
-                <h2>{foodDescription[actualFood]}</h2>
+const FoodDetails = ({ food, topBtn, setFilter }) => {
+    const favSlimeCalc = () => {
+        for (let slime in slimesList)
+            if (slimesList[slime][2] === food)
+                return slime;
+        return 'none';
+    };
+    const favSlime = favSlimeCalc();
+    return (
+        <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
+            <div className="image-title">
+                <div className="info-title">
+                    <h1>{foodList[food][0]}</h1>
+                    <h2>{foodDescription[food]}</h2>
+                </div>
+                <div className="image-container">
+                    <img src={mediaFetcher(`food/${food}.png`)} className='img-main' alt={foodList[food][0]} />
+                </div>
             </div>
-            <div className="image-container">
-                <img src={mediaFetcher(`food/${actualFood}.png`)} className='img-main' alt={foodList[actualFood][0]} />
+            <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}>
+                <img src={mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
+                <div>
+                    <h3>Food type</h3>
+                    <h4>{foodSingular[foodList[food][1]]}</h4>
+                </div>
             </div>
+            {favSlime === 'none' ?
+                <div className='little-box food-fav'>
+                    <img src={noneImg} alt='None' />
+                    <div>
+                        <h3>Favorite of</h3>
+                        <h4>Nobody</h4>
+                    </div>
+                </div>
+                :
+                <NavLink to={`/slimes/${favSlime}`} style={{ textDecoration: 'none' }}>
+                    <div className='little-box food-fav link-to-food'>
+                        <img src={mediaFetcher(`slimes/${favSlime}.png`)} alt={slimesList[favSlime][0]} />
+                        <div>
+                            <h3>Favorite of</h3>
+                            <h4>{slimesList[favSlime][0]}</h4>
+                        </div>
+                    </div>
+                </NavLink>
+            }
+            <Biomes spawnList={foodList[food][2]} />
         </div>
-        <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(actualFood) ? actualFood : 'honey') }}>
-            <img src={mediaFetcher(`food/${foodList[actualFood][1]}.png`)} alt={foodSingular[foodList[actualFood][1]]} />
-            <div>
-                <h3>Food type</h3>
-                <h4>{foodSingular[foodList[actualFood][1]]}</h4>
-            </div>
-        </div>
-        <div className={'little-box food-fav' + (favSlime === 'none' ? '' : ' link-to-food')} onClick={() => { if (favSlime !== 'none') changePage('slimes', favSlime) }}>
-            <img src={favSlime === 'none' ? noneImg : mediaFetcher(`slimes/${favSlime}.png`)} alt='none' />
-            <div>
-                <h3>Favorite of</h3>
-                <h4>{(favSlime === 'none' ? 'Nobody' : slimesList[favSlime][0])}</h4>
-            </div>
-        </div>
-        <Biomes spawnList={foodList[actualFood][2]} changePage={changePage} />
-    </div>
-);
+    )
+};
 
 FoodDetails.propTypes = {
-    actualFood: PropTypes.string.isRequired,
-    favSlime: PropTypes.string.isRequired,
-    changePage: PropTypes.func.isRequired,
+    food: PropTypes.string.isRequired,
     topBtn: PropTypes.bool.isRequired,
     setFilter: PropTypes.func.isRequired
 };
 
-const FoodDescription = ({ actualFood, topBtn }) => (
+const FoodDescription = ({ food, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
             <img src={pediaAbout} alt='Slimeology' />
             <h3>About</h3>
         </div>
-        <p>{foodpedia[actualFood][0]}</p>
+        <p>{foodpedia[food][0]}</p>
         <div className='desc-title'>
             <img src={pediaQuestion} alt='Rancher Risks' />
             <h3>On the ranch</h3>
         </div>
-        <p>{foodpedia[actualFood][1]}</p>
+        <p>{foodpedia[food][1]}</p>
     </div>
 );
 
 FoodDescription.propTypes = {
-    actualFood: PropTypes.string.isRequired,
+    food: PropTypes.string.isRequired,
     topBtn: PropTypes.bool.isRequired
 };
 
 export const Food = ({
-    food = 'carrot',
-    tab = 'food',
-    changePage = ({ args }) => { console.log('changePage not defined, args={', args, '}') }
+    food: foodAttr,
 }) => {
+    const [filter, setFilter] = useState('any');
+    const foodRef = useRef('carrot');
+    useEffect(() => {
+        switch (foodAttr) {
+            case 'ash':
+                foodRef.current = 'ash';
+                setFilter('special');
+                break;
+            case 'water':
+                foodRef.current = 'water';
+                setFilter('special');
+                break;
+            case 'nectar':
+                foodRef.current = 'nectar';
+                setFilter('special');
+                break;
+            case 'any':
+                foodRef.current = 'carrot';
+                setFilter('any');
+                break;
+            case 'meat':
+                foodRef.current = 'hen';
+                setFilter('meat');
+                break;
+            case 'veggies':
+                foodRef.current = 'carrot';
+                setFilter('veggies');
+                break;
+            case 'fruits':
+                foodRef.current = 'pogofruit';
+                setFilter('fruits');
+                break;
+            default:
+                foodRef.current = foodNames.includes(foodAttr) ? foodAttr : 'carrot';
+                setFilter(['meat', 'veggies', 'fruits'].includes(foodList[foodRef.current][1]) ? foodList[foodRef.current][1] : 'special');
+                break;
+        }
+    }, [foodAttr]);
     const [topBtn, setTopBtn] = useState(false);
-    const [actualFood, setFood] = useState(food);
-    const [filter, setFilter] = useState(tab);
-    const updateFood = useCallback((food) => {
-        setFood(food);
-        setTopBtn(false);
-    }, []);
+    console.log(foodList[foodRef.current][1], filter);
+    useState(() => setTopBtn(false), [foodRef.current]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -163,37 +216,30 @@ export const Food = ({
     const actualFoodList = useMemo(() => {
         switch (filter) {
             case 'fruits':
-                return foodNames.filter(food => foodList[food][1] === 'fruits');
+                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'fruits');
             case 'veggies':
-                return foodNames.filter(food => foodList[food][1] === 'veggies');
+                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'veggies');
             case 'meat':
-                return foodNames.filter(food => foodList[food][1] === 'meat');
+                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'meat');
             case 'special':
-                return foodNames.filter(food => !['veggies', 'fruits', 'meat'].includes(foodList[food][1]));
+                return foodNames.filter(foodSearched => !['veggies', 'fruits', 'meat'].includes(foodList[foodSearched][1]));
             default:
                 return foodNames;
         }
     }, [filter]);
 
-    const favSlime = useMemo(() => {
-        for (let slime in slimesList) 
-            if (slimesList[slime][2] === actualFood)
-                return slime;
-        return 'none';
-    }, [actualFood]);
-
     return (
         <div>
             <div className='list-container'>
                 <FoodTabs filter={filter} setFilter={setFilter} />
-                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} updateFood={updateFood} actualFood={actualFood} filter={filter} />
+                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} food={foodRef.current} filter={filter} />
             </div>
             <div className='food-container box-layout-secondary'>
-                <FoodDetails actualFood={actualFood} favSlime={favSlime} changePage={changePage} topBtn={topBtn} setFilter={setFilter} />
+                <FoodDetails food={foodRef.current} topBtn={topBtn} setFilter={setFilter} />
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='arrow' />
                 </div>
-                <FoodDescription actualFood={actualFood} topBtn={topBtn} />
+                <FoodDescription food={foodRef.current} topBtn={topBtn} />
             </div>
         </div>
     );
@@ -201,6 +247,4 @@ export const Food = ({
 
 Food.propTypes = {
     food: PropTypes.string,
-    tab: PropTypes.string,
-    changePage: PropTypes.func
 };

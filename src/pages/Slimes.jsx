@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
@@ -13,8 +13,9 @@ import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
 import '../css/Pedia.css';
 import { mediaFetcher } from '../media-manager.js';
+import { NavLink } from 'react-router-dom';
 
-const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
+const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
     const slimeName = currentSlimeList[0];
     const slimeIcon = selectedSlime === "none" ? none : mediaFetcher(`slimes/${selectedSlime}.png`);
     const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? none : mediaFetcher(`plorts/${selectedSlime}.png`);
@@ -35,26 +36,44 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
                 </div>
                 <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />
             </div>
-            <div
-                className={'little-box box-food' + (!['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ? ' link-to-food' : '')}
-                onClick={() => { if (!['none', 'ranchersnslimes'].includes(currentSlimeList[2])) changePage('food', currentSlimeList[1], (currentSlimeList[2] === 'none' ? 'carrot' : currentSlimeList[2])) }}
-            >
-                <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
-                <div>
-                    <h3>Diet</h3>
-                    <h4>{foodTypes[currentSlimeList[1]]}</h4>
+            {['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ?
+                <div className='little-box box-food'>
+                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
+                    <div>
+                        <h3>Diet</h3>
+                        <h4>{foodTypes[currentSlimeList[1]]}</h4>
+                    </div>
                 </div>
-            </div>
-            <div
-                className={'little-box box-fav' + (['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ? '' : ' link-to-food')}
-                onClick={() => { if (!['none', 'ranchersnslimes'].includes(currentSlimeList[2])) changePage('food', 'food', currentSlimeList[2]); }}
-            >
-                <img src={favFoodIcon} alt={'Picture of ' + foodList[currentSlimeList[2]][0]} />
-                <div>
-                    <h3>Favorite Food</h3>
-                    <h4>{foodList[currentSlimeList[2]][0]}</h4>
+                :
+                <NavLink to={`/food/${currentSlimeList[2]}`} style={{ textDecoration: 'none' }}>
+                    <div className='little-box box-food link-to-food'>
+                        <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
+                        <div>
+                            <h3>Diet</h3>
+                            <h4>{foodTypes[currentSlimeList[1]]}</h4>
+                        </div>
+                    </div>
+                </NavLink>
+            }
+            {['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ?
+                <div className='little-box box-fav'>
+                    <img src={favFoodIcon} alt='None' />
+                    <div>
+                        <h3>Favorite Food</h3>
+                        <h4>None</h4>
+                    </div>
                 </div>
-            </div>
+                :
+                <NavLink to={`/food/${currentSlimeList[2]}`} style={{ textDecoration: 'none' }}>
+                    <div className='little-box box-fav link-to-food'>
+                        <img src={favFoodIcon} alt={'Picture of ' + foodList[currentSlimeList[2]][0]} />
+                        <div>
+                            <h3>Favorite Food</h3>
+                            <h4>{foodList[currentSlimeList[2]][0]}</h4>
+                        </div>
+                    </div>
+                </NavLink>
+            }
             <div className='little-box box-largo'>
                 <img src={(currentSlimeList[3]) ? largo : none} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
                 <div>
@@ -62,17 +81,26 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
                     <h4>{(currentSlimeList[3]) ? "Yes" : "No"}</h4>
                 </div>
             </div>
-            <div
-                className={'little-box box-toy' + (currentSlimeList[5] === 'none' ? '' : ' link-to-food')}
-                onClick={() => { if (currentSlimeList[5] !== 'none') changePage('items', 'toys', currentSlimeList[5]) }}
-            >
-                <img src={favToyIcon} alt={slimeToy[0]} />
-                <div>
-                    <h3>Favorite Toy</h3>
-                    <h4>{slimeToy[0]}</h4>
+            {currentSlimeList[5] === 'none' ?
+                <div className='little-box box-toy'>
+                    <img src={favToyIcon} alt='None' />
+                    <div>
+                        <h3>Favorite Toy</h3>
+                        <h4>None</h4>
+                    </div>
                 </div>
-            </div>
-            <Biomes spawnList={currentSlimeList[4]} changePage={changePage} />
+                :
+                <NavLink to={`/toys/${currentSlimeList[5]}`} style={{ textDecoration: 'none' }}>
+                    <div className='little-box box-toy link-to-food'>
+                        <img src={favToyIcon} alt={slimeToy[0]} />
+                        <div>
+                            <h3>Favorite Toy</h3>
+                            <h4>{slimeToy[0]}</h4>
+                        </div>
+                    </div>
+                </NavLink>
+            }
+            <Biomes spawnList={currentSlimeList[4]} />
         </>
     );
 };
@@ -80,7 +108,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime, changePage }) => {
 SlimeDetails.propTypes = {
     currentSlimeList: PropTypes.arrayOf(PropTypes.any).isRequired,
     selectedSlime: PropTypes.string.isRequired,
-    changePage: PropTypes.func.isRequired
+
 };
 
 
@@ -111,16 +139,11 @@ SlimeDescription.propTypes = {
 
 export const Slimes = ({
     slime = 'pink',
-    changePage = ({ args }) => { console.log('changePage not defined, args={', args, '}') }
 }) => {
     const [topBtn, setTopBtn] = useState(false);
-    const [currentSlime, setSlime] = useState(slime && slime in slimesList ? slime : 'pink');
-    const updateSlime = useCallback((slime) => {
-        setSlime(slime);
-        setTopBtn(false);
-    }, []);
-    const currentSlimeList = slimesList[currentSlime];
-    const slimepediaEntry = useMemo(() => slimepedia[currentSlime] ? slimepedia[currentSlime] : slimepedia['lorem'], [currentSlime]);
+    useEffect(() => setTopBtn(false), [slime]);
+    const currentSlimeList = slimesList[slime];
+    const slimepediaEntry = useMemo(() => slimepedia[slime] ? slimepedia[slime] : slimepedia['lorem'], [slime]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -140,19 +163,20 @@ export const Slimes = ({
         <div>
             <div className='list-slime'>
                 {slimeNames.map((slime) => (
-                    <NavButton
-                        key={slime}
-                        icon={`slimes/${slime}`}
-                        size={wideScreen ? 125 : 100}
-                        name={slimesList[slime][0]}
-                        action={() => updateSlime(slime)}
-                        selected={currentSlime === slime}
-                    />
+                    <NavLink to={`/slimes/${slime}`} style={{ textDecoration: 'none' }} key={slime}>
+                        <NavButton
+                            key={slime}
+                            icon={`slimes/${slime}`}
+                            size={wideScreen ? 125 : 100}
+                            name={slimesList[slime][0]}
+                            selected={slime === slime}
+                        />
+                    </NavLink>
                 ))}
             </div>
             <div className='slime-presentation box-layout-secondary'>
                 <div className={'slime-infos' + (topBtn ? ' hidden-infos' : '')}>
-                    <SlimeDetails currentSlimeList={currentSlimeList} changePage={changePage} selectedSlime={currentSlime} />
+                    <SlimeDetails currentSlimeList={currentSlimeList} selectedSlime={slime} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='Expand arrow' />
@@ -165,5 +189,4 @@ export const Slimes = ({
 
 Slimes.propTypes = {
     slime: PropTypes.string,
-    changePage: PropTypes.func
 };

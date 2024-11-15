@@ -8,14 +8,14 @@
 
 .tab:not(.selected-tab) {
     background-color: var(--menu-color-0);
-    padding-bottom: 0;
+    padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .selected-tab {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -41,6 +41,7 @@
 .tab>p {
     margin: 0 0 10px 0;
     text-align: center;
+    color: var(--text-color);
 }
 
 @media (max-width: 1600px) {
