@@ -4,6 +4,8 @@ import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
 import { foodList, foodTypes } from '../text/food.js';
 import { toysList } from '../text/toys.js';
+import { mediaFetcher } from '../media-manager.js';
+import { NavLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import largo from '/src/assets/misc/largo.png';
 import none from '/src/assets/misc/none.png';
@@ -12,8 +14,6 @@ import pediaSlime from '/src/assets/misc/pediaslime.png';
 import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
 import '../css/Pedia.css';
-import { mediaFetcher } from '../media-manager.js';
-import { NavLink } from 'react-router-dom';
 
 const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
     const slimeName = currentSlimeList[0];
@@ -29,7 +29,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
             <div className="image-title">
                 <div className="info-title">
                     <h1>{slimeName}</h1>
-                    <h2>{slimesText[currentSlimeList[0]] ? slimesText[currentSlimeList[0]] : ''}</h2>
+                    <h2>{slimesText[selectedSlime]}</h2>
                 </div>
                 <div className='image-container'>
                     <img src={slimeIcon} className='img-main' alt={'Picture of ' + slimeName} />
@@ -137,9 +137,9 @@ SlimeDescription.propTypes = {
     topBtn: PropTypes.bool.isRequired
 };
 
-export const Slimes = ({
-    slime = 'pink',
-}) => {
+export const Slimes = () => {
+    const { slime: slimeName } = useParams();
+    const slime = slimeName || 'pink';
     const [topBtn, setTopBtn] = useState(false);
     useEffect(() => setTopBtn(false), [slime]);
     const currentSlimeList = slimesList[slime];
@@ -162,14 +162,15 @@ export const Slimes = ({
     return (
         <div>
             <div className='list-slime'>
-                {slimeNames.map((slime) => (
-                    <NavLink to={`/slimes/${slime}`} style={{ textDecoration: 'none' }} key={slime}>
+                {slimeNames.map((slimeName) => (
+                    <NavLink to={`/slimes/${slimeName}`} style={{ textDecoration: 'none' }} key={slimeName}>
                         <NavButton
-                            key={slime}
-                            icon={`slimes/${slime}`}
+                            to={`/slimes/${slimeName}`}
+                            key={slimeName}
+                            icon={`slimes/${slimeName}`}
                             size={wideScreen ? 125 : 100}
-                            name={slimesList[slime][0]}
-                            selected={slime === slime}
+                            name={slimesList[slimeName][0]}
+                            selected={slimeName === slime}
                         />
                     </NavLink>
                 ))}

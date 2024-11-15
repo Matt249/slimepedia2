@@ -1,22 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, createRef } from 'react';
 import { spawnLocationsList } from '../text/regions';
-import PropTypes from 'prop-types';
-import '../css/Biomes.css';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import '../css/Biomes.css';
 
 const light = true;
 
 export const Biomes = ({
     spawnList = [],
 }) => {
-    console.log(spawnList);
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef([]);
     const biomeBlacklist = ['pm', 'ps', 'ws'];
 
     useEffect(() => {
-        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || React.createRef());
+        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || createRef());
     }, [spawnList]);
 
     return (

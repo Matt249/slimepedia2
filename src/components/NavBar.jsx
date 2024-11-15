@@ -22,7 +22,8 @@ export const NavBar = () => {
     return (
         <nav className="box-layout">
             <NavLink style={noLink} to="/slimes/pink">
-                <NavButton name="Slimes" icon="slimes/pink" size={navBtnSize} tilting="left" /></NavLink>
+                <NavButton name="Slimes" icon="slimes/pink" size={navBtnSize} tilting="left" />
+            </NavLink>
             <NavLink style={noLink} to="/food">
                 <NavButton name="Food" icon="food/food" size={navBtnSize} tilting="right" />
             </NavLink>

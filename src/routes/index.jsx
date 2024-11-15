@@ -8,7 +8,6 @@ import { Regions } from "../pages/Regions";
 import { Header } from "../components/Header";
 import { Blueprints } from "../pages/Blueprints";
 import { Buildings } from "../pages/Buildings";
-import { slimeNames } from "../text/slimes";
 import { foodNames } from "../text/food";
 import { resourcesNames } from "../text/resources";
 import { toyNames } from "../text/toys";
@@ -23,8 +22,9 @@ export default function index() {
                 <Route path="/" element={<Header />} />
                 <Route path="/slimepedia" element={<Header />} />
                 <Route path="/slimes" element={<Slimes />} />
-                {slimeNames.map((slime) => (<Route key={slime} path={`/slimes/${slime}`} element={<Slimes slime={slime} />} />))}
+                <Route path="/slimes/:slime" element={<Slimes />} />
                 <Route path="/food" element={<Food />} />
+                <Route path="/food/" element={<Food />} />
                 {foodNames.map((food) => (<Route key={food} path={`/food/${food}`} element={<Food food={food} />} />))}
                 <Route path="/resources" element={<Items tab='resources' />} />
                 <Route path="/toys" element={<Items tab='toys' />} />

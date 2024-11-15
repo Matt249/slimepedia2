@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
 import { buildingPedia, buildingUpgrades, usageList } from '../text/buildings';
 import { mediaFetcher } from '../media-manager';
+import { useParams } from 'react-router-dom';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import buck from '/src/assets/misc/buck.png';
 import pediaTut from '/src/assets/misc/pediatut.png';
@@ -10,10 +11,11 @@ import '../css/Buildings.css';
 const defaultBuilding = 'corral';
 
 export const Buildings = () => {
+    const { building, upgrade } = useParams();
     const buildingList = buildingPedia.map(building => building[0]);
-    const [activeBuilding, setActiveBuilding] = useState(defaultBuilding);
+    const [activeBuilding, setActiveBuilding] = useState(building ? building : defaultBuilding);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [currentUpgrade, setCurrentUpgrade] = useState(null);
+    const [currentUpgrade, setCurrentUpgrade] = useState(upgrade ? upgrade : null);
     const buildingsButtons = () => {
         return buildingPedia.map((building, index) => {
             return <NavButton

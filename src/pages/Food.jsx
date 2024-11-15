@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo, useRef, } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
@@ -11,7 +12,6 @@ import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
 import '../css/Pedia.css';
-import { NavLink } from 'react-router-dom';
 
 const FoodTabs = ({ filter, setFilter }) => (
     <div className='food-tabs'>
@@ -73,7 +73,6 @@ const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
 FoodList.propTypes = {
     actualFoodList: PropTypes.arrayOf(PropTypes.any).isRequired,
     wideScreen: PropTypes.bool.isRequired,
-    updateFood: PropTypes.func.isRequired,
     food: PropTypes.string.isRequired,
     filter: PropTypes.string.isRequired
 };
@@ -154,50 +153,13 @@ FoodDescription.propTypes = {
     topBtn: PropTypes.bool.isRequired
 };
 
-export const Food = ({
-    food: foodAttr,
-}) => {
+export const Food = () => {
+    const { food: foodName } = useParams();
+    const food = foodName || 'carrot';
     const [filter, setFilter] = useState('any');
-    const foodRef = useRef('carrot');
-    useEffect(() => {
-        switch (foodAttr) {
-            case 'ash':
-                foodRef.current = 'ash';
-                setFilter('special');
-                break;
-            case 'water':
-                foodRef.current = 'water';
-                setFilter('special');
-                break;
-            case 'nectar':
-                foodRef.current = 'nectar';
-                setFilter('special');
-                break;
-            case 'any':
-                foodRef.current = 'carrot';
-                setFilter('any');
-                break;
-            case 'meat':
-                foodRef.current = 'hen';
-                setFilter('meat');
-                break;
-            case 'veggies':
-                foodRef.current = 'carrot';
-                setFilter('veggies');
-                break;
-            case 'fruits':
-                foodRef.current = 'pogofruit';
-                setFilter('fruits');
-                break;
-            default:
-                foodRef.current = foodNames.includes(foodAttr) ? foodAttr : 'carrot';
-                setFilter(['meat', 'veggies', 'fruits'].includes(foodList[foodRef.current][1]) ? foodList[foodRef.current][1] : 'special');
-                break;
-        }
-    }, [foodAttr]);
+
     const [topBtn, setTopBtn] = useState(false);
-    console.log(foodList[foodRef.current][1], filter);
-    useState(() => setTopBtn(false), [foodRef.current]);
+    useState(() => setTopBtn(false), [food]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -232,14 +194,14 @@ export const Food = ({
         <div>
             <div className='list-container'>
                 <FoodTabs filter={filter} setFilter={setFilter} />
-                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} food={foodRef.current} filter={filter} />
+                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} food={food} filter={filter} />
             </div>
             <div className='food-container box-layout-secondary'>
-                <FoodDetails food={foodRef.current} topBtn={topBtn} setFilter={setFilter} />
+                <FoodDetails food={food} topBtn={topBtn} setFilter={setFilter} />
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='arrow' />
                 </div>
-                <FoodDescription food={foodRef.current} topBtn={topBtn} />
+                <FoodDescription food={food} topBtn={topBtn} />
             </div>
         </div>
     );
