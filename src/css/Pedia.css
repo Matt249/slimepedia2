@@ -13,7 +13,6 @@
 
 .list-slime,
 .list-food {
-    flex: 0 0 auto;
     margin: 10px;
     padding: 10px;
     display: grid;
@@ -312,17 +311,32 @@ br {
     flex: 0 0 auto;
     margin: 10px;
     width: fit-content;
-    overflow: auto;
     border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    gap: 0;
 }
 
-
-
-.food-tabs {
-    display: flex;
-    flex-flow: row nowrap;
+.food-tabs,
+.items-tabs {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-rows: 1fr;
     gap: 10px;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.food-tabs {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.items-tabs {
+    grid-template-columns: 1fr 1fr;
 }
 
 .food-container {
@@ -330,6 +344,7 @@ br {
     width: 100%;
     position: relative;
 }
+
 
 .food-presentation {
     width: 100%;

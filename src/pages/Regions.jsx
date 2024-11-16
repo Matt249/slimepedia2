@@ -62,8 +62,24 @@ export const Regions = () => {
                             <div className="region-element-content">
                                 <img
                                     src={mediaFetcher(`slimes/${slime}.png`)}
-                                    alt={slimesList[slime][1]}
-                                    title={slimesList[slime][1]}
+                                    alt={slimesList[slime][0]}
+                                    title={slimesList[slime][0]}
+                                />
+                            </div>
+                        </div>
+                    </NavLink>
+                ))}
+            </div>
+            <div className='region-food'>
+                <h2 className='box-title'>Available Food</h2>
+                {regionElements[region][1].map((food, index) => (
+                    <NavLink to={`/food/${food}`} style={{ textDecoration: 'none' }} key={`${food}-${index}`}>
+                        <div className="region-element" key={`${food}-${index}`}>
+                            <div className="region-element-content">
+                                <img
+                                    src={mediaFetcher(`food/${food}.png`)}
+                                    alt={foodList[food][0]}
+                                    title={foodList[food][0]}
                                 />
                             </div>
                         </div>
@@ -77,7 +93,7 @@ export const Regions = () => {
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
                             <img
                                 src={mediaFetcher(`world/${regionArg}.png`)}
-                                alt='Portal'
+                                alt={regionInfos[regionArg][0]}
                                 key={regionArg}
                             />
                         </NavLink>
@@ -99,30 +115,14 @@ export const Regions = () => {
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
                             <img
                                 src={mediaFetcher(`world/${regionArg}.png`)}
-                                alt='Portal'
+                                alt={regionInfos[regionArg][0]}
                                 key={regionArg}
                             />
                         </NavLink>
                     )) : (
-                        <img className='no-hover' src={noneImg} alt='Portal' />
+                        <img className='no-hover' src={noneImg} alt='No Region' />
                     )}
                 </div>
-            </div>
-            <div className='region-food'>
-                <h2 className='box-title'>Available Food</h2>
-                {regionElements[region][1].map((food, index) => (
-                    <NavLink to={`/food/${food}`} style={{ textDecoration: 'none' }} key={`${food}-${index}`}>
-                        <div className="region-element" key={`${food}-${index}`}>
-                            <div className="region-element-content">
-                                <img
-                                    src={mediaFetcher(`food/${food}.png`)}
-                                    alt={foodList[food][0]}
-                                    title={foodList[food][0]}
-                                />
-                            </div>
-                        </div>
-                    </NavLink>
-                ))}
             </div>
             <div className='region-resources'>
                 <h2 className='box-title'>Available Resources</h2>
@@ -241,7 +241,7 @@ export const Regions = () => {
                         className='ranch-special-feature'
                         key={feature}
                     >
-                        <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt='Slots' />
+                        <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt={regionsResourcesInfos[feature][0]} />
                         <h3>{regionsResourcesInfos[feature][0]}</h3>
                     </div>
                     :
@@ -250,7 +250,7 @@ export const Regions = () => {
                             className='ranch-special-feature special-hover'
                             key={feature}
                         >
-                            <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt='Slots' />
+                            <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt={regionsResourcesInfos[feature][0]} />
                             <h3>{regionsResourcesInfos[feature][0]}</h3>
                         </div>
                     </NavLink>
@@ -273,7 +273,7 @@ export const Regions = () => {
     return (
         <div>
             <div className='region-tab-list'>
-                <div className='regions-tab-selector'>
+                <div className='regions-tabs'>
                     <NavLink to='/regions/fields' style={{ textDecoration: 'none' }}>
                         <Tab title='World Regions' icon='misc/world' selected={actualSelection === 'regions'} />
                     </NavLink>
@@ -281,7 +281,7 @@ export const Regions = () => {
                         <Tab title='Ranch' icon='misc/patch' selected={actualSelection === 'ranch'} />
                     </NavLink>
                 </div>
-                <div className={'regions-list' + (actualSelection === 'regions' ? ' not-rounded' : '')}>
+                <div className='regions-list' style={{ borderRadius: `${actualSelection === 'regions' ? '0' : '20px'} ${actualSelection === 'ranch' ? '0' : '20px'} 20px 20px` }}>
                     {listOfRegions.map(regionItem => (
                         <NavLink to={`/regions/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
                             <div
@@ -297,7 +297,7 @@ export const Regions = () => {
                                 >
                                     {regionInfos[regionItem][0]} Video
                                 </video>
-                                <img className='region-icon' src={mediaFetcher(`world/${regionInfos[regionItem][1]}.png`)} alt='Rainbow Fields Logo' />
+                                <img className='region-icon' src={mediaFetcher(`world/${regionInfos[regionItem][1]}.png`)} alt={regionInfos[regionItem][0]} />
                                 <h2 className='region-name'>{regionInfos[regionItem][0]}</h2>
                             </div>
                         </NavLink>
@@ -320,7 +320,7 @@ export const Regions = () => {
                 <div className='region-container'>
                     <div className='region-main-page-frame'>
                         <div className='region-main-page'>
-                            <img src={mediaFetcher(`world/${region}.png`)} alt='Region Icon' />
+                            <img src={mediaFetcher(`world/${region}.png`)} alt={regionInfos[region][0]} />
                             <h1>{regionInfos[region][0]}</h1>
                             <h2>{regionInfos[region][3]}</h2>
                         </div>

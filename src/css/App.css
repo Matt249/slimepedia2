@@ -15,7 +15,7 @@ body {
   color: var(--text-color);
 }
 
-.App {
+.slimepedia-app {
   text-align: center;
   height: 100vh;
   display: flex;
@@ -26,12 +26,12 @@ body {
   overflow: hidden;
 }
 
-.App-logo {
+.slimepedia-logo {
   height: 350px;
   pointer-events: none;
 }
 
-.App-header {
+.slimepedia-header {
   flex-grow: 5;
   height: max-content;
   display: flex;
@@ -45,7 +45,7 @@ body {
   transition: height .5s;
 }
 
-.App>div:not(.pin-list) {
+.slimepedia-app>div:not(.pin-list) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

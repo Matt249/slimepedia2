@@ -37,7 +37,8 @@ const matchInfosList = (list) => {
 
 export const Items = () => {
     const firstOption = 'resources';
-    const {tab: tabName, item: itemName} = useParams();
+    const lastOption = 'toys';
+    const { tab: tabName, item: itemName } = useParams();
     const tab = (tabName && ['resources', 'toys'].includes(tabName)) ? tabName : firstOption;
     const item = (itemName && matchMainList(tab).includes(itemName)) ? itemName : matchMainList(tab)[0];
     const itemsNames = matchMainList(tab);
@@ -59,7 +60,7 @@ export const Items = () => {
     return (
         <div>
             <div className='list-container'>
-                <div className='food-tabs'>
+                <div className='items-tabs'>
                     <NavLink to='/items/resources' style={{ textDecoration: 'none' }}>
                         <Tab
                             title='Resources'
@@ -75,17 +76,17 @@ export const Items = () => {
                         />
                     </NavLink>
                 </div>
-                <div className='list-food' style={{ borderRadius: (tab === firstOption ? '0' : '20px') + ' 20px 20px 20px' }}>
+                <div className='list-food' style={{ borderRadius: `${tab === firstOption ? '0' : '20px'} ${tab === lastOption ? ' 0 ' : '20px'} 20px 20px` }}>
                     {itemsNames.map((itemName) => {
                         return (
                             <NavLink key={itemName} to={`/items/${tab}/${itemName}`} style={{ textDecoration: 'none' }}>
-                            <NavButton
-                                key={itemName}
-                                icon={tab + '/' + itemName}
-                                name={infosItems[itemName][0]}
-                                size={wideScreen ? 125 : 100}
-                                selected={itemName === item}
-                            />
+                                <NavButton
+                                    key={itemName}
+                                    icon={tab + '/' + itemName}
+                                    name={infosItems[itemName][0]}
+                                    size={wideScreen ? 125 : 100}
+                                    selected={itemName === item}
+                                />
                             </NavLink>
                         );
                     })}
@@ -99,7 +100,7 @@ export const Items = () => {
                             <h2>{tab === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[item][0]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={mediaFetcher(`${tab}/${item}.png`)} className='img-main' alt="pink slime" />
+                            <img src={mediaFetcher(`${tab}/${item}.png`)} className='img-main' alt={infosItems[item][0]} />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
@@ -115,7 +116,7 @@ export const Items = () => {
                         </div>
                     </div>
                     <div className={'little-box toy-price' + (tab !== 'toys' ? ' toy-hide' : '')}>
-                        <img src={buck} alt='none' />
+                        <img src={buck} alt='Newbuck Icon' />
                         <div>
                             <h3>Price</h3>
                             <h4>500</h4>
@@ -132,7 +133,7 @@ export const Items = () => {
                         :
                         <NavLink to={`/slimes/${infosItems[item][1]}`} style={{ textDecoration: 'none' }}>
                             <div className='little-box toy-fav link-to-food'>
-                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt='none' />
+                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[infosItems[item][1]][0]} />
                                 <div>
                                     <h3>Favorite of</h3>
                                     <h4>{slimesList[infosItems[item][1]][0]}</h4>
@@ -141,7 +142,7 @@ export const Items = () => {
                         </NavLink>
                         :
                         <div className="little-box toy-fav toy-hide">
-                            <img src={noneIcon} alt='none' />
+                            <img src={noneIcon} alt='None' />
                             <div>
                                 <h3>Favorite of</h3>
                                 <h4>None</h4>

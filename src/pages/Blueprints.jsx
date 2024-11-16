@@ -230,10 +230,12 @@ const WarpPage = ({ recipeListAdder }) => {
                     </div>
                     <div className='vac-upgrade-requirements-box'>
                         <h2>Requirements</h2>
-                        {(selectedWarp === null) ? '' : (<>{console.log(warpGadgets[selectedWarp][1])}
-                            <img src={mediaFetcher(`${unlockRequirements[warpGadgets[selectedWarp][1]][1]}.png`)} alt={selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]} />
-                            <p>{selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]}</p>
-                        </>)}
+                        {(selectedWarp === null) ? '' : (
+                            <>
+                                <img src={mediaFetcher(`${unlockRequirements[warpGadgets[selectedWarp][1]][1]}.png`)} alt={selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]} />
+                                <p>{selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]}</p>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
