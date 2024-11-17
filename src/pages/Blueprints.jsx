@@ -1,8 +1,9 @@
 import { useState } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
 import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
-import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, warpGadgets, warpNames } from '../text/blueprints';
+import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, warpDescriptions, warpGadgets, warpNames } from '../text/blueprints';
 import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
@@ -12,6 +13,7 @@ import buck from '/src/assets/misc/buck.png';
 import shopImg from '/src/assets/misc/shop.png';
 import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
+import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
 
 const UpgradeItemList = ({
@@ -44,9 +46,10 @@ const UpgradeItemList = ({
     };
 
     return (
-        <div
+        <NavLink
             className={'vac-upgrade-item' + (selected === upgradePack[0] ? ' selected' : '')}
             key={upgradePack[0]}
+            to={`/blueprints/upgrades/${upgradePack[0]}`}
         >
             <div
                 className='vac-upgrade-pack'
@@ -66,7 +69,7 @@ const UpgradeItemList = ({
                     onClick={upgrade}
                 ><Down /></div>
             </div>
-        </div>
+        </NavLink>
     );
 
 };
@@ -77,8 +80,8 @@ UpgradeItemList.propTypes = {
     selectedCallback: PropTypes.func.isRequired
 };
 
-const UpgradesPage = ({ recipeListAdder }) => {
-    const [selectedUpgrade, setSelectedUpgrade] = useState(null);
+const UpgradesPage = ({ recipeListAdder, blueprint }) => {
+    const [selectedUpgrade, setSelectedUpgrade] = useState(blueprint || null);
     const [selectedTier, setSelectedTier] = useState(1);
     const upgradeSelection = (upgrade, tier) => {
         if (upgrade === selectedUpgrade && tier === selectedTier) {
@@ -90,11 +93,6 @@ const UpgradesPage = ({ recipeListAdder }) => {
             setSelectedUpgrade(upgrade);
         }
     }
-
-    UpgradesPage.propTypes = {
-        recipeListAdder: PropTypes.func.isRequired
-    };
-
 
     return (
         <>
@@ -166,6 +164,11 @@ const UpgradesPage = ({ recipeListAdder }) => {
     );
 };
 
+UpgradesPage.propTypes = {
+    recipeListAdder: PropTypes.func.isRequired,
+    blueprint: PropTypes.string
+};
+
 const UtilitiesPage = () => {
     (
         <div>
@@ -175,74 +178,62 @@ const UtilitiesPage = () => {
     );
 };
 
-const WarpPage = ({ recipeListAdder }) => {
-    const [selectedWarp, setSelectedWarp] = useState(null);
+const WarpPage = ({ recipeListAdder, blueprint }) => {
     return (
         <>
-            <div className='warp-list'>
+            <div className='blueprint-list'>
                 {warpNames.map((warpName) => (
-                    <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} action={setSelectedWarp(warpName)} />
+                    <NavLink key={warpName} to={`/blueprints/warp/${warpName}`} className='warp-item'>
+                        <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} tilting='none' />
+                    </NavLink>
                 ))}
             </div>
-            <div className='warp-info'>
-                <div className='vac-upgrade-info'>
-                    <div className='vac-upgrade-title-box'>
-                        <img src={selectedWarp === null ? upgradeImg : mediaFetcher(`gadgets/${selectedWarp}.png`)} alt={selectedWarp === null ? '' : warpGadgets[selectedWarp][0]} />
-                        <h1>{selectedWarp === null ? 'Select an upgrade' : warpGadgets[selectedWarp][0]}</h1>
-                        <h3>{selectedWarp === null ? 'Select an upgrade to view its details' : warpGadgets[selectedWarp]}</h3>
-                    </div>
-                    <div className='vac-upgrade-recipe-box'>
-                        <h2>Recipe</h2>
-                        <div className='vac-upgrade-recipe-list'>
-                            {selectedWarp !== null && (
-                                <>
-                                    <div
-                                        onClick={() => recipeListAdder(warpGadgets[selectedWarp][3])}
-                                    >
-                                        add items
+            <div className='blueprint-infos'>
+                <div className='vac-upgrade-title-box'>
+                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? '' : warpGadgets[blueprint][0]} />
+                    <h1>{blueprint === null ? 'Select a blueprint' : warpGadgets[blueprint][0]}</h1>
+                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : warpDescriptions[blueprint]}</h3>
+                </div>
+                <div className='vac-upgrade-recipe-box'>
+                    <h2>Recipe</h2>
+                    <div className='vac-upgrade-recipe-list'>
+                        {blueprint !== null && (
+                            <>
+                                <div onClick={() => recipeListAdder(warpGadgets[blueprint][3])}>
+                                    add items
+                                </div>
+                                <div>
+                                    <img src={buck} alt='Newbucks' title='Newbucks' />
+                                    <p>Newbucks: </p>
+                                    <h3>{warpGadgets[blueprint][2]}</h3>
+                                </div>
+                                {Object.keys(warpGadgets[blueprint][3]).map((ingredient) => (
+                                    <div key={ingredient}>{console.log(ingredient)}
+                                        <img src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)} alt={recipeElements[ingredient][0]} title={recipeElements[ingredient][0]} />
+                                        <p>{recipeElements[ingredient][0]}: </p>{console.log(warpGadgets[blueprint][3][ingredient])}
+                                        <h3>{warpGadgets[blueprint][3][ingredient]}</h3>
                                     </div>
-                                    <div>
-                                        <img
-                                            src={buck}
-                                            alt='Newbucks'
-                                            title='Newbucks'
-                                        />
-                                        <p>Newbucks: </p>
-                                        <h3>{warpGadgets[selectedWarp][2]}</h3>
-                                    </div>
-                                    {Object.keys(warpGadgets[selectedWarp][3]).map((ingredient) => (
-                                        <div key={ingredient}>
-                                            <img
-                                                src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
-                                                alt={recipeElements[ingredient][0]}
-                                                title={recipeElements[ingredient][0]}
-                                            />
-                                            <p>{recipeElements[ingredient][0]}: </p>
-                                            <h3>{warpGadgets[selectedWarp][3][ingredient]}</h3>
-                                        </div>
-                                    ))}
-                                </>
-                            )}
-                        </div>
-                    </div>
-                    <div className='vac-upgrade-effect-box'>
-
-                    </div>
-                    <div className='vac-upgrade-requirements-box'>
-                        <h2>Requirements</h2>
-                        {(selectedWarp === null) ? '' : (<>{console.log(warpGadgets[selectedWarp][1])}
-                            <img src={mediaFetcher(`${unlockRequirements[warpGadgets[selectedWarp][1]][1]}.png`)} alt={selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]} />
-                            <p>{selectedWarp === null ? '' : unlockRequirements[warpGadgets[selectedWarp][1]][0]}</p>
-                        </>)}
+                                ))}
+                            </>
+                        )}
                     </div>
                 </div>
-            </div>
+                <div className='vac-upgrade-requirements-box'>
+                    <h2>Requirements</h2>
+                    {blueprint !== null && (
+                        <>
+                            <img src={mediaFetcher(`${unlockRequirements[warpGadgets[blueprint][1]][1]}.png`)} alt={unlockRequirements[warpGadgets[blueprint][1]][0]} />
+                            <p>{unlockRequirements[warpGadgets[blueprint][1]][0]}</p>
+                        </>
+                    )}
+                </div>            </div>
         </>
     );
 };
 
 WarpPage.propTypes = {
-    recipeListAdder: PropTypes.func.isRequired
+    recipeListAdder: PropTypes.func.isRequired,
+    blueprint: PropTypes.string
 };
 
 const DecorationsPage = () => {
@@ -254,12 +245,10 @@ const DecorationsPage = () => {
 };
 
 export const Blueprints = () => {
-    const [selectedTab, setSelectedTab] = useState('upgrades');
-    const changeTab = (tab) => {
-        if (tab !== selectedTab) {
-            setSelectedTab(tab);
-        }
-    };
+    const { tab: tabName, blueprint: blueprintName } = useParams();
+    const tab = tabName || 'upgrades';
+    const blueprint = blueprintName || null;
+
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     const [recipeList, setRecipeList] = useState({});
     const addToRecipeList = (items) => {
@@ -276,13 +265,13 @@ export const Blueprints = () => {
     };
 
     const renderPage = () => {
-        switch (selectedTab) {
+        switch (tab) {
             case 'upgrades':
-                return <UpgradesPage recipeListAdder={addToRecipeList} />;
+                return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             case 'utilities':
                 return <UtilitiesPage />;
             case 'warp':
-                return <WarpPage recipeListAdder={addToRecipeList} />;
+                return <WarpPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             case 'decorations':
                 return <DecorationsPage />;
             default:
@@ -294,22 +283,22 @@ export const Blueprints = () => {
         <>
             <div>
                 <div className='blueprints-category'>
-                    <div className={'blueprints-tab' + (selectedTab === 'upgrades' ? ' selected' : '')} onClick={() => changeTab('upgrades')}>
+                    <NavLink to='/blueprints/upgrades' className={'blueprints-tab' + (tab === 'upgrades' ? ' selected' : '')}>
                         <img src={upgradeImg} alt="Upgrade Icon" />
                         <h1>Upgrades</h1>
-                    </div>
-                    <div className={'blueprints-tab' + (selectedTab === 'utilities' ? ' selected' : '')} onClick={() => changeTab('utilities')}>
+                    </NavLink>
+                    <NavLink to='/blueprints/utilities' className={'blueprints-tab' + (tab === 'utilities' ? ' selected' : '')}>
                         <img src={utilitiesImg} alt="Utilities" />
                         <h1>Utilities</h1>
-                    </div>
-                    <div className={'blueprints-tab' + (selectedTab === 'warp' ? ' selected' : '')} onClick={() => changeTab('warp')}>
+                    </NavLink>
+                    <NavLink to='/blueprints/warp' className={'blueprints-tab' + (tab === 'warp' ? ' selected' : '')}>
                         <img src={warpImg} alt="Warp Tech" />
                         <h1>Warp Tech</h1>
-                    </div>
-                    <div className={'blueprints-tab' + (selectedTab === 'decorations' ? ' selected' : '')} onClick={() => changeTab('decorations')}>
+                    </NavLink>
+                    <NavLink to='/blueprints/decorations' className={'blueprints-tab' + (tab === 'decorations' ? ' selected' : '')}>
                         <img src={decorationsImg} alt="Decorations" />
                         <h1>Decorations</h1>
-                    </div>
+                    </NavLink>
                 </div>
                 {renderPage()}
             </div>
