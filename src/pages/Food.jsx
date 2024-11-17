@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular } from '../text/food.js';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesNames } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
 import { slimesList } from '../text/slimes.js';
 import { mediaFetcher } from '../media-manager.js';
@@ -54,7 +54,7 @@ FoodTabs.propTypes = {
 };
 
 const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
-    <div className='list-food' style={{ borderRadius: (filter === 'any' ? '0' : '20px') + ' 20px 20px 20px' }}>
+    <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : '20px'} ${filter === 'special' ? ' 0 ' : '20px'} 20px 20px` }}>
         {actualFoodList.map((foodId) => (
             <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
                 <NavButton
@@ -97,7 +97,7 @@ const FoodDetails = ({ food, topBtn, setFilter }) => {
                 </div>
             </div>
             <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}>
-                <img src={mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
+                <img src={foodList[food][1] === 'none' ? noneImg : mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
                 <div>
                     <h3>Food type</h3>
                     <h4>{foodSingular[foodList[food][1]]}</h4>
@@ -155,8 +155,17 @@ FoodDescription.propTypes = {
 
 export const Food = () => {
     const { food: foodName } = useParams();
-    const food = foodName || 'carrot';
     const [filter, setFilter] = useState('any');
+    const [food, setFood] = useState('carrot');
+
+    useEffect(() => {
+        if (foodName in foodTypesNames) {
+            setFood(foodTypesNames[foodName][1]);
+            setFilter(foodTypesNames[foodName][0]);
+        } else {
+            setFood(foodName || 'carrot');
+        }
+    }, [foodName]);
 
     const [topBtn, setTopBtn] = useState(false);
     useState(() => setTopBtn(false), [food]);
@@ -199,7 +208,7 @@ export const Food = () => {
             <div className='food-container box-layout-secondary'>
                 <FoodDetails food={food} topBtn={topBtn} setFilter={setFilter} />
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={arrow} alt='arrow' />
+                    <img src={arrow} alt='Arrow' />
                 </div>
                 <FoodDescription food={food} topBtn={topBtn} />
             </div>

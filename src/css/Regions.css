@@ -43,20 +43,18 @@
     gap: 10px;
 }
 
-.regions-list.not-rounded {
-    border-top-left-radius: 0;
-}
-
-.regions-tab-selector {
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 20px;
+.regions-tabs {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0;
+    width: 100%;
 }
 
 .regions-list {
     flex: 1;
     background-color: var(--menu-color-1);
-    border-radius: 20px;
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto;

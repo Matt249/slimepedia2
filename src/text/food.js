@@ -8,6 +8,7 @@ export const foodNames = [
     'mango',
     'granite',
     'pear',
+
     'hen',
     'henStony',
     'henSea',
@@ -17,6 +18,12 @@ export const foodNames = [
     'rooster',
     'henElder',
     'roosterElder',
+    'chick',
+    'chickBriar',
+    'chickCluck',
+    'chickPainted',
+    'chickSea',
+    'chickStony',
     'ash',
     'nectar',
     'water'
@@ -34,13 +41,22 @@ export const foodTypes = {
     'none': "None"
 };
 
+export const foodTypesNames = {
+    'food': ['any', 'carrot'],
+    'meat': ['meat', 'hen'],
+    'fruits': ['fruits', 'pogo'],
+    'veggies': ['veggies', 'carrot'],
+    'honey': ['special', 'nectar'],
+}
+
 export const foodSingular = {
     'meat': "Meat",
     'fruits': "Fruit",
     'veggies': "Veggie",
     'water': "Water",
     'ash': "Ash",
-    'nectar': "Nectar"
+    'nectar': "Nectar",
+    'none': "None"
 }
 
 export const foodList = {
@@ -56,11 +72,11 @@ export const foodList = {
     'granite': ["Pomegranite", 'fruits', ['ss', 'ev']],
     'pear': ["Prickle Pear", 'fruits', ['ev']],
     'chick': ['Chickadoo', 'none', ['rf', 'ss', 'ev', 'pb']],
-    'chickBriar': ['Briar Chickadoo', 'none', ['ev']],
-    'chickCluck': ['Thundercluck Chickadoo', 'none', ['pb']],
-    'chickPainted': ['Painted Chickadoo', 'none', ['ss']],
-    'chickSea': ['Sea Chickadoo', 'none', ['ss', 'ev']],
-    'chickStony': ['Stony Chickadoo', 'none', ['rf', 'ev']],
+    'chickBriar': ['Briar Chick', 'none', ['ev']],
+    'chickCluck': ['Thundercluck Chick', 'none', ['pb']],
+    'chickPainted': ['Painted Chick', 'none', ['ss']],
+    'chickSea': ['Sea Chick', 'none', ['ss', 'ev']],
+    'chickStony': ['Stony Chick', 'none', ['rf', 'ev']],
     'hen': ['Hen Hen', 'meat', ['gu', 'rf', 'ss', 'ev', 'pb']],
     'henStony': ["Stony Hen", 'meat', ['rf', 'ev']],
     'henSea': ["Sea Hen", 'meat', ['ss', 'ev']],
@@ -86,6 +102,12 @@ export const foodDescription = {
     'mango': 'Intensely sweet with a cool, minty finish.',
     'granite': 'Rich in minerals!',
     'pear': 'This is a fruit that knows how to fight back.',
+    'chick': 'So little and soft you\'d think they\'re filled with marshmallow.',
+    'chickBriar': 'A breed of chick that\'s totally bush-league.',
+    'chickCluck': 'The king of chickens has to start somewhere.',
+    'chickPainted': 'A tiny chick that\'s hiding a bounty of colorful potential.',
+    'chickSea': 'Equal parts salt and fluff.',
+    'chickStony': 'This little chick had quite a hard upbringing.',
     'hen': 'A hearty chicken bred to be twice as tasty as its cousin on Earth.',
     'henStony': 'Has a rock solid conviction... in chicken stuff.',
     'henBriar': 'A real wild bird that loves to ramble in the bramble.',
@@ -134,6 +156,30 @@ export const foodpedia = {
     'granite': [
         "The pomegranite is as mysterious as it is ancient. A fruit that grows only in the dark caves beneath the earth, it grows without sunlight, without warmth. It should not be, and yet, it is. A living paradox? Or a symbol of nature's resilience, of the ability for life to thrive even in the unlikeliest of spaces? Pretty deep stuff.",
         "Deposit a pomegranite into a garden's depositor and you'll grow a large pomegranite tree of your own."
+    ],
+    'chick': [
+        "Chickadoos of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones. Chicks are baby chickens that will eventually grow into a hen hen or more rarely, a roostro.",
+        "Keep chickadoos in a safe place and they'll eventually grow into a Hen Hen or Roostro."
+    ],
+    'chickBriar': [
+        "Briar chickadoos are baby chickens that will eventually grow into a briar hen or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
+        "Keep Briar Chicks in a safe place and they'll eventually grow into a Briar Hen or Roostro."
+    ],
+    'chickCluck': [
+        "Thunder chickadoos are baby chickens that will eventually grow into a thundercluck or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
+        "Keep thunder chickadoos in a safe place and they'll eventually grow into a thundercluck or Roostro."
+    ],
+    'chickPainted': [
+        "Painted chickadoos are baby chickens that will eventually grow into a painted hen or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
+        "Keep Painted chickadoos in a safe place and they'll eventually grow into a Painted Hen or a Roostro. "
+    ],
+    'chickSea': [
+        "Chickadoos of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones. Sea chickadoos are baby chickens that will eventually grow into a sea hen or more rarely, a roostro.",
+        " Keep sea chickadoos in a safe place and they'll eventually grow into a sea hen or roostro. "
+    ],
+    'chickStony': [
+        "Stony chickadoos are baby chickens that will eventually grow into a stony hen or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones. ",
+        "Keep Stony Chicks in a safe place and they'll eventually grow into a Stony Hen or a Roostro."
     ],
     'hen': [
         "Hen Hens are a special breed of chicken bred to survive the climate of the Far, Far Range. While appearing more or less like a big chicken, these burly birds are much more adept at fending for themselves, making them ideal for ranchers who might otherwise be distracted by a few hundred hungry slimes.",

@@ -18,7 +18,6 @@ export const Buildings = () => {
     const { building, upgrade } = useParams();
     const activeBuilding = building ? building : defaultBuilding;
     const currentUpgrade = upgrade ? upgrade : null;
-    console.log(activeBuilding, currentUpgrade);
     const buildingsButtons = () => {
         return buildingNames.map((building) => {
             return (
@@ -106,7 +105,7 @@ export const Buildings = () => {
                 <div className='building-title'>
                     <h1>{buildingList[activeBuilding][0]}</h1>
                     <h2>{buildingList[activeBuilding][1]}</h2>
-                    <img className='building-image' src={mediaFetcher(`buildings/${activeBuilding}.png`)} alt='Corral' />
+                    <img className='building-image' src={mediaFetcher(`buildings/${activeBuilding}.png`)} alt={buildingList[activeBuilding][0]} />
                 </div>
                 <div className='upgrade-list'>
                     <div>

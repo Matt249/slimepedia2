@@ -45,7 +45,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     </div>
                 </div>
                 :
-                <NavLink to={`/food/${currentSlimeList[2]}`} style={{ textDecoration: 'none' }}>
+                <NavLink to={`/food/${currentSlimeList[1]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-food link-to-food'>
                         <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
                         <div>
