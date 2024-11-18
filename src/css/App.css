@@ -4,6 +4,7 @@
   --item-color: #D2B394;
   --text-color: #000;
   --background-color: var(--menu-color-0);
+  --text-shadow: 0px 0px 5px #000;
 }
 
 body {
@@ -45,7 +46,7 @@ body {
   transition: height .5s;
 }
 
-.slimepedia-app>div:not(.pin-list) {
+.slimepedia-app>div:not(.pin-button) {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

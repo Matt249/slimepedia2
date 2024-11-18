@@ -1,20 +1,69 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
 import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
-import { recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, warpDescriptions, warpGadgets, warpNames } from '../text/blueprints';
+import { decorationsDescription, decorationsList, decorationsNames, recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription, utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames } from '../text/blueprints';
 import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
 import warpImg from '/src/assets/misc/warp.png';
 import decorationsImg from '/src/assets/misc/decorations.png';
-import buck from '/src/assets/misc/buck.png';
 import shopImg from '/src/assets/misc/shop.png';
 import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
+
+const ConstructionList = ({ recipe: pattern, recipeListAdder, hideQtty = false }) => {
+    const [quantity, setQuantity] = useState(1);
+    const increaseQuantity = () => setQuantity(prevQtty => prevQtty + (prevQtty < 99 ? 1 : 0));
+    const decreaseQuantity = () => setQuantity(prevQtty => prevQtty - (prevQtty > 1 ? 1 : 0));
+    const [recipe, setRecipe] = useState({});
+
+    useEffect(() => {
+        const newRecipe = {};
+        for (let element in pattern)
+            newRecipe[element] = pattern[element] * quantity;
+        setRecipe(newRecipe);
+    }, [pattern, quantity]);
+
+    return (
+        <div className='recipe-list'>
+            {recipe !== null && (
+                <>
+                    {!hideQtty &&
+                        <div className='quantity-selector'>
+                            <Down onClick={() => decreaseQuantity()} />
+                            <div></div>
+                            <h2 onClick={() => recipeListAdder(recipe)}>{quantity}</h2>
+                            <img src={crossImg} alt='Add to the list' onClick={() => recipeListAdder(recipe)} />
+                            <div></div>
+                            <Down onClick={() => increaseQuantity()} />
+                        </div>
+                    }
+                    {Object.keys(recipe).map((ingredient) => (
+                        <div key={ingredient}>
+                            <img
+                                src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
+                                alt={recipeElements[ingredient][0]}
+                                title={recipeElements[ingredient][0]}
+                            />
+                            <p>{recipeElements[ingredient][0]}: </p>
+                            <h3>{recipe[ingredient]}</h3>
+                        </div>
+                    ))}
+                </>
+            )}
+        </div>
+    );
+};
+
+ConstructionList.propTypes = {
+    recipe: PropTypes.object.isRequired,
+    recipeListAdder: PropTypes.func.isRequired,
+    hideQtty: PropTypes.bool
+};
 
 const UpgradeItemList = ({
     selected = false,
@@ -113,37 +162,7 @@ const UpgradesPage = ({ recipeListAdder, blueprint }) => {
                 </div>
                 <div className='vac-upgrade-recipe-box'>
                     <h2>Recipe</h2>
-                    <div className='vac-upgrade-recipe-list'>
-                        {selectedUpgrade !== null && (
-                            <>
-                                <div
-                                    onClick={() => recipeListAdder(upgradesList[selectedUpgrade + selectedTier][3])}
-                                >
-                                    add items
-                                </div>
-                                <div>
-                                    <img
-                                        src={buck}
-                                        alt='Newbucks'
-                                        title='Newbucks'
-                                    />
-                                    <p>Newbucks: </p>
-                                    <h3>{upgradesList[selectedUpgrade + selectedTier][2]}</h3>
-                                </div>
-                                {Object.keys(upgradesList[selectedUpgrade + selectedTier][3]).map((ingredient) => (
-                                    <div key={ingredient}>
-                                        <img
-                                            src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
-                                            alt={recipeElements[ingredient][0]}
-                                            title={recipeElements[ingredient][0]}
-                                        />
-                                        <p>{recipeElements[ingredient][0]}: </p>
-                                        <h3>{upgradesList[selectedUpgrade + selectedTier][3][ingredient]}</h3>
-                                    </div>
-                                ))}
-                            </>
-                        )}
-                    </div>
+                    {(selectedUpgrade !== null && selectedTier !== null) && <ConstructionList recipe={upgradesList[selectedUpgrade + selectedTier][2]} recipeListAdder={recipeListAdder} />}
                 </div>
                 <div className='vac-upgrade-effect-box'>
                     <img src={selectedUpgrade === null ? '' : mediaFetcher(`${upgradeEffects[selectedUpgrade + selectedTier][0][0]}.png`)} alt={selectedUpgrade === null ? '' : upgradesList[selectedUpgrade + selectedTier][0]} />
@@ -169,16 +188,46 @@ UpgradesPage.propTypes = {
     blueprint: PropTypes.string
 };
 
-const UtilitiesPage = () => {
-    (
-        <div>
-            <h1>Utilites Page</h1>
-        </div>
-
-    );
+const UtilitiesPage = ({ recipeListAdder, blueprint = null }) => {
+    return (
+        <>
+            <div className='blueprint-list'>
+                {utilitiesNames.map((utilitiesNames) => (
+                    <NavLink key={utilitiesNames} to={`/blueprints/utilities/${utilitiesNames}`} className='warp-item'>
+                        <NavButton key={utilitiesNames} name={utilitiesList[utilitiesNames][0]} icon={`gadgets/${utilitiesNames}`} tilting='none' />
+                    </NavLink>
+                ))}
+            </div>
+            <div className='blueprint-infos'>
+                <div className='vac-upgrade-title-box'>{console.log(blueprint)}
+                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? '' : utilitiesList[blueprint][0]} />
+                    <h1>{blueprint === null ? 'Select a blueprint' : utilitiesList[blueprint][0]}</h1>
+                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : utilitiesDescription[blueprint]}</h3>
+                </div>
+                <div className='vac-upgrade-recipe-box'>
+                    <h2>Recipe</h2>
+                    {blueprint !== null && <ConstructionList recipe={utilitiesList[blueprint][2]} recipeListAdder={recipeListAdder} hideQtty={false} />}
+                </div>
+                <div className='vac-upgrade-requirements-box'>
+                    <h2>Requirements</h2>
+                    {blueprint !== null && (
+                        <>
+                            <img src={mediaFetcher(`${unlockRequirements[utilitiesList[blueprint][1]][1]}.png`)} alt={unlockRequirements[utilitiesList[blueprint][1]][0]} />
+                            <p>{unlockRequirements[utilitiesList[blueprint][1]][0]}</p>
+                        </>
+                    )}
+                </div>
+            </div>
+        </>
+    )
 };
 
-const WarpPage = ({ recipeListAdder, blueprint }) => {
+UtilitiesPage.propTypes = {
+    recipeListAdder: PropTypes.func.isRequired,
+    blueprint: PropTypes.string
+};
+
+const WarpPage = ({ recipeListAdder, blueprint = null }) => {
     return (
         <>
             <div className='blueprint-list'>
@@ -196,27 +245,7 @@ const WarpPage = ({ recipeListAdder, blueprint }) => {
                 </div>
                 <div className='vac-upgrade-recipe-box'>
                     <h2>Recipe</h2>
-                    <div className='vac-upgrade-recipe-list'>
-                        {blueprint !== null && (
-                            <>
-                                <div onClick={() => recipeListAdder(warpGadgets[blueprint][3])}>
-                                    add items
-                                </div>
-                                <div>
-                                    <img src={buck} alt='Newbucks' title='Newbucks' />
-                                    <p>Newbucks: </p>
-                                    <h3>{warpGadgets[blueprint][2]}</h3>
-                                </div>
-                                {Object.keys(warpGadgets[blueprint][3]).map((ingredient) => (
-                                    <div key={ingredient}>{console.log(ingredient)}
-                                        <img src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)} alt={recipeElements[ingredient][0]} title={recipeElements[ingredient][0]} />
-                                        <p>{recipeElements[ingredient][0]}: </p>{console.log(warpGadgets[blueprint][3][ingredient])}
-                                        <h3>{warpGadgets[blueprint][3][ingredient]}</h3>
-                                    </div>
-                                ))}
-                            </>
-                        )}
-                    </div>
+                    {blueprint !== null && <ConstructionList recipe={warpGadgets[blueprint][2]} recipeListAdder={recipeListAdder} hideQtty={false} />}
                 </div>
                 <div className='vac-upgrade-requirements-box'>
                     <h2>Requirements</h2>
@@ -226,7 +255,8 @@ const WarpPage = ({ recipeListAdder, blueprint }) => {
                             <p>{unlockRequirements[warpGadgets[blueprint][1]][0]}</p>
                         </>
                     )}
-                </div>            </div>
+                </div>
+            </div>
         </>
     );
 };
@@ -236,21 +266,88 @@ WarpPage.propTypes = {
     blueprint: PropTypes.string
 };
 
-const DecorationsPage = () => {
+const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
     return (
-        <div>
-            <h1>Decorations Page</h1>
-        </div>
+        <>
+            <div className='blueprint-list'>
+                {decorationsNames.map((decoName) => (
+                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
+                        <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' />
+                    </NavLink>
+                ))}
+            </div>
+            <div className='blueprint-infos'>
+                <div className='vac-upgrade-title-box'>{console.log(blueprint)}
+                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`deco/${blueprint}.png`)} alt={blueprint === null ? '' : decorationsList[blueprint][0]} />
+                    <h1>{blueprint === null ? 'Select a blueprint' : decorationsList[blueprint][0]}</h1>
+                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : decorationsDescription[blueprint]}</h3>
+                </div>
+                <div className='vac-upgrade-recipe-box'>
+                    <h2>Recipe</h2>
+                    {blueprint !== null && <ConstructionList recipe={decorationsList[blueprint][2]} recipeListAdder={recipeListAdder} hideQtty={false} />}
+                </div>
+                <div className='vac-upgrade-requirements-box'>
+                    <h2>Requirements</h2>
+                    {blueprint !== null && (
+                        <>
+                            <img src={mediaFetcher(`${unlockRequirements[decorationsList[blueprint][1]][1]}.png`)} alt={unlockRequirements[decorationsList[blueprint][1]][0]} />
+                            <p>{unlockRequirements[decorationsList[blueprint][1]][0]}</p>
+                        </>
+                    )}
+                </div>
+            </div>
+        </>
     );
 };
 
+DecorationsPage.propTypes = {
+    recipeListAdder: PropTypes.func.isRequired,
+    blueprint: PropTypes.string
+};
+
+const RecipeMenu = ({ recipeList, resetList }) => {
+    const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
+    return (
+        <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
+            <img src={shopImg} alt='Shop icon' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+            <div className='pin-header'>
+                <img src={shopImg} alt='Shop icon' />
+                <h1>Recipes Ingredients List</h1>
+                <img src={trashImg} alt='Clear the list' onClick={() => resetList()} />
+                <img src={crossImg} alt='Close' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+            </div>
+            <div className='pin-item-list'>
+                {Object.keys(recipeList).map((item) => (
+                    <div
+                        key={item}
+                        className='pin-item-element'
+                    >
+                        <img
+                            src={mediaFetcher(`${recipeElements[item][1]}.png`)}
+                            alt={recipeElements[item][0]}
+                            title={recipeElements[item][0]}
+                        />
+                        <p>{recipeElements[item][0]}: </p>
+                        <h3>{recipeList[item]}</h3>
+                    </div>))}
+            </div>
+        </div>
+    )
+};
+
+RecipeMenu.propTypes = {
+    recipeList: PropTypes.object.isRequired,
+    resetList: PropTypes.func.isRequired
+};
+
 export const Blueprints = () => {
-    const { tab: tabName, blueprint: blueprintName } = useParams();
+    const { tab: tabName, blueprint: blueprintName, tier: tierName } = useParams();
     const tab = tabName || 'upgrades';
     const blueprint = blueprintName || null;
+    const tier = tierName || null;
 
-    const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     const [recipeList, setRecipeList] = useState({});
+    const resetList = () => setRecipeList({});
     const addToRecipeList = (items) => {
         setRecipeList(prevList => {
             const newList = { ...prevList };
@@ -267,13 +364,13 @@ export const Blueprints = () => {
     const renderPage = () => {
         switch (tab) {
             case 'upgrades':
-                return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
+                return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} tier={tier} />;
             case 'utilities':
-                return <UtilitiesPage />;
+                return <UtilitiesPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             case 'warp':
                 return <WarpPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             case 'decorations':
-                return <DecorationsPage />;
+                return <DecorationsPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             default:
                 return <></>;
         }
@@ -302,31 +399,7 @@ export const Blueprints = () => {
                 </div>
                 {renderPage()}
             </div>
-            <div className='pin-list'>
-                <img src={shopImg} alt='Shop icon' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
-                <div className={'pin-list-recipe' + (recipeMenuToggle ? '' : ' disabled')}>
-                    <div className='pin-header'>
-                        <h1>Recipes Ingredients List</h1>
-                        <img src={trashImg} alt='Clear' onClick={() => setRecipeList({})} />
-                        <img src={crossImg} alt='Close' onClick={() => setRecipeMenuToggle(false)} />
-                    </div>
-                    <div className='pin-item-list'>
-                        {Object.keys(recipeList).map((item) => (
-                            <div
-                                key={item}
-                                className='pin-item-element'
-                            >
-                                <img
-                                    src={mediaFetcher(`${recipeElements[item][1]}.png`)}
-                                    alt={recipeElements[item][0]}
-                                    title={recipeElements[item][0]}
-                                />
-                                <p>{recipeElements[item][0]}: </p>
-                                <h3>{recipeList[item]}</h3>
-                            </div>))}
-                    </div>
-                </div>
-            </div>
+            <RecipeMenu recipeList={recipeList} resetList={resetList} />
         </>
     );
 };

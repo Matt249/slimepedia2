@@ -31,6 +31,7 @@ export default function index() {
                 <Route path="/blueprints" element={<Blueprints />} />
                 <Route path="/blueprints/:tab" element={<Blueprints />} />
                 <Route path="/blueprints/:tab/:blueprint" element={<Blueprints />} />
+                <Route path="/blueprints/:tab/:blueprint/:tier" element={<Blueprints />} />
                 <Route path="/buildings" element={<Buildings />} />
                 <Route path="/buildings/:building" element={<Buildings />} />
                 <Route path="/buildings/:building/:upgrade" element={<Buildings />} />
