@@ -41,7 +41,7 @@ export const recipeElements = {
     'sureshotModule': ['Sureshot Module', 'upgrades/sureshotModule', ''],
     'droneKey': ['Drone Key', 'upgrades/droneKey', ''],
     'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', '']
-}
+};
 
 export const unlockRequirements = {
     'start': ['Available at the start', 'misc/check'],
@@ -52,7 +52,7 @@ export const unlockRequirements = {
     'ogden': ['Given by Ogden Ortiz', 'ranchers/ogden'],
     'bob': ['Given by Bob', 'ranchers/bob'],
     'thora': ['Given by Thora West', 'ranchers/thora'],
-}
+};
 
 export const upgradeNames = [
     'harvester',
@@ -67,7 +67,7 @@ export const upgradeNames = [
     'tankGuard',
     'droneKey',
     'sureshot'
-]
+];
 
 export const upgradePacks = {
     'harvester': ['Resource Harvester', 1],
@@ -82,7 +82,7 @@ export const upgradePacks = {
     'tankGuard': ['Tank Loss Prevention', 3],
     'droneKey': ['Drone Archive Key', 1],
     'sureshot': ['Golden Sureshot Modules', 3]
-}
+};
 
 export const upgradesList = {
     'harvester1': ['Resource Harvester', 'start', 450, { 'cotton': 10 }],
@@ -112,7 +112,7 @@ export const upgradesList = {
     'sureshot1': ['Golden Sureshot I', 'pod', 1500, { 'fire': 20, 'gold': 1, 'snowflake': 10, 'sunsap': 1, 'sureshotModule:': 1 }],
     'sureshot2': ['Golden Sureshot II', 'pod', 3000, { 'saber': 30, 'gold': 2, 'snowflake': 20, 'sunsap': 2, 'sureshotModule:': 1 }],
     'sureshot3': ['Golden Sureshot III', 'pod', 6000, { 'saber': 40, 'gold': 3, 'snowflake': 30, 'sunsap': 3, 'sureshotModule:': 1 }],
-}
+};
 
 export const upgradeDescriptions = {
     'harvester1': "Adds a resonator to the vac's suction mechanism that shakes loose science resources from nodes in the environment.",
@@ -142,7 +142,7 @@ export const upgradeDescriptions = {
     'sureshot1': "A special vacpack upgrade that hones in on gold slime weakpoints (their secret bellybutton?) and doubles the amount of gold plorts they produce when hit.",
     'sureshot2': "Upgrades the Sureshot's focusing lens, reducing the glare from those shiny, bright gold slimes. This triples the amount of plorts they produce when hit.",
     'sureshot3': "The ultimate in Sureshot technology, this upgrade quadruples the amount of gold plorts produced when hitting gold slimes."
-}
+};
 
 export const upgradeEffects = {
     'harvester1': [['misc/none', ''], ['upgrades/harvester', '+ Resource Harvester']],
@@ -172,7 +172,7 @@ export const upgradeEffects = {
     'sureshot1': [['slimes/gold', '1 Plorts per Gold Slime Fed'], ['slimes/gold', '2 Plorts per Gold Slime Fed']],
     'sureshot2': [['slimes/gold', '2 Plorts per Gold Slime Fed'], ['slimes/gold', '3 Plorts per Gold Slime Fed']],
     'sureshot3': [['slimes/gold', '3 Plorts per Gold Slime Fed'], ['slimes/gold', '4 Plorts per Gold Slime Fed']]
-}
+};
 
 export const warpNames = [
     "teleporthomegreen",
@@ -200,32 +200,32 @@ export const warpNames = [
 ];
 
 export const warpGadgets = {
-    'teleporthomegreen': ['Green Home Portal', 'viktor', 800, { 'angler': 20, 'radiant': 10, 'wax': 10, 'wildHoney': 5 }, null],
-    'teleporthomeblue': ['Blue Home Portal', 'viktor', 250, { 'rock': 10, 'radiant': 10, 'primordy': 5 }, null],
-    'teleporthomered': ['Red Home Portal', 'viktor', 800, { 'boom': 20, 'jelly': 10, 'primordy': 10, 'lava': 5 }, null],
-    'teleporthomeyellow': ['Yellow Home Portal', 'viktor', 250, { 'cotton': 10, 'jelly': 10, 'brine': 10 }, null],
-    'teleportev': ['Ember Valley Portal', 'pod', 1000, { 'fire': 20, 'crystal': 10, 'radiant': 10, 'primordy': 10, 'diamond': 1 }, null],
-    'teleportss': ['Starlight Strand Portal', 'pod', 1000, { 'hunter': 20, 'honey': 10, 'radiant': 10, 'wax': 10, 'diamond': 1 }, null],
-    'teleportpb': ['Powderfall Bluffs Portal', 'pod', 1000, { 'saber': 20, 'puddle': 5, 'radiant': 10, 'fossil': 10, 'diamond': 1 }, null],
-    'teleportblue': ['Blue Teleporter', 'viktor', 1200, { 'rock': 30, 'brine': 20, 'radiant': 20, 'honey': 10, 'diamond': 2 }, 'teleportblue'],
-    'teleportgrey': ['Grey Teleporter', 'viktor', 1200, { 'tabby': 30, 'wax': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }, 'teleportgrey'],
-    'teleportpink': ['Pink Teleporter', 'viktor', 1200, { 'pink': 30, 'jelly': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }, 'teleportpink'],
-    'teleportviolet': ['Violet Teleporter', 'viktor', 1200, { 'phosphor': 30, 'primordy': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }, 'teleportviolet'],
-    'teleportwhite': ['Snowy Teleporter', 'viktor', 1200, { 'saber': 30, 'fossil': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }, 'teleportwhite'],
-    'warpdepotblue': ['Blue Warp Depot', 'pod', 250, { 'rock': 20, 'wax': 10, 'radiant': 3, 'sand': 3 }, 'warpdepotblue'],
-    'warpdepotgrey': ['Grey Warp Depot', 'pod', 250, { 'tabby': 20, 'brine': 10, 'radiant': 5, 'lava': 3 }, 'warpdepotgrey'],
-    'warpdepotpink': ['Pink Warp Depot', 'pod', 250, { 'pink': 20, 'primordy': 10, 'radiant': 5, 'sand': 3 }, 'warpdepotpink'],
-    'warpdepotviolet': ['Violet Warp Depot', 'pod', 250, { 'batty': 20, 'jelly': 10, 'radiant': 5, 'wildHoney': 3 }, 'warpdepotviolet'],
-    'warpdepotwhite': ['Snowy Warp Depot', 'pod', 250, { 'saber': 20, 'snowflake': 10, 'radiant': 5, 'wildHoney': 3 }, 'warpdepotwhite'],
-    'marketlink': ['Market Link', 'mochi', 250, { 'pink': 20, 'wax': 10, 'primordy': 10, 'sand': 5 }, null],
-    'refinerylink': ['Refinery Link', 'mochi', 250, { 'phosphor': 10, 'jelly': 10, 'brine': 5 }, null],
-    'linkedcannonblue': ['Blue Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannonblueout'],
-    'linkedcannongrey': ['Grey Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannongreyout'],
-    'linkedcannonpink': ['Pink Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, 'linkedcannonpinkout'],
-    'linkedcannonblueout': ['Blue Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
-    'linkedcannongreyout': ['Grey Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
-    'linkedcannonpinkout': ['Pink Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }, undefined],
-}
+    'teleporthomegreen': ['Green Home Portal', 'viktor', 800, { 'angler': 20, 'radiant': 10, 'wax': 10, 'wildHoney': 5 }],
+    'teleporthomeblue': ['Blue Home Portal', 'viktor', 250, { 'rock': 10, 'radiant': 10, 'primordy': 5 }],
+    'teleporthomered': ['Red Home Portal', 'viktor', 800, { 'boom': 20, 'jelly': 10, 'primordy': 10, 'lava': 5 }],
+    'teleporthomeyellow': ['Yellow Home Portal', 'viktor', 250, { 'cotton': 10, 'jelly': 10, 'brine': 10 }],
+    'teleportev': ['Ember Valley Portal', 'pod', 1000, { 'fire': 20, 'crystal': 10, 'radiant': 10, 'primordy': 10, 'diamond': 1 }],
+    'teleportss': ['Starlight Strand Portal', 'pod', 1000, { 'hunter': 20, 'honey': 10, 'radiant': 10, 'wax': 10, 'diamond': 1 }],
+    'teleportpb': ['Powderfall Bluffs Portal', 'pod', 1000, { 'saber': 20, 'puddle': 5, 'radiant': 10, 'fossil': 10, 'diamond': 1 }],
+    'teleportblue': ['Blue Teleporter', 'viktor', 1200, { 'rock': 30, 'brine': 20, 'radiant': 20, 'honey': 10, 'diamond': 2 }],
+    'teleportgrey': ['Grey Teleporter', 'viktor', 1200, { 'tabby': 30, 'wax': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }],
+    'teleportpink': ['Pink Teleporter', 'viktor', 1200, { 'pink': 30, 'jelly': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }],
+    'teleportviolet': ['Violet Teleporter', 'viktor', 1200, { 'phosphor': 30, 'primordy': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }],
+    'teleportwhite': ['Snowy Teleporter', 'viktor', 1200, { 'saber': 30, 'fossil': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }],
+    'warpdepotblue': ['Blue Warp Depot', 'pod', 250, { 'rock': 20, 'wax': 10, 'radiant': 3, 'sand': 3 }],
+    'warpdepotgrey': ['Grey Warp Depot', 'pod', 250, { 'tabby': 20, 'brine': 10, 'radiant': 5, 'lava': 3 }],
+    'warpdepotpink': ['Pink Warp Depot', 'pod', 250, { 'pink': 20, 'primordy': 10, 'radiant': 5, 'sand': 3 }],
+    'warpdepotviolet': ['Violet Warp Depot', 'pod', 250, { 'batty': 20, 'jelly': 10, 'radiant': 5, 'wildHoney': 3 }],
+    'warpdepotwhite': ['Snowy Warp Depot', 'pod', 250, { 'saber': 20, 'snowflake': 10, 'radiant': 5, 'wildHoney': 3 }],
+    'marketlink': ['Market Link', 'mochi', 250, { 'pink': 20, 'wax': 10, 'primordy': 10, 'sand': 5 }],
+    'refinerylink': ['Refinery Link', 'mochi', 250, { 'phosphor': 10, 'jelly': 10, 'brine': 5 }],
+    'linkedcannonblue': ['Blue Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+    'linkedcannongrey': ['Grey Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+    'linkedcannonpink': ['Pink Linked Cannon', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+    'linkedcannonblueout': ['Blue Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+    'linkedcannongreyout': ['Grey Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+    'linkedcannonpinkout': ['Pink Linked Cannon Output', 'polestar', 1000, { 'batty': 10, 'mote': 3 }],
+};
 
 export const warpDescriptions = {
     'teleporthomegreen': "A teleporter that allows for one-way travel back to the Conservatory.",
@@ -250,4 +250,103 @@ export const warpDescriptions = {
     'linkedcannonblue': "Combining ancient warp technology and slime science allows the two sides of this linked cannon to efficiently transport items across distances.",
     'linkedcannongrey': "Combining ancient warp technology and slime science allows the two sides of this linked cannon to efficiently transport items across distances.",
     'linkedcannonpink': "Combining ancient warp technology and slime science allows the two sides of this linked cannon to efficiently transport items across distances.",
+};
+
+export const utilitiesNames = [
+    'medstation',
+    'dashpad',
+    'springpad',
+    'turret',
+    'superturret',
+    'shower',
+    'tamingbell',
+    'watertap',
+    'portablescareslime',
+    'novicesnare',
+    'advancedsnare',
+    'baitpogo',
+    'baitcarrot',
+    'baitchicken',
+    'slimestage',
+    'snowballmachine',
+    'fan',
+    'bumper',
+    'cannon',
+    'accelerator',
+    'goal',
+    'markerexcl',
+    'markerno',
+    'markerquestion',
+    'markerfruit',
+    'markerveggie',
+    'markermeat',
+    'markerresource',
+    'markermineral',
+    'markerhive'
+];
+
+export const utilitiesList = {
+    'medstation': ['Med Station', 'viktor', 100, { 'pink': 10, 'brine': 10, 'jelly': 5 }],
+    'dashpad': ['Dash Pad', 'pod', 500, { 'crystal': 10, 'angler': 10, 'lava': 5, 'sand': 5 }],
+    'springpad': ['Spring Pad', 'pod', 500, { 'cotton': 10, 'phosphor': 10, 'sand': 5, 'honey': 5 }],
+    'turret': ['Hydro Turret', 'pod', 250, { 'boom': 10, 'puddle': 5, 'brine': 5 }],
+    'superturret': ['Super Turret', 'ogden', 500, { 'boom': 30, 'puddle': 10, 'brine': 10, 'sand': 5 }],
+    'shower': ['Hydro Shower', 'pod', 500, { 'flutter': 40, 'puddle': 10, 'snowflake': 10, 'wildHoney': 5 }],
+    'tamingbell': ['Taming Bell', 'thora', 250, { 'flutter': 10, 'cotton': 10, 'primordy': 10, 'wildHoney': 5 }],
+    'watertap': ['Portable Water Tap', 'ogden', 250, { 'puddle': 10, 'angler': 10, 'brine': 10, 'radiant': 5 }],
+    'portablescareslime': ['Portable Scare Slime', 'ogden', 250, { 'batty': 30, 'ringtail': 10, 'jelly': 10, 'sand': 5 }],
+    'novicesnare': ['Novice Gordo Snare', 'pod', 250, { 'hunter': 10, 'primordy': 10, 'wax': 10, 'jelly': 10 }],
+    'advancedsnare': ['Advanced Gordo Snare', 'thora', 500, { 'hunter': 20, 'flutter': 10, 'radiant': 10, 'wildHoney': 5, 'lava': 5 }],
+    'baitpogo': ['Fruit Slime Bait', 'pod', 250, { 'phosphor': 20, 'batty': 10, 'honey': 10, 'wax': 10 }],
+    'baitcarrot': ['Veggie Slime Bait', 'pod', 250, { 'cotton': 20, 'rock': 10, 'crystal': 10, 'radiant': 10 }],
+    'baitchicken': ['Meat Slime Bait', 'pod', 250, { 'tabby': 20, 'boom': 10, 'hunter': 10, 'primordy': 10 }],
+    'slimestage': ['Slime Stage', 'pod', 500, { 'pink': 20, 'tabby': 10, 'wax': 10, 'lava': 5 }],
+    'snowballmachine': ['Snowball Machine', 'pod', 2000, { 'saber': 20, 'snowflake': 10, 'diamond': 1 }],
+    'fan': ['Easy Breezy Fan', 'pod', 500, { 'dervish': 10, 'rock': 5, 'brine': 3 }],
+    'bumper': ['Round Bumper', 'pod', 500, { 'pink': 10, 'saber': 10, 'primordy': 3 }],
+    'cannon': ['Stunt Cannon', 'pod', 1000, { 'boom': 20, 'fire': 5, 'lava': 3 }],
+    'accelerator': ['Accelerator', 'pod', 50, { 'ringtail': 1, 'brine': 1 }],
+    'goal': ['Slimeball Goal', 'polestar', 5000, { 'honey': 25, 'flutter': 25, 'sand': 3 }],
+    'markerexcl': ['Attention Flag', 'viktor', 50, { 'pink': 5, 'jelly': 5 }],
+    'markerno': ['Cautious Flag', 'viktor', 50, { 'pink': 5, 'fossil': 5 }],
+    'markerquestion': ['Curious Flag', 'viktor', 50, { 'pink': 5, 'fossil': 5 }],
+    'markerfruit': ['Fruit Flag', 'pod', 50, { 'pink': 5, 'jelly': 5 }],
+    'markerveggie': ['Veggie Flag', 'pod', 50, { 'pink': 5, 'jelly': 5 }],
+    'markermeat': ['Meat Flag', 'pod', 50, { 'pink': 5, 'jelly': 5 }],
+    'markerresource': ['Spout Resource Flag', 'polestar', 50, { 'pink': 5, 'jelly': 5 }],
+    'markermineral': ['Mineral Resource Flag', 'polestar', 50, { 'pink': 5, 'jelly': 5 }],
+    'markerhive': ['Hive Resource Flag', 'polestar', 50, { 'pink': 5, 'jelly': 5 }]
+};
+
+export const utilitiesDescriptions = {
+    'medstation': "Rapidly drains your energy to restore health. Fixes you up fast!",
+    'dashpad': "Allows you to briefly sprint with zero energy cost.",
+    'springpad': "Launches anything that touches it straight into the air!",
+    'turret': "A defensive cannon that will automatically target Tarr and blast them with water.",
+    'superturret': "An advanced defensive cannon that doubles the firepower against tarr.",
+    'shower': "This oversized sprinkler system is perfect panic button for dealing with large numbers of tarr.",
+    'tamingbell': "The dulcet tone of this curious bell will calm the anger of any feral slime that hears it.",
+    'watertap': "Creates a refreshing fresh water spring.",
+    'portablescareslime': "Used to keep slimes away from things on your ranch, or to just scare them because you're THAT person.",
+    'novicesnare': "A special snare that captures a gordo slime. Bait it with food and wait...",
+    'advancedsnare': "A more advanced gordo snare with less random results. Bait it with food and wait...",
+    'baitpogo': "This special slime bait can be used to harmlessly attract fruit-eating slimes.",
+    'baitcarrot': "This special slime bait can be used to harmlessly attract veggie-eating slimes.",
+    'baitchicken': "This special slime bait can be used to harmlessly attract meat-eating slimes.",
+    'slimestage': "Allows you to let other slimes know who is, unequivocally, the number one slime.",
+    'snowballmachine': "The everfrost cooling system in this device provides fresh and powdery snowballs year-round.",
+    'fan': "For most ranchers this fan is simply a great way to cool down on a hot day. But you're not most ranchers.",
+    'bumper': "A pinball-inspired bumper that bumps around any object you throw at it. See that? You're picturing a very silly setup with enough of these and slimes, and to that we say YES.",
+    'cannon': "This danger-defying cannon launches whatever is loaded into it through the air. Never get in yourself, unless you're wearing a slime as a safety helmet.",
+    'accelerator': "Any object shot through this ring will gain a boost of speed. It's rumored that too many accelerators bend time and space. Accelerate responsibly!",
+    'goal': "Challenge your vac skills and delight your slimes with this moving Slimeball goal! How high can you score?",
+    'markerexcl': "A useful marker for when you really need to call attention to something.",
+    'markerno': "A useful marker for when you need to remember to be cautious in an area.",
+    'markerquestion': "A useful marker to point you towards a nearby curiosity.",
+    'markerfruit': "A useful marker to call attention to any nearby fruit.",
+    'markerveggie': "A useful marker to call attention to any nearby veggies.",
+    'markermeat': "A useful marker to call attention to any nearby chicken nests.",
+    'markerresource': "A useful marker to call attention to any nearby spout resources.",
+    'markermineral': "A useful marker to call attention to any nearby mineral resources.",
+    'markerhive': "A useful marker to call attention to any nearby hive resources."
 }

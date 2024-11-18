@@ -24,6 +24,7 @@ export const initializeFolders = () => {
         slimes: createFolderObject(import.meta.glob('/src/assets/slimes/*', { eager: true, query: '?url', import: 'default' })),
         toys: createFolderObject(import.meta.glob('/src/assets/toys/*', { eager: true, query: '?url', import: 'default' })),
         upgrades: createFolderObject(import.meta.glob('/src/assets/upgrades/*', { eager: true, query: '?url', import: 'default' })),
+        wait: createFolderObject(import.meta.glob('/src/assets/wait/*', { eager: true, query: '?url', import: 'default' })),
         videos: createFolderObject(import.meta.glob('/src/assets/videos/*', { eager: true, query: '?url', import: 'default' })),
         wallpapers: createFolderObject(import.meta.glob('/src/assets/wallpapers/*', { eager: true, query: '?url', import: 'default' })),
         world: createFolderObject(import.meta.glob('/src/assets/world/*', { eager: true, query: '?url', import: 'default' }))

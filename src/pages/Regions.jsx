@@ -270,6 +270,10 @@ export const Regions = () => {
                 e.target.pause();
     };
 
+    const backgroudRegion = {
+        backgroundImage: `url(${mediaFetcher(`wait/${region}.jpg`)})`
+    };
+
     return (
         <div>
             <div className='region-tab-list'>
@@ -305,7 +309,7 @@ export const Regions = () => {
                 </div>
             </div>
             <div className='region-presentation'>
-                <div className='region-background'>
+                <div className='region-background' style={backgroudRegion}>
                     <video
                         className='region-background-video'
                         src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
