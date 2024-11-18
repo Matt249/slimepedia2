@@ -51,7 +51,7 @@ export const unlockRequirements = {
     'mochi': ['Given by Mochi Miles', 'ranchers/mochi'],
     'viktor': ['Given by Viktor Humphries', 'ranchers/viktor'],
     'ogden': ['Given by Ogden Ortiz', 'ranchers/ogden'],
-    'bob': ['Given by Bob', 'ranchers/bob'],
+    'bob': ['Given by BOb', 'ranchers/bob'],
     'thora': ['Given by Thora West', 'ranchers/thora'],
 };
 
@@ -350,28 +350,69 @@ export const utilitiesDescription = {
     'markerresource': "A useful marker to call attention to any nearby spout resources.",
     'markermineral': "A useful marker to call attention to any nearby mineral resources.",
     'markerhive': "A useful marker to call attention to any nearby hive resources."
-}
+};
 
 export const decorationsNames = [
     'emeraldgrass',
     'emeraldshrubs',
     'emeraldcypress',
     'tallemeraldcypress',
-    'emeraldcypresscluster'
-]
+    'emeraldcypresscluster',
+    'goldpetalflowers',
+    'rainbowgrass',
+    'pinkbonsai',
+    'largepinkbonsai',
+    'rockfragments',
+    'rockcluster',
+    'rockclump',
+    'smallboulder',
+    'sharpboulder',
+    'rainbowmound',
+    'rainbowlumps',
+    'shortpinkcoralcolumns',
+    'overjoyedstatue'
+];
 
 export const decorationsList = {
     'emeraldgrass': ['Emerald Grass', 'thora', { 'newbucks': 25, 'tabby': 5}, 'fields'],
     'emeraldshrubs': ['Emerald Shrubs', 'ogden', { 'newbucks': 50, 'phosphor': 10}, 'fields'],
     'emeraldcypress': ['Emerald Cypress', 'pod', { 'newbucks': 50, 'tabby': 10}, 'fields'],
     'tallemeraldcypress': ['Tall Emerald Cypress', 'ogden', { 'newbucks': 50, 'puddle': 5, 'brine': 1}, 'fields'],
-    'emeraldcypresscluster': ['Emerald Cypress Cluster', 'pod', { 'newbucks': 75, 'cotton': 10}, 'fields']
-}
+    'emeraldcypresscluster': ['Emerald Cypress Cluster', 'pod', { 'newbucks': 75, 'cotton': 10}, 'fields'],
+    'goldpetalflowers': ['Goldpetal Flowers', 'thora', { 'newbucks': 25, 'phosphor': 5, 'brine': 1}, 'fields'],
+    'rainbowgrass': ['Rainbow Grass', 'thora', { 'newbucks': 25, 'pink': 5}, 'fields'],
+    'pinkbonsai': ['Pink Bonsai', 'ogden', { 'newbucks': 150, 'hunter': 20, 'jelly': 3, 'wildHoney': 2, 'wax': 2}, 'fields'],
+    'largepinkbonsai': ['Large Pink Bonsai', 'pod', { 'newbucks': 200, 'honey': 20, 'jelly': 3, 'brine': 2, 'sand': 2}, 'fields'],
+    'rockfragments': ['Rock Fragments', 'bob', { 'newbucks': 50, 'pink': 5, 'jelly': 1}, 'fields'],
+    'rockcluster': ['Rock Cluster', 'bob', { 'newbucks': 50, 'pink': 10, 'wax': 1}, 'fields'],
+    'rockclump': ['Rock Clump', 'bob', { 'newbucks': 50, 'cotton': 10, 'brine': 1}, 'fields'],
+    'smallboulder': ['Small Boulder', 'pod', { 'newbucks': 50, 'cotton': 10, 'jelly': 1}, 'fields'],
+    'sharpboulder': ['Sharp Boulder', 'bob', { 'newbucks': 50, 'rock': 10, 'brine': 1}, 'fields'],
+    'rainbowmound': ['Rainbow Mound', 'bob', { 'newbucks': 50, 'ringtail': 10}, 'fields'],
+    'rainbowlumps': ['Rainbow Lumps', 'bob', { 'newbucks': 50, 'rock': 10}, 'fields'],
+    'shortpinkcoralcolumns': ['Short Pink Coral Columns', 'mochi', { 'newbucks': 100, 'angler': 5, 'jelly': 3, 'wax': 2}, 'fields'],
+    'mediumpinkcoralcolumns': ['Medium Pink Coral Columns', 'ogden', { 'newbucks': 150, 'angler': 20, 'primordy': 3, 'jelly': 2, 'sand': 2}, 'fields'],
+    'overjoyedstatue': ['Overjoyed Statue', 'pod', { 'newbucks': 700, 'crystal': 15, 'puddle': 10, 'hunter': 15, 'radiant': 10, 'jelly': 10}, 'fields']
+};
 
 export const decorationsDescription = {
     'emeraldgrass': "A small patch of idyllic, lush grass that never needs watering. Truly miraculous!",
     'emeraldshrubs': "Vibrantly green and often found near cypresses, they will not grow into trees. They're shrubs.",
     'emeraldcypress': "A tree whose leaves are a rich emerald color. They're just leaves though, and won't make you rich.",
     'tallemeraldcypress': "This cypress is extra lush and healthy. It must be because it's taller and gets more sunlight.",
-    'emeraldcypresscluster': "A group of cypress trees is a great start for a grove. Two times more effective than a lone tree."
-}
+    'emeraldcypresscluster': "A group of cypress trees is a great start for a grove. Two times more effective than a lone tree.",
+    'goldpetalflowers': "Lustrous and glittering, these flowers definitely aren't gold but are beautiful nonetheless.",
+    'rainbowgrass': "This unique ground cover ripples with all the colors of the Rainbow Fields.",
+    'pinkbonsai': "This contemplative arrangement of tree and rock is guaranteed to decrease stress. It's science.",
+    'largepinkbonsai': "A lovely centerpiece to any garden, this arrangement evokes peace, calm, and the joy of pink slimes.",
+    'rockfragments': "Rock slimes get their spikes by rolling over fragments like these tiny shards.",
+    'rockcluster': "A clump of rocks resulting from repeated rock slime impacts against larger boulders.",
+    'rockclump': "Sometimes these are signs of a Rock Gordo! But most of the time they're just a bunch of rocks.",
+    'smallboulder': "Larger than a pebble. Smaller than a boulder.",
+    'sharpboulder': "Wind and time have sharpened this rock formation to a rough point.",
+    'rainbowmound': "Rumor has it that cotton slimes perfect their jumping by bounding over these grass-covered mounds.",
+    'rainbowlumps': "A dollop of soil and rocks topped and sprinkled with prismatic grass.",
+    'shortpinkcorralclumn': "These coral towers are usually found submerged beneath the slime sea. Curious.",
+    'mediumpinkcorralclumn': "Once populated by other aquatic life, these columns are often found where angler slimes abound.",
+    'overjoyedstatue': "The only thing potentially happier than a slime is an overjoyed statue of a slime."
+};
