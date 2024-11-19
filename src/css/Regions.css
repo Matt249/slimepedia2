@@ -182,6 +182,64 @@
     width: 100%;
 }
 
+.region-music-player {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+    padding-left: 20px;
+    padding-right: 70px;
+    width: fit-content;
+    height: 50px;
+    border-radius: 50px;
+    overflow: hidden;
+    background-color: var(--menu-color-1);
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+    transition: width .2s ease-in-out;
+}
+
+.region-music-player.disabled {
+    width: 50px;
+    padding-right: 0;
+}
+
+.region-music-player.disabled>img:not(.music-player-icon) {
+    transform: scale(0);
+}
+
+/* .region-music-player.disabled>img:not(.music-player-icon) */
+
+.region-music-player>img:not(.music-player-icon) {
+    width: 50px;
+    height: 50px;
+    transform: scale(.8);
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.music-player-icon {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    transform: scale(.6);
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.music-player-icon:hover {
+    transform: scale(.8);
+}
+
+.region-music-player>img.music-current {
+    transform: scale(1);
+}
+
 .region-main-page {
     position: absolute;
     display: flex;

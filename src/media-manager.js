@@ -18,6 +18,7 @@ export const initializeFolders = () => {
         gordos: createFolderObject(import.meta.glob('/src/assets/gordos/*', { eager: true, query: '?url', import: 'default' })),
         map: createFolderObject(import.meta.glob('/src/assets/map/*', { eager: true, query: '?url', import: 'default' })),
         misc: createFolderObject(import.meta.glob('/src/assets/misc/*', { eager: true, query: '?url', import: 'default' })),
+        music: createFolderObject(import.meta.glob('/src/assets/music/*', { eager: true, query: '?url', import: 'default' })),
         plorts: createFolderObject(import.meta.glob('/src/assets/plorts/*', { eager: true, query: '?url', import: 'default' })),
         ranchers: createFolderObject(import.meta.glob('/src/assets/ranchers/*', { eager: true, query: '?url', import: 'default' })),
         resources: createFolderObject(import.meta.glob('/src/assets/resources/*', { eager: true, query: '?url', import: 'default' })),

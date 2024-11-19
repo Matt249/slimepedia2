@@ -33,8 +33,9 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      "no-unused-vars": ["warn"],
-      "no-constant-condition": ["warn"],
+      "no-unused-vars": "warn",
+      "no-constant-condition": "warn",
+      "@html-eslint/require-img-alt": "error",
     },
   },
 ]
