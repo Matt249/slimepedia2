@@ -3,7 +3,12 @@ import { NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
 import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
-import { decorationsDescription, decorationsList, decorationsNames, recipeElements, unlockRequirements, upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription, utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames } from '../text/blueprints';
+import { Tab } from '../components/Tab';
+import {
+    decorationsDescription, decorationsList, decorationsNames, recipeElements, themeList, unlockRequirements,
+    upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription,
+    utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
+} from '../text/blueprints';
 import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
@@ -14,7 +19,6 @@ import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
-import { regionInfos } from '../text/regions';
 
 const ConstructionList = ({ recipe: pattern, recipeListAdder, hideQtty = false }) => {
     const [quantity, setQuantity] = useState(1);
@@ -200,7 +204,7 @@ const UtilitiesPage = ({ recipeListAdder, blueprint = null }) => {
                 ))}
             </div>
             <div className='blueprint-infos'>
-                <div className='vac-upgrade-title-box'>{console.log(blueprint)}
+                <div className='vac-upgrade-title-box'>
                     <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? '' : utilitiesList[blueprint][0]} />
                     <h1>{blueprint === null ? 'Select a blueprint' : utilitiesList[blueprint][0]}</h1>
                     <h3>{blueprint === null ? 'Select an upgrade to view its details' : utilitiesDescription[blueprint]}</h3>
@@ -268,17 +272,27 @@ WarpPage.propTypes = {
 };
 
 const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
+    const lastOption = Object.keys(themeList)[Object.keys(themeList).length - 1];
+    const [decoFilter, setDecoFilter] = useState(null);
     return (
         <>
-            <div className='blueprint-list'>
-                {decorationsNames.map((decoName) => (
-                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>{console.log(decoName)}
-                        <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' />
-                    </NavLink>
-                ))}
+            <div className='decoration-list'>
+                <div className='decoration-tabs'>
+                <Tab title='Any' icon='misc/decorations' action={() => setDecoFilter(null)} selected={decoFilter === null}/>
+                    {Object.keys(themeList).map((theme) => (
+                        <Tab key={theme} title={themeList[theme][0]} icon={themeList[theme][1]} action={() => setDecoFilter(theme)} selected={theme === decoFilter}/>
+                    ))}
+                </div>
+                <div className='blueprint-list' style={{borderRadius: `${decoFilter === null ? '0' : '20px'} ${decoFilter === lastOption ? '0' : '20px'} 20px 20px`}}>
+                {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
+                        <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
+                            <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} />
+                        </NavLink>
+                    ))}
+                </div>
             </div>
             <div className='blueprint-infos decoration'>
-                <div className='vac-upgrade-title-box'>{console.log(blueprint)}
+                <div className='vac-upgrade-title-box'>
                     <img src={blueprint === null ? blueprintImg : mediaFetcher(`deco/${blueprint}.png`)} alt={blueprint === null ? '' : decorationsList[blueprint][0]} />
                     <h1>{blueprint === null ? 'Select a blueprint' : decorationsList[blueprint][0]}</h1>
                     <h3>{blueprint === null ? 'Select an upgrade to view its details' : decorationsDescription[blueprint]}</h3>
@@ -297,11 +311,11 @@ const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
                     )}
                 </div>
                 <div className='decoration-theme'>
-                    <h2>Region theme</h2>
+                    <h2>Theme</h2>
                     {blueprint !== null && (
                         <>
-                            <img src={mediaFetcher(`world/${decorationsList[blueprint][3]}.png`)} alt={decorationsList[blueprint][0]} />
-                            <p>{regionInfos[decorationsList[blueprint][3]][0]}</p>
+                            <img src={mediaFetcher(`${themeList[decorationsList[blueprint][3]][1]}.png`)} alt={decorationsList[blueprint][0]} />
+                            <p>{themeList[decorationsList[blueprint][3]][0]}</p>
                         </>
                     )}
                 </div>

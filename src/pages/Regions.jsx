@@ -236,7 +236,7 @@ export const Regions = () => {
             </div>
             <div className='ranch-box ranch-special'>
                 <h2 className='box-title'>Special Features</h2>
-                {ranchSpecials[region].map((feature) => (regionsResourcesInfos[feature][2].length === 0 ?
+                {ranchSpecials[region].map((feature) => (regionsResourcesInfos[feature][2] === '' ?
                     <div
                         className='ranch-special-feature'
                         key={feature}
@@ -245,7 +245,7 @@ export const Regions = () => {
                         <h3>{regionsResourcesInfos[feature][0]}</h3>
                     </div>
                     :
-                    <NavLink to={`/${regionsResourcesInfos[feature][2][0]}/${regionsResourcesInfos[feature][2][2]}`} style={{ textDecoration: 'none' }} key={feature}>
+                    <NavLink to={regionsResourcesInfos[feature][2]} style={{ textDecoration: 'none' }} key={feature}>
                         <div
                             className='ranch-special-feature special-hover'
                             key={feature}
