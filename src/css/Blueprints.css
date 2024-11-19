@@ -539,3 +539,36 @@
     ;
     gap: 20px;
 }
+
+.blueprint-infos.decoration {
+    grid-template-rows: 2fr 1fr 1fr;
+    grid-template-areas:
+        "header header"
+        "theme recipe"
+        "unlock recipe";
+}
+
+.decoration-theme {
+    grid-area: theme;
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 50px !important;
+}
+
+.decoration-theme>h2 {
+    position: absolute;
+    top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.decoration-theme>img {
+    height: 50px;
+    width: auto;
+    border-radius: 20px;
+}
