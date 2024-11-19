@@ -5,9 +5,10 @@ import { Food } from "../pages/Food";
 import { Items } from "../pages/Items";
 import { Map } from "../pages/Map";
 import { Regions } from "../pages/Regions";
-import { Header } from "../components/Header";
+import { Header } from "../pages/Header";
 import { Blueprints } from "../pages/Blueprints";
 import { Buildings } from "../pages/Buildings";
+import { ErrorPage } from "../pages/ErrorPage";
 
 
 export default function index() {
@@ -35,6 +36,7 @@ export default function index() {
                 <Route path="/buildings" element={<Buildings />} />
                 <Route path="/buildings/:building" element={<Buildings />} />
                 <Route path="/buildings/:building/:upgrade" element={<Buildings />} />
+                <Route path="*" element={<ErrorPage />} />
             </Routes>
         </BrowserRouter>
     );

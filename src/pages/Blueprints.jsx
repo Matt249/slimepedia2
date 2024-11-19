@@ -14,6 +14,7 @@ import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
+import { regionInfos } from '../text/regions';
 
 const ConstructionList = ({ recipe: pattern, recipeListAdder, hideQtty = false }) => {
     const [quantity, setQuantity] = useState(1);
@@ -271,12 +272,12 @@ const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
         <>
             <div className='blueprint-list'>
                 {decorationsNames.map((decoName) => (
-                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
+                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>{console.log(decoName)}
                         <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' />
                     </NavLink>
                 ))}
             </div>
-            <div className='blueprint-infos'>
+            <div className='blueprint-infos decoration'>
                 <div className='vac-upgrade-title-box'>{console.log(blueprint)}
                     <img src={blueprint === null ? blueprintImg : mediaFetcher(`deco/${blueprint}.png`)} alt={blueprint === null ? '' : decorationsList[blueprint][0]} />
                     <h1>{blueprint === null ? 'Select a blueprint' : decorationsList[blueprint][0]}</h1>
@@ -292,6 +293,15 @@ const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
                         <>
                             <img src={mediaFetcher(`${unlockRequirements[decorationsList[blueprint][1]][1]}.png`)} alt={unlockRequirements[decorationsList[blueprint][1]][0]} />
                             <p>{unlockRequirements[decorationsList[blueprint][1]][0]}</p>
+                        </>
+                    )}
+                </div>
+                <div className='decoration-theme'>
+                    <h2>Region theme</h2>
+                    {blueprint !== null && (
+                        <>
+                            <img src={mediaFetcher(`world/${decorationsList[blueprint][3]}.png`)} alt={decorationsList[blueprint][0]} />
+                            <p>{regionInfos[decorationsList[blueprint][3]][0]}</p>
                         </>
                     )}
                 </div>

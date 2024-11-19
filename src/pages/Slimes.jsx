@@ -5,7 +5,7 @@ import { Biomes } from '../components/Biomes.jsx';
 import { foodList, foodTypes } from '../text/food.js';
 import { toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
-import { NavLink, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import largo from '/src/assets/misc/largo.png';
 import none from '/src/assets/misc/none.png';
@@ -139,6 +139,7 @@ SlimeDescription.propTypes = {
 
 export const Slimes = () => {
     const { slime: slimeName } = useParams();
+
     const slime = slimeName || 'pink';
     const [topBtn, setTopBtn] = useState(false);
     useEffect(() => setTopBtn(false), [slime]);
@@ -158,6 +159,12 @@ export const Slimes = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    if (slimeName && !slimeNames.includes(slimeName)) {
+        return (
+            <Navigate to='/slimes/pink' />
+        );
+    }
 
     return (
         <div>

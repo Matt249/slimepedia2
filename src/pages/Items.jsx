@@ -11,7 +11,7 @@ import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
 import { mediaFetcher } from '../media-manager';
-import { NavLink, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 
 const matchMainList = (list) => {
     switch (list) {
@@ -57,6 +57,11 @@ export const Items = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    if (itemName && !itemsNames.includes(itemName)) {
+        return tab === 'toys' ? <Navigate to='/items/toys/ball' /> : <Navigate to='/items/resource/brine' />;
+    }
+
     return (
         <div>
             <div className='list-container'>
