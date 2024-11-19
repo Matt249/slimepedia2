@@ -46,6 +46,21 @@ body {
   transition: height .5s;
 }
 
+.slimepedia-header>h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 3em;
+}
+
+.slimepedia-header>h2>a {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  color: rgb(107, 107, 255);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
 .slimepedia-app>div:not(.pin-button) {
   display: flex;
   flex-flow: row nowrap;

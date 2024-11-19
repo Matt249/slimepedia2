@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesNames } from '../text/food.js';
@@ -77,18 +77,19 @@ FoodList.propTypes = {
     filter: PropTypes.string.isRequired
 };
 
-const FoodDetails = ({ food, topBtn, setFilter }) => {
-    const favSlimeCalc = () => {
+const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
+    const favSlimeCalc = (currentFood) => {
         for (let slime in slimesList)
-            if (slimesList[slime][2] === food)
+            if (slimesList[slime][2] === currentFood)
                 return slime;
         return 'none';
     };
-    const favSlime = favSlimeCalc();
+    const food = foodNames.includes(foodName) ? foodName : 'carrot';
+    const favSlime = favSlimeCalc(food);
     return (
         <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
             <div className="image-title">
-                <div className="info-title">
+                <div className="info-title">{console.log(food)}
                     <h1>{foodList[food][0]}</h1>
                     <h2>{foodDescription[food]}</h2>
                 </div>
@@ -133,7 +134,9 @@ FoodDetails.propTypes = {
     setFilter: PropTypes.func.isRequired
 };
 
-const FoodDescription = ({ food, topBtn }) => (
+const FoodDescription = ({ food: foodName, topBtn }) => {
+    const food = foodNames.includes(foodName) ? foodName : 'carrot';
+    return (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
             <img src={pediaAbout} alt='Slimeology' />
@@ -146,7 +149,7 @@ const FoodDescription = ({ food, topBtn }) => (
         </div>
         <p>{foodpedia[food][1]}</p>
     </div>
-);
+)};
 
 FoodDescription.propTypes = {
     food: PropTypes.string.isRequired,
@@ -198,6 +201,12 @@ export const Food = () => {
                 return foodNames;
         }
     }, [filter]);
+
+    if (foodName && !foodNames.includes(foodName)) {
+        return (
+            <Navigate to='/food/carrot' />
+        );
+    }
 
     return (
         <div>
