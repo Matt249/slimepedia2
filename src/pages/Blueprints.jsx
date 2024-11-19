@@ -272,7 +272,7 @@ const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
         <>
             <div className='blueprint-list'>
                 {decorationsNames.map((decoName) => (
-                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
+                    <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>{console.log(decoName)}
                         <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' />
                     </NavLink>
                 ))}
@@ -304,7 +304,7 @@ const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
                             <p>{regionInfos[decorationsList[blueprint][3]][0]}</p>
                         </>
                     )}
-                    </div>
+                </div>
             </div>
         </>
     );
