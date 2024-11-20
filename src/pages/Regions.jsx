@@ -382,11 +382,11 @@ export const Regions = () => {
                                 <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientNightRef)} />
                                 <img src={happyStatue} className={getAudioName() === `${regionMusic}-night-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxNightRef)} />
                                 <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeNightRef)} />
-                                <img src={moonImg} alt='Night Music' />
+                                <img src={moonImg} className='music-time' alt='Night Music' />
                                 <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientDayRef)} />
                                 <img src={happyStatue} className={getAudioName() === `${regionMusic}-day-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxDayRef)} />
                                 <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeDayRef)} />
-                                <img src={sunImg} alt='Day Music' />
+                                <img src={sunImg} className='music-time' alt='Day Music' />
                                 <img className={'music-player-icon'} src={musicImg} onClick={() => setMusicMenu(!musicMenu)} />
                             </div>
                         </>)}

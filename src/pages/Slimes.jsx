@@ -2,8 +2,8 @@ import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodList, foodTypes } from '../text/food.js';
-import { toysList } from '../text/toys.js';
+import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
+import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -36,15 +36,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                 </div>
                 <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />
             </div>
-            {['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ?
-                <div className='little-box box-food'>
-                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
-                    <div>
-                        <h3>Diet</h3>
-                        <h4>{foodTypes[currentSlimeList[1]]}</h4>
-                    </div>
-                </div>
-                :
+            {foodTypesNames.includes(currentSlimeList[2]) ?
                 <NavLink to={`/food/${currentSlimeList[1]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-food link-to-food'>
                         <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
@@ -54,16 +46,16 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                         </div>
                     </div>
                 </NavLink>
-            }
-            {['none', 'ranchersnslimes'].includes(currentSlimeList[2]) ?
-                <div className='little-box box-fav'>
-                    <img src={favFoodIcon} alt='None' />
+                :
+                <div className='little-box box-food'>
+                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
                     <div>
-                        <h3>Favorite Food</h3>
-                        <h4>None</h4>
+                        <h3>Diet</h3>
+                        <h4>{foodTypes[currentSlimeList[1]]}</h4>
                     </div>
                 </div>
-                :
+            }
+            {foodNames.includes(currentSlimeList[2]) ?
                 <NavLink to={`/food/${currentSlimeList[2]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-fav link-to-food'>
                         <img src={favFoodIcon} alt={'Picture of ' + foodList[currentSlimeList[2]][0]} />
@@ -73,6 +65,14 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                         </div>
                     </div>
                 </NavLink>
+                :
+                <div className='little-box box-fav'>
+                    <img src={favFoodIcon} alt='None' />
+                    <div>
+                        <h3>Favorite Food</h3>
+                        <h4>None</h4>
+                    </div>
+                </div>
             }
             <div className='little-box box-largo'>
                 <img src={(currentSlimeList[3]) ? largo : none} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
@@ -81,15 +81,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     <h4>{(currentSlimeList[3]) ? "Yes" : "No"}</h4>
                 </div>
             </div>
-            {currentSlimeList[5] === 'none' ?
-                <div className='little-box box-toy'>
-                    <img src={favToyIcon} alt='None' />
-                    <div>
-                        <h3>Favorite Toy</h3>
-                        <h4>None</h4>
-                    </div>
-                </div>
-                :
+            {toyNames.includes(currentSlimeList[5]) ?
                 <NavLink to={`/items/toys/${currentSlimeList[5]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-toy link-to-food'>
                         <img src={favToyIcon} alt={slimeToy[0]} />
@@ -99,6 +91,14 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                         </div>
                     </div>
                 </NavLink>
+                :
+                <div className='little-box box-toy'>
+                    <img src={favToyIcon} alt='None' />
+                    <div>
+                        <h3>Favorite Toy</h3>
+                        <h4>None</h4>
+                    </div>
+                </div>
             }
             <Biomes spawnList={currentSlimeList[4]} />
         </>

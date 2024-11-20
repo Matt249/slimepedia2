@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { NavButton } from '../components/NavButton.jsx';
 import { Biomes } from '../components/Biomes.jsx';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesNames } from '../text/food.js';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
 import { slimesList } from '../text/slimes.js';
 import { mediaFetcher } from '../media-manager.js';
@@ -162,16 +162,16 @@ export const Food = () => {
     const [food, setFood] = useState('carrot');
 
     useEffect(() => {
-        if (foodName in foodTypesNames) {
-            setFood(foodTypesNames[foodName][1]);
-            setFilter(foodTypesNames[foodName][0]);
+        if (foodName in foodTypesList) {
+            setFood(foodTypesList[foodName][1]);
+            setFilter(foodTypesList[foodName][0]);
         } else {
             setFood(foodName || 'carrot');
         }
     }, [foodName]);
 
     const [topBtn, setTopBtn] = useState(false);
-    useState(() => setTopBtn(false), [food]);
+    useState(() => setTopBtn(false), [  ]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {

@@ -189,7 +189,7 @@
     margin: 20px;
     padding-left: 20px;
     padding-right: 70px;
-    width: fit-content;
+    width: 630px;
     height: 50px;
     border-radius: 50px;
     overflow: hidden;
@@ -214,12 +214,18 @@
 
 /* .region-music-player.disabled>img:not(.music-player-icon) */
 
-.region-music-player>img:not(.music-player-icon) {
+.region-music-player>img:not(.music-player-icon, .music-time) {
+    width: 50px;
+    height: 50px;
+    transform: scale(.8) translateY(-5%);
+    cursor: pointer;
+    transition: transform .2s ease-in-out;
+}
+
+.music-time {
     width: 50px;
     height: 50px;
     transform: scale(.8);
-    cursor: pointer;
-    transition: transform .2s ease-in-out;
 }
 
 .music-player-icon {
@@ -237,7 +243,7 @@
 }
 
 .region-music-player>img.music-current {
-    transform: scale(1);
+    transform: scale(1) translateY(-10%);
 }
 
 .region-main-page {

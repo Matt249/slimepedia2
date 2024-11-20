@@ -8,7 +8,6 @@ export const foodNames = [
     'mango',
     'granite',
     'pear',
-
     'hen',
     'henStony',
     'henSea',
@@ -24,7 +23,14 @@ export const foodNames = [
     'chickPainted',
     'chickSea',
     'chickStony',
-    'ash',
+    'nectar',
+    'water'
+];
+
+export const foodTypesNames = [
+    'fruits',
+    'veggies',
+    'meat',
     'nectar',
     'water'
 ];
@@ -41,7 +47,7 @@ export const foodTypes = {
     'none': "None"
 };
 
-export const foodTypesNames = {
+export const foodTypesList = {
     'food': ['any', 'carrot'],
     'meat': ['meat', 'hen'],
     'fruits': ['fruits', 'pogo'],
