@@ -36,7 +36,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                 </div>
                 <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />
             </div>
-            {foodTypesNames.includes(currentSlimeList[2]) ?
+            {foodTypesNames.includes(currentSlimeList[1]) ?
                 <NavLink to={`/food/${currentSlimeList[1]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-food link-to-food'>
                         <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
@@ -47,8 +47,8 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     </div>
                 </NavLink>
                 :
-                <div className='little-box box-food'>
-                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
+                <div className='little-box box-food'>{console.log(currentSlimeList[1])}
+                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[1]]} />
                     <div>
                         <h3>Diet</h3>
                         <h4>{foodTypes[currentSlimeList[1]]}</h4>
@@ -70,7 +70,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     <img src={favFoodIcon} alt='None' />
                     <div>
                         <h3>Favorite Food</h3>
-                        <h4>None</h4>
+                        <h4>{currentSlimeList[2] === 'none' ? 'None' : foodList[currentSlimeList[2]][0]}</h4>
                     </div>
                 </div>
             }

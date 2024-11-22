@@ -163,8 +163,9 @@ export const Food = () => {
 
     useEffect(() => {
         if (foodName in foodTypesList) {
-            setFood(foodTypesList[foodName][1]);
+            console.log(foodTypesList[foodName]);
             setFilter(foodTypesList[foodName][0]);
+            setFood(foodTypesList[foodName][1]);
         } else {
             setFood(foodName || 'carrot');
         }

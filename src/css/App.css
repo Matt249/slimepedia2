@@ -5,6 +5,25 @@
   --text-color: #000;
   --background-color: var(--menu-color-0);
   --text-shadow: 0px 0px 5px #000;
+  --element-size: 100px;
+  --tab-font-size: 1.6em;
+  --image-size: 70px;
+  --main-menu-icon-size: 200px;
+  --main-menu-title-size: 3.5em;
+  --main-menu-subtitle-size: 2em;
+
+}
+
+@media (min-width: 2000px) {
+  :root {
+    --element-size: 150px;
+    --tab-font-size: 1.7em;
+    --image-size: 90px;
+    --main-menu-icon-size: 300px;
+    --main-menu-title-size: 4em;
+    --main-menu-subtitle-size: 2.5em;
+  }
+
 }
 
 body {

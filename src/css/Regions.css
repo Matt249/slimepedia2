@@ -1,10 +1,5 @@
 :root {
-    --element-size: 100px;
-    --tab-font-size: 1.6em;
-    --image-size: 70px;
-    --main-menu-icon-size: 200px;
-    --main-menu-title-size: 3.5em;
-    --main-menu-subtitle-size: 2em;
+
     --special-img-scale: .8;
     --special-size: 1em;
     --region-pedia-size: 1.1em;
@@ -14,12 +9,6 @@
 
 @media (min-width: 2000px) {
     :root {
-        --element-size: 150px;
-        --tab-font-size: 1.7em;
-        --image-size: 90px;
-        --main-menu-icon-size: 300px;
-        --main-menu-title-size: 4em;
-        --main-menu-subtitle-size: 2.5em;
         --special-img-scale: .9;
         --special-size: 1.3em;
         --region-pedia-size: 1.7em;
