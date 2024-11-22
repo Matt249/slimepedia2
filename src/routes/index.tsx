@@ -3,12 +3,13 @@ import { Slimes } from "../pages/Slimes";
 import { NavBar } from "../components/NavBar";
 import { Food } from "../pages/Food";
 import { Items } from "../pages/Items";
-import { Map } from "../pages/Map";
+import { Map } from "../pages/Map.jsx";
 import { Regions } from "../pages/Regions";
 import { Header } from "../pages/Header";
 import { Blueprints } from "../pages/Blueprints";
 import { Buildings } from "../pages/Buildings";
 import { ErrorPage } from "../pages/ErrorPage";
+import React from "react";
 
 
 export default function index() {

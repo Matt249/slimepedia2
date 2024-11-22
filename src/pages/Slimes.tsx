@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
-import { NavButton } from '../components/NavButton.jsx';
-import { Biomes } from '../components/Biomes.jsx';
+import { NavButton } from '../components/NavButton.js';
+import { Biomes } from '../components/Biomes.js';
 import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
@@ -13,6 +13,7 @@ import arrow from '/src/assets/misc/arrow.png';
 import pediaSlime from '/src/assets/misc/pediaslime.png';
 import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
+import React from 'react';
 import '../css/Pedia.css';
 
 const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
@@ -172,7 +173,6 @@ export const Slimes = () => {
                 {slimeNames.map((slimeName) => (
                     <NavLink to={`/slimes/${slimeName}`} style={{ textDecoration: 'none' }} key={slimeName}>
                         <NavButton
-                            to={`/slimes/${slimeName}`}
                             key={slimeName}
                             icon={`slimes/${slimeName}`}
                             size={wideScreen ? 125 : 100}

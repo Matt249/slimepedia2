@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import glitch from '../assets/slimes/glitch.png';
+import React from 'react';
 
 export const ErrorPage = () => {
     return (

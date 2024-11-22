@@ -5,13 +5,14 @@ import { Tab } from '../components/Tab';
 import { resourcesList, resourcesNames, resPedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
+import { mediaFetcher } from '../media-manager';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import PropTypes from 'prop-types';
 import pedia from '/src/assets/misc/pediatut.png';
 import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
-import { mediaFetcher } from '../media-manager';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
 
 const matchMainList = (list) => {
     switch (list) {

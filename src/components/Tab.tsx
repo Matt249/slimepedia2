@@ -1,6 +1,7 @@
-import "../css/Tab.css";
-import PropTypes from 'prop-types';
 import { mediaFetcher } from "../media-manager";
+import React from 'react';
+import PropTypes from 'prop-types';
+import "../css/Tab.css";
 
 export const Tab = ({
     title = 'Default Title',

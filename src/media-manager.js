@@ -3,7 +3,7 @@ let folders = {};
 export const initializeFolders = () => {
     const createFolderObject = (globResult) => {
         return Object.entries(globResult).reduce((acc, [path, module]) => {
-            const fileName = path.split('/').pop().split('?')[0];
+            const fileName = (path.split('/').pop() || '').split('?')[0];
             acc[fileName] = module;
             return acc;
         }, {});
@@ -44,4 +44,5 @@ export const mediaFetcher = (path) => {
     const cleanedFile = requiredFile.replace(/\?.*$/, '');
     return folder[cleanedFile] || null;
 };
+
 initializeFolders();

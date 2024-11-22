@@ -3,6 +3,7 @@ import { NavButton } from '../components/NavButton';
 import { buildingNames, buildingList, buildingUpgrades, usageList } from '../text/buildings';
 import { mediaFetcher } from '../media-manager';
 import { NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import buck from '/src/assets/misc/buck.png';
 import pediaTut from '/src/assets/misc/pediatut.png';

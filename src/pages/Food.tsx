@@ -1,11 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import { NavButton } from '../components/NavButton.jsx';
-import { Biomes } from '../components/Biomes.jsx';
+import { NavButton } from '../components/NavButton.js';
+import { Biomes } from '../components/Biomes.js';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
 import { Tab } from '../components/Tab.jsx';
 import { slimesList } from '../text/slimes.js';
 import { mediaFetcher } from '../media-manager.js';
+import React from 'react';
 import PropTypes from 'prop-types';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
@@ -89,7 +90,7 @@ const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
     return (
         <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
             <div className="image-title">
-                <div className="info-title">{console.log(food)}
+                <div className="info-title">
                     <h1>{foodList[food][0]}</h1>
                     <h2>{foodDescription[food]}</h2>
                 </div>
@@ -137,19 +138,20 @@ FoodDetails.propTypes = {
 const FoodDescription = ({ food: foodName, topBtn }) => {
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
     return (
-    <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
-        <div className='desc-title'>
-            <img src={pediaAbout} alt='Slimeology' />
-            <h3>About</h3>
+        <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
+            <div className='desc-title'>
+                <img src={pediaAbout} alt='Slimeology' />
+                <h3>About</h3>
+            </div>
+            <p>{foodpedia[food][0]}</p>
+            <div className='desc-title'>
+                <img src={pediaQuestion} alt='Rancher Risks' />
+                <h3>On the ranch</h3>
+            </div>
+            <p>{foodpedia[food][1]}</p>
         </div>
-        <p>{foodpedia[food][0]}</p>
-        <div className='desc-title'>
-            <img src={pediaQuestion} alt='Rancher Risks' />
-            <h3>On the ranch</h3>
-        </div>
-        <p>{foodpedia[food][1]}</p>
-    </div>
-)};
+    )
+};
 
 FoodDescription.propTypes = {
     food: PropTypes.string.isRequired,
@@ -162,16 +164,19 @@ export const Food = () => {
     const [food, setFood] = useState('carrot');
 
     useEffect(() => {
-        if (foodName in foodTypesList) {
-            setFood(foodTypesList[foodName][1]);
-            setFilter(foodTypesList[foodName][0]);
-        } else {
+        if (foodName) {
+            if (foodName in foodTypesList) {
+                setFood(foodTypesList[foodName][1]);
+                setFilter(foodTypesList[foodName][0]);
+            }
+        }
+        else {
             setFood(foodName || 'carrot');
         }
+
     }, [foodName]);
 
     const [topBtn, setTopBtn] = useState(false);
-    useState(() => setTopBtn(false), [  ]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {

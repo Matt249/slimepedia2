@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { mediaFetcher } from '../media-manager';
+import React from 'react';
 import PropTypes from 'prop-types';
 import '../css/NavButton.css';
-import { mediaFetcher } from '../media-manager';
 
 export const NavButton = ({
     name = "Slimes",

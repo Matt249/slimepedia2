@@ -5,6 +5,7 @@ import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
 import { NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import Down from '../components/Down';
 import PropTypes from 'prop-types';
 import podImg from '/src/assets/misc/pod.png';
@@ -169,7 +170,6 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
                         <div
                             className="ranch-element"
                             key={place}
-                            name={'coucou'}
                         >
                             <div className="region-element-content">
                                 <img
@@ -191,7 +191,6 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
                     <div
                         className="ranch-element"
                         key={place}
-                        name={regionInfos[place][0]}
                     >
                         <div className="region-element-content">
                             <img
@@ -254,7 +253,7 @@ RanchDescription.propTypes = {
 export const Regions = () => {
 
     const [musicMenu, setMusicMenu] = useState(false);
-    const [currentAudio, setCurrentAudio] = useState(null); // État pour suivre la musique en cours de lecture
+    const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null); // État pour suivre la musique en cours de lecture
 
     const themeDayRef = useRef(null);
     const relaxDayRef = useRef(null);
@@ -265,28 +264,35 @@ export const Regions = () => {
 
     // Fonction pour arrêter la musique en cours et lancer la nouvelle
     const playAudio = (audioRef) => {
-        if (currentAudio && currentAudio !== audioRef.current) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        else if (currentAudio === audioRef.current) {
-            audioRef.current.pause();
-            currentAudio.currentTime = 0;
-            setCurrentAudio(null);
-            return;
-        }
+        if (currentAudio)
+            if (currentAudio !== audioRef.current) {
+                currentAudio.pause();
+                if (currentAudio)
+                    currentAudio.currentTime = 0;
+            }
+            else if (currentAudio === audioRef.current) {
+                audioRef.current.pause();
+                currentAudio.currentTime = 0;
+                setCurrentAudio(null);
+                return;
+            }
         setCurrentAudio(audioRef.current);
         audioRef.current.volume = 0.1;
         audioRef.current.play();
     };
 
-    const getAudioName = () => currentAudio === null ? '' : currentAudio.src.split('/').pop().split('.')[0];
+    const getAudioName = () => {
+        if (currentAudio === null || !currentAudio.src) return '';
+        const parts = currentAudio.src.split('/');
+        const lastPart = parts.pop();
+        return lastPart ? lastPart.split('.')[0] : '';
+    };
 
     const { region: regionName } = useParams();
     const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
     const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
     const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
-    const regionDescriptionRef = useRef(null);
+    const regionDescriptionRef = useRef<HTMLDivElement>(null);
 
     const scrollToSection = () => {
         if (regionDescriptionRef.current)
@@ -307,12 +313,12 @@ export const Regions = () => {
     }
 
 
-    const handleMouseEnter = (e) => {
+    const handleMouseEnter = (e, regionItem: string) => {
         if (e.target.readyState >= 3)
-            e.target.play();
+            (e.target as HTMLVideoElement).play();
     };
 
-    const handleMouseLeave = (e) => {
+    const handleMouseLeave = (e, regionItem: string) => {
         if (e.target.readyState >= 3)
             if (region !== region)
                 e.target.pause();
@@ -363,7 +369,7 @@ export const Regions = () => {
                         src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
                         disablePictureInPicture autoPlay loop muted
                         onLoadedData={e => {
-                            e.target.play();
+                            (e.target as HTMLVideoElement).play();
                         }}
                     >
                         Video Background

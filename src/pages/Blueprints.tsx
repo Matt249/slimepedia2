@@ -9,6 +9,7 @@ import {
     upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription,
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
+import React from 'react';
 import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
@@ -190,10 +191,11 @@ const UpgradesPage = ({ recipeListAdder, blueprint }) => {
 
 UpgradesPage.propTypes = {
     recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string
+    blueprint: PropTypes.string.isRequired,
+    tier: PropTypes.number
 };
 
-const UtilitiesPage = ({ recipeListAdder, blueprint = null }) => {
+const UtilitiesPage = ({ recipeListAdder, blueprint = 'medstation' }) => {
     return (
         <>
             <div className='blueprint-list'>
@@ -205,7 +207,7 @@ const UtilitiesPage = ({ recipeListAdder, blueprint = null }) => {
             </div>
             <div className='blueprint-infos'>
                 <div className='vac-upgrade-title-box'>
-                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? '' : utilitiesList[blueprint][0]} />
+                    <img src={!blueprint ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={utilitiesList[blueprint][0]} />
                     <h1>{blueprint === null ? 'Select a blueprint' : utilitiesList[blueprint][0]}</h1>
                     <h3>{blueprint === null ? 'Select an upgrade to view its details' : utilitiesDescription[blueprint]}</h3>
                 </div>
@@ -229,10 +231,10 @@ const UtilitiesPage = ({ recipeListAdder, blueprint = null }) => {
 
 UtilitiesPage.propTypes = {
     recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string
+    blueprint: PropTypes.string.isRequired,
 };
 
-const WarpPage = ({ recipeListAdder, blueprint = null }) => {
+const WarpPage = ({ recipeListAdder, blueprint = 'snowyteleporter' }) => {
     return (
         <>
             <div className='blueprint-list'>
@@ -271,9 +273,9 @@ WarpPage.propTypes = {
     blueprint: PropTypes.string
 };
 
-const DecorationsPage = ({ recipeListAdder, blueprint = null }) => {
+const DecorationsPage = ({ recipeListAdder, blueprint = 'emeraldcypress' }) => {
     const lastOption = Object.keys(themeList)[Object.keys(themeList).length - 1];
-    const [decoFilter, setDecoFilter] = useState(null);
+    const [decoFilter, setDecoFilter] = useState<string | null>(null);
     return (
         <>
             <div className='decoration-list'>
@@ -368,7 +370,7 @@ export const Blueprints = () => {
     const { tab: tabName, blueprint: blueprintName, tier: tierName } = useParams();
     const tab = tabName || 'upgrades';
     const blueprint = blueprintName || null;
-    const tier = tierName || null;
+    const tier = tierName ? parseInt(tierName, 10) : null;
 
     const [recipeList, setRecipeList] = useState({});
     const resetList = () => setRecipeList({});
@@ -386,6 +388,8 @@ export const Blueprints = () => {
     };
 
     const renderPage = () => {
+        if (blueprint === null)
+            return <></>;
         switch (tab) {
             case 'upgrades':
                 return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} tier={tier} />;
