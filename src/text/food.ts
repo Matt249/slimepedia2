@@ -1,4 +1,4 @@
-export const foodNames = [
+export const foodNames: string[] = [
     'carrot',
     'lettuce',
     'beet',
@@ -27,7 +27,7 @@ export const foodNames = [
     'water'
 ];
 
-export const foodTypesNames = [
+export const foodTypesNames: string[] = [
     'fruits',
     'veggies',
     'meat',
@@ -35,7 +35,7 @@ export const foodTypesNames = [
     'water'
 ];
 
-export const foodTypes = {
+export const foodTypes: { [key: string]: string} = {
     'food': "Any",
     'meat': "Meat",
     'fruits': "Fruits",
@@ -47,7 +47,7 @@ export const foodTypes = {
     'none': "None"
 };
 
-export const foodTypesList = {
+export const foodTypesList: { [key: string]: [string, string] } = {
     'food': ['any', 'carrot'],
     'meat': ['meat', 'hen'],
     'fruits': ['fruits', 'pogo'],
@@ -55,7 +55,7 @@ export const foodTypesList = {
     'honey': ['special', 'nectar'],
 }
 
-export const foodSingular = {
+export const foodSingular: { [key: string]: string} = {
     'meat': "Meat",
     'fruits': "Fruit",
     'veggies': "Veggie",
@@ -65,7 +65,7 @@ export const foodSingular = {
     'none': "None"
 }
 
-export const foodList = {
+export const foodList: { [key: string]: [string, string, string[]]} = {
     'none': ['None', 'none', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf', 'ss', 'ev', 'pb']],
     'ranchersnslimes': ['Ranchers and Slimes', 'ranchersnslimes', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf', 'ss', 'ev', 'pb']],
     'carrot': ['Carrot', 'veggies', ['ar', 'rf', 'ss', 'ev', 'pb']],
@@ -97,7 +97,7 @@ export const foodList = {
     'ash': ["Ash", 'ash', ['ev']],
 };
 
-export const foodDescription = {
+export const foodDescription: { [key: string]: string} = {
     'lorem': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
     'carrot': 'Next to a vacpack, it\'s a rancher\'s best friend.',
     'beet': 'If you listen to it closely, you can faintly hear a veggie.',
@@ -130,7 +130,7 @@ export const foodDescription = {
 
 
 
-export const foodpedia = {
+export const foodpedia: { [key: string]: [string, string]} = {
     'carrot': [
         "The humble carrot was brought to the Far, Far Range because they're easy to grow and nutritious. Most ranchers swear by them as they're a handy portable snack, promote good night vision, and when juiced are only second to coffee as the perfect morning beverage.",
         "Deposit a carrot into a garden's depositor and you'll have a large carrot crop of your own."

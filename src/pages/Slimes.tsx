@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
-import { NavButton } from '../components/NavButton.js';
+import { NavButton } from '../components/NavButton.tsx';
 import { Biomes } from '../components/Biomes.js';
 import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
 import { toyNames, toysList } from '../text/toys.js';
@@ -198,3 +198,5 @@ export const Slimes = () => {
 Slimes.propTypes = {
     slime: PropTypes.string,
 };
+
+export default Slimes;

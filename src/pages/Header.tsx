@@ -15,3 +15,5 @@ export const Header = ({ dark }) => {
 Header.propTypes = {
     dark: PropTypes.bool
 };
+
+export default Header;

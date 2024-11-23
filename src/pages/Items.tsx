@@ -162,7 +162,5 @@ export const Items = () => {
     );
 };
 
-Items.propTypes = {
-    item: PropTypes.string,
-    tab: PropTypes.string,
-};
+
+export default Items;

@@ -5,6 +5,8 @@ import React from 'react';
 import Routes from './routes/index.jsx';
 import './css/App.css';
 
+
+
 function App() {
     document.title = "Slimepedia 2";
     document.body.style.backgroundImage = `url(${mediaFetcher('wallpapers/houseDay.png')})`;

@@ -8,7 +8,12 @@ import '../css/Biomes.css';
 
 const light = true;
 
-export const Biomes = ({
+interface BiomesProps {
+    spawnList: string[];
+}
+
+
+export const Biomes: React.FC<BiomesProps> = ({
     spawnList = [],
 }) => {
     const [listHovered, setListHovered] = useState(false);
@@ -128,5 +133,5 @@ export const Biomes = ({
 };
 
 Biomes.propTypes = {
-    spawnList: PropTypes.array,
+    spawnList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 }

@@ -1,11 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
-import { NavButton } from '../components/NavButton.js';
-import { Biomes } from '../components/Biomes.js';
+import { Redirect, NavLink, useParams } from 'react-router-dom';
+import { NavButton } from '../components/NavButton';
+import { Biomes } from '../components/Biomes';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
-import { Tab } from '../components/Tab.jsx';
-import { slimesList } from '../text/slimes.js';
-import { mediaFetcher } from '../media-manager.js';
+import { Tab } from '../components/Tab';
+import { slimesList } from '../text/slimes';
+import { mediaFetcher } from '../media-manager';
 import React from 'react';
 import PropTypes from 'prop-types';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
@@ -14,7 +14,12 @@ import noneImg from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
 import '../css/Pedia.css';
 
-const FoodTabs = ({ filter, setFilter }) => (
+interface FoodTabsProps {
+    filter: string;
+    setFilter: (filter: string) => void;
+}
+
+const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
     <div className='food-tabs'>
         <Tab
             title='All'
@@ -54,7 +59,14 @@ FoodTabs.propTypes = {
     setFilter: PropTypes.func.isRequired
 };
 
-const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
+interface FoodListProps {
+    actualFoodList: string[];
+    wideScreen: boolean;
+    food: string;
+    filter: string;
+}
+
+const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, filter }) => (
     <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : '20px'} ${filter === 'special' ? ' 0 ' : '20px'} 20px 20px` }}>
         {actualFoodList.map((foodId) => (
             <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
@@ -78,11 +90,17 @@ FoodList.propTypes = {
     filter: PropTypes.string.isRequired
 };
 
-const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
-    const favSlimeCalc = (currentFood) => {
+interface FoodDetailsProps {
+    food: string;
+    topBtn: boolean;
+    setFilter: (filter: string) => void;
+}
+
+const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFilter }) => {
+    const favSlimeCalc = (currentFood: string): keyof typeof slimesList | 'none' => {
         for (let slime in slimesList)
-            if (slimesList[slime][2] === currentFood)
-                return slime;
+            if (slimesList[slime as keyof typeof slimesList][2] === currentFood)
+                return slime as keyof typeof slimesList;
         return 'none';
     };
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
@@ -135,7 +153,12 @@ FoodDetails.propTypes = {
     setFilter: PropTypes.func.isRequired
 };
 
-const FoodDescription = ({ food: foodName, topBtn }) => {
+interface FoodDescriptionProps {
+    food: string;
+    topBtn: boolean;
+}
+
+const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBtn }) => {
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
     return (
         <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
@@ -159,7 +182,7 @@ FoodDescription.propTypes = {
 };
 
 export const Food = () => {
-    const { food: foodName } = useParams();
+    const { food: foodName } = useParams<{ food: string }>();
     const [filter, setFilter] = useState('any');
     const [food, setFood] = useState('carrot');
 
@@ -209,7 +232,7 @@ export const Food = () => {
 
     if (foodName && !foodNames.includes(foodName)) {
         return (
-            <Navigate to='/food/carrot' />
+            <Redirect to='/food/carrot' />
         );
     }
 
@@ -233,3 +256,5 @@ export const Food = () => {
 Food.propTypes = {
     food: PropTypes.string,
 };
+
+export default Food;

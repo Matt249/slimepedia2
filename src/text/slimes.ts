@@ -1,4 +1,4 @@
-export const slimeNames = [
+export const slimeNames: string[] = [
     'pink',
     'cotton',
     'tabby',
@@ -23,7 +23,7 @@ export const slimeNames = [
     'tarr'
 ];
 
-export const slimesList = {
+export const slimesList: { [key: string]: [string, string, string, boolean, string[], string] } = {
     'pink': ['Pink Slime', 'food', 'none', true, ['rf', 'ss', 'ev', 'pb'], 'ball'],
     'cotton': ['Cotton Slime', 'veggies', 'lettuce', true, ['rf', 'ss', 'pb'], 'bouncy'],
     'tabby': ['Tabby Slime', 'meat', 'henStony', true, ['rf', 'ss', 'ev'], 'yarn'],
@@ -49,7 +49,7 @@ export const slimesList = {
 };
 
 
-export const slimesText = {
+export const slimesText: { [key: string]: string } = {
     'pink': 'Their coral hue is scientifically proven to be the color of cheer.',
     'cotton': 'A hop, a skip, a jump and- oh, it\'s gone.',
     'tabby': 'Those stripes, that tail, that wiggle, wiggle, wiggle.',
@@ -74,7 +74,7 @@ export const slimesText = {
     'tarr': 'Those awful, ravenous rainbows.'
 };
 
-export const slimepedia = {
+export const slimepedia: { [key: string]: [string, string, string] } = {
     'pink': [
         "Pink Slimes are the most common slime found on the Far, Far Range. They're cheerful, docile, and the easiest of all slimes to ranch. A pink slime will eat anything you put in front of it, though they have no favorite food, and their plorts are the least valuable of all slimes.",
         "Not much to worry about with a pink slime. They're soft, squishy, very happy to be around a rancher, and found all over the Range. But because of this, a rancher won't go far without finding a few pink plorts, which can lead to largos, and then...",

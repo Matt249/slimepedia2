@@ -138,3 +138,5 @@ export const Buildings = () => {
         </div>
     );
 }
+
+export default Buildings;

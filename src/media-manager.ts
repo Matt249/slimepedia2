@@ -1,8 +1,16 @@
-let folders = {};
+interface FolderObject {
+    [key: string]: any;
+}
+
+let folders: { [key: string]: FolderObject } = {};
 
 export const initializeFolders = () => {
-    const createFolderObject = (globResult) => {
-        return Object.entries(globResult).reduce((acc, [path, module]) => {
+    interface FolderObject {
+        [key: string]: any;
+    }
+
+    const createFolderObject = (globResult: Record<string, any>): FolderObject => {
+        return Object.entries(globResult).reduce((acc: FolderObject, [path, module]) => {
             const fileName = (path.split('/').pop() || '').split('?')[0];
             acc[fileName] = module;
             return acc;
@@ -32,7 +40,7 @@ export const initializeFolders = () => {
     };
 };
 
-export const mediaFetcher = (path) => {
+export const mediaFetcher = (path: string) => {
     const pathList = path.split('/');
     const requiredFile = pathList[1];
     const requiredFolder = pathList[0];

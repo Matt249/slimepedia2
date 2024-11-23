@@ -11,3 +11,5 @@ export const ErrorPage = () => {
         </header>
     );
 }
+
+export default ErrorPage;

@@ -431,3 +431,5 @@ export const Blueprints = () => {
         </>
     );
 };
+
+export default Blueprints;

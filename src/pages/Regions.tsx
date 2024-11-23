@@ -416,3 +416,5 @@ Regions.propTypes = {
     region: PropTypes.string,
     changePage: PropTypes.func
 };
+
+export default Regions;
