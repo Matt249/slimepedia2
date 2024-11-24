@@ -34,7 +34,7 @@ const ConstructionList: React.FC<ConstructionListProps> = ({ recipe: pattern, re
 
     useEffect(() => {
         const newRecipe: { [kay: string]: number } = {};
-        for (let element in pattern)
+        for (const element in pattern)
             newRecipe[element] = pattern[element] * quantity;
         setRecipe(newRecipe);
     }, [pattern, quantity]);
@@ -136,13 +136,13 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
 
 interface UpgradesPageProps {
     recipeListAdder: (recipe: Record<string, number>) => void;
-    blueprint: string;
-    tier: number;
+    blueprint: string | null;
+    tier?: number;
 }
 
-const UpgradesPage: React.FC<UpgradesPageProps> = ({ recipeListAdder, blueprint, tier = 1 }) => {
-    const [selectedUpgrade, setSelectedUpgrade] = useState(blueprint || null);
-    const [selectedTier, setSelectedTier] = useState(1);
+const UpgradesPage: React.FC<UpgradesPageProps> = ({ recipeListAdder, blueprint, tier = 1}) => {
+    const [selectedUpgrade, setSelectedUpgrade] = useState<string | null>(blueprint || null);
+    const [selectedTier, setSelectedTier] = useState<number>(tier);
     const upgradeSelection = (upgrade: string, tier: number) => {
         if (upgrade === selectedUpgrade && tier === selectedTier) {
             setSelectedUpgrade(null);
@@ -197,7 +197,7 @@ const UpgradesPage: React.FC<UpgradesPageProps> = ({ recipeListAdder, blueprint,
 
 interface UtilitiesPageProps {
     recipeListAdder: (recipe: Record<string, number>) => void;
-    blueprint: string;
+    blueprint: string | null;
 }
 
 const UtilitiesPage: React.FC<UtilitiesPageProps> = ({ recipeListAdder, blueprint = 'medstation' }) => {
@@ -212,7 +212,7 @@ const UtilitiesPage: React.FC<UtilitiesPageProps> = ({ recipeListAdder, blueprin
             </div>
             <div className='blueprint-infos'>
                 <div className='vac-upgrade-title-box'>
-                    <img src={!blueprint ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={utilitiesList[blueprint][0]} />
+                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? 'No Blueprint' : utilitiesList[blueprint][0]} />
                     <h1>{blueprint === null ? 'Select a blueprint' : utilitiesList[blueprint][0]}</h1>
                     <h3>{blueprint === null ? 'Select an upgrade to view its details' : utilitiesDescription[blueprint]}</h3>
                 </div>
@@ -236,7 +236,7 @@ const UtilitiesPage: React.FC<UtilitiesPageProps> = ({ recipeListAdder, blueprin
 
 interface WarpPageProps {
     recipeListAdder: (recipe: Record<string, number>) => void;
-    blueprint: string;
+    blueprint: string | null;
 }
 
 const WarpPage: React.FC<WarpPageProps> = ({ recipeListAdder, blueprint = 'snowyteleporter' }) => {
@@ -275,7 +275,7 @@ const WarpPage: React.FC<WarpPageProps> = ({ recipeListAdder, blueprint = 'snowy
 
 interface DecorationsPageProps {
     recipeListAdder: (recipe: Record<string, number>) => void;
-    blueprint: string;
+    blueprint: string | null;
 }
 
 const DecorationsPage: React.FC<DecorationsPageProps> = ({ recipeListAdder, blueprint = 'emeraldcypress' }) => {
@@ -377,7 +377,7 @@ export const Blueprints = () => {
     const addToRecipeList = (items: { [key: string]: number }) => {
         setRecipeList(prevList => {
             const newList: { [key: string]: number } = { ...prevList };
-            for (let item in items) {
+            for (const item in items) {
                 if (newList[item] === undefined)
                     newList[item] = items[item];
                 else
@@ -388,9 +388,9 @@ export const Blueprints = () => {
     };
 
     const renderPage = () => {
-        if (blueprint === null)
+/*         if (blueprint === null)
             return <></>;
-        switch (tab) {
+ */        switch (tab) {
             case 'upgrades':
                 return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} tier={tier || 1} />;
             case 'utilities':

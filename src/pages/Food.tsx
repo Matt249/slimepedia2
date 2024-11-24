@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
+import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
@@ -85,7 +85,7 @@ interface FoodDetailsProps {
 
 const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFilter }) => {
     const favSlimeCalc = (currentFood: string): keyof typeof slimesList | 'none' => {
-        for (let slime in slimesList)
+        for (const slime in slimesList)
             if (slimesList[slime as keyof typeof slimesList][2] === currentFood)
                 return slime as keyof typeof slimesList;
         return 'none';
@@ -159,6 +159,7 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
 
 export const Food = () => {
     const { food: foodName } = useParams<{ food: string }>();
+    const navigate = useNavigate(); // Utilisez useNavigate pour la redirection
     const [filter, setFilter] = useState('any');
     const [food, setFood] = useState('carrot');
 
@@ -170,10 +171,16 @@ export const Food = () => {
             }
             else if (foodNames.includes(foodName))
                 setFood(foodName);
-            else setFood('carrot');
+            else {
+                setFood('carrot');
+                navigate('/food/carrot'); // Redirection si foodName n'est pas valide
+            }
         }
-        else setFood('carrot');
-    }, [foodName]);
+        else {
+            setFood('carrot');
+            navigate('/food/carrot'); // Redirection si foodName est undefined
+        }
+    }, [foodName, navigate]);
 
     const [topBtn, setTopBtn] = useState(false);
 

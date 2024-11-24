@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, createRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { spawnLocationsList } from '../text/regions';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';

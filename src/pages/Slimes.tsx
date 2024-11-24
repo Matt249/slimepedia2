@@ -75,7 +75,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                     <img src={favFoodIcon} alt='None' />
                     <div>
                         <h3>Favorite Food</h3>
-                        <h4>None</h4>
+                        <h4>{['ash', 'ranchersnslimes'].includes(currentSlimeList[2]) ? foodList[currentSlimeList[2]][0] : 'None'}</h4>
                     </div>
                 </div>
             }

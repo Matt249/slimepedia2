@@ -12,9 +12,9 @@ export const NavBar = () => {
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
     const toggleTheme = () => {
         setDarkMode(!darkMode);
-        var rootElement = document.querySelector(':root');
+        const rootElement = document.querySelector(':root') as HTMLElement | null;
         if (rootElement) {
-            var rootStyle: CSSStyleDeclaration = (rootElement as HTMLElement).style;
+            const rootStyle: CSSStyleDeclaration = (rootElement as HTMLElement).style;
             rootStyle.setProperty('--background-color', darkMode ? '#000' : '#EFE7D4');
             rootStyle.setProperty('--menu-color-0', darkMode ? '#222' : '#EFE7D4');
             rootStyle.setProperty('--menu-color-1', darkMode ? '#181818' : '#E9DDC7');

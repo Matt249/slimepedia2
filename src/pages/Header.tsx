@@ -3,7 +3,7 @@ import pink from '../assets/slimes/pink.png';
 import phosphor from '../assets/slimes/phosphor.png';
 
 interface HeaderProps {
-    dark: boolean;
+    dark?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({ dark }) => {

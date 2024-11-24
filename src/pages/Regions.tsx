@@ -57,7 +57,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                 </NavLink>
             ))}
         </div>
-        <div className='region-food'>const
+        <div className='region-food'>
             <h2 className='box-title'>Available Food</h2>
             {regionElements[region][1].map((food, index) => (
                 <NavLink to={`/food/${food}`} style={{ textDecoration: 'none' }} key={`${food}-${index}`}>
@@ -94,7 +94,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
             <div>
                 <img className='no-hover' src={mediaFetcher(`world/${region}.png`)} alt='Current Biome' />
             </div>
-            <div className='region-connection-separator'>const
+            <div className='region-connection-separator'>
                 <Down />
             </div>
             <div className='region-from'>
@@ -125,7 +125,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     />
                 </div>
                 :
-                <NavLink to={`/resources/${resource}`} style={{ textDecoration: 'none' }} key={resource}>
+                <NavLink to={regionsResourcesInfos[resource][2]} style={{ textDecoration: 'none' }} key={resource}>
                     <div
                         className='region-element-resource resource-hover'
                         key={resource}
@@ -252,7 +252,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
 export const Regions = () => {
 
     const [musicMenu, setMusicMenu] = useState(false);
-    const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null); // État pour suivre la musique en cours de lecture
+    const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
     const themeDayRef = useRef(null);
     const relaxDayRef = useRef(null);
@@ -261,7 +261,6 @@ export const Regions = () => {
     const relaxNightRef = useRef(null);
     const ambientNightRef = useRef(null);
 
-    // Fonction pour arrêter la musique en cours et lancer la nouvelle
     const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
         if (currentAudio)
             if (currentAudio !== audioRef.current) {
@@ -291,6 +290,7 @@ export const Regions = () => {
 
     const { region: regionName } = useParams();
     const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
+    console.log(region)
     const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
     const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
     const regionDescriptionRef = useRef<HTMLDivElement>(null);
@@ -314,15 +314,14 @@ export const Regions = () => {
     }
 
 
-    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, regionItem: string) => {
+    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
         if ((e.target as HTMLVideoElement).readyState >= 3)
             (e.target as HTMLVideoElement).play();
     };
 
-    const handleMouseLeave = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, regionItem: string) => {
+    const handleMouseLeave = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
         if ((e.target as HTMLVideoElement).readyState >= 3)
-            if (region !== region)
-                (e.target as HTMLVideoElement).pause();
+            (e.target as HTMLVideoElement).pause();
     };
 
     const backgroudRegion = {
@@ -350,8 +349,9 @@ export const Regions = () => {
                                 <video
                                     className='region-video'
                                     src={mediaFetcher(`videos/${regionInfos[regionItem][2]}.light.webm`)}
-                                    onMouseEnter={e => handleMouseEnter(e, regionItem)}
-                                    onMouseLeave={e => handleMouseLeave(e, regionItem)}
+                                    onMouseEnter={e => handleMouseEnter(e)}
+                                    onMouseLeave={e => { if (regionItem !== region) handleMouseLeave(e) }}
+                                    autoPlay={regionItem === region}
                                     disablePictureInPicture loop muted
                                 >
                                     {regionInfos[regionItem][0]} Video
@@ -368,7 +368,10 @@ export const Regions = () => {
                     <video
                         className='region-background-video'
                         src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
-                        disablePictureInPicture autoPlay loop muted
+                        disablePictureInPicture
+                        autoPlay
+                        loop
+                        muted
                         onLoadedData={e => {
                             (e.target as HTMLVideoElement).play();
                         }}

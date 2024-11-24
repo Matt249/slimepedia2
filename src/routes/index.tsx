@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { ErrorPage } from "../pages/ErrorPage";
 
-function lazyWithDefault<T extends ComponentType<any>>(factory: () => Promise<{ default: T }>): LazyExoticComponent<T> {
+function lazyWithDefault<T extends ComponentType>(factory: () => Promise<{ default: T }>): LazyExoticComponent<T> {
     return React.lazy(factory);
 }
 
@@ -32,7 +32,7 @@ export default function Index() {
                     <Route path="/items/" element={<Items />} />
                     <Route path="/items/:tab" element={<Items />} />
                     <Route path="/items/:tab/:item" element={<Items />} />
-                    <Route path="/map/*" element={/* <Map /> */ <Header />} />
+                    <Route path="/map/*" element={<Header />} />
                     <Route path="/regions" element={<Regions />} />
                     <Route path="/regions/:region" element={<Regions />} />
                     <Route path="/weather" element={<Header />} />

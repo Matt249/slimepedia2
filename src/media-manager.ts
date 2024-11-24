@@ -1,15 +1,17 @@
+import noneImg from './assets/misc/none.png';
+
 interface FolderObject {
-    [key: string]: any;
+    [key: string]: string | undefined;
 }
 
 let folders: { [key: string]: FolderObject } = {};
 
 export const initializeFolders = () => {
     interface FolderObject {
-        [key: string]: any;
+        [key: string]: string | undefined;
     }
 
-    const createFolderObject = (globResult: Record<string, any>): FolderObject => {
+    const createFolderObject = (globResult: Record<string, undefined>): FolderObject => {
         return Object.entries(globResult).reduce((acc: FolderObject, [path, module]) => {
             const fileName = (path.split('/').pop() || '').split('?')[0];
             acc[fileName] = module;
@@ -38,19 +40,20 @@ export const initializeFolders = () => {
         wallpapers: createFolderObject(import.meta.glob('/src/assets/wallpapers/*', { eager: true, query: '?url', import: 'default' })),
         world: createFolderObject(import.meta.glob('/src/assets/world/*', { eager: true, query: '?url', import: 'default' }))
     };
+    console.log('Folders initialized: ', folders);
 };
 
-export const mediaFetcher = (path: string) => {
+export const mediaFetcher = (path: string): string => {
     const pathList = path.split('/');
     const requiredFile = pathList[1];
     const requiredFolder = pathList[0];
     const folder = folders[requiredFolder];
     if (!folder) {
         console.error(`Folder not found: ${requiredFolder}`);
-        return null;
+        return noneImg;
     }
     const cleanedFile = requiredFile.replace(/\?.*$/, '');
-    return folder[cleanedFile] || null;
+    return folder[cleanedFile] || noneImg;
 };
 
 initializeFolders();

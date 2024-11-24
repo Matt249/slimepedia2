@@ -3,7 +3,16 @@ import { mediaFetcher } from '../media-manager';
 import React from 'react';
 import '../css/NavButton.css';
 
-export const NavButton = ({
+interface NavButtonProps {
+    name?: string;
+    icon?: string;
+    size?: number;
+    action?: () => void;
+    selected?: boolean;
+    tilting?: string;
+}
+
+export const NavButton: React.FC<NavButtonProps> = ({
     name = "Slimes",
     icon = "slimes/pink",
     size = 100,

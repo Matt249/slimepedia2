@@ -2,7 +2,14 @@ import { mediaFetcher } from "../media-manager";
 import React from 'react';
 import "../css/Tab.css";
 
-export const Tab = ({
+interface TabProps {
+    title?: string;
+    icon?: string;
+    selected?: boolean;
+    action?: () => void;
+}
+
+export const Tab: React.FC<TabProps> = ({
     title = 'Default Title',
     icon = 'misc/pediaquestion',
     selected = false,

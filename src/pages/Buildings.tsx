@@ -66,10 +66,8 @@ export const Buildings = () => {
         };
     }, []);
     const upgradeInfo = () => {
-        var upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
-        if (!upgrade)
-            return <Navigate to='/buildings/' />;
-        if (!currentUpgrade)
+        const upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
+        if (!currentUpgrade) {
             return (
                 <div className='upgrade-infos upgrade-no-infos'>
                     <div>
@@ -79,6 +77,9 @@ export const Buildings = () => {
                     </div>
                 </div>
             );
+        }
+        if (!upgrade)
+            return <Navigate to='/buildings/' />;
         return (
             <div className='upgrade-infos upgrade-infos-available'>
                 <div className='upgrade-title'>
