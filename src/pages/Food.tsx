@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Redirect, NavLink, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
@@ -7,7 +7,6 @@ import { Tab } from '../components/Tab';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
 import React from 'react';
-import PropTypes from 'prop-types';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
@@ -54,11 +53,6 @@ const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
     </div>
 );
 
-FoodTabs.propTypes = {
-    filter: PropTypes.string.isRequired,
-    setFilter: PropTypes.func.isRequired
-};
-
 interface FoodListProps {
     actualFoodList: string[];
     wideScreen: boolean;
@@ -82,13 +76,6 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, f
         ))}
     </div>
 );
-
-FoodList.propTypes = {
-    actualFoodList: PropTypes.arrayOf(PropTypes.any).isRequired,
-    wideScreen: PropTypes.bool.isRequired,
-    food: PropTypes.string.isRequired,
-    filter: PropTypes.string.isRequired
-};
 
 interface FoodDetailsProps {
     food: string;
@@ -147,12 +134,6 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFi
     )
 };
 
-FoodDetails.propTypes = {
-    food: PropTypes.string.isRequired,
-    topBtn: PropTypes.bool.isRequired,
-    setFilter: PropTypes.func.isRequired
-};
-
 interface FoodDescriptionProps {
     food: string;
     topBtn: boolean;
@@ -176,11 +157,6 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
     )
 };
 
-FoodDescription.propTypes = {
-    food: PropTypes.string.isRequired,
-    topBtn: PropTypes.bool.isRequired
-};
-
 export const Food = () => {
     const { food: foodName } = useParams<{ food: string }>();
     const [filter, setFilter] = useState('any');
@@ -189,14 +165,16 @@ export const Food = () => {
     useEffect(() => {
         if (foodName) {
             if (foodName in foodTypesList) {
+                console.log(foodTypesList[foodName]);
                 setFood(foodTypesList[foodName][1]);
+                console.log(food);
                 setFilter(foodTypesList[foodName][0]);
             }
+            else if (foodNames.includes(foodName))
+                setFood(foodName);
+            else setFood('carrot');
         }
-        else {
-            setFood(foodName || 'carrot');
-        }
-
+        else setFood('carrot');
     }, [foodName]);
 
     const [topBtn, setTopBtn] = useState(false);
@@ -230,12 +208,6 @@ export const Food = () => {
         }
     }, [filter]);
 
-    if (foodName && !foodNames.includes(foodName)) {
-        return (
-            <Redirect to='/food/carrot' />
-        );
-    }
-
     return (
         <div>
             <div className='list-container'>
@@ -251,10 +223,6 @@ export const Food = () => {
             </div>
         </div>
     );
-};
-
-Food.propTypes = {
-    food: PropTypes.string,
 };
 
 export default Food;

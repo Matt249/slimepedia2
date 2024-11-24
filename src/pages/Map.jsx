@@ -12,8 +12,8 @@ export const Map = () => {
     const bounds = [[-90, -180], [90, 180]];
 
     useEffect(() => {
-        if (!mapRef.current) return; 
-        
+        if (!mapRef.current) return;
+
         const map = mapRef.current;
         map.setView(center, zoom, { animate: false });
     }, [center, zoom]);

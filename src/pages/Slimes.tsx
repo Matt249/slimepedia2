@@ -1,12 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
-import { NavButton } from '../components/NavButton.tsx';
+import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes.js';
 import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import largo from '/src/assets/misc/largo.png';
 import none from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
@@ -16,7 +15,12 @@ import pediaPlort from '/src/assets/misc/pediaplort.png';
 import React from 'react';
 import '../css/Pedia.css';
 
-const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
+interface SlimeDetailsProps {
+    currentSlimeList: [string, string, string, boolean, string[], string];
+    selectedSlime: string;
+}
+
+const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedSlime }) => {
     const slimeName = currentSlimeList[0];
     const slimeIcon = selectedSlime === "none" ? none : mediaFetcher(`slimes/${selectedSlime}.png`);
     const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? none : mediaFetcher(`plorts/${selectedSlime}.png`);
@@ -37,7 +41,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                 </div>
                 <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />
             </div>
-            {foodTypesNames.includes(currentSlimeList[2]) ?
+            {foodTypesNames.includes(currentSlimeList[1]) ?
                 <NavLink to={`/food/${currentSlimeList[1]}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box box-food link-to-food'>
                         <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
@@ -106,14 +110,12 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
     );
 };
 
-SlimeDetails.propTypes = {
-    currentSlimeList: PropTypes.arrayOf(PropTypes.any).isRequired,
-    selectedSlime: PropTypes.string.isRequired,
+interface SlimeDescriptionProps {
+    slimepediaEntry: [string, string, string];
+    topBtn: boolean;
+}
 
-};
-
-
-const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
+const SlimeDescription: React.FC<SlimeDescriptionProps> = ({ slimepediaEntry, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
             <img src={pediaSlime} alt='Slimeology' />
@@ -132,11 +134,6 @@ const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
         <p>{slimepediaEntry[2]}</p>
     </div>
 );
-
-SlimeDescription.propTypes = {
-    slimepediaEntry: PropTypes.arrayOf(PropTypes.string).isRequired,
-    topBtn: PropTypes.bool.isRequired
-};
 
 export const Slimes = () => {
     const { slime: slimeName } = useParams();
@@ -193,10 +190,6 @@ export const Slimes = () => {
             </div>
         </div>
     );
-};
-
-Slimes.propTypes = {
-    slime: PropTypes.string,
 };
 
 export default Slimes;

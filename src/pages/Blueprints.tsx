@@ -10,7 +10,6 @@ import {
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
 import React from 'react';
-import PropTypes from 'prop-types';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import utilitiesImg from '/src/assets/misc/utilities.png';
 import warpImg from '/src/assets/misc/warp.png';
@@ -21,14 +20,20 @@ import trashImg from '/src/assets/misc/trash.png';
 import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
 
-const ConstructionList = ({ recipe: pattern, recipeListAdder, hideQtty = false }) => {
+interface ConstructionListProps {
+    recipe: Record<string, number>;
+    recipeListAdder: (recipe: Record<string, number>) => void;
+    hideQtty?: boolean;
+}
+
+const ConstructionList: React.FC<ConstructionListProps> = ({ recipe: pattern, recipeListAdder, hideQtty = false }) => {
     const [quantity, setQuantity] = useState(1);
     const increaseQuantity = () => setQuantity(prevQtty => prevQtty + (prevQtty < 99 ? 1 : 0));
     const decreaseQuantity = () => setQuantity(prevQtty => prevQtty - (prevQtty > 1 ? 1 : 0));
-    const [recipe, setRecipe] = useState({});
+    const [recipe, setRecipe] = useState<{ [key: string]: number }>({});
 
     useEffect(() => {
-        const newRecipe = {};
+        const newRecipe: { [kay: string]: number } = {};
         for (let element in pattern)
             newRecipe[element] = pattern[element] * quantity;
         setRecipe(newRecipe);
@@ -65,13 +70,13 @@ const ConstructionList = ({ recipe: pattern, recipeListAdder, hideQtty = false }
     );
 };
 
-ConstructionList.propTypes = {
-    recipe: PropTypes.object.isRequired,
-    recipeListAdder: PropTypes.func.isRequired,
-    hideQtty: PropTypes.bool
-};
+interface UpgradeItemListProps {
+    selected: boolean;
+    upgradePack: [string, string, number];
+    selectedCallback: (upgrade: string, tier: number) => void;
+}
 
-const UpgradeItemList = ({
+const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
     selected = false,
     upgradePack,
     selectedCallback
@@ -102,7 +107,7 @@ const UpgradeItemList = ({
 
     return (
         <NavLink
-            className={'vac-upgrade-item' + (selected === upgradePack[0] ? ' selected' : '')}
+            className={'vac-upgrade-item' + (selected ? ' selected' : '')}
             key={upgradePack[0]}
             to={`/blueprints/upgrades/${upgradePack[0]}`}
         >
@@ -129,16 +134,16 @@ const UpgradeItemList = ({
 
 };
 
-UpgradeItemList.propTypes = {
-    selected: PropTypes.bool,
-    upgradePack: PropTypes.array.isRequired,
-    selectedCallback: PropTypes.func.isRequired
-};
+interface UpgradesPageProps {
+    recipeListAdder: (recipe: Record<string, number>) => void;
+    blueprint: string;
+    tier: number;
+}
 
-const UpgradesPage = ({ recipeListAdder, blueprint }) => {
+const UpgradesPage: React.FC<UpgradesPageProps> = ({ recipeListAdder, blueprint, tier = 1 }) => {
     const [selectedUpgrade, setSelectedUpgrade] = useState(blueprint || null);
     const [selectedTier, setSelectedTier] = useState(1);
-    const upgradeSelection = (upgrade, tier) => {
+    const upgradeSelection = (upgrade: string, tier: number) => {
         if (upgrade === selectedUpgrade && tier === selectedTier) {
             setSelectedUpgrade(null);
             setSelectedTier(1);
@@ -154,6 +159,7 @@ const UpgradesPage = ({ recipeListAdder, blueprint }) => {
             <div className='vac-upgrade-list'>
                 {upgradeNames.map((upgradeName) => (
                     <UpgradeItemList
+                        selected={selectedUpgrade === upgradeName && selectedTier === upgradePacks[upgradeName][1]}
                         key={upgradeName}
                         upgradePack={[upgradeName, upgradePacks[upgradeName][0], upgradePacks[upgradeName][1]]}
                         selectedCallback={upgradeSelection}
@@ -189,13 +195,12 @@ const UpgradesPage = ({ recipeListAdder, blueprint }) => {
     );
 };
 
-UpgradesPage.propTypes = {
-    recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string.isRequired,
-    tier: PropTypes.number
-};
+interface UtilitiesPageProps {
+    recipeListAdder: (recipe: Record<string, number>) => void;
+    blueprint: string;
+}
 
-const UtilitiesPage = ({ recipeListAdder, blueprint = 'medstation' }) => {
+const UtilitiesPage: React.FC<UtilitiesPageProps> = ({ recipeListAdder, blueprint = 'medstation' }) => {
     return (
         <>
             <div className='blueprint-list'>
@@ -229,12 +234,12 @@ const UtilitiesPage = ({ recipeListAdder, blueprint = 'medstation' }) => {
     )
 };
 
-UtilitiesPage.propTypes = {
-    recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string.isRequired,
-};
+interface WarpPageProps {
+    recipeListAdder: (recipe: Record<string, number>) => void;
+    blueprint: string;
+}
 
-const WarpPage = ({ recipeListAdder, blueprint = 'snowyteleporter' }) => {
+const WarpPage: React.FC<WarpPageProps> = ({ recipeListAdder, blueprint = 'snowyteleporter' }) => {
     return (
         <>
             <div className='blueprint-list'>
@@ -268,25 +273,25 @@ const WarpPage = ({ recipeListAdder, blueprint = 'snowyteleporter' }) => {
     );
 };
 
-WarpPage.propTypes = {
-    recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string
-};
+interface DecorationsPageProps {
+    recipeListAdder: (recipe: Record<string, number>) => void;
+    blueprint: string;
+}
 
-const DecorationsPage = ({ recipeListAdder, blueprint = 'emeraldcypress' }) => {
+const DecorationsPage: React.FC<DecorationsPageProps> = ({ recipeListAdder, blueprint = 'emeraldcypress' }) => {
     const lastOption = Object.keys(themeList)[Object.keys(themeList).length - 1];
     const [decoFilter, setDecoFilter] = useState<string | null>(null);
     return (
         <>
             <div className='decoration-list'>
                 <div className='decoration-tabs'>
-                <Tab title='Any' icon='misc/decorations' action={() => setDecoFilter(null)} selected={decoFilter === null}/>
+                    <Tab title='Any' icon='misc/decorations' action={() => setDecoFilter(null)} selected={decoFilter === null} />
                     {Object.keys(themeList).map((theme) => (
-                        <Tab key={theme} title={themeList[theme][0]} icon={themeList[theme][1]} action={() => setDecoFilter(theme)} selected={theme === decoFilter}/>
+                        <Tab key={theme} title={themeList[theme][0]} icon={themeList[theme][1]} action={() => setDecoFilter(theme)} selected={theme === decoFilter} />
                     ))}
                 </div>
-                <div className='blueprint-list' style={{borderRadius: `${decoFilter === null ? '0' : '20px'} ${decoFilter === lastOption ? '0' : '20px'} 20px 20px`}}>
-                {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
+                <div className='blueprint-list' style={{ borderRadius: `${decoFilter === null ? '0' : '20px'} ${decoFilter === lastOption ? '0' : '20px'} 20px 20px` }}>
+                    {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
                         <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
                             <NavButton key={decoName} name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} />
                         </NavLink>
@@ -326,12 +331,12 @@ const DecorationsPage = ({ recipeListAdder, blueprint = 'emeraldcypress' }) => {
     );
 };
 
-DecorationsPage.propTypes = {
-    recipeListAdder: PropTypes.func.isRequired,
-    blueprint: PropTypes.string
-};
+interface RecipeMenuProps {
+    recipeList: Record<string, number>;
+    resetList: () => void;
+}
 
-const RecipeMenu = ({ recipeList, resetList }) => {
+const RecipeMenu: React.FC<RecipeMenuProps> = ({ recipeList, resetList }) => {
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     return (
         <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
@@ -361,11 +366,6 @@ const RecipeMenu = ({ recipeList, resetList }) => {
     )
 };
 
-RecipeMenu.propTypes = {
-    recipeList: PropTypes.object.isRequired,
-    resetList: PropTypes.func.isRequired
-};
-
 export const Blueprints = () => {
     const { tab: tabName, blueprint: blueprintName, tier: tierName } = useParams();
     const tab = tabName || 'upgrades';
@@ -374,9 +374,9 @@ export const Blueprints = () => {
 
     const [recipeList, setRecipeList] = useState({});
     const resetList = () => setRecipeList({});
-    const addToRecipeList = (items) => {
+    const addToRecipeList = (items: { [key: string]: number }) => {
         setRecipeList(prevList => {
-            const newList = { ...prevList };
+            const newList: { [key: string]: number } = { ...prevList };
             for (let item in items) {
                 if (newList[item] === undefined)
                     newList[item] = items[item];
@@ -392,7 +392,7 @@ export const Blueprints = () => {
             return <></>;
         switch (tab) {
             case 'upgrades':
-                return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} tier={tier} />;
+                return <UpgradesPage recipeListAdder={addToRecipeList} blueprint={blueprint} tier={tier || 1} />;
             case 'utilities':
                 return <UtilitiesPage recipeListAdder={addToRecipeList} blueprint={blueprint} />;
             case 'warp':

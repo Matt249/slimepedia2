@@ -7,7 +7,6 @@ import { mediaFetcher } from '../media-manager';
 import { NavLink, useParams } from 'react-router-dom';
 import React from 'react';
 import Down from '../components/Down';
-import PropTypes from 'prop-types';
 import podImg from '/src/assets/misc/pod.png';
 import noneImg from '/src/assets/misc/none.png';
 import buckImg from '/src/assets/misc/buck.png';
@@ -20,7 +19,12 @@ import sunImg from '/src/assets/misc/sun.png';
 import moonImg from '/src/assets/misc/moon.png';
 import '../css/Regions.css';
 
-const RegionDescription = ({ region, regionDescriptionRef }) => (
+interface RegionDescriptionProps {
+    region: string;
+    regionDescriptionRef: React.RefObject<HTMLDivElement>;
+}
+
+const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className='region-description' ref={regionDescriptionRef}>
         <div className='region-pedia'>
             <h2 className='box-title'>Slimepedia Entry</h2>
@@ -53,7 +57,7 @@ const RegionDescription = ({ region, regionDescriptionRef }) => (
                 </NavLink>
             ))}
         </div>
-        <div className='region-food'>
+        <div className='region-food'>const
             <h2 className='box-title'>Available Food</h2>
             {regionElements[region][1].map((food, index) => (
                 <NavLink to={`/food/${food}`} style={{ textDecoration: 'none' }} key={`${food}-${index}`}>
@@ -90,7 +94,7 @@ const RegionDescription = ({ region, regionDescriptionRef }) => (
             <div>
                 <img className='no-hover' src={mediaFetcher(`world/${region}.png`)} alt='Current Biome' />
             </div>
-            <div className='region-connection-separator'>
+            <div className='region-connection-separator'>const
                 <Down />
             </div>
             <div className='region-from'>
@@ -143,12 +147,12 @@ const RegionDescription = ({ region, regionDescriptionRef }) => (
     </div>
 );
 
-RegionDescription.propTypes = {
-    region: PropTypes.string,
-    regionDescriptionRef: PropTypes.object
-};
+interface RanchDescriptionProps {
+    region: string,
+    regionDescriptionRef: React.RefObject<HTMLDivElement>
+}
 
-const RanchDescription = ({ region, regionDescriptionRef }) => (
+const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className={`ranch-description${region === 'conservatory' ? ' ranch-conservatory' : ''}`} ref={regionDescriptionRef}>
         <div className='ranch-pedia'>
             <h2 className='box-title'>Slimepedia Entry</h2>
@@ -245,11 +249,6 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
     </div>
 );
 
-RanchDescription.propTypes = {
-    region: PropTypes.string,
-    regionDescriptionRef: PropTypes.object
-};
-
 export const Regions = () => {
 
     const [musicMenu, setMusicMenu] = useState(false);
@@ -263,7 +262,7 @@ export const Regions = () => {
     const ambientNightRef = useRef(null);
 
     // Fonction pour arrêter la musique en cours et lancer la nouvelle
-    const playAudio = (audioRef) => {
+    const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
         if (currentAudio)
             if (currentAudio !== audioRef.current) {
                 currentAudio.pause();
@@ -277,8 +276,10 @@ export const Regions = () => {
                 return;
             }
         setCurrentAudio(audioRef.current);
-        audioRef.current.volume = 0.1;
-        audioRef.current.play();
+        if (audioRef.current) {
+            audioRef.current.volume = 0.1;
+            audioRef.current.play();
+        }
     };
 
     const getAudioName = () => {
@@ -313,15 +314,15 @@ export const Regions = () => {
     }
 
 
-    const handleMouseEnter = (e, regionItem: string) => {
-        if (e.target.readyState >= 3)
+    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, regionItem: string) => {
+        if ((e.target as HTMLVideoElement).readyState >= 3)
             (e.target as HTMLVideoElement).play();
     };
 
-    const handleMouseLeave = (e, regionItem: string) => {
-        if (e.target.readyState >= 3)
+    const handleMouseLeave = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>, regionItem: string) => {
+        if ((e.target as HTMLVideoElement).readyState >= 3)
             if (region !== region)
-                e.target.pause();
+                (e.target as HTMLVideoElement).pause();
     };
 
     const backgroudRegion = {
@@ -411,10 +412,5 @@ export const Regions = () => {
         </div>
     );
 }
-
-Regions.propTypes = {
-    region: PropTypes.string,
-    changePage: PropTypes.func
-};
 
 export default Regions;

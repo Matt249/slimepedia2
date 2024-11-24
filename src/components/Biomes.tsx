@@ -3,7 +3,6 @@ import { spawnLocationsList } from '../text/regions';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../css/Biomes.css';
 
 const light = true;
@@ -131,7 +130,3 @@ export const Biomes: React.FC<BiomesProps> = ({
         </div>
     );
 };
-
-Biomes.propTypes = {
-    spawnList: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-}
