@@ -1,19 +1,24 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
-import { NavButton } from '../components/NavButton.jsx';
-import { Biomes } from '../components/Biomes.jsx';
+import { NavLink, useParams, useNavigate } from 'react-router-dom';
+import { NavButton } from '../components/NavButton';
+import { Biomes } from '../components/Biomes';
 import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
-import { Tab } from '../components/Tab.jsx';
-import { slimesList } from '../text/slimes.js';
-import { mediaFetcher } from '../media-manager.js';
-import PropTypes from 'prop-types';
+import { Tab } from '../components/Tab';
+import { slimesList } from '../text/slimes';
+import { mediaFetcher } from '../media-manager';
+import React from 'react';
 import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
 import '../css/Pedia.css';
 
-const FoodTabs = ({ filter, setFilter }) => (
+interface FoodTabsProps {
+    filter: string;
+    setFilter: (filter: string) => void;
+}
+
+const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
     <div className='food-tabs'>
         <Tab
             title='All'
@@ -48,12 +53,14 @@ const FoodTabs = ({ filter, setFilter }) => (
     </div>
 );
 
-FoodTabs.propTypes = {
-    filter: PropTypes.string.isRequired,
-    setFilter: PropTypes.func.isRequired
-};
+interface FoodListProps {
+    actualFoodList: string[];
+    wideScreen: boolean;
+    food: string;
+    filter: string;
+}
 
-const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
+const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, filter }) => (
     <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : '20px'} ${filter === 'special' ? ' 0 ' : '20px'} 20px 20px` }}>
         {actualFoodList.map((foodId) => (
             <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
@@ -70,18 +77,17 @@ const FoodList = ({ actualFoodList, wideScreen, food, filter }) => (
     </div>
 );
 
-FoodList.propTypes = {
-    actualFoodList: PropTypes.arrayOf(PropTypes.any).isRequired,
-    wideScreen: PropTypes.bool.isRequired,
-    food: PropTypes.string.isRequired,
-    filter: PropTypes.string.isRequired
-};
+interface FoodDetailsProps {
+    food: string;
+    topBtn: boolean;
+    setFilter: (filter: string) => void;
+}
 
-const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
-    const favSlimeCalc = (currentFood) => {
-        for (let slime in slimesList)
-            if (slimesList[slime][2] === currentFood)
-                return slime;
+const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFilter }) => {
+    const favSlimeCalc = (currentFood: string): keyof typeof slimesList | 'none' => {
+        for (const slime in slimesList)
+            if (slimesList[slime as keyof typeof slimesList][2] === currentFood)
+                return slime as keyof typeof slimesList;
         return 'none';
     };
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
@@ -89,7 +95,7 @@ const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
     return (
         <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
             <div className="image-title">
-                <div className="info-title">{console.log(food)}
+                <div className="info-title">
                     <h1>{foodList[food][0]}</h1>
                     <h2>{foodDescription[food]}</h2>
                 </div>
@@ -128,51 +134,55 @@ const FoodDetails = ({ food: foodName, topBtn, setFilter }) => {
     )
 };
 
-FoodDetails.propTypes = {
-    food: PropTypes.string.isRequired,
-    topBtn: PropTypes.bool.isRequired,
-    setFilter: PropTypes.func.isRequired
-};
+interface FoodDescriptionProps {
+    food: string;
+    topBtn: boolean;
+}
 
-const FoodDescription = ({ food: foodName, topBtn }) => {
+const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBtn }) => {
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
     return (
-    <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
-        <div className='desc-title'>
-            <img src={pediaAbout} alt='Slimeology' />
-            <h3>About</h3>
+        <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
+            <div className='desc-title'>
+                <img src={pediaAbout} alt='Slimeology' />
+                <h3>About</h3>
+            </div>
+            <p>{foodpedia[food][0]}</p>
+            <div className='desc-title'>
+                <img src={pediaQuestion} alt='Rancher Risks' />
+                <h3>On the ranch</h3>
+            </div>
+            <p>{foodpedia[food][1]}</p>
         </div>
-        <p>{foodpedia[food][0]}</p>
-        <div className='desc-title'>
-            <img src={pediaQuestion} alt='Rancher Risks' />
-            <h3>On the ranch</h3>
-        </div>
-        <p>{foodpedia[food][1]}</p>
-    </div>
-)};
-
-FoodDescription.propTypes = {
-    food: PropTypes.string.isRequired,
-    topBtn: PropTypes.bool.isRequired
+    )
 };
 
 export const Food = () => {
-    const { food: foodName } = useParams();
+    const { food: foodName } = useParams<{ food: string }>();
+    const navigate = useNavigate(); // Utilisez useNavigate pour la redirection
     const [filter, setFilter] = useState('any');
     const [food, setFood] = useState('carrot');
 
     useEffect(() => {
-        if (foodName in foodTypesList) {
-            console.log(foodTypesList[foodName]);
-            setFilter(foodTypesList[foodName][0]);
-            setFood(foodTypesList[foodName][1]);
-        } else {
-            setFood(foodName || 'carrot');
+        if (foodName) {
+            if (foodName in foodTypesList) {
+                setFood(foodTypesList[foodName][1]);
+                setFilter(foodTypesList[foodName][0]);
+            }
+            else if (foodNames.includes(foodName))
+                setFood(foodName);
+            else {
+                setFood('carrot');
+                navigate('/food/carrot'); // Redirection si foodName n'est pas valide
+            }
         }
-    }, [foodName]);
+        else {
+            setFood('carrot');
+            navigate('/food/carrot'); // Redirection si foodName est undefined
+        }
+    }, [foodName, navigate]);
 
     const [topBtn, setTopBtn] = useState(false);
-    useState(() => setTopBtn(false), [  ]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -203,12 +213,6 @@ export const Food = () => {
         }
     }, [filter]);
 
-    if (foodName && !foodNames.includes(foodName)) {
-        return (
-            <Navigate to='/food/carrot' />
-        );
-    }
-
     return (
         <div>
             <div className='list-container'>
@@ -226,6 +230,4 @@ export const Food = () => {
     );
 };
 
-Food.propTypes = {
-    food: PropTypes.string,
-};
+export default Food;

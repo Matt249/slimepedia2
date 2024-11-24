@@ -5,8 +5,8 @@ import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
 import { NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import Down from '../components/Down';
-import PropTypes from 'prop-types';
 import podImg from '/src/assets/misc/pod.png';
 import noneImg from '/src/assets/misc/none.png';
 import buckImg from '/src/assets/misc/buck.png';
@@ -19,7 +19,12 @@ import sunImg from '/src/assets/misc/sun.png';
 import moonImg from '/src/assets/misc/moon.png';
 import '../css/Regions.css';
 
-const RegionDescription = ({ region, regionDescriptionRef }) => (
+interface RegionDescriptionProps {
+    region: string;
+    regionDescriptionRef: React.RefObject<HTMLDivElement>;
+}
+
+const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className='region-description' ref={regionDescriptionRef}>
         <div className='region-pedia'>
             <h2 className='box-title'>Slimepedia Entry</h2>
@@ -120,7 +125,7 @@ const RegionDescription = ({ region, regionDescriptionRef }) => (
                     />
                 </div>
                 :
-                <NavLink to={`/resources/${resource}`} style={{ textDecoration: 'none' }} key={resource}>
+                <NavLink to={regionsResourcesInfos[resource][2]} style={{ textDecoration: 'none' }} key={resource}>
                     <div
                         className='region-element-resource resource-hover'
                         key={resource}
@@ -142,12 +147,12 @@ const RegionDescription = ({ region, regionDescriptionRef }) => (
     </div>
 );
 
-RegionDescription.propTypes = {
-    region: PropTypes.string,
-    regionDescriptionRef: PropTypes.object
-};
+interface RanchDescriptionProps {
+    region: string,
+    regionDescriptionRef: React.RefObject<HTMLDivElement>
+}
 
-const RanchDescription = ({ region, regionDescriptionRef }) => (
+const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className={`ranch-description${region === 'conservatory' ? ' ranch-conservatory' : ''}`} ref={regionDescriptionRef}>
         <div className='ranch-pedia'>
             <h2 className='box-title'>Slimepedia Entry</h2>
@@ -169,7 +174,6 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
                         <div
                             className="ranch-element"
                             key={place}
-                            name={'coucou'}
                         >
                             <div className="region-element-content">
                                 <img
@@ -191,7 +195,6 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
                     <div
                         className="ranch-element"
                         key={place}
-                        name={regionInfos[place][0]}
                     >
                         <div className="region-element-content">
                             <img
@@ -246,15 +249,10 @@ const RanchDescription = ({ region, regionDescriptionRef }) => (
     </div>
 );
 
-RanchDescription.propTypes = {
-    region: PropTypes.string,
-    regionDescriptionRef: PropTypes.object
-};
-
 export const Regions = () => {
 
     const [musicMenu, setMusicMenu] = useState(false);
-    const [currentAudio, setCurrentAudio] = useState(null); // État pour suivre la musique en cours de lecture
+    const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
     const themeDayRef = useRef(null);
     const relaxDayRef = useRef(null);
@@ -263,30 +261,39 @@ export const Regions = () => {
     const relaxNightRef = useRef(null);
     const ambientNightRef = useRef(null);
 
-    // Fonction pour arrêter la musique en cours et lancer la nouvelle
-    const playAudio = (audioRef) => {
-        if (currentAudio && currentAudio !== audioRef.current) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
-        }
-        else if (currentAudio === audioRef.current) {
-            audioRef.current.pause();
-            currentAudio.currentTime = 0;
-            setCurrentAudio(null);
-            return;
-        }
+    const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
+        if (currentAudio)
+            if (currentAudio !== audioRef.current) {
+                currentAudio.pause();
+                if (currentAudio)
+                    currentAudio.currentTime = 0;
+            }
+            else if (currentAudio === audioRef.current) {
+                audioRef.current.pause();
+                currentAudio.currentTime = 0;
+                setCurrentAudio(null);
+                return;
+            }
         setCurrentAudio(audioRef.current);
-        audioRef.current.volume = 0.1;
-        audioRef.current.play();
+        if (audioRef.current) {
+            audioRef.current.volume = 0.1;
+            audioRef.current.play();
+        }
     };
 
-    const getAudioName = () => currentAudio === null ? '' : currentAudio.src.split('/').pop().split('.')[0];
+    const getAudioName = () => {
+        if (currentAudio === null || !currentAudio.src) return '';
+        const parts = currentAudio.src.split('/');
+        const lastPart = parts.pop();
+        return lastPart ? lastPart.split('.')[0] : '';
+    };
 
     const { region: regionName } = useParams();
     const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
+    console.log(region)
     const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
     const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
-    const regionDescriptionRef = useRef(null);
+    const regionDescriptionRef = useRef<HTMLDivElement>(null);
 
     const scrollToSection = () => {
         if (regionDescriptionRef.current)
@@ -307,15 +314,14 @@ export const Regions = () => {
     }
 
 
-    const handleMouseEnter = (e) => {
-        if (e.target.readyState >= 3)
-            e.target.play();
+    const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+        if ((e.target as HTMLVideoElement).readyState >= 3)
+            (e.target as HTMLVideoElement).play();
     };
 
-    const handleMouseLeave = (e) => {
-        if (e.target.readyState >= 3)
-            if (region !== region)
-                e.target.pause();
+    const handleMouseLeave = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
+        if ((e.target as HTMLVideoElement).readyState >= 3)
+            (e.target as HTMLVideoElement).pause();
     };
 
     const backgroudRegion = {
@@ -343,8 +349,9 @@ export const Regions = () => {
                                 <video
                                     className='region-video'
                                     src={mediaFetcher(`videos/${regionInfos[regionItem][2]}.light.webm`)}
-                                    onMouseEnter={e => handleMouseEnter(e, regionItem)}
-                                    onMouseLeave={e => handleMouseLeave(e, regionItem)}
+                                    onMouseEnter={e => handleMouseEnter(e)}
+                                    onMouseLeave={e => { if (regionItem !== region) handleMouseLeave(e) }}
+                                    autoPlay={regionItem === region}
                                     disablePictureInPicture loop muted
                                 >
                                     {regionInfos[regionItem][0]} Video
@@ -361,9 +368,12 @@ export const Regions = () => {
                     <video
                         className='region-background-video'
                         src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
-                        disablePictureInPicture autoPlay loop muted
+                        disablePictureInPicture
+                        autoPlay
+                        loop
+                        muted
                         onLoadedData={e => {
-                            e.target.play();
+                            (e.target as HTMLVideoElement).play();
                         }}
                     >
                         Video Background
@@ -406,7 +416,4 @@ export const Regions = () => {
     );
 }
 
-Regions.propTypes = {
-    region: PropTypes.string,
-    changePage: PropTypes.func
-};
+export default Regions;

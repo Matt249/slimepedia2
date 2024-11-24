@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
+import React from 'react';
 import worldImg from '/src/assets/map/output.png';
 import 'leaflet/dist/leaflet.css';
 import '../css/Map.css';
@@ -11,8 +12,8 @@ export const Map = () => {
     const bounds = [[-90, -180], [90, 180]];
 
     useEffect(() => {
-        if (!mapRef.current) return; 
-        
+        if (!mapRef.current) return;
+
         const map = mapRef.current;
         map.setView(center, zoom, { animate: false });
     }, [center, zoom]);
@@ -20,7 +21,8 @@ export const Map = () => {
     const handleMoveEnd = () => {
         if (mapRef.current) {
             const map = mapRef.current;
-            setCenter(map.getCenter());
+            const center = map.getCenter();
+            setCenter([center.lat, center.lng]);
             setZoom(map.getZoom());
         }
     };
@@ -37,3 +39,5 @@ export const Map = () => {
         </MapContainer>
     );
 }
+
+export default Map;

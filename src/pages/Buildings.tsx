@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
 import { buildingNames, buildingList, buildingUpgrades, usageList } from '../text/buildings';
 import { mediaFetcher } from '../media-manager';
-import { NavLink, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import upgradeImg from '/src/assets/misc/upgrade.png';
 import buck from '/src/assets/misc/buck.png';
 import pediaTut from '/src/assets/misc/pediatut.png';
@@ -65,7 +66,8 @@ export const Buildings = () => {
         };
     }, []);
     const upgradeInfo = () => {
-        if (currentUpgrade === null || buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade) === undefined)
+        const upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
+        if (!currentUpgrade) {
             return (
                 <div className='upgrade-infos upgrade-no-infos'>
                     <div>
@@ -75,7 +77,9 @@ export const Buildings = () => {
                     </div>
                 </div>
             );
-        var upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
+        }
+        if (!upgrade)
+            return <Navigate to='/buildings/' />;
         return (
             <div className='upgrade-infos upgrade-infos-available'>
                 <div className='upgrade-title'>
@@ -137,3 +141,5 @@ export const Buildings = () => {
         </div>
     );
 }
+
+export default Buildings;

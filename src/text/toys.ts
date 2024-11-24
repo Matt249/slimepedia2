@@ -1,4 +1,4 @@
-export const toyNames = [
+export const toyNames: string[] = [
     'ball',
     'bouncy',
     'yarn',
@@ -11,7 +11,7 @@ export const toyNames = [
     'fox'
 ]
 
-export const toysList = {
+export const toysList: {[key: string] : [string, string]} = {
     'ball': ['Beach Ball', 'pink'],
     'bouncy': ['Bouncy Ball', 'cotton'],
     'yarn': ['Yarn Ball', 'tabby'],
@@ -25,7 +25,7 @@ export const toysList = {
     'none': ['None', 'none']
 };
 
-export const toyDesc = {
+export const toyDesc: {[key: string] : string} = {
     'ball': 'Reduces agitation of nearby slimes, especially Pink Slimes who enjoy fun in the sun.',
     'bouncy': 'Reduces agitation of nearby slimes, especially Cotton Slimes who see it as serious competition.',
     'yarn': 'Reduces agitation of nearby slimes, especially Tabby Slimes. Though, they still don\'t know how to knit anymore than other slimes',

@@ -1,21 +1,26 @@
 import { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
-import { NavButton } from '../components/NavButton.jsx';
-import { Biomes } from '../components/Biomes.jsx';
+import { NavButton } from '../components/NavButton';
+import { Biomes } from '../components/Biomes.js';
 import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import largo from '/src/assets/misc/largo.png';
 import none from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
 import pediaSlime from '/src/assets/misc/pediaslime.png';
 import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
+import React from 'react';
 import '../css/Pedia.css';
 
-const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
+interface SlimeDetailsProps {
+    currentSlimeList: [string, string, string, boolean, string[], string];
+    selectedSlime: string;
+}
+
+const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedSlime }) => {
     const slimeName = currentSlimeList[0];
     const slimeIcon = selectedSlime === "none" ? none : mediaFetcher(`slimes/${selectedSlime}.png`);
     const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? none : mediaFetcher(`plorts/${selectedSlime}.png`);
@@ -47,8 +52,8 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     </div>
                 </NavLink>
                 :
-                <div className='little-box box-food'>{console.log(currentSlimeList[1])}
-                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[1]]} />
+                <div className='little-box box-food'>
+                    <img src={foodTypeIcon} alt={'Picture of ' + foodTypes[currentSlimeList[2]]} />
                     <div>
                         <h3>Diet</h3>
                         <h4>{foodTypes[currentSlimeList[1]]}</h4>
@@ -70,7 +75,7 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
                     <img src={favFoodIcon} alt='None' />
                     <div>
                         <h3>Favorite Food</h3>
-                        <h4>{currentSlimeList[2] === 'none' ? 'None' : foodList[currentSlimeList[2]][0]}</h4>
+                        <h4>{['ash', 'ranchersnslimes'].includes(currentSlimeList[2]) ? foodList[currentSlimeList[2]][0] : 'None'}</h4>
                     </div>
                 </div>
             }
@@ -105,14 +110,12 @@ const SlimeDetails = ({ currentSlimeList, selectedSlime }) => {
     );
 };
 
-SlimeDetails.propTypes = {
-    currentSlimeList: PropTypes.arrayOf(PropTypes.any).isRequired,
-    selectedSlime: PropTypes.string.isRequired,
+interface SlimeDescriptionProps {
+    slimepediaEntry: [string, string, string];
+    topBtn: boolean;
+}
 
-};
-
-
-const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
+const SlimeDescription: React.FC<SlimeDescriptionProps> = ({ slimepediaEntry, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
             <img src={pediaSlime} alt='Slimeology' />
@@ -131,11 +134,6 @@ const SlimeDescription = ({ slimepediaEntry, topBtn }) => (
         <p>{slimepediaEntry[2]}</p>
     </div>
 );
-
-SlimeDescription.propTypes = {
-    slimepediaEntry: PropTypes.arrayOf(PropTypes.string).isRequired,
-    topBtn: PropTypes.bool.isRequired
-};
 
 export const Slimes = () => {
     const { slime: slimeName } = useParams();
@@ -172,7 +170,6 @@ export const Slimes = () => {
                 {slimeNames.map((slimeName) => (
                     <NavLink to={`/slimes/${slimeName}`} style={{ textDecoration: 'none' }} key={slimeName}>
                         <NavButton
-                            to={`/slimes/${slimeName}`}
                             key={slimeName}
                             icon={`slimes/${slimeName}`}
                             size={wideScreen ? 125 : 100}
@@ -195,6 +192,4 @@ export const Slimes = () => {
     );
 };
 
-Slimes.propTypes = {
-    slime: PropTypes.string,
-};
+export default Slimes;

@@ -1,4 +1,4 @@
-export const recipeElements = {
+export const recipeElements: { [key: string]: [string, string, string] } = {
     'newbucks': ['Newbucks', 'misc/buck', ''],
     'pink': ['Pink Plort', 'plorts/pink', 'slimes/pink'],
     'cotton': ['Cotton Plort', 'plorts/cotton', 'slimes/cotton'],
@@ -47,7 +47,7 @@ export const recipeElements = {
     'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', '']
 };
 
-export const unlockRequirements = {
+export const unlockRequirements: { [key: string]: [string, string] } = {
     'start': ['Available at the start', 'misc/check'],
     'pod': ['Unlocked via a Pod', 'misc/pod'],
     'polestar': ['Unlocked via Polestar Provisions', 'misc/polestar'],
@@ -58,7 +58,7 @@ export const unlockRequirements = {
     'thora': ['Given by Thora West', 'ranchers/thora'],
 };
 
-export const upgradeNames = [
+export const upgradeNames: string[] = [
     'harvester',
     'health',
     'power',
@@ -73,7 +73,7 @@ export const upgradeNames = [
     'sureshot'
 ];
 
-export const upgradePacks = {
+export const upgradePacks: { [key: string]: [string, number] } = {
     'harvester': ['Resource Harvester', 1],
     'health': ['Health Modules', 3],
     'power': ['Power Modules', 4],
@@ -88,7 +88,7 @@ export const upgradePacks = {
     'sureshot': ['Golden Sureshot Modules', 3]
 };
 
-export const upgradesList = {
+export const upgradesList: { [key: string]: [string, string, { [key: string]: number }] } = {
     'harvester1': ['Resource Harvester', 'start', { 'newbucks': 450, 'cotton': 10 }],
     'health1': ['Heart Module I', 'start', { 'newbucks': 450, 'pink': 10 }],
     'health2': ['Heart Module II', 'pod', { 'newbucks': 900, 'pink': 20, 'honey': 10, 'brine': 10, 'jelly': 10, 'heartModule': 1 }],
@@ -118,7 +118,7 @@ export const upgradesList = {
     'sureshot3': ['Golden Sureshot III', 'pod', { 'newbucks': 6000, 'saber': 40, 'gold': 3, 'snowflake': 30, 'sunsap': 3, 'sureshotModule:': 1 }],
 };
 
-export const upgradeDescriptions = {
+export const upgradeDescriptions: { [key: string]: string } = {
     'harvester1': "Adds a resonator to the vac's suction mechanism that shakes loose science resources from nodes in the environment.",
     'health1': "Syncs with your body's own vital processes to enhance life systems, boosting health to 150. Plus, it's sparkly.",
     'health2': "A more advanced and even sparklier heart module that boosts health to 200.",
@@ -148,7 +148,7 @@ export const upgradeDescriptions = {
     'sureshot3': "The ultimate in Sureshot technology, this upgrade quadruples the amount of gold plorts produced when hitting gold slimes."
 };
 
-export const upgradeEffects = {
+export const upgradeEffects: { [key: string]: [[string, string], [string, string]] } = {
     'harvester1': [['misc/none', ''], ['upgrades/harvester', '+ Resource Harvester']],
     'health1': [['misc/health', '100 Health'], ['misc/health', '150 Health (+50)']],
     'health2': [['misc/health', '150 Health'], ['misc/health', '200 Health (+50)']],
@@ -178,7 +178,7 @@ export const upgradeEffects = {
     'sureshot3': [['slimes/gold', '3 Plorts per Gold Slime Fed'], ['slimes/gold', '4 Plorts per Gold Slime Fed']]
 };
 
-export const warpNames = [
+export const warpNames: string[] = [
     "teleporthomegreen",
     "teleporthomeblue",
     "teleporthomered",
@@ -203,7 +203,7 @@ export const warpNames = [
     "linkedcannonpink"
 ];
 
-export const warpGadgets = {
+export const warpGadgets: { [key: string]: [string, string, { [key: string]: number }] } = {
     'teleporthomegreen': ['Green Home Portal', 'viktor', { 'newbucks': 800, 'angler': 20, 'radiant': 10, 'wax': 10, 'wildHoney': 5 }],
     'teleporthomeblue': ['Blue Home Portal', 'viktor', { 'newbucks': 250, 'rock': 10, 'radiant': 10, 'primordy': 5 }],
     'teleporthomered': ['Red Home Portal', 'viktor', { 'newbucks': 800, 'boom': 20, 'jelly': 10, 'primordy': 10, 'lava': 5 }],
@@ -231,7 +231,7 @@ export const warpGadgets = {
     'linkedcannonpinkout': ['Pink Linked Cannon Output', 'polestar', { 'newbucks': 1000, 'batty': 10, 'mote': 3 }],
 };
 
-export const warpDescriptions = {
+export const warpDescriptions: { [key: string]: string } = {
     'teleporthomegreen': "A teleporter that allows for one-way travel back to the Conservatory.",
     'teleporthomeblue': "A teleporter that allows for one-way travel back to the Conservatory.",
     'teleporthomered': "A teleporter that allows for one-way travel back to the Conservatory.",
@@ -256,7 +256,7 @@ export const warpDescriptions = {
     'linkedcannonpink': "Combining ancient warp technology and slime science allows the two sides of this linked cannon to efficiently transport items across distances.",
 };
 
-export const utilitiesNames = [
+export const utilitiesNames: string[] = [
     'medstation',
     'dashpad',
     'springpad',
@@ -289,7 +289,7 @@ export const utilitiesNames = [
     'markerhive'
 ];
 
-export const utilitiesList = {
+export const utilitiesList: { [key: string]: [string, string, { [key: string]: number }] } = {
     'medstation': ['Med Station', 'viktor', { 'newbucks': 100, 'pink': 10, 'brine': 10, 'jelly': 5 }],
     'dashpad': ['Dash Pad', 'pod', { 'newbucks': 500, 'crystal': 10, 'angler': 10, 'lava': 5, 'sand': 5 }],
     'springpad': ['Spring Pad', 'pod', { 'newbucks': 500, 'cotton': 10, 'phosphor': 10, 'sand': 5, 'honey': 5 }],
@@ -322,7 +322,7 @@ export const utilitiesList = {
     'markerhive': ['Hive Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }]
 };
 
-export const utilitiesDescription = {
+export const utilitiesDescription: { [key: string]: string } = {
     'medstation': "Rapidly drains your energy to restore health. Fixes you up fast!",
     'dashpad': "Allows you to briefly sprint with zero energy cost.",
     'springpad': "Launches anything that touches it straight into the air!",
@@ -355,7 +355,7 @@ export const utilitiesDescription = {
     'markerhive': "A useful marker to call attention to any nearby hive resources."
 };
 
-export const themeList = {
+export const themeList: { [key: string]: [string, string] } = {
     'fields': ['Rainbow Fields', 'world/fields'],
     'valley': ['Ember Valley', 'world/valley'],
     'strand': ['Starlight Strand', 'world/strand'],
@@ -366,7 +366,7 @@ export const themeList = {
     'fun': ['Fun', 'food/ranchersnslimes'],
 }
 
-export const decorationsNames = [
+export const decorationsNames: string[] = [
     'emeraldgrass',
     'emeraldshrubs',
     'emeraldcypress',
@@ -522,7 +522,7 @@ export const decorationsNames = [
     'musicpillar'
 ];
 
-export const decorationsList = {
+export const decorationsList: { [key: string]: [string, string, { [key: string]: number }, string] } = {
     'emeraldgrass': ['Emerald Grass', 'thora', { 'newbucks': 25, 'tabby': 5 }, 'fields'],
     'emeraldshrubs': ['Emerald Shrubs', 'ogden', { 'newbucks': 50, 'phosphor': 10 }, 'fields'],
     'emeraldcypress': ['Emerald Cypress', 'pod', { 'newbucks': 50, 'tabby': 10 }, 'fields'],
@@ -655,19 +655,19 @@ export const decorationsList = {
     'largenet': ['Large Net', 'polestar', { 'newbucks': 1000, 'dervish': 20, 'glass': 5 }, 'beach'],
     'shipinabottle': ['Ship in a Bottle', 'polestar', { 'newbucks': 9000, 'flutter': 50, 'tabby': 50, 'radiant': 10, 'sunsap': 1 }, 'beach'],
     'sandyyellowcoral': ['Sandy Yellow Coral', 'polestar', { 'newbucks': 50, 'angler': 10, 'brine': 1 }, 'beach'],
-    'pennant': ['Pennant', 'viktor', { 'newbucks': 50, 'pink': 5}, 'fun'],
-    'ribbonstreamers': ['Ribbon Streamers', 'viktor', { 'newbucks': 50, 'pink': 5}, 'fun'],
-    'scarfstreamers': ['Scarf Streamers', 'viktor', { 'newbucks': 50, 'pink': 5}, 'fun'],
-    'windsocks': ['Windsocks', 'viktor', { 'newbucks': 50, 'dervish': 5}, 'fun'],
-    'smallpinwheel': ['Small Pinwheel', 'viktor', { 'newbucks': 50, 'dervish': 5, 'wax': 1}, 'fun'],
-    'largepinwheel': ['Large Pinwheel', 'viktor', { 'newbucks': 50, 'tangle': 5, 'jelly': 1}, 'fun'],
-    'windchimes': ['Windchimes', 'pod', { 'newbucks': 250, 'honey': 10, 'drift': 5}, 'fun'],
-    'boombox': ['Boombox', 'pod', { 'newbucks': 1000, 'boom': 25, 'angler': 25, 'fossil': 5, 'glass': 3}, 'fun'],
+    'pennant': ['Pennant', 'viktor', { 'newbucks': 50, 'pink': 5 }, 'fun'],
+    'ribbonstreamers': ['Ribbon Streamers', 'viktor', { 'newbucks': 50, 'pink': 5 }, 'fun'],
+    'scarfstreamers': ['Scarf Streamers', 'viktor', { 'newbucks': 50, 'pink': 5 }, 'fun'],
+    'windsocks': ['Windsocks', 'viktor', { 'newbucks': 50, 'dervish': 5 }, 'fun'],
+    'smallpinwheel': ['Small Pinwheel', 'viktor', { 'newbucks': 50, 'dervish': 5, 'wax': 1 }, 'fun'],
+    'largepinwheel': ['Large Pinwheel', 'viktor', { 'newbucks': 50, 'tangle': 5, 'jelly': 1 }, 'fun'],
+    'windchimes': ['Windchimes', 'pod', { 'newbucks': 250, 'honey': 10, 'drift': 5 }, 'fun'],
+    'boombox': ['Boombox', 'pod', { 'newbucks': 1000, 'boom': 25, 'angler': 25, 'fossil': 5, 'glass': 3 }, 'fun'],
     'daintyteacup': ['Dainty Teacup', 'pod', { 'newbucks': 500, 'angler': 10, 'primordy': 5 }, 'fun'],
     'bountifulteacup': ['Bountiful Teacup', 'pod', { 'newbucks': 500, 'fire': 10, 'glass': 5 }, 'fun'],
     'pinkstripedlamp': ['Pink Striped Lamp', 'pod', { 'newbucks': 200, 'pink': 20, 'mote': 3 }, 'fun'],
     'swing': ['Swing', 'pod', { 'newbucks': 1500, 'batty': 25, 'wildHoney': 4, 'drift': 6 }, 'fun'],
-    'prideflag': ['Pride Flag', 'polestar', { 'newbucks': 50, 'pink': 5}, 'fun'],
+    'prideflag': ['Pride Flag', 'polestar', { 'newbucks': 50, 'pink': 5 }, 'fun'],
     'seesaw': ['Seesaw', 'polestar', { 'newbucks': 1000, 'hunter': 25, 'tabby': 25, 'brine': 3 }, 'fun'],
     'carousel': ['Carousel', 'pod', { 'newbucks': 10000, 'phosphor': 50, 'crystal': 50, 'radiant': 10, 'mote': 5, 'diamond': 1 }, 'fun'],
     'ferriswheel': ['Ferris Wheel', 'pod', { 'newbucks': 10000, 'ringtail': 50, 'rock': 50, 'brine': 10, 'drift': 3, 'sunsap': 1 }, 'fun'],
@@ -679,7 +679,7 @@ export const decorationsList = {
     'musicpillar': ['Music Pilar', 'polestar', { 'newbucks': 50, 'hunter': 3, 'cotton': 3, 'radiant': 1 }, 'fun']
 };
 
-export const decorationsDescription = {
+export const decorationsDescription: { [key: string]: string } = {
     'emeraldgrass': "A small patch of idyllic, lush grass that never needs watering. Truly miraculous!",
     'emeraldshrubs': "Vibrantly green and often found near cypresses, they will not grow into trees. They're shrubs.",
     'emeraldcypress': "A tree whose leaves are a rich emerald color. They're just leaves though, and won't make you rich.",

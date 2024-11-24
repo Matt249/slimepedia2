@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import '../css/NavButton.css';
 import { mediaFetcher } from '../media-manager';
+import React from 'react';
+import '../css/NavButton.css';
 
-export const NavButton = ({
+interface NavButtonProps {
+    name?: string;
+    icon?: string;
+    size?: number;
+    action?: () => void;
+    selected?: boolean;
+    tilting?: string;
+}
+
+export const NavButton: React.FC<NavButtonProps> = ({
     name = "Slimes",
     icon = "slimes/pink",
     size = 100,
-    action = () => {},
+    action = () => { },
     selected = false,
     tilting = "random"
 }) => {
@@ -53,12 +62,3 @@ export const NavButton = ({
         </div>
     );
 }
-
-NavButton.propTypes = {
-    name: PropTypes.string,
-    icon: PropTypes.string,
-    size: PropTypes.number,
-    action: PropTypes.func,
-    selected: PropTypes.bool,
-    tilting: PropTypes.string
-};

@@ -5,15 +5,15 @@ import { Tab } from '../components/Tab';
 import { resourcesList, resourcesNames, resPedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
-import PropTypes from 'prop-types';
+import { mediaFetcher } from '../media-manager';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
+import React from 'react';
 import pedia from '/src/assets/misc/pediatut.png';
 import buck from '/src/assets/misc/buck.png';
 import noneIcon from '/src/assets/misc/none.png';
 import '../css/Pedia.css';
-import { mediaFetcher } from '../media-manager';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
 
-const matchMainList = (list) => {
+const matchMainList = (list: string) => {
     switch (list) {
         case 'resources':
             return resourcesNames;
@@ -24,7 +24,7 @@ const matchMainList = (list) => {
     }
 }
 
-const matchInfosList = (list) => {
+const matchInfosList = (list: string) => {
     switch (list) {
         case 'resources':
             return resourcesList;
@@ -136,12 +136,12 @@ export const Items = () => {
                             </div>
                         </div>
                         :
-                        <NavLink to={`/slimes/${infosItems[item][1]}`} style={{ textDecoration: 'none' }}>
+                        <NavLink to={`/slimes/${toysList[item][1]}`} style={{ textDecoration: 'none' }}>
                             <div className='little-box toy-fav link-to-food'>
-                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[infosItems[item][1]][0]} />
+                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[toysList[item][1]][0]} />
                                 <div>
                                     <h3>Favorite of</h3>
-                                    <h4>{slimesList[infosItems[item][1]][0]}</h4>
+                                    <h4>{slimesList[toysList[item][1]][0]}</h4>
                                 </div>
                             </div>
                         </NavLink>
@@ -161,7 +161,5 @@ export const Items = () => {
     );
 };
 
-Items.propTypes = {
-    item: PropTypes.string,
-    tab: PropTypes.string,
-};
+
+export default Items;

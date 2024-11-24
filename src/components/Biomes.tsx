@@ -1,21 +1,26 @@
-import { useState, useRef, useEffect, createRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { spawnLocationsList } from '../text/regions';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react';
 import '../css/Biomes.css';
 
 const light = true;
 
-export const Biomes = ({
+interface BiomesProps {
+    spawnList: string[];
+}
+
+
+export const Biomes: React.FC<BiomesProps> = ({
     spawnList = [],
 }) => {
     const [listHovered, setListHovered] = useState(false);
-    const videoRefs = useRef([]);
+    const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const biomeBlacklist = ['pm', 'ps', 'ws'];
 
     useEffect(() => {
-        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || createRef());
+        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || null);
     }, [spawnList]);
 
     return (
@@ -33,9 +38,9 @@ export const Biomes = ({
                             className="biome-item biome-item-hover"
                             onMouseEnter={() => {
                                 const videoRef = videoRefs.current[index];
-                                if (videoRef && videoRef.current) {
+                                if (videoRef) {
                                     try {
-                                        videoRef.current.play();
+                                        videoRef.play();
                                     } catch (e) {
                                         console.error(e);
                                         console.error(videoRefs, index);
@@ -44,9 +49,9 @@ export const Biomes = ({
                             }}
                             onMouseLeave={() => {
                                 const videoRef = videoRefs.current[index];
-                                if (videoRef && videoRef.current) {
+                                if (videoRef) {
                                     try {
-                                        videoRef.current.pause();
+                                        videoRef.pause();
                                     } catch (e) {
                                         console.error(e);
                                         console.error(videoRefs, index);
@@ -55,7 +60,7 @@ export const Biomes = ({
                             }}
                         >
                             <video
-                                ref={videoRefs.current[index]}
+                                ref={(el) => videoRefs.current[index] = el}
                                 className="biome-list-video"
                                 src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
                                 preload='auto'
@@ -79,9 +84,9 @@ export const Biomes = ({
                                 className="biome-item biome-item-hover"
                                 onMouseEnter={() => {
                                     const videoRef = videoRefs.current[index];
-                                    if (videoRef && videoRef.current) {
+                                    if (videoRef) {
                                         try {
-                                            videoRef.current.play();
+                                            videoRef.play();
                                         } catch (e) {
                                             console.error(e);
                                             console.error(videoRefs, index);
@@ -90,9 +95,9 @@ export const Biomes = ({
                                 }}
                                 onMouseLeave={() => {
                                     const videoRef = videoRefs.current[index];
-                                    if (videoRef && videoRef.current) {
+                                    if (videoRef) {
                                         try {
-                                            videoRef.current.pause();
+                                            videoRef.pause();
                                         } catch (e) {
                                             console.error(e);
                                             console.error(videoRefs, index);
@@ -101,7 +106,7 @@ export const Biomes = ({
                                 }}
                             >
                                 <video
-                                    ref={videoRefs.current[index]}
+                                    ref={(el) => videoRefs.current[index] = el}
                                     className="biome-list-video"
                                     src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
                                     preload='auto'
@@ -125,7 +130,3 @@ export const Biomes = ({
         </div>
     );
 };
-
-Biomes.propTypes = {
-    spawnList: PropTypes.array,
-}

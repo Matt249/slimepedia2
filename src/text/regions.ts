@@ -2,12 +2,12 @@ export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
 export const RegAndRanchIds = regionsIds.concat(ranchIds);
 
-export const regionInfos = {
-    'sea': ['The Slime Sea', 'sea', 'se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0],
-    'fields': ['Rainbow Fields', 'fields', 'rf', 'Shifting colors like a dream, fading just as quickly.', 'rf', 16, 0],
-    'strand': ['Starlight Strand', 'strand', 'ss', 'A vision of dusk and dawn together as one.', 'ss', 31, 0],
-    'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0],
-    'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0],
+export const regionInfos: {[key: string]: [string, string, string, string, string, number, number, number]} = {
+    'sea': ['The Slime Sea', 'sea', 'se', 'An expansive body of water and slime compound that\'s not fit for swimming, let alone drinking.', 'se', 0, 0, 0],
+    'fields': ['Rainbow Fields', 'fields', 'rf', 'Shifting colors like a dream, fading just as quickly.', 'rf', 16, 0, 0],
+    'strand': ['Starlight Strand', 'strand', 'ss', 'A vision of dusk and dawn together as one.', 'ss', 31, 0, 0],
+    'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0, 0],
+    'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0, 0],
     'conservatory': ['The Conservatory', 'conservatory', 'co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
     'den': ['The Den', 'den', 'td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
     'gully': ['The Gully', 'gully', 'gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
@@ -16,7 +16,7 @@ export const regionInfos = {
     'digsite': ['The Digsite', 'digsite', 'ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 5, 4500]
 };
 
-export const spawnLocationsList = {
+export const spawnLocationsList: { [key: string]: [string, string, boolean] } = {
     'co': ['conservatory', 'The Conservatory', true],
     'td': ['den', 'The Den', true],
     'gu': ['gully', 'The Gully', true],
@@ -34,15 +34,15 @@ export const spawnLocationsList = {
     'pm': ['shop', 'Pronto Mart', false]
 };
 
-export const regionElements = {
-    'fields': [['pink', 'cotton', 'tabby', 'phosphor'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],
+export const regionElements: { [key: string]: [string[], string[], string[]] }= {
+    'fields': [['pink', 'cotton', 'tabby', 'phosphor'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'diamond', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],
     'strand': [['pink', 'cotton', 'rock', 'phosphor', 'hunter', 'honey', 'angler', 'flutter', 'ringtail', 'puddle'], ['pogo', 'cuberry', 'mango', 'granite', 'carrot', 'beet', 'nectar', 'hen', 'henPainted', 'henSea', 'henStony', 'rooster', 'chick', 'chickPainted', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'honey', 'diamond', 'gordoHunter', 'gordoHoney', 'gordoRingtail', 'gordoAngler', 'gordoFlutter']],
     'valley': [['pink', 'cotton', 'rock', 'phosphor', 'tabby', 'angler', 'crystal', 'boom', 'fire', 'puddle', 'ringtail', 'batty'], ['pogo', 'cuberry', 'pear', 'granite', 'carrot', 'onion', 'beet', 'lettuce', 'hen', 'henBriar', 'henSea', 'henStony', 'rooster', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'diamond', 'primordy', 'lava', 'gordoBatty', 'gordoBoom', 'gordoCrystal', 'gordoRock', 'gordoTabby']],
     'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']],
     'sea': [[], [], []]
 }
 
-export const ranchSpecials = {
+export const ranchSpecials: { [key: string]: string[] } = {
     'conservatory': ['market', 'refinery', 'pronto'],
     'den': ['dark'],
     'gully': ['spawnHen', 'spawnRooster'],
@@ -51,7 +51,7 @@ export const ranchSpecials = {
     'digsite': ['pond', 'springpad']
 }
 
-export const regionPedia = {
+export const regionPedia: { [key: string]: string } = {
     'conservatory': 'When Beatrix first arrived at Rainbow Island she discovered this mysterious, abandoned Conservatory and decided to use it as her home away from home, as it has all the facilities an experienced slime rancher would need to make a living.\nThe Conservatory itself is the only structure on the island that appears to have been constructed recently, standing in stark contrast to the ancient slime ruins found all over Rainbow Island and the rest of the Far, Far Range.\nStrangely, imperfections and wear on its various structures seem to be part of the design, as if it was created for a museum exhibit. And yet, there is a palpable feeling throughout that this was a home to someone, that it was built with love and purpose.',
     'den': 'Hidden within a large rounded hill resides the Den, an expansion to the conservatory. This dark, damp cave is a refuge from the sun for slimes and ranches alike. Phosphor slimes in particular enjoy the mushroom-lined walls, while Batty slimes love to stretch their wings in their natural habitat.',
     'gully': 'The Gully is an expansion to the Conservatory nestled between ancient, towering rock formations. While slimes enjoy frolicking in the amber fields of grass, Hen Hens nest in the cliffs, making this a meat-lover\'s paradise.',
@@ -65,7 +65,7 @@ export const regionPedia = {
     'bluffs': 'In a time long forgotten, Powderfall Bluffs may have been part of a greater landmass of Rainbow Island but somehow broke away, likely from the geological turmoil found in Ember Valley. And as it drifted away into the sea, it took its prehistoric inhabitants with it.\nAs sea levels rose, Powderfall Bluffs somehow became encased in a gigantic shell of shimmering ice before sinking into the depths of The Slime Sea, becoming like a living world inside a snow globe. The cause of this icy phenomenon is unknown, but could indicate that the strange effects of the prisma waves radiating from Rainbow Island date back to a time before recorded history on the Far, Far Range.\nNow, Powderfall Bluffs has returned, as a perfectly preserved prehistoric ecosystem. Those willing to brave the freezing climate will find hungry saber slimes, and fearsome thunderclucks. Vibrant Sun Sap can be found in groves of ancient redwoods, with slime fossils and blustery plumes of perfect snowflakes hidden around every frozen corner. '
 }
 
-export const regionsConnections = {
+export const regionsConnections: {[key: string]: [string[], string[]]} = {
     'conservatory': [[], ['fields', 'den', 'gully', 'archway']],
     'den': [['conservatory'], ['digsite']],
     'gully': [['conservatory'], ['tidepools']],
@@ -79,7 +79,7 @@ export const regionsConnections = {
     'sea': [['conservatory', 'fields', 'strand', 'valley', 'bluffs'], []]
 }
 
-export const regionsResourcesInfos = {
+export const regionsResourcesInfos: { [key: string]: [string, string, string] } = {
     'gordoPink': ['Pink Gordo', 'gordos/pink', ''],
     'gordoCotton': ['Cotton Gordo', 'gordos/cotton', ''],
     'gordoPhosphor': ['Phosphor Gordo', 'gordos/phosphor', ''],
