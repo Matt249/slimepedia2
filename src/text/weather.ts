@@ -1,4 +1,4 @@
-export const weatherList = [
+export const weatherList: [string, string][] = [
     ['clear', 'Clear'],
     ['rain', 'Rain'],
     ['thunder', 'Thunderstorm'],

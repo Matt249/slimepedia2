@@ -1,4 +1,4 @@
-export const resourcesNames = [
+export const resourcesNames: string[] = [
     'brine',
     'sand',
     'lava',
@@ -16,7 +16,7 @@ export const resourcesNames = [
     'mote'
 ];
 
-export const resourcesList = {
+export const resourcesList: { [key: string]: [string, string[]] } = {
     'brine': ['Deep Brine', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
     'sand': ['Silky Sand', ['ss', 'ev']],
     'lava': ['Lava Dust', ['ev']],
@@ -34,7 +34,7 @@ export const resourcesList = {
     'mote': ['Lightning Mote', ['ls']]
 };
 
-export const resPedia = {
+export const resPedia: { [key: string]: [string, string] } = {
     'brine': [
         'Salt of the earth kind of stuff.',
         'Not safe for drinking, deep brine is thought to be water from the Slime Sea that has been filtered by the subterranean coral below Rainbow Island. It is significantly denser than fresh water and loaded with salt.'
