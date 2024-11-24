@@ -40,7 +40,6 @@ export const initializeFolders = () => {
         wallpapers: createFolderObject(import.meta.glob('/src/assets/wallpapers/*', { eager: true, query: '?url', import: 'default' })),
         world: createFolderObject(import.meta.glob('/src/assets/world/*', { eager: true, query: '?url', import: 'default' }))
     };
-    console.log('Folders initialized: ', folders);
 };
 
 export const mediaFetcher = (path: string): string => {

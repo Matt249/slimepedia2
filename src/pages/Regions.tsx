@@ -290,7 +290,6 @@ export const Regions = () => {
 
     const { region: regionName } = useParams();
     const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
-    console.log(region)
     const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
     const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
     const regionDescriptionRef = useRef<HTMLDivElement>(null);
