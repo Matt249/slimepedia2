@@ -165,9 +165,7 @@ export const Food = () => {
     useEffect(() => {
         if (foodName) {
             if (foodName in foodTypesList) {
-                console.log(foodTypesList[foodName]);
                 setFood(foodTypesList[foodName][1]);
-                console.log(food);
                 setFilter(foodTypesList[foodName][0]);
             }
             else if (foodNames.includes(foodName))
