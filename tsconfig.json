@@ -106,6 +106,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.d.ts"
-, "src/pages/Map.jsx"  ],
+, "src/pages/Map.tsx"  ],
 }
 
