@@ -7,7 +7,7 @@ import '../css/Map.css';
 
 export const Map = () => {
     const center: [number, number] = [0, 0];
-    const zoom: number = 1
+    const zoom: number = 1;
     const mapRef = useRef<L.Map | null>(null);
     const bounds: [[number, number], [number, number]] = [[-90, -180], [90, 180]];
 
