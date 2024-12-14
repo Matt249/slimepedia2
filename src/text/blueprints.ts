@@ -75,11 +75,11 @@ export const upgradeNames: string[] = [
 
 export const upgradePacks: { [key: string]: [string, number] } = {
     'harvester': ['Resource Harvester', 1],
-    'health': ['Health Modules', 3],
-    'power': ['Power Modules', 4],
+    'health': ['Health Modules', 4],
+    'power': ['Power Modules', 5],
     'dash': ['Dash Boots Speed', 2],
     'jetpack': ['Jetpack', 2],
-    'tankBooster': ['Tank Capacity', 4],
+    'tankBooster': ['Tank Capacity', 6],
     'extraTank': ['Extra Tanks', 2],
     'waterTank': ['Dedicated Water Tank', 1],
     'pulseWave': ['Pulse Wave', 1],

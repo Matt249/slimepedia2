@@ -112,7 +112,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
             </div>
         </div>
         <div className='region-resources'>
-            <h2 className='box-title'>Available Resources</h2>
+            <h2 className='box-title'>Available Resources</h2>{console.log(regionElements[region][2])}
             {regionElements[region][2].map(resource => (regionsResourcesInfos[resource][2].length === 0 ?
                 <div
                     className='region-element-resource'

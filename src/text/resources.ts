@@ -11,6 +11,14 @@ export const resourcesNames: string[] = [
     'fossil',
     'snowflake',
     'sunsap',
+    'aqua',
+    'petal',
+    'magmacomb',
+    'blackindigo',
+    'dream',
+    'petal',
+    'royal',
+    'prisma',
     'drift',
     'glass',
     'mote'
@@ -29,9 +37,16 @@ export const resourcesList: { [key: string]: [string, string[]] } = {
     'fossil': ['Slime Fossil', ['pb']],
     'snowflake': ['Perfect Snowflake', ['pb']],
     'sunsap': ['Sun Sap', ['pb']],
+    'aqua': ['Aqua Glass', ['gl']],
+    'magmacomb': ['Magma Comb', ['gl']],
+    'blackindigo': ['Black Indigonium', ['gl']],
+    'dream': ['Dream Bubble', ['gl']],
+    'petal': ['Tin Petal', ['gl']],
+    'royal': ['Royal Jelly', ['gl']],
+    'prisma': ['Radiant Plort', ['gl']],
     'drift': ['Drift Crystal', ['ws']],
     'glass': ['Storm Glass', ['ls']],
-    'mote': ['Lightning Mote', ['ls']]
+    'mote': ['Lightning Mote', ['ls']],
 };
 
 export const resPedia: { [key: string]: [string, string] } = {
@@ -77,7 +92,7 @@ export const resPedia: { [key: string]: [string, string] } = {
     ],
     'radiant': [
         'The awesome power of a rainbow and the sleek aesthetic of a lump of mineral.',
-        'Of all of Rainbow Island\'s many oddities, radiant ore may be the most remarkable. Under a laser thermometer, its temperature reads over 100 degrees celsius, but it is cool to the touch and becomes an icy liquid when melted.\nThe mechanics behind its shifting array of pastel colors is easily understood once observed under a microscope: it\'s made up of infinitesimal deposits of pure rainbow.\nThen there\'s the way it gently vibrates, humming, as if radiating some strange cosmic energy. Spooky.'
+        'Of all of Rainbow Island\'s many oddities, ore ore may be the most remarkable. Under a laser thermometer, its temperature reads over 100 degrees celsius, but it is cool to the touch and becomes an icy liquid when melted.\nThe mechanics behind its shifting array of pastel colors is easily understood once observed under a microscope: it\'s made up of infinitesimal deposits of pure rainbow.\nThen there\'s the way it gently vibrates, humming, as if radiating some strange cosmic energy. Spooky.'
     ],
     'sand': [
         'The finest, smoothest sand you\'ll ever see. Rubbish for sand castles.',
@@ -94,5 +109,33 @@ export const resPedia: { [key: string]: [string, string] } = {
     'wax': [
         'Can be used to make a great candle if you enjoy the smell of bee abdominal glands.',
         'Just like bees on Earth, bees on the Far, Far Range produce a waxy substance that they use to form their hives. Buzz wax is still malleable deposits of unused wax found in apiaries. It has many practical uses ranging from building materials to medicines. You can also chew it as the worst gum in the world.'
-    ]
+    ],
+    'aqua': [
+        'A different kind of hard water.',
+        'The swirling colors suggest an orb of water, but it\'s solid all the way through. What could make water behave like this?'
+    ],
+    'magmacomb': [
+        'A new level of spicy honey.', 
+        'Although the comb appears quite delicate, the slowly oozing lava suggests otherwise. Or is that honey? Either way it\'s probably not safe for consumption.'
+    ],
+    'blackindigo': [
+        'Dark as midnight.',
+        'Almost no light reflects from this black metal, despite the prismatic environment in which it\'s found. Another mystery of the Grey Labyrinth, or something darker?'
+    ],
+    'dream': [
+        'Dream a little dream.', 
+        'These mysterious little bubbles appear to form directly from the ether of Dream Land. Are they the wandering dreams of slimes, or something else?'
+    ],
+    'petal': [
+        'Nature is metal.', 
+        'The delicate details of these leaves are surely too fine to have been formed from metal, but they are clearly tin. Could it be these were once organic petals?'
+    ],
+    'royal': [
+        'The king of all jellies... that is, until you meet the queen.',
+        'The royal jelly found in the hives of the Grey Labyrinth is as special as it is unnaturally sweet compared to other varieties. It\'s believed that this is a result of bees collectiong small deposits of slime from honey slimes and working it into their royal jelly mixture. If a rancher is lucky enough to acquire some, they\'ll find its unique properties are very valuable in certain Slime Science endeavors.'
+    ],
+    'prisma': [
+        'Prismatic plorts of possibilities with a purpose.', 
+        'Unlike other objects affected by prisma disruptions, these plorts appear to be especially sensitive to the temporal distortions that appear throughout the Grey Labyrinth. The ancient beings that created the Grey Labyrinth seem to have had a special use in mind for these plorts when they designed the megastructure. Perhaps the plorts themselves are the key to delving further into the structure\'s mysteries?'
+    ],
 };

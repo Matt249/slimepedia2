@@ -8,23 +8,29 @@ export const foodNames: string[] = [
     'mango',
     'granite',
     'pear',
+    'cherry',
     'hen',
     'henStony',
     'henSea',
     'henBriar',
     'henCluck',
     'henPainted',
+    'henCandied',
     'rooster',
     'henElder',
     'roosterElder',
     'chick',
     'chickBriar',
+    'chickCandied',
     'chickCluck',
     'chickPainted',
     'chickSea',
     'chickStony',
     'nectar',
-    'water'
+    'water',
+    'unstablefruit',
+    'unstableveggie',
+    'unstablemeat'
 ];
 
 export const foodTypesNames: string[] = [
@@ -77,8 +83,10 @@ export const foodList: { [key: string]: [string, string, string[]]} = {
     'mango': ["Mint Mango", 'fruits', ['ss']],
     'granite': ["Pomegranite", 'fruits', ['ss', 'ev']],
     'pear': ["Prickle Pear", 'fruits', ['ev']],
+    'cherry': ["Polaricherry", 'fruits', ['gl']],
     'chick': ['Chickadoo', 'none', ['rf', 'ss', 'ev', 'pb']],
     'chickBriar': ['Briar Chick', 'none', ['ev']],
+    'chickCandied': ['Candied Chick', 'none', ['gl']],
     'chickCluck': ['Thundercluck Chick', 'none', ['pb']],
     'chickPainted': ['Painted Chick', 'none', ['ss']],
     'chickSea': ['Sea Chick', 'none', ['ss', 'ev']],
@@ -89,12 +97,16 @@ export const foodList: { [key: string]: [string, string, string[]]} = {
     'henBriar': ["Briar Hen", 'meat', ['ev']],
     'henCluck': ["Thundercluck Hen", 'meat', ['pb']],
     'henPainted': ["Painted Hen", 'meat', ['ss']],
+    'henCandied': ["Candied Hen", 'meat', ['gl']],
     'rooster': ["Rooster", 'meat', ['gu', 'rf', 'ss', 'ev', 'pb']],
     'henElder': ['Elder Hen', 'meat', ['rf', 'ss', 'ev', 'pb']],
     'roosterElder': ['Elder Rooster', 'meat', ['rf', 'ss', 'ev', 'pb']],
     'water': ["Water", 'water', ['tp', 'ds', 'ss', 'ev', 'pb']],
     'nectar': ["Moondew Nectar", 'nectar', ['ss']],
     'ash': ["Ash", 'ash', ['ev']],
+    'unstablefruit': ["Unstable Fruit", 'fruits', ['gl']],
+    'unstableveggie': ["Unstable Veggie", 'veggies', ['gl']],
+    'unstablemeat': ["Unstable Meat", 'meat', ['gl']]
 };
 
 export const foodDescription: { [key: string]: string} = {
@@ -108,8 +120,10 @@ export const foodDescription: { [key: string]: string} = {
     'mango': 'Intensely sweet with a cool, minty finish.',
     'granite': 'Rich in minerals!',
     'pear': 'This is a fruit that knows how to fight back.',
+    'cherry': 'Sharply sour or sickeningly sweet.',
     'chick': 'So little and soft you\'d think they\'re filled with marshmallow.',
     'chickBriar': 'A breed of chick that\'s totally bush-league.',
+    'chickCandied': 'The sweetest chicks grow into the toughest jawbreakers.',
     'chickCluck': 'The king of chickens has to start somewhere.',
     'chickPainted': 'A tiny chick that\'s hiding a bounty of colorful potential.',
     'chickSea': 'Equal parts salt and fluff.',
@@ -118,6 +132,7 @@ export const foodDescription: { [key: string]: string} = {
     'henStony': 'Has a rock solid conviction... in chicken stuff.',
     'henBriar': 'A real wild bird that loves to ramble in the bramble.',
     'henPainted': 'Some believe it\'s what lies at the end of a rainbow. Totally disappointing.',
+    'henCandied': 'Try to catch them before the sugar rush.',
     'henSea': 'Loveable trash. Like your favorite bad movie.',
     'henCluck': 'A chicken that\'s always ready to throw down.',
     'rooster': 'Struts his stuff like he\'s king of the coop.',
@@ -125,7 +140,10 @@ export const foodDescription: { [key: string]: string} = {
     'roosterElder': 'Shakes his tail feathers and no one cares.',
     'nectar': 'Very sweet but VERY sticky. Handle with care.',
     'water': 'Give your slimes a bath, they really need it.',
-    'ash': 'A fine powder that\'s great for making slimes sneeze.'
+    'ash': 'A fine powder that\'s great for making slimes sneeze.',
+    'unstablefruit': 'Unnatural objects with a slippery grasp on reality.',
+    'unstableveggie': 'Unnatural objects with a slippery grasp on reality.',
+    'unstablemeat': 'Unnatural objects with a slippery grasp on reality.'
 }
 
 
@@ -163,6 +181,14 @@ export const foodpedia: { [key: string]: [string, string]} = {
         "The pomegranite is as mysterious as it is ancient. A fruit that grows only in the dark caves beneath the earth, it grows without sunlight, without warmth. It should not be, and yet, it is. A living paradox? Or a symbol of nature's resilience, of the ability for life to thrive even in the unlikeliest of spaces? Pretty deep stuff.",
         "Deposit a pomegranite into a garden's depositor and you'll grow a large pomegranite tree of your own."
     ],
+    'pear': [
+        "Prickle pears are a fruit that know how to put up a fight. With a thick, leathery skin and covered sharp barbs, they're an 'acquired taste' to be sure. But those that put forth the (cautious) effort will find one of the sweetest fruits in the known universe hiding within.",
+        "Deposit a prickle pear into a garden's depositor and you'll grow a large prickle pear tree of your very own."
+    ],
+    'cherry': [
+        " The polaricherry is somehow both the most sweet and the most sour fruit on Rainbow Island, depending on which side you're looking at when you take a bite. Is their flavor profile another strange effect of the labyrinth, or a natural variation?",
+        " Deposit a polaricherry into a garden's depositor and you'll grow a large polaricherry tree of your own."
+    ],
     'chick': [
         "Chickadoos of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones. Chicks are baby chickens that will eventually grow into a hen hen or more rarely, a roostro.",
         "Keep chickadoos in a safe place and they'll eventually grow into a Hen Hen or Roostro."
@@ -170,6 +196,10 @@ export const foodpedia: { [key: string]: [string, string]} = {
     'chickBriar': [
         "Briar chickadoos are baby chickens that will eventually grow into a briar hen or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
         "Keep Briar Chicks in a safe place and they'll eventually grow into a Briar Hen or Roostro."
+    ],
+    'chickCandied': [
+        "Candied chickadoos are baby chickens that will eventually grow into a candied hen or more rarely, a roostro. Chickadoos of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
+        "Keep candied chickadoos in a safe place and they'll eventually grow into a candied hen or roostro."
     ],
     'chickCluck': [
         "Thunder chickadoos are baby chickens that will eventually grow into a thundercluck or more rarely, a roostro. Chicks of all varieties will never be eaten by slimes. Some believe this is because slimes are too kind-hearted to do such a thing. Others believe it's because chickadoos don't yet have enough meat on their bones.",
@@ -211,9 +241,9 @@ export const foodpedia: { [key: string]: [string, string]} = {
         "Thought to be extinct for over a billion years, thunderclucks are a variety of prehistoric hen that ruled the roost during the Jellasic Period and absolute proof that dinosaurs were basically just giant chickens. Historians had long believed they were wiped out from a giant meteor, but seeing them now it's clear that the roostros were probably just super terrified of them and it just sort of took care of itself.",
         "Thunderclucks in close proximity to roostros will periodically lay eggs that produce thunder chickadoos. However, keeping too many chickens in close proximity makes them anxious and egg production will come to a halt. Savvy ranchers with an understanding of the complex nature of chicken romance will monitor growth rates in their coops and reduce density when growth beings to slow."
     ],
-    'pear': [
-        "Prickle pears are a fruit that know how to put up a fight. With a thick, leathery skin and covered sharp barbs, they're an 'acquired taste' to be sure. But those that put forth the (cautious) effort will find one of the sweetest fruits in the known universe hiding within.",
-        "Deposit a prickle pear into a garden's depositor and you'll grow a large prickle pear tree of your very own."
+    'henCandied': [
+        "Candied hens are a mysterious breed of chicken found in the Grey Labyrinth. Their unusual sweetness is almost too perfect, as if pulled from the dreams of a hungry slime. How did such a hen come to be in the labyrinth?",
+        " Candied hens in close proximity to roostros will periodically lay eggs that produce candied chickadoos. However, keeping too many chickens in close proximity makes them anxious and egg production will come to a halt. Savvy ranchers with an understanding of the complex nature of chicken romance will monitor growth rates in their coops and reduce density when growth beings to slow"
     ],
     'rooster': [
         "Roostros are the alpha birds on the Far, Far Range and half of the equation required to breed chickens on the ranch. However, roostros are rarer than any hen making them a great find any time one is discovered. To acquire a roostro, either find one out on the range or breed them on the ranch. Any type of chickadoo has a small chance of growing into a roostro. Some ranchers believe that these odds increase if you greet the Rooster King's crow at sunrise with an enthusiastic 'good morning!'",
@@ -235,12 +265,16 @@ export const foodpedia: { [key: string]: [string, string]} = {
         "Water can be used to speed up garden growth, calm down slimes, and disperse pesky Tarr before they gobble up your slimes. Water can even wash away Crystal slime's crystal formations or neutralize Boom slimes before they explode. Water is a truly wonderous tool for any rancher, but remember where you found it: water sources are few and far between.",
         "Water is an extremely useful resource found across the Far, Far Range. Unlike water in the slime sea, water from pools and waterfalls can be suctioned into the vac pack and stored using the handy Water Tank upgrade. Once stored, it can be shot out of the vac at the world around you, creating numerous beneficial effects."
     ],
-    'ash': [
-        "Ash.",
-        "Incinerators"
+    'unstablefruit': [
+        "Caught and stretched across reality, matter, and time, resources affected by the prisma disruptions of the Grey Labyrinth are too volatile to exist for long in the natural world. Eventually, these resources will pop out of existence, or even a rancher's vac tank, to escape the confines of reality and mundane three dimensions. Basically, they've got too many reality appointments and they are constantly rushing to get to their next one.",
+        "While unable to be used for regular ranching, unstable resources do seem to have unique interactions with the slimes within the Grey Labyrinth. It will take an intrepid slime scientist or adventurous rancher to find out how these disrupted resources impact the normal slime digestive process. Due to their reality-bending energies, unstable resources directly conflict with warp technology. They cannot be teleported and even prevent ranchers from using warp technology themselves as long as unstable resources are within their vac tanks."
     ],
-    'lorem': [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum nisl et sem facilisis vestibulum. Duis quis aliquet turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam porta lorem ut gravida condimentum. Etiam ultricies tincidunt nisl vitae pharetra. Suspendisse sed est arcu. Etiam ullamcorper diam a ante volutpat, non sollicitudin est varius. Morbi a nisi in erat elementum convallis vel ut quam. Cras a leo mauris.",
-        "Etiam velit diam, viverra et ante porta, ultricies suscipit odio. Sed nisi sem, dignissim sit amet ornare finibus, imperdiet ac enim. Fusce et odio ac orci blandit viverra quis sed lacus. Sed euismod urna sed diam elementum, at finibus tellus vestibulum. Suspendisse orci sapien, pulvinar at ullamcorper sed, dapibus eget ipsum. Phasellus eleifend sodales lorem, vel varius dolor ultrices sed. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Morbi pharetra enim sit amet mollis tincidunt. Etiam euismod tortor nunc. Aenean malesuada non neque id luctus. Quisque ut sodales quam."
-    ]
+    'unstablemeat': [
+        "Caught and stretched across reality, matter, and time, resources affected by the prisma disruptions of the Grey Labyrinth are too volatile to exist for long in the natural world. Eventually, these resources will pop out of existence, or even a rancher's vac tank, to escape the confines of reality and mundane three dimensions. Basically, they've got too many reality appointments and they are constantly rushing to get to their next one.",
+        "While unable to be used for regular ranching, unstable resources do seem to have unique interactions with the slimes within the Grey Labyrinth. It will take an intrepid slime scientist or adventurous rancher to find out how these disrupted resources impact the normal slime digestive process. Due to their reality-bending energies, unstable resources directly conflict with warp technology. They cannot be teleported and even prevent ranchers from using warp technology themselves as long as unstable resources are within their vac tanks."
+    ],
+    'unstableveggie': [
+        "Caught and stretched across reality, matter, and time, resources affected by the prisma disruptions of the Grey Labyrinth are too volatile to exist for long in the natural world. Eventually, these resources will pop out of existence, or even a rancher's vac tank, to escape the confines of reality and mundane three dimensions. Basically, they've got too many reality appointments and they are constantly rushing to get to their next one.",
+        "While unable to be used for regular ranching, unstable resources do seem to have unique interactions with the slimes within the Grey Labyrinth. It will take an intrepid slime scientist or adventurous rancher to find out how these disrupted resources impact the normal slime digestive process. Due to their reality-bending energies, unstable resources directly conflict with warp technology. They cannot be teleported and even prevent ranchers from using warp technology themselves as long as unstable resources are within their vac tanks."
+    ],
 }

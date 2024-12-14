@@ -1,4 +1,4 @@
-export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'sea'];
+export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'labyrinth', 'sea'];
 export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
 export const RegAndRanchIds = regionsIds.concat(ranchIds);
 
@@ -9,6 +9,7 @@ export const regionInfos: {[key: string]: [string, string, string, string, strin
     'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0, 0],
     'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0, 0],
     'conservatory': ['The Conservatory', 'conservatory', 'co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
+    'labyrinth': ['Grey Labyrinth', 'labyrinth', 'gl', 'An imposing layer cake whose depths hide ancient, prismatic secrets.', 'gl', 0, 0, 0],
     'den': ['The Den', 'den', 'td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
     'gully': ['The Gully', 'gully', 'gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
     'archway': ['The Archway', 'archway', 'ar', 'An expansion to the conservatory set amongst ancient ruins and fields of rainbow grass.', 'ar', 1, 5, 1800],
@@ -27,6 +28,7 @@ export const spawnLocationsList: { [key: string]: [string, string, boolean] } = 
     'ss': ['strand', 'Starlight Strand', false],
     'ev': ['valley', 'Ember Valley', false],
     'pb': ['bluffs', 'Powderfall Bluffs', false],
+    'gl': ['labyrinth', 'Grey Labyrinth', false],
     'se': ['sea', 'The Slime Sea', false],
     'ws': ['tornado', 'Level 3 Wind Storm', false],
     'ps': ['vines', 'Level 3 Pollen Storm', false],
@@ -39,6 +41,7 @@ export const regionElements: { [key: string]: [string[], string[], string[]] }= 
     'strand': [['pink', 'cotton', 'rock', 'phosphor', 'hunter', 'honey', 'angler', 'flutter', 'ringtail', 'puddle'], ['pogo', 'cuberry', 'mango', 'granite', 'carrot', 'beet', 'nectar', 'hen', 'henPainted', 'henSea', 'henStony', 'rooster', 'chick', 'chickPainted', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'honey', 'diamond', 'gordoHunter', 'gordoHoney', 'gordoRingtail', 'gordoAngler', 'gordoFlutter']],
     'valley': [['pink', 'cotton', 'rock', 'phosphor', 'tabby', 'angler', 'crystal', 'boom', 'fire', 'puddle', 'ringtail', 'batty'], ['pogo', 'cuberry', 'pear', 'granite', 'carrot', 'onion', 'beet', 'lettuce', 'hen', 'henBriar', 'henSea', 'henStony', 'rooster', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'diamond', 'primordy', 'lava', 'gordoBatty', 'gordoBoom', 'gordoCrystal', 'gordoRock', 'gordoTabby']],
     'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']],
+    'labyrinth': [['pink', 'cotton', 'tabby', 'rock', 'phosphor', 'hunter', 'angler', 'crystal', 'shadow', 'twin', 'sloomber'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'onion', 'hen', 'henSea', 'cherry', 'henCandied'], ['aqua', 'magmacomb', 'blackindigo', 'dream', 'petal', 'royal', 'gordoTwin', 'gordoSloomber']],
     'sea': [[], [], []]
 }
 
@@ -62,7 +65,8 @@ export const regionPedia: { [key: string]: string } = {
     'fields': 'Every day is one perfect, unending lazy afternoon in the Rainbow Fields; the kind that would make anyone want to stretch out across its prismatic grasses and while away the hours watching marshmallow clouds drift slowly across the sky.\nHappy, hoppy cotton slimes pop from their underground warrens and bounce about the glades, always hoping to land in a patch of delicious water lettuce.\nCareful explorers will also find ample reserves of jellystone along the hills and cliffs, as well as spouts of deep brine near the banks of the Slime Sea.\nWatching it all are the giant, smiling slime statues dotting the landscape, basking in the golden sun and hinting at the wondrous stone structures that Rainbow Island has yet to reveal to its vistors.',
     'strand': 'The Starlight Strand is a world of opposites: a winding land cut erratically by the Slime Sea, with towering heights and cliffs that loom over deep lowland marshes.\nFurther, it is all mysteriously split right down the middle between two opposing palettes of coral and lavender, with the very atmosphere itself seeming to change as you cross from one to the other.\n\nThe strand is a floral fantasia, making it an ideal home to nectar-loving honey and flutter slimes, and its canopies are abuzz with hives that can be harvested for wild honey and buzz wax.\nThough undeniably beautiful, the Starlight Strand\'s peculiar nature is unlikely a natural occurrence, and suggests a secret history hidden within the heart of Rainbow Island.',
     'valley': 'Ember Valley is always rumbling: blasting great geysers of water along its coasts and erupting lava into its smoldering ravines. It is a primal place, with canyons carved from swirling winds, revealing enormous fossils of unknown creatures.\nThe unique combination of strong geothermal activity and volcanic soil makes for a land abundant in primordy oil and lava dust, and makes for a natural home to heat-loving boom, fire and crystal slimes.\nStrangely, much of Ember Valley\'s primordial nature feels like a recent occurrence, at least relatively speaking. Its volcanic activity does not feel like the product of eons of change, but from some kind of unknown catalyst.\nIt would be wise to tread carefully in this place, further change could happen swiftly and it might just occur right below your feet...',
-    'bluffs': 'In a time long forgotten, Powderfall Bluffs may have been part of a greater landmass of Rainbow Island but somehow broke away, likely from the geological turmoil found in Ember Valley. And as it drifted away into the sea, it took its prehistoric inhabitants with it.\nAs sea levels rose, Powderfall Bluffs somehow became encased in a gigantic shell of shimmering ice before sinking into the depths of The Slime Sea, becoming like a living world inside a snow globe. The cause of this icy phenomenon is unknown, but could indicate that the strange effects of the prisma waves radiating from Rainbow Island date back to a time before recorded history on the Far, Far Range.\nNow, Powderfall Bluffs has returned, as a perfectly preserved prehistoric ecosystem. Those willing to brave the freezing climate will find hungry saber slimes, and fearsome thunderclucks. Vibrant Sun Sap can be found in groves of ancient redwoods, with slime fossils and blustery plumes of perfect snowflakes hidden around every frozen corner. '
+    'bluffs': 'In a time long forgotten, Powderfall Bluffs may have been part of a greater landmass of Rainbow Island but somehow broke away, likely from the geological turmoil found in Ember Valley. And as it drifted away into the sea, it took its prehistoric inhabitants with it.\nAs sea levels rose, Powderfall Bluffs somehow became encased in a gigantic shell of shimmering ice before sinking into the depths of The Slime Sea, becoming like a living world inside a snow globe. The cause of this icy phenomenon is unknown, but could indicate that the strange effects of the prisma waves radiating from Rainbow Island date back to a time before recorded history on the Far, Far Range.\nNow, Powderfall Bluffs has returned, as a perfectly preserved prehistoric ecosystem. Those willing to brave the freezing climate will find hungry saber slimes, and fearsome thunderclucks. Vibrant Sun Sap can be found in groves of ancient redwoods, with slime fossils and blustery plumes of perfect snowflakes hidden around every frozen corner.',
+    'labyrinth': 'Towering over the horizon, the Grey Labyrinth stretches across the skyline of Rainbow Island like an imposing jigsaw puzzle missing a piece. On its surface, it appears to be keeping the curious out, yet the further in one ventures, the more one suspects the Grey Labyrinth is holding something in. Amid twisting corridors of carved stone and unnatural metals, and echoing from pipes channeling water and magma, an erratic pulse of power beats from somewhere deeper within the ancient structure. Strange phenomena mar otherwise ethereal, manicured gardens, and prismatic light washes over the landscape, bathing it in unpredictable, transformative energies. Countless ages of exposure to these energies seems to have impacted both slimes and inanimate objects alike, giving them odd properties that sometimes defy logic or natural forces entirely. Even shadows seem to cluster and capriciously bound through the ancient megastructure. Within its deepest chambers, the Grey Labyrinth holds a secret that perhaps one can only answer with some unexpected guidance from beyond.'
 }
 
 export const regionsConnections: {[key: string]: [string[], string[]]} = {
@@ -73,9 +77,10 @@ export const regionsConnections: {[key: string]: [string[], string[]]} = {
     'tidepools': [['gully'], []],
     'digsite': [['den'], []],
     'fields': [['conservatory'], ['strand', 'valley']],
-    'strand': [['fields'], []],
+    'strand': [['fields'], ['labyrinth']],
     'valley': [['fields'], ['bluffs']],
     'bluffs': [['valley'], []],
+    'labyrinth': [['strand', 'valley'], []],
     'sea': [['conservatory', 'fields', 'strand', 'valley', 'bluffs'], []]
 }
 
@@ -94,6 +99,8 @@ export const regionsResourcesInfos: { [key: string]: [string, string, string] } 
     'gordoRock': ['Rock Gordo', 'gordos/rock', ''],
     'gordoTabby': ['Tabby Gordo', 'gordos/tabby', ''],
     'gordoSaber': ['Saber Gordo', 'gordos/saber', ''],
+    'gordoTwin': ['Twin Gordo', 'gordos/twin', ''],
+    'gordoSloomber': ['Sloomber Gordo', 'gordos/sloomber', ''],
     'jelly': ['Jellystone', 'resources/jelly', '/items/resources/jelly'],
     'brine': ['Deep Brine', 'resources/brine', '/items/resources/brine'],
     'water': ['Water', 'food/water', '/food/water'],
@@ -107,6 +114,13 @@ export const regionsResourcesInfos: { [key: string]: [string, string, string] } 
     'snowflake': ['Perfect Snowflake', 'resources/snowflake', '/items/resources/snowflake'],
     'sunsap': ['Sun Sap', 'resources/sunsap', '/items/resources/sunsap'],
     'fossil': ['Slime Fossil', 'resources/fossil', '/items/resources/fossil'],
+    'aqua': ['Aqua Glass', 'resources/aqua', '/items/resources/aqua'],
+    'magmacomb': ['Magma Comb', 'resources/magmacomb', '/items/resources/magmacomb'],
+    'blackindigo': ['Black Indigonium', 'resources/blackindigo', '/items/resources/blackindigo'],
+    'dream': ['Dream Bubble', 'resources/dream', '/items/resources/dream'],
+    'petal': ['Tin Petal', 'resources/petal', '/items/resources/petal'],
+    'royal': ['Royal Jelly', 'resources/royal', '/items/resources/royal'],
+    'prisma': ['Radiant Plort', 'resources/prisma', '/items/resources/prisma'],
     'market': ['Plort Market', 'misc/market', ''],
     'refinery': ['Plort Refinery', 'misc/refinery', ''],
     'pronto': ['Prontomart', 'misc/shop', ''],
