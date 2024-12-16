@@ -3,7 +3,7 @@
     transition: background-color .5s, border-radius .3s, margin .3s, padding .3s;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    cursor: pointer;
+    cursor: var(--pointer-style);
 }
 
 .tab:not(.selected-tab) {

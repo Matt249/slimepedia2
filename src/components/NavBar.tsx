@@ -4,6 +4,7 @@ import { useState } from "react"
 import React from "react";
 import houseDay from '../assets/wallpapers/houseDay.png';
 import houseNight from '../assets/wallpapers/houseNight.png';
+import { mediaFetcher } from "../media-manager";
 
 export const NavBar = () => {
     const navBtnSize = 100;
@@ -20,6 +21,7 @@ export const NavBar = () => {
             rootStyle.setProperty('--menu-color-1', darkMode ? '#181818' : '#E9DDC7');
             rootStyle.setProperty('--item-color', darkMode ? '#000' : '#D2B394');
             rootStyle.setProperty('--text-color', darkMode ? '#fff' : '#000');
+            rootStyle.setProperty('--pointer-style', 'url(' + (mediaFetcher('ui/map.png')) + '), pointer');
         }
         document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
     }

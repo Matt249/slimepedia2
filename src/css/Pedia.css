@@ -163,7 +163,7 @@
 }
 
 .link-to-food {
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: border-radius .3s;
 }
 
@@ -216,7 +216,7 @@
     left: calc(50% - 10px);
     transition: all .3s;
     z-index: 10;
-    cursor: pointer;
+    cursor: var(--pointer-style);
 }
 
 .arrow-btn:hover {
@@ -396,7 +396,7 @@ br {
 
 .food-fav {
     grid-area: fav;
-    cursor: pointer;
+    cursor: var(--pointer-style);
 }
 
 .spawn-list-container {

@@ -41,7 +41,7 @@
     height: 50px;
     width: 50px;
     margin: 10px;
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transform: scale(1) rotate(0);
     transition: transform .2s ease-in-out 0s;
     z-index: 15;
@@ -135,7 +135,7 @@
 
 .quantity-selector>img {
     transform: rotate(45deg) scale(1);
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: transform .2s ease-in-out;
 }
 
@@ -152,7 +152,7 @@
 
 .quantity-selector>svg {
     fill: var(--text-color);
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: fill .2s ease-in-out;
     --svg-scale: 1.7;
     transition: transform .2s ease-in-out;
@@ -192,7 +192,7 @@
     padding: 20px 40px;
     border-radius: 20px;
     background-color: var(--menu-color-1);
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: background-color .5s;
     text-decoration: none;
 }
@@ -268,7 +268,7 @@
     min-height: fit-content;
     background-color: var(--menu-color-1);
     border-radius: 20px;
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: background-color .2s ease-in-out;
 }
 
@@ -327,7 +327,7 @@
     height: 50px;
     width: 50px;
     fill: var(--text-color);
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition: transform .2s ease-in-out;
 }
 
@@ -335,7 +335,7 @@
 .arrow-right.disabled>svg {
     visibility: hidden;
     fill: var(--text-color-2);
-    cursor: pointer;
+    cursor: var(--pointer-style);
 }
 
 .vac-upgrade-info {

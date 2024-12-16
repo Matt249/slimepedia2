@@ -54,7 +54,7 @@ const ConstructionList: React.FC<ConstructionListProps> = ({ recipe: pattern, re
                         </div>
                     }
                     {Object.keys(recipe).map((ingredient) => (
-                        <div key={ingredient}>
+                        <div key={ingredient}>{console.log(ingredient)}
                             <img
                                 src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
                                 alt={recipeElements[ingredient][0]}

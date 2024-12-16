@@ -37,7 +37,7 @@
     align-items: flex-start;
     height: var(--img-size);
     overflow: hidden;
-    cursor: pointer;
+    cursor: var(--pointer-style);
     transition:
         height var(--animation-speed) ease-in-out,
         padding var(--animation-speed) ease-in-out;
