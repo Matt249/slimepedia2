@@ -17,6 +17,7 @@ import happyStatue from '/src/assets/deco/happystatue.png';
 import cheerfulStatue from '/src/assets/deco/cheerfulstatue.png';
 import sunImg from '/src/assets/misc/sun.png';
 import moonImg from '/src/assets/misc/moon.png';
+import vaultImg from '/src/assets/misc/vault.png';
 import '../css/Regions.css';
 
 interface RegionDescriptionProps {
@@ -112,7 +113,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
             </div>
         </div>
         <div className='region-resources'>
-            <h2 className='box-title'>Available Resources</h2>{console.log(regionElements[region][2])}
+            <h2 className='box-title'>Available Resources</h2>
             {regionElements[region][2].map(resource => (regionsResourcesInfos[resource][2].length === 0 ?
                 <div
                     className='region-element-resource'
@@ -140,8 +141,8 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
             ))}
         </div>
         <div className='region-pods'>
-            <h2 className='box-title'>Available Pods</h2>
-            <img src={podImg} alt='Pods' />
+            <h2 className='box-title'>{region === 'labyrinth' ? 'Ancient Vaults' : 'Tresaure Pods'}</h2>
+            <img src={region === 'labyrinth' ? vaultImg : podImg} alt='Pods' />
             <p>{regionInfos[region][5]}</p>
         </div>
     </div>

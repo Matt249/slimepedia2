@@ -13,7 +13,7 @@ export const resourcesNames: string[] = [
     'sunsap',
     'aqua',
     'petal',
-    'magmacomb',
+    'magma',
     'blackindigo',
     'dream',
     'petal',
@@ -31,14 +31,14 @@ export const resourcesList: { [key: string]: [string, string[]] } = {
     'primordy': ['Primordy Oil', ['ev']],
     'jelly': ['Jellystone', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf']],
     'radiant': ['Radiant Ore', ['ss', 'ev']],
-    'diamond': ['Strange Diamond', ['rf', 'ss', 'ev', 'pb']],
+    'diamond': ['Strange Diamond', ['rf', 'ss', 'ev', 'pb', 'gl']],
     'wax': ['Buzz Wax', ['ss', 'ev']],
     'honey': ['Wild Honey', ['ss']],
     'fossil': ['Slime Fossil', ['pb']],
     'snowflake': ['Perfect Snowflake', ['pb']],
     'sunsap': ['Sun Sap', ['pb']],
     'aqua': ['Aqua Glass', ['gl']],
-    'magmacomb': ['Magma Comb', ['gl']],
+    'magma': ['Magma Comb', ['gl']],
     'blackindigo': ['Black Indigonium', ['gl']],
     'dream': ['Dream Bubble', ['gl']],
     'petal': ['Tin Petal', ['gl']],
@@ -114,7 +114,7 @@ export const resPedia: { [key: string]: [string, string] } = {
         'A different kind of hard water.',
         'The swirling colors suggest an orb of water, but it\'s solid all the way through. What could make water behave like this?'
     ],
-    'magmacomb': [
+    'magma': [
         'A new level of spicy honey.', 
         'Although the comb appears quite delicate, the slowly oozing lava suggests otherwise. Or is that honey? Either way it\'s probably not safe for consumption.'
     ],

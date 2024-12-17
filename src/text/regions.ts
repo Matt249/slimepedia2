@@ -9,12 +9,12 @@ export const regionInfos: {[key: string]: [string, string, string, string, strin
     'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0, 0],
     'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0, 0],
     'conservatory': ['The Conservatory', 'conservatory', 'co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
-    'labyrinth': ['Grey Labyrinth', 'labyrinth', 'gl', 'An imposing layer cake whose depths hide ancient, prismatic secrets.', 'gl', 0, 0, 0],
+    'labyrinth': ['Grey Labyrinth', 'labyrinth', 'gl', 'An imposing layer cake whose depths hide ancient, prismatic secrets.', 'gl', 19, 0, 0],
     'den': ['The Den', 'den', 'td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
     'gully': ['The Gully', 'gully', 'gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
     'archway': ['The Archway', 'archway', 'ar', 'An expansion to the conservatory set amongst ancient ruins and fields of rainbow grass.', 'ar', 1, 5, 1800],
     'tidepools': ['The Tidepools', 'tidepools', 'tp', 'A costal sanctuary for coral lifeforms and seaweed, this expansion to the conservatory is guaranteed to fill your shoes with sand.', 'tp', 0, 5, 3500],
-    'digsite': ['The Digsite', 'digsite', 'ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 5, 4500]
+    'digsite': ['The Digsite', 'digsite', 'ds', 'A curious archaeological site with plenty of room for a creative rancher to clean up and make it their own.', 'ds', 0, 4, 4500]
 };
 
 export const spawnLocationsList: { [key: string]: [string, string, boolean] } = {
@@ -37,11 +37,11 @@ export const spawnLocationsList: { [key: string]: [string, string, boolean] } = 
 };
 
 export const regionElements: { [key: string]: [string[], string[], string[]] }= {
-    'fields': [['pink', 'cotton', 'tabby', 'phosphor'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'diamond', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],
-    'strand': [['pink', 'cotton', 'rock', 'phosphor', 'hunter', 'honey', 'angler', 'flutter', 'ringtail', 'puddle'], ['pogo', 'cuberry', 'mango', 'granite', 'carrot', 'beet', 'nectar', 'hen', 'henPainted', 'henSea', 'henStony', 'rooster', 'chick', 'chickPainted', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'honey', 'diamond', 'gordoHunter', 'gordoHoney', 'gordoRingtail', 'gordoAngler', 'gordoFlutter']],
-    'valley': [['pink', 'cotton', 'rock', 'phosphor', 'tabby', 'angler', 'crystal', 'boom', 'fire', 'puddle', 'ringtail', 'batty'], ['pogo', 'cuberry', 'pear', 'granite', 'carrot', 'onion', 'beet', 'lettuce', 'hen', 'henBriar', 'henSea', 'henStony', 'rooster', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'diamond', 'primordy', 'lava', 'gordoBatty', 'gordoBoom', 'gordoCrystal', 'gordoRock', 'gordoTabby']],
-    'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']],
-    'labyrinth': [['pink', 'cotton', 'tabby', 'rock', 'phosphor', 'hunter', 'angler', 'crystal', 'shadow', 'twin', 'sloomber'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'onion', 'hen', 'henSea', 'cherry', 'henCandied'], ['aqua', 'magmacomb', 'blackindigo', 'dream', 'petal', 'royal', 'gordoTwin', 'gordoSloomber']],
+    'fields': [['pink', 'cotton', 'tabby', 'phosphor', 'yolky'], ['pogo', 'cuberry', 'carrot', 'lettuce', 'hen', 'henStony', 'rooster', 'chick', 'chickStony', 'henElder', 'roosterElder'], ['jelly', 'brine', 'diamond', 'gordoPink', 'gordoCotton', 'gordoPhosphor']],
+    'strand': [['pink', 'cotton', 'rock', 'phosphor', 'hunter', 'honey', 'angler', 'flutter', 'ringtail', 'puddle', 'yolky'], ['pogo', 'cuberry', 'mango', 'granite', 'carrot', 'beet', 'nectar', 'hen', 'henPainted', 'henSea', 'henStony', 'rooster', 'chick', 'chickPainted', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'honey', 'diamond', 'gordoHunter', 'gordoHoney', 'gordoRingtail', 'gordoAngler', 'gordoFlutter']],
+    'valley': [['pink', 'cotton', 'rock', 'phosphor', 'tabby', 'angler', 'crystal', 'boom', 'fire', 'puddle', 'ringtail', 'batty', 'yolky'], ['pogo', 'cuberry', 'pear', 'granite', 'carrot', 'onion', 'beet', 'lettuce', 'hen', 'henBriar', 'henSea', 'henStony', 'rooster', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'henElder', 'roosterElder'], ['water', 'radiant', 'sand', 'wax', 'diamond', 'primordy', 'lava', 'gordoBatty', 'gordoBoom', 'gordoCrystal', 'gordoRock', 'gordoTabby']],
+    'bluffs': [['pink', 'cotton', 'rock', 'phosphor', 'boom', 'hunter', 'puddle', 'crystal', 'saber', 'yolky'], ['pogo', 'cuberry', 'carrot', 'onion', 'beet', 'hen', 'henCluck', 'rooster', 'henElder', 'roosterElder'], ['water', 'snowflake', 'sunsap', 'fossil', 'diamond', 'gordoSaber']],
+    'labyrinth': [['pink', 'cotton', 'tabby', 'rock', 'phosphor', 'hunter', 'angler', 'crystal', 'boom', 'fire', 'batty', 'puddle', 'ringtail', 'shadow', 'twin', 'sloomber', 'yolky'], ['pogo', 'cuberry', 'mango', 'granite', 'pear', 'carrot', 'lettuce', 'onion', 'beet', 'hen', 'henBriar', 'henSea', 'henStony', 'chick', 'chickBriar', 'chickSea', 'chickStony', 'cherry', 'henCandied'], ['aqua', 'magma', 'blackindigo', 'dream', 'petal', 'royal', 'diamond', 'gordoTwin', 'gordoSloomber']],
     'sea': [[], [], []]
 }
 
@@ -78,7 +78,7 @@ export const regionsConnections: {[key: string]: [string[], string[]]} = {
     'digsite': [['den'], []],
     'fields': [['conservatory'], ['strand', 'valley']],
     'strand': [['fields'], ['labyrinth']],
-    'valley': [['fields'], ['bluffs']],
+    'valley': [['fields'], ['bluffs', 'labyrinth']],
     'bluffs': [['valley'], []],
     'labyrinth': [['strand', 'valley'], []],
     'sea': [['conservatory', 'fields', 'strand', 'valley', 'bluffs'], []]
@@ -115,7 +115,7 @@ export const regionsResourcesInfos: { [key: string]: [string, string, string] } 
     'sunsap': ['Sun Sap', 'resources/sunsap', '/items/resources/sunsap'],
     'fossil': ['Slime Fossil', 'resources/fossil', '/items/resources/fossil'],
     'aqua': ['Aqua Glass', 'resources/aqua', '/items/resources/aqua'],
-    'magmacomb': ['Magma Comb', 'resources/magmacomb', '/items/resources/magmacomb'],
+    'magma': ['Magma Comb', 'resources/magma', '/items/resources/magma'],
     'blackindigo': ['Black Indigonium', 'resources/blackindigo', '/items/resources/blackindigo'],
     'dream': ['Dream Bubble', 'resources/dream', '/items/resources/dream'],
     'petal': ['Tin Petal', 'resources/petal', '/items/resources/petal'],
