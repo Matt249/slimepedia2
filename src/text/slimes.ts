@@ -48,10 +48,10 @@ export const slimesList: { [key: string]: [string, string, string, boolean, stri
     'sloomber': ['Sloomber Slime', 'meat', 'henCandied', true, ['gl'], 'none'],
     'dervish': ['Dervish Slime', 'fruits', 'pear', true, ['ws'], 'none'],
     'tangle': ['Tangle Slime', 'meat', 'henPainted', true, ['ps'], 'none'],
-    'yolky': ['Yolky Slime', 'none', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
-    'lucky': ['Lucky Slime', 'meat', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
-    'gold': ['Gold Slime', 'food', 'none', false, ['rf', 'ss', 'ev', 'pb'], 'none'],
-    'tarr': ['Tarr Slime', 'ranchersnslimes', 'ranchersnslimes', false, ['co', 'rf', 'ss', 'ev', 'pb'], 'none']
+    'yolky': ['Yolky Slime', 'none', 'none', false, ['rf', 'ss', 'ev', 'pb', 'gl'], 'none'],
+    'lucky': ['Lucky Slime', 'meat', 'none', false, ['rf', 'ss', 'ev', 'pb', 'gl'], 'none'],
+    'gold': ['Gold Slime', 'food', 'none', false, ['rf', 'ss', 'ev', 'pb', 'gl'], 'none'],
+    'tarr': ['Tarr Slime', 'ranchersnslimes', 'ranchersnslimes', false, ['co', 'rf', 'ss', 'ev', 'pb', 'gl'], 'none']
 };
 
 
