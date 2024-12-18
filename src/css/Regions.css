@@ -178,12 +178,12 @@
     top: 0;
     right: 0;
     margin: 20px;
-    padding-left: 20px;
     padding-right: 70px;
-    width: 630px;
+    max-width: calc(100% - 40px);
+    width: auto;
     height: 50px;
     border-radius: 50px;
-    overflow: hidden;
+    overflow: auto;
     background-color: var(--menu-color-1);
     display: flex;
     flex-flow: row-reverse nowrap;
@@ -191,21 +191,52 @@
     align-items: center;
     gap: 20px;
     box-sizing: border-box;
-    transition: width .2s ease-in-out;
+    transition: max-width .2s ease-in-out;
 }
 
 .region-music-player.disabled {
-    width: 50px;
+    max-width: 50px;
     padding-right: 0;
+    overflow: hidden;
 }
 
+.region-music-player>div {
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    align-items: center;
+    gap: 10px;
+    border-radius: 50px;
+    padding: 0 10px;
+    transition: background-color .2s ease-in-out;
+}
+
+.region-music-player.disabled>div {
+    background-color: #0000;
+}
+
+.dreamland-music {
+    background-color: #f9ccff;
+}
+
+.labyrinth-music {
+    background-color: #4ed6ac;
+}
+
+.lava-music {
+    background-color: #FC8400;
+}
+
+.waterworks-music {
+    background-color: #86EBF7;
+}
+
+.region-music-player.disabled>div>img:not(.music-player-icon),
 .region-music-player.disabled>img:not(.music-player-icon) {
     transform: scale(0);
 }
 
-/* .region-music-player.disabled>img:not(.music-player-icon) */
-
-.region-music-player>img:not(.music-player-icon, .music-time) {
+.region-music-player>img:not(.music-player-icon, .music-time),
+.region-music-player>div>img:not(.music-player-icon, .music-time) {
     width: 50px;
     height: 50px;
     transform: scale(.8) translateY(-5%);

@@ -262,6 +262,23 @@ export const Regions = () => {
     const relaxNightRef = useRef(null);
     const ambientNightRef = useRef(null);
 
+    const waterworksDayThemeRef = useRef(null);
+    const waterworksDayAmbientRef = useRef(null);
+    const waterworksNightThemeRef = useRef(null);
+    const waterworksNightAmbientRef = useRef(null);
+    const lavaDayThemeRef = useRef(null);
+    const lavaDayAmbientRef = useRef(null);
+    const lavaNightThemeRef = useRef(null);
+    const lavaNightAmbientRef = useRef(null);
+    const labyrinthDayThemeRef = useRef(null);
+    const labyrinthDayAmbientRef = useRef(null);
+    const labyrinthNightThemeRef = useRef(null);
+    const labyrinthNightAmbientRef = useRef(null);
+    const dreamlandDayThemeRef = useRef(null);
+    const dreamlandDayAmbientRef = useRef(null);
+    const dreamlandNightThemeRef = useRef(null);
+    const dreamlandNightAmbientRef = useRef(null);
+
     const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
         if (currentAudio)
             if (currentAudio !== audioRef.current) {
@@ -286,7 +303,11 @@ export const Regions = () => {
         if (currentAudio === null || !currentAudio.src) return '';
         const parts = currentAudio.src.split('/');
         const lastPart = parts.pop();
-        return lastPart ? lastPart.split('.')[0] : '';
+        if (lastPart) {
+            const lP = lastPart.split('.')[0].split('-');
+            return `${lP[0]}-${lP[1]}-${lP[2]}`;
+        }
+        return '';
     };
 
     const { region: regionName } = useParams();
@@ -381,25 +402,81 @@ export const Regions = () => {
                 </div>
                 <div className='region-container'>
                     <div className='region-main-page-frame'>
-                        {(regionMusic) && (<>
-                            <audio ref={themeDayRef} src={mediaFetcher(`music/${regionMusic}-day-theme.ogg`)} />
-                            <audio ref={relaxDayRef} src={mediaFetcher(`music/${regionMusic}-day-relax.ogg`)} />
-                            <audio ref={ambientDayRef} src={mediaFetcher(`music/${regionMusic}-day-ambient.ogg`)} />
-                            <audio ref={themeNightRef} src={mediaFetcher(`music/${regionMusic}-night-theme.ogg`)} />
-                            <audio ref={relaxNightRef} src={mediaFetcher(`music/${regionMusic}-night-relax.ogg`)} />
-                            <audio ref={ambientNightRef} src={mediaFetcher(`music/${regionMusic}-night-ambient.ogg`)} />
-                            <div className={`region-music-player ${musicMenu ? '' : 'disabled'}`}>
-                                <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientNightRef)} />
-                                <img src={happyStatue} className={getAudioName() === `${regionMusic}-night-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxNightRef)} />
-                                <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeNightRef)} />
-                                <img src={moonImg} className='music-time' alt='Night Music' />
-                                <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientDayRef)} />
-                                <img src={happyStatue} className={getAudioName() === `${regionMusic}-day-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxDayRef)} />
-                                <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeDayRef)} />
-                                <img src={sunImg} className='music-time' alt='Day Music' />
-                                <img className={'music-player-icon'} src={musicImg} onClick={() => setMusicMenu(!musicMenu)} />
-                            </div>
-                        </>)}
+                        {(regionMusic) && (region === 'labyrinth') ? (
+                            <>
+                                <audio ref={waterworksDayThemeRef} src={mediaFetcher(`music/waterworks-day-theme.ogg`)} />
+                                <audio ref={waterworksDayAmbientRef} src={mediaFetcher(`music/waterworks-day-ambient.ogg`)} />
+                                <audio ref={waterworksNightThemeRef} src={mediaFetcher(`music/waterworks-night-theme.ogg`)} />
+                                <audio ref={waterworksNightAmbientRef} src={mediaFetcher(`music/waterworks-night-ambient.ogg`)} />
+                                <audio ref={lavaDayThemeRef} src={mediaFetcher(`music/lava-day-theme.ogg`)} />
+                                <audio ref={lavaDayAmbientRef} src={mediaFetcher(`music/lava-day-ambient.ogg`)} />
+                                <audio ref={lavaNightThemeRef} src={mediaFetcher(`music/lava-night-theme.ogg`)} />
+                                <audio ref={lavaNightAmbientRef} src={mediaFetcher(`music/lava-night-ambient.ogg`)} />
+                                <audio ref={labyrinthDayThemeRef} src={mediaFetcher(`music/labyrinth-day-theme.ogg`)} />
+                                <audio ref={labyrinthDayAmbientRef} src={mediaFetcher(`music/labyrinth-day-ambient.ogg`)} />
+                                <audio ref={labyrinthNightThemeRef} src={mediaFetcher(`music/labyrinth-night-theme.ogg`)} />
+                                <audio ref={labyrinthNightAmbientRef} src={mediaFetcher(`music/labyrinth-night-ambient.ogg`)} />
+                                <audio ref={dreamlandDayThemeRef} src={mediaFetcher(`music/dreamland-day-theme.ogg`)} />
+                                <audio ref={dreamlandDayAmbientRef} src={mediaFetcher(`music/dreamland-day-ambient.ogg`)} />
+                                <audio ref={dreamlandNightThemeRef} src={mediaFetcher(`music/dreamland-night-theme.ogg`)} />
+                                <audio ref={dreamlandNightAmbientRef} src={mediaFetcher(`music/dreamland-night-ambient.ogg`)} />
+                                <div className={`region-music-player ${musicMenu ? '' : 'disabled'}`}>
+                                    <div className='waterworks-music'>
+                                        <img src={cheerfulStatue} className={getAudioName() === `waterworks-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(waterworksNightAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `waterworks-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(waterworksNightThemeRef)} />
+                                        <img src={moonImg} className='music-time' alt='Night Music' />
+                                        <img src={cheerfulStatue} className={getAudioName() === `waterworks-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(waterworksDayAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `waterworks-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(waterworksDayThemeRef)} />
+                                        <img src={sunImg} className='music-time' alt='Day Music' />
+                                    </div>
+                                    <div className='lava-music'>
+                                        <img src={cheerfulStatue} className={getAudioName() === `lava-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(lavaNightAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `lava-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(lavaNightThemeRef)} />
+                                        <img src={moonImg} className='music-time' alt='Night Music' />
+                                        <img src={cheerfulStatue} className={getAudioName() === `lava-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(lavaDayAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `lava-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(lavaDayThemeRef)} />
+                                        <img src={sunImg} className='music-time' alt='Day Music' />
+                                    </div>
+                                    <div className='labyrinth-music'>
+                                        <img src={cheerfulStatue} className={getAudioName() === `labyrinth-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(labyrinthNightAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `labyrinth-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(labyrinthNightThemeRef)} />
+                                        <img src={moonImg} className='music-time' alt='Night Music' />
+                                        <img src={cheerfulStatue} className={getAudioName() === `labyrinth-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(labyrinthDayAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `labyrinth-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(labyrinthDayThemeRef)} />
+                                        <img src={sunImg} className='music-time' alt='Day Music' />
+                                    </div>
+                                    <div className='dreamland-music'>
+                                        <img src={cheerfulStatue} className={getAudioName() === `dreamland-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(dreamlandNightAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `dreamland-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(dreamlandNightThemeRef)} />
+                                        <img src={moonImg} className='music-time' alt='Night Music' />
+                                        <img src={cheerfulStatue} className={getAudioName() === `dreamland-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(dreamlandDayAmbientRef)} />
+                                        <img src={overjoyedStatue} className={getAudioName() === `dreamland-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(dreamlandDayThemeRef)} />
+                                        <img src={sunImg} className='music-time' alt='Day Music' />
+                                    </div>
+                                    <img className={'music-player-icon'} src={musicImg} onClick={() => setMusicMenu(!musicMenu)} />
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <audio ref={themeDayRef} src={mediaFetcher(`music/${regionMusic}-day-theme.ogg`)} />
+                                <audio ref={relaxDayRef} src={mediaFetcher(`music/${regionMusic}-day-relax.ogg`)} />
+                                <audio ref={ambientDayRef} src={mediaFetcher(`music/${regionMusic}-day-ambient.ogg`)} />
+                                <audio ref={themeNightRef} src={mediaFetcher(`music/${regionMusic}-night-theme.ogg`)} />
+                                <audio ref={relaxNightRef} src={mediaFetcher(`music/${regionMusic}-night-relax.ogg`)} />
+                                <audio ref={ambientNightRef} src={mediaFetcher(`music/${regionMusic}-night-ambient.ogg`)} />
+                                <div className={`region-music-player ${musicMenu ? '' : 'disabled'}`}>
+                                    <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-night-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientNightRef)} />
+                                    <img src={happyStatue} className={getAudioName() === `${regionMusic}-night-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxNightRef)} />
+                                    <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-night-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeNightRef)} />
+                                    <img src={moonImg} className='music-time' alt='Night Music' />
+                                    <img src={cheerfulStatue} className={getAudioName() === `${regionMusic}-day-ambient` ? 'music-current' : ''} alt='Cheerful Statue' onClick={() => playAudio(ambientDayRef)} />
+                                    <img src={happyStatue} className={getAudioName() === `${regionMusic}-day-relax` ? 'music-current' : ''} alt='Happy Statue' onClick={() => playAudio(relaxDayRef)} />
+                                    <img src={overjoyedStatue} className={getAudioName() === `${regionMusic}-day-theme` ? 'music-current' : ''} alt='Overjoyed Statue' onClick={() => playAudio(themeDayRef)} />
+                                    <img src={sunImg} className='music-time' alt='Day Music' />
+                                    <img className={'music-player-icon'} src={musicImg} onClick={() => setMusicMenu(!musicMenu)} />
+                                </div>
+                            </>
+                        )}
                         <div className='region-main-page'>
                             <img src={mediaFetcher(`world/${region}.png`)} alt={regionInfos[region][0]} />
                             <h1>{regionInfos[region][0]}</h1>
