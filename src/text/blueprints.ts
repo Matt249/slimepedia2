@@ -53,7 +53,9 @@ export const recipeElements: { [key: string]: [string, string, string] } = {
     'heartModule': ['Heart Module', 'upgrades/heartModule', ''],
     'sureshotModule': ['Sureshot Module', 'upgrades/sureshotModule', ''],
     'droneKey': ['Drone Key', 'upgrades/droneKey', ''],
-    'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', '']
+    'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', ''],
+    'regenenModule': ['Regenerator Module', 'upgrades/regeneratorModule', ''],
+    'injectorModule': ['Injector Module', 'upgrades/injectorModule', '']
 };
 
 export const unlockRequirements: { [key: string]: [string, string] } = {
@@ -81,12 +83,16 @@ export const upgradeNames: string[] = [
     'pulseWave',
     'tankGuard',
     'droneKey',
-    'sureshot'
+    'sureshot',
+    'regenerator',
+    'powerinjector'
 ];
 
 export const upgradePacks: { [key: string]: [string, number] } = {
     'harvester': ['Resource Harvester', 1],
     'health': ['Health Modules', 4],
+    'regenerator': ['Regenerator', 1],
+    'powerinjector': ['Power Injector', 1],
     'power': ['Power Modules', 5],
     'dash': ['Dash Boots Speed', 2],
     'jetpack': ['Jetpack', 2],
@@ -105,6 +111,8 @@ export const upgradesList: { [key: string]: [string, string, { [key: string]: nu
     'health2': ['Heart Module II', 'pod', { 'newbucks': 900, 'pink': 20, 'honey': 10, 'brine': 10, 'jelly': 10, 'heartModule': 1 }],
     'health3': ['Heart Module III', 'pod', { 'newbucks': 3000, 'pink': 30, 'honey': 20, 'brine': 30, 'sand': 10, 'heartModule': 1 }],
     'health4': ['Heart Module IV', 'ancient', { 'newbucks': 10000, 'prisma': 50, 'magma': 25, 'royal': 1, 'heartModule': 1 }],
+    'regenerator1': ['Regenerator', 'ancient', { 'newbucks': 5000, 'twin': 25, 'prisma': 10, 'magma': 10, 'aqua': 10, 'regenModule': 1 }],
+    'powerinjector1': ['Power Injector', 'ancient', { 'newbucks': 5000, 'sloomber': 25, 'prisma': 10, 'dream': 10, 'blackindigo': 10, 'injectorModule': 1 }],
     'power1': ['Power Module I', 'start', { 'newbucks': 450, 'cotton': 10 }],
     'power2': ['Power Module II', 'pod', { 'newbucks': 900, 'cotton': 20, 'batty': 10, 'primordy': 10, 'jelly': 10, 'powerChip': 1 }],
     'power3': ['Power Module III', 'pod', { 'newbucks': 3000, 'cotton': 30, 'batty': 20, 'wildHoney': 10, 'primordy': 30, 'powerChip': 1 }],
@@ -119,7 +127,7 @@ export const upgradesList: { [key: string]: [string, string, { [key: string]: nu
     'tankBooster3': ['Tank Booster III', 'pod', { 'newbucks': 3000, 'tabby': 30, 'angler': 20, 'radiant': 30, 'lava': 10, 'storageCell': 1 }],
     'tankBooster4': ['Tank Booster IV', 'pod', { 'newbucks': 10000, 'tabby': 40, 'saber': 30, 'snowflake': 30, 'sunsap': 1, 'storageCell': 1 }],
     'tankBooster5': ['Tank Booster V', 'ancient', { 'newbucks': 15000, 'sloomber': 50, 'prisma': 20, 'blackindigo': 20, 'royal': 1, 'storageCell': 1 }],
-    'tankBooster6': ['Tank Booster VI', 'ancient', { 'newbucks': 0}], // à changer
+    'tankBooster6': ['Tank Booster VI', 'ancient', { 'newbucks': 20000, 'twin': 60, 'prisma': 25, 'dream': 20, 'sunsap': 3, 'storageCell': 1 }],
     'extraTank1': ['Extra Tank I', 'start', { 'newbucks': 1500, 'rock': 10, 'sand': 10 }],
     'extraTank2': ['Extra Tank II', 'pod', { 'newbucks': 3000, 'rock': 40, 'ringtail': 20, 'sand': 20, 'diamond': 2, 'storageUnit': 1 }],
     'waterTank1': ['Water Tank', 'start', { 'newbucks': 450, 'brine': 10 }],
@@ -144,6 +152,8 @@ export const upgradeDescriptions: { [key: string]: string } = {
     'power3': "The latest micro generator boosts energy to 250; but not high enough to give up coffee entirely.",
     'power4': "An impossibly advanced micro generator boosts personal energy to 275. There's no way this is still legal.",
     'power5': "An advanced micro generator that blows past all previously known limits of personal energy, pushing it to 300.",
+    'regenerator1': "A small software update that improves energy routing trough the vac's conduits, increasing the rate of energy regeneration by 15%.",
+    'powerinjector1': "Streamlines the vac's power transfer, reducing the delay before energy regenerates by 25%.",
     'dash1': "These highly advanced and, frankly, fashion-forward boots reduce the energy consumption of sprinting.",
     'dash2': "Experimental footwear capable of reducing the cost of sprinting even further. It makes you think walking is for suckers.",
     'jetpack1': "Keep your head in the clouds with this amazing, personal jetpack!",
@@ -153,6 +163,7 @@ export const upgradeDescriptions: { [key: string]: string } = {
     'tankBooster3': "More is better, but in this case, it's best. These premium nano-storage cells can hold 50 units in each vac tank.",
     'tankBooster4': "The secret best vac tank available using experimental nano-storage technology that's absolutely probably maybe legal.",
     'tankBooster5': "Pushing the limits of slime science, the nano-storage technology increases vac tank capacity to 70.",
+    'tankBooster6': "Thanks to the latest scientific breaktroughs, the nano-storage technology of this booster allows you to hold 80 units per vac tank.",
     'extraTank1': "Adds an extra general-purpose vac tank.",
     'extraTank2': "Adds yet another extra general-purpose vac tank.",
     'waterTank1': "Adds a specialized vac tank that allows you to store fresh water.",
@@ -348,7 +359,7 @@ export const utilitiesList: { [key: string]: [string, string, { [key: string]: n
     'markerresource': ['Spout Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }],
     'markermineral': ['Mineral Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }],
     'markerhive': ['Hive Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }],
-    'markerstabilizer': ['Stabilizer Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }], // à changer
+    'markerstabilizer': ['Stabilizer Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'petal': 1 }],
     'dreamlantern': ['Dream Lantern', 'ancient', { 'newbucks': 10000, 'honey': 50, 'crystal': 50, 'lava': 10, 'sand': 10, 'diamond': 1 }],
     'radiantprojector': ['Radiant Projector', 'viktor', { 'newbucks': 500, 'hunter': 10, 'boom': 10, 'sand': 5, 'lava': 5 }],
     'disruptiondetector': ['Disruption Detector', 'gigi', { 'newbucks': 500, 'prisma': 10, 'petal': 5, 'dream': 5 }]
@@ -386,7 +397,7 @@ export const utilitiesDescription: { [key: string]: string } = {
     'markermineral': "A useful marker to call attention to any nearby mineral resources.",
     'markerhive': "A useful marker to call attention to any nearby hive resources.",
     'markerstabilizer': "A useful marker to call attention to any nearby stabilizers.",
-    'dreamlantern': "When turned on, the calming aura of this device will put slimes to sleep, and help them stay asleep trough all kinds of disruptions. Tough the mechanism is not fully understood, it seems if must briefly reset every three days, after which it requires manual activation.", // à changer
+    'dreamlantern': "When turned on, the calming aura of this device will put slimes to sleep, and help them stay asleep trough all kinds of disruptions. Tough the mechanism is not fully understood, it seems if must briefly reset every three days, after which it requires manual activation.",
     'radiantprojector': "A projector that will help you project radiant energy.",
     'disruptiondetector': "This device can help restart long-dormant devices in the Grey Labyrinth."
 };
@@ -548,20 +559,18 @@ export const decorationsNames: string[] = [
     'mediumnet',
     'largenet',
     'ancientarchedwall',
+    'pottedlavaplants',
     'excavationlights',
     'walllighting',
     'youngcedaroak',
+    'ancientpurpleoak',
     'ancientroundpillar',
     'goldslimefloorpanel',
     'aquarium',
     'magmafountain',
-    'shipinabottle',
-
     'anglerfountain',
     'goldtwistedtree',
-    'ancientpurpleoak',
-    'pottedlavaplants',
-
+    'shipinabottle',
     'carousel',
     'ferriswheel',
     'goldenchickenstatue',
@@ -729,16 +738,16 @@ export const decorationsList: { [key: string]: [string, string, { [key: string]:
     'tarrstandee': ['Tarr Standee', 'polestar', { 'newbucks': 500, 'hunter': 10, 'boom': 5, 'glass': 3 }, 'fun'],
     'musictile': ['Music Tile', 'polestar', { 'newbucks': 50, 'saber': 3, 'tabby': 3, 'radiant': 1 }, 'fun'],
     'musicpillar': ['Music Pilar', 'polestar', { 'newbucks': 50, 'hunter': 3, 'cotton': 3, 'radiant': 1 }, 'fun'],
-    'anglerfountain': ['Angler Fountain', 'ancient', { 'newbucks': 50, 'angler': 3, 'brine': 3, 'primordy': 1 }, 'labyrinth'], // à changer
+    'anglerfountain': ['Angler Fountain', 'ancient', { 'newbucks': 9000, 'sloomber': 25, 'prisma': 20, 'brine': 10, 'aqua': 10 }, 'labyrinth'],
     'magmafountain': ['Magma Fountain', 'ancient', { 'newbucks': 7000, 'twin': 25, 'fire': 25, 'primordy': 10, 'magma': 10 }, 'labyrinth'],
     'ancientroundpillar': ['Ancient Round Pillar', 'ancient', { 'newbucks': 100, 'twin': 10, 'blackindigo': 3 }, 'labyrinth'],
     'ancientarchedwall': ['Ancient Arched Wall', 'ancient', { 'newbucks': 200, 'rock': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
     'excavationlights': ['Excavation Lights', 'ancient', { 'newbucks': 150, 'dervish': 10, 'aqua': 5, 'dream': 5, }, 'labyrinth'],
     'goldslimefloorpanel': ['Gold Slime Floor Panel', 'ancient', { 'newbucks': 1000, 'sloomber': 25, 'flutter': 25, 'aqua': 10, 'dream': 10 }, 'labyrinth'],
-    'goldtwistedtree': ['Gold Twisted Tree', 'ancient', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'], // à changer
-    'ancientpurpleoak': ['Ancient Purple Oak', 'ancient', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'], // à changer
+    'goldtwistedtree': ['Gold Twisted Tree', 'ancient', { 'newbucks': 1000, 'sloomber': 20, 'petal': 15, 'aqua': 5, 'dream': 5 }, 'labyrinth'],
+    'ancientpurpleoak': ['Ancient Purple Oak', 'ancient', { 'newbucks': 200, 'sloomber': 10, 'petal': 5, 'wax': 5 }, 'labyrinth'],
     'youngcedaroak': ['Young Cedaroak', 'ancient', { 'newbucks': 200, 'twin': 10, 'petal': 5, 'wildHoney': 5 }, 'labyrinth'],
-    'pottedlavaplants': ['Potted Lava Plants', 'ancient', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'], // à changer
+    'pottedlavaplants': ['Potted Lava Plants', 'ancient', { 'newbucks': 150, 'tangle': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
     'walllighting': ['Ancient Wall Lighting', 'ancient', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'],
     'aquarium': ['Aquarium', 'ancient', { 'newbucks': 6000, 'twin': 25, 'hunter': 25, 'puddle': 5, 'aqua': 10 }, 'labyrinth'],
 };
@@ -898,16 +907,16 @@ export const decorationsDescription: { [key: string]: string } = {
     'tarrstandee': "Edgier slimes will love posing as a terrifying Tarr.",
     'musictile': "Festive floor tiles that light up and create music when touched.",
     'musicpillar': "Playful pillars that light up and create music when touched.",
-    'anglerpillar': "The winding designs on this arched wall are truly amazing.", // à changer
+    'anglerfountain': "The lure on this angler fountain won't daze you, but the relaxing sound of running water may put you to sleep all the same.",
     'magmafountain': "This fountain draws magma fromthe depths of the planet, transforming the awesome power of nature into a cute garden ornament.",
     'ancientroundpillar': "What ancient builder first decided on roundd over square? And why a hole in the pillar? Were they inspired by ancient slimes, or cheating at ancient hide-and-seek?",
     'ancientarchedwall': "The winding designs on this arched wall are truly amazing.",
     'excavationlights': "Essential for safety exploring ancient ruins.",
     'goldslimefloorpanel': "A burnished ode to the duality of slime-kind, and also a flashy addition to any garden path.",
-    'goldtwistedtree': "A tree that lights up and creates music when touched.", // à changer
-    'ancientpurpleoak': "A tree that lights up and creates music when touched.", // à changer
+    'goldtwistedtree': "Organic and metal, wood and gold twine together unnaturally, yet with a brilliant beauty.",
+    'ancientpurpleoak': "A mighty oak whose branches provide shade and peace to anyone resting below.",
     'youngcedaroak': "This tree seems to have characteristics of several different species of plant.",
-    'potterlavaplants': "Plants that light up and create music when touched.", // à changer
+    'pottedlavaplants': "These lava plants bring warmth to any space, and can fire the very pots they're potted in.",
     'walllighting': "Add a dash of elegance, and light, to any space with this wall lighting.",
     'aquarium': "Inspired by ancient water works, this aquarium works to keep water inside."
 };
