@@ -11,7 +11,7 @@
   --main-menu-icon-size: 200px;
   --main-menu-title-size: 3.5em;
   --main-menu-subtitle-size: 2em;
-
+  --pointer-style: pointer;
 }
 
 @media (min-width: 2000px) {

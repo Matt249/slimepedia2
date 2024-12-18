@@ -402,7 +402,7 @@ export const Regions = () => {
                 </div>
                 <div className='region-container'>
                     <div className='region-main-page-frame'>
-                        {(regionMusic) && (region === 'labyrinth') ? (
+                        {((regionMusic) && (region !== 'sea')) ? (region === 'labyrinth') ? (
                             <>
                                 <audio ref={waterworksDayThemeRef} src={mediaFetcher(`music/waterworks-day-theme.ogg`)} />
                                 <audio ref={waterworksDayAmbientRef} src={mediaFetcher(`music/waterworks-day-ambient.ogg`)} />
@@ -476,7 +476,7 @@ export const Regions = () => {
                                     <img className={'music-player-icon'} src={musicImg} onClick={() => setMusicMenu(!musicMenu)} />
                                 </div>
                             </>
-                        )}
+                        ) : null}
                         <div className='region-main-page'>
                             <img src={mediaFetcher(`world/${region}.png`)} alt={regionInfos[region][0]} />
                             <h1>{regionInfos[region][0]}</h1>
