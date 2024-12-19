@@ -264,6 +264,7 @@
     transform: scale(.8);
 }
 
+.region-music-player>div>img.music-current,
 .region-music-player>img.music-current {
     transform: scale(1) translateY(-10%);
 }
