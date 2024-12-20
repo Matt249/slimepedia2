@@ -18,7 +18,10 @@
 .image-frame {
     padding: 12%;
     background-color: var(--item-color);
-    transition: border-radius .2s;
+    transition:
+        border-radius .2s,
+        background-color .2s;
+    ;
     border-radius: 25%;
     width: fit-content;
     height: fit-content;

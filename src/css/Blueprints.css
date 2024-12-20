@@ -100,8 +100,8 @@
 }
 
 .pin-item-element>img {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
 }
 
 .pin-item-element>p {
@@ -109,6 +109,7 @@
     overflow: hidden;
     white-space: nowrap;
     font-weight: 500;
+    font-size: 1.1em;
 }
 
 .pin-item-element>p::after {
@@ -179,7 +180,7 @@
 .blueprints-category {
     width: auto;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(auto-fill, 1fr);
     gap: 20px;
 }
 
@@ -215,7 +216,7 @@
 }
 
 .blueprints-tab>h1 {
-    font-size: 2em;
+    font-size: var(--main-menu-subtitle-size);
     font-weight: bold;
     margin: 0;
     text-decoration: none;
@@ -251,15 +252,12 @@
     color: var(--text-color);
 }
 
-.vac-upgrade-item>div {
-    padding: 10px;
-}
-
 .vac-upgrade-item:hover {
     background-color: var(--menu-color-1);
 }
 
 .vac-upgrade-pack {
+    padding: 10px 20px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -270,10 +268,7 @@
     border-radius: 20px;
     cursor: var(--pointer-style);
     transition: background-color .2s ease-in-out;
-}
-
-.vac-upgrade-item.selected>.vac-upgrade-pack {
-    background-color: var(--item-color);
+    text-decoration: none;
 }
 
 .vac-upgrade-pack>img {
@@ -292,18 +287,25 @@
     font-size: 1.3em;
     font-weight: bold;
     margin: 0;
+    color: var(--text-color);
 }
 
 .vac-upgrade-tiers {
     display: flex;
     flex-flow: row nowrap;
     gap: 10px;
-
+    align-items: center;
 }
 
 .vac-upgrade-tiers>img {
     height: 50px;
     border-radius: 20px;
+}
+
+.vac-upgrade-tiers>h2 {
+    font-size: 1.7em;
+    font-weight: bold;
+    margin: 0;
 }
 
 .arrow-left>svg {
@@ -371,7 +373,7 @@
     grid-area: header;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas:
         "icon title"
         "icon description"
@@ -401,7 +403,7 @@
 .blueprint-title-box>h3,
 .vac-upgrade-title-box>h3 {
     grid-area: description;
-    font-size: 1.7em;
+    font-size: 1.5em;
     font-weight: normal;
     margin: 0;
     text-align: center;
@@ -495,8 +497,6 @@
     position: relative;
     grid-area: unlock;
     display: flex;
-    flex-flow: row nowrap;
-    gap: 20px;
     align-items: center;
     justify-content: center;
     padding-top: 50px !important;
@@ -510,9 +510,31 @@
     transform: translateX(-50%);
 }
 
-.blueprint-requirements-box>img,
+.blueprint-requirements-box>p,
+.vac-upgrade-requirements-box>p {
+    font-size: 1.4em;
+    margin: 0;
+    text-align: center;
+}
+
+.blueprint-requirements-box {
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+.blueprint-requirements-box>img {
+    height: 100px;
+    width: auto;
+}
+
+.vac-upgrade-requirements-box {
+    flex-flow: row nowrap;
+    gap: 20px;
+}
+
 .vac-upgrade-requirements-box>img {
-    height: 3em;
+    height: 45px;
+    width: auto;
 }
 
 .blueprint-list {

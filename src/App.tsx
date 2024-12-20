@@ -11,7 +11,6 @@ function App() {
     document.title = "Slimepedia 2";
     document.body.style.backgroundImage = `url(${mediaFetcher('wallpapers/houseDay.png')})`;
     document.body.style.cursor = 'url(' + mediaFetcher('ui/pointer24.png') + '), auto';
-    //document.body.style.cursor = 'url(' + (mediaFetcher('ui/map.png')) + '), pointer';
 
     useEffect(() => {
         const randomSlimeKey = slimeNames[Math.floor(Math.random() * Object.keys(slimeNames).length)];

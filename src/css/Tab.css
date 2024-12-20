@@ -1,6 +1,20 @@
+:root {
+    --tab-icon-size: 50px;
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --tab-icon-size: 75px;
+    }
+}
+
 .tab {
     padding: 10px 20px;
-    transition: background-color .5s, border-radius .3s, margin .3s, padding .3s;
+    transition:
+        background-color .2s,
+        border-radius .2s,
+        margin .2s,
+        padding .2s;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     cursor: var(--pointer-style);
@@ -27,8 +41,8 @@
 }
 
 .tab>img {
-    width: 50px;
-    height: 50px;
+    width: var(--tab-icon-size);
+    height: var(--tab-icon-size);
     transform: scale(.9);
     transition: transform .3s;
 }
@@ -42,18 +56,5 @@
     margin: 0 0 10px 0;
     text-align: center;
     color: var(--text-color);
-}
-
-@media (max-width: 1600px) {
-    .tab>img {
-        width: 40px;
-        height: 40px;
-        }
-}
-
-@media (min-width: 2000px) {
-    .tab>img {
-        width: 75px;
-        height: 75px;
-        }
+    font-size: var(--small-text-size);
 }

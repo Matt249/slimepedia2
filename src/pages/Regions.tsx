@@ -349,6 +349,16 @@ export const Regions = () => {
         backgroundImage: `url(${mediaFetcher(`wait/${region}.jpg`)})`
     };
 
+    const mainPlayer = useRef<HTMLVideoElement>(null);
+    const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+
+    const handleTabClick = (regionItem: string) => {
+        if (videoRefs.current[regionItem]) {
+            videoRefs.current[regionItem].currentTime = 0;
+            videoRefs.current[regionItem].play();
+        }
+    };
+
     return (
         <div>
             <div className='region-tab-list'>
@@ -366,8 +376,10 @@ export const Regions = () => {
                             <div
                                 className={'region-tab' + (regionItem === region ? ' region-selected' : '')}
                                 key={regionInfos[regionItem][0]}
+                                onClick={() => handleTabClick(regionItem)}
                             >
                                 <video
+                                    ref={el => videoRefs.current[regionItem] = el}
                                     className='region-video'
                                     src={mediaFetcher(`videos/${regionInfos[regionItem][2]}.light.webm`)}
                                     onMouseEnter={e => handleMouseEnter(e)}
@@ -387,6 +399,7 @@ export const Regions = () => {
             <div className='region-presentation'>
                 <div className='region-background' style={backgroudRegion}>
                     <video
+                        ref={mainPlayer}
                         className='region-background-video'
                         src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
                         disablePictureInPicture

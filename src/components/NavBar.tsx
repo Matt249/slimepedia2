@@ -17,9 +17,9 @@ export const NavBar = () => {
         if (rootElement) {
             const rootStyle: CSSStyleDeclaration = (rootElement as HTMLElement).style;
             rootStyle.setProperty('--background-color', darkMode ? '#000' : '#EFE7D4');
-            rootStyle.setProperty('--menu-color-0', darkMode ? '#222' : '#EFE7D4');
+            rootStyle.setProperty('--menu-color-0', darkMode ? '#000' : '#EFE7D4');
             rootStyle.setProperty('--menu-color-1', darkMode ? '#181818' : '#E9DDC7');
-            rootStyle.setProperty('--item-color', darkMode ? '#000' : '#D2B394');
+            rootStyle.setProperty('--item-color', darkMode ? '#222' : '#D2B394');
             rootStyle.setProperty('--text-color', darkMode ? '#fff' : '#000');
             rootStyle.setProperty('--pointer-style', 'url(' + (mediaFetcher('ui/map.png')) + '), pointer');
         }
