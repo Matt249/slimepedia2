@@ -25,7 +25,7 @@ export const recipeElements: { [key: string]: [string, string, string] } = {
     'sloomber': ['Sloomber Plort', 'plorts/sloomber', 'slimes/sloomber'],
     'magma': ['Magma Honeycomb', 'resources/magma', 'resources/magma'],
     'royal': ['Royal Jelly', 'resources/royal', 'resources/royal'],
-    'prisma': ['Prisma Plort', 'plorts/prisma', 'items/resources/prisma'],
+    'prisma': ['Prisma Plort', 'resources/prisma', 'items/resources/prisma'],
     'blackindigo': ['Black Indigonium', 'resources/blackindigo', 'resources/blackindigo'],
     'petal': ['Tin Petal', 'resources/petal', 'resources/petal'],
     'aqua': ['Aqua Glass', 'resources/aqua', 'resources/aqua'],
@@ -54,8 +54,8 @@ export const recipeElements: { [key: string]: [string, string, string] } = {
     'sureshotModule': ['Sureshot Module', 'upgrades/sureshotModule', ''],
     'droneKey': ['Drone Key', 'upgrades/droneKey', ''],
     'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', ''],
-    'regenenModule': ['Regenerator Module', 'upgrades/regeneratorModule', ''],
-    'injectorModule': ['Injector Module', 'upgrades/injectorModule', '']
+    'regenModule': ['Regenerator Module', 'upgrades/regenModule', ''],
+    'injectorModule': ['Injector Module', 'upgrades/injectorModule', ''],
 };
 
 export const unlockRequirements: { [key: string]: [string, string] } = {
@@ -68,7 +68,7 @@ export const unlockRequirements: { [key: string]: [string, string] } = {
     'bob': ['Given by BOb', 'ranchers/bob'],
     'thora': ['Given by Thora West', 'ranchers/thora'],
     'gigi': ['Given by Gigi', 'ranchers/gigi'],
-    'ancient': ['Unlocked via Ancient Vault', 'misc/vault']
+    'door': ['Found inside Shadow Plort Door', 'misc/door']
 };
 
 export const upgradeNames: string[] = [
@@ -110,14 +110,14 @@ export const upgradesList: { [key: string]: [string, string, { [key: string]: nu
     'health1': ['Heart Module I', 'start', { 'newbucks': 450, 'pink': 10 }],
     'health2': ['Heart Module II', 'pod', { 'newbucks': 900, 'pink': 20, 'honey': 10, 'brine': 10, 'jelly': 10, 'heartModule': 1 }],
     'health3': ['Heart Module III', 'pod', { 'newbucks': 3000, 'pink': 30, 'honey': 20, 'brine': 30, 'sand': 10, 'heartModule': 1 }],
-    'health4': ['Heart Module IV', 'ancient', { 'newbucks': 10000, 'prisma': 50, 'magma': 25, 'royal': 1, 'heartModule': 1 }],
-    'regenerator1': ['Regenerator', 'ancient', { 'newbucks': 5000, 'twin': 25, 'prisma': 10, 'magma': 10, 'aqua': 10, 'regenModule': 1 }],
-    'powerinjector1': ['Power Injector', 'ancient', { 'newbucks': 5000, 'sloomber': 25, 'prisma': 10, 'dream': 10, 'blackindigo': 10, 'injectorModule': 1 }],
+    'health4': ['Heart Module IV', 'door', { 'newbucks': 10000, 'prisma': 50, 'magma': 25, 'royal': 1, 'heartModule': 1 }],
+    'regenerator1': ['Regenerator', 'door', { 'newbucks': 5000, 'twin': 25, 'prisma': 10, 'magma': 10, 'aqua': 10, 'regenModule': 1 }],
+    'powerinjector1': ['Power Injector', 'door', { 'newbucks': 5000, 'sloomber': 25, 'prisma': 10, 'dream': 10, 'blackindigo': 10, 'injectorModule': 1 }],
     'power1': ['Power Module I', 'start', { 'newbucks': 450, 'cotton': 10 }],
     'power2': ['Power Module II', 'pod', { 'newbucks': 900, 'cotton': 20, 'batty': 10, 'primordy': 10, 'jelly': 10, 'powerChip': 1 }],
     'power3': ['Power Module III', 'pod', { 'newbucks': 3000, 'cotton': 30, 'batty': 20, 'wildHoney': 10, 'primordy': 30, 'powerChip': 1 }],
     'power4': ['Power Module IV', 'pod', { 'newbucks': 10000, 'cotton': 50, 'saber': 30, 'fossil': 30, 'sunsap': 1, 'powerChip': 1 }],
-    'power5': ['Power Module V', 'ancient', { 'newbucks': 15000, 'prisma': 50, 'twin': 40, 'petal': 25, 'royal': 1, 'powerChip': 1 }],
+    'power5': ['Power Module V', 'door', { 'newbucks': 15000, 'prisma': 50, 'twin': 40, 'petal': 25, 'royal': 1, 'powerChip': 1 }],
     'dash1': ['Dash Module I', 'start', { 'newbucks': 450, 'boom': 10 }],
     'dash2': ['Dash Module II', 'pod', { 'newbucks': 1500, 'boom': 20, 'flutter': 10, 'wildHoney': 10, 'lava': 10, 'dashBootModule': 1 }],
     'jetpack1': ['Jetpack I', 'start', { 'newbucks': 450, 'phosphor': 10, 'radiant': 10 }],
@@ -126,8 +126,8 @@ export const upgradesList: { [key: string]: [string, string, { [key: string]: nu
     'tankBooster2': ['Tank Booster II', 'pod', { 'newbucks': 900, 'tabby': 20, 'angler': 10, 'radiant': 10, 'jelly': 10, 'storageCell': 1 }],
     'tankBooster3': ['Tank Booster III', 'pod', { 'newbucks': 3000, 'tabby': 30, 'angler': 20, 'radiant': 30, 'lava': 10, 'storageCell': 1 }],
     'tankBooster4': ['Tank Booster IV', 'pod', { 'newbucks': 10000, 'tabby': 40, 'saber': 30, 'snowflake': 30, 'sunsap': 1, 'storageCell': 1 }],
-    'tankBooster5': ['Tank Booster V', 'ancient', { 'newbucks': 15000, 'sloomber': 50, 'prisma': 20, 'blackindigo': 20, 'royal': 1, 'storageCell': 1 }],
-    'tankBooster6': ['Tank Booster VI', 'ancient', { 'newbucks': 20000, 'twin': 60, 'prisma': 25, 'dream': 20, 'sunsap': 3, 'storageCell': 1 }],
+    'tankBooster5': ['Tank Booster V', 'door', { 'newbucks': 15000, 'sloomber': 50, 'prisma': 20, 'blackindigo': 20, 'royal': 1, 'storageCell': 1 }],
+    'tankBooster6': ['Tank Booster VI', 'door', { 'newbucks': 20000, 'twin': 60, 'prisma': 25, 'dream': 20, 'sunsap': 3, 'storageCell': 1 }],
     'extraTank1': ['Extra Tank I', 'start', { 'newbucks': 1500, 'rock': 10, 'sand': 10 }],
     'extraTank2': ['Extra Tank II', 'pod', { 'newbucks': 3000, 'rock': 40, 'ringtail': 20, 'sand': 20, 'diamond': 2, 'storageUnit': 1 }],
     'waterTank1': ['Water Tank', 'start', { 'newbucks': 450, 'brine': 10 }],
@@ -208,7 +208,9 @@ export const upgradeEffects: { [key: string]: [[string, string], [string, string
     'droneKey1': [['misc/none', ''], ['upgrades/droneKey', '+ Drone Archive Key']],
     'sureshot1': [['slimes/gold', '1 Plorts per Gold Slime Fed'], ['slimes/gold', '2 Plorts per Gold Slime Fed']],
     'sureshot2': [['slimes/gold', '2 Plorts per Gold Slime Fed'], ['slimes/gold', '3 Plorts per Gold Slime Fed']],
-    'sureshot3': [['slimes/gold', '3 Plorts per Gold Slime Fed'], ['slimes/gold', '4 Plorts per Gold Slime Fed']]
+    'sureshot3': [['slimes/gold', '3 Plorts per Gold Slime Fed'], ['slimes/gold', '4 Plorts per Gold Slime Fed']],
+    'regenerator1': [['misc/none', ''], ['upgrades/regenerator', '+ Energy Regeneration Rate']],
+    'powerinjector1': [['misc/none', ''], ['upgrades/powerinjector', '- Energy Regeneration Delay']]
 };
 
 export const warpNames: string[] = [
@@ -246,13 +248,13 @@ export const warpGadgets: { [key: string]: [string, string, { [key: string]: num
     'teleportev': ['Ember Valley Portal', 'pod', { 'newbucks': 1000, 'fire': 20, 'crystal': 10, 'radiant': 10, 'primordy': 10, 'diamond': 1 }],
     'teleportss': ['Starlight Strand Portal', 'pod', { 'newbucks': 1000, 'hunter': 20, 'honey': 10, 'radiant': 10, 'wax': 10, 'diamond': 1 }],
     'teleportpb': ['Powderfall Bluffs Portal', 'pod', { 'newbucks': 1000, 'saber': 20, 'puddle': 5, 'radiant': 10, 'fossil': 10, 'diamond': 1 }],
-    'teleportgl': ['Grey Labyrinth Portal', 'ancient', { 'newbucks': 1000, 'sloomber': 20, 'tangle': 10, 'magma': 10, 'blackindigo': 10, 'diamond': 1 }],
+    'teleportgl': ['Grey Labyrinth Portal', 'door', { 'newbucks': 1000, 'sloomber': 20, 'tangle': 10, 'magma': 10, 'blackindigo': 10, 'diamond': 1 }],
     'teleportblue': ['Blue Teleporter', 'viktor', { 'newbucks': 1200, 'rock': 30, 'brine': 20, 'radiant': 20, 'honey': 10, 'diamond': 2 }],
     'teleportgrey': ['Grey Teleporter', 'viktor', { 'newbucks': 1200, 'tabby': 30, 'wax': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }],
     'teleportpink': ['Pink Teleporter', 'viktor', { 'newbucks': 1200, 'pink': 30, 'jelly': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }],
     'teleportviolet': ['Violet Teleporter', 'viktor', { 'newbucks': 1200, 'phosphor': 30, 'primordy': 20, 'radiant': 20, 'sand': 10, 'diamond': 2 }],
     'teleportwhite': ['Snowy Teleporter', 'viktor', { 'newbucks': 1200, 'saber': 30, 'fossil': 20, 'radiant': 20, 'lava': 10, 'diamond': 2 }],
-    'teleportgold': ['Golden Teleporter', 'ancient', { 'newbucks': 1200, 'twin': 30, 'petal': 20, 'radiant': 20, 'wildHoney': 10, 'royal': 2 }],
+    'teleportgold': ['Golden Teleporter', 'door', { 'newbucks': 1200, 'twin': 30, 'petal': 20, 'radiant': 20, 'wildHoney': 10, 'royal': 2 }],
     'warpdepotblue': ['Blue Warp Depot', 'pod', { 'newbucks': 250, 'rock': 20, 'wax': 10, 'radiant': 3, 'sand': 3 }],
     'warpdepotgrey': ['Grey Warp Depot', 'pod', { 'newbucks': 250, 'tabby': 20, 'brine': 10, 'radiant': 5, 'lava': 3 }],
     'warpdepotpink': ['Pink Warp Depot', 'pod', { 'newbucks': 250, 'pink': 20, 'primordy': 10, 'radiant': 5, 'sand': 3 }],
@@ -364,7 +366,7 @@ export const utilitiesList: { [key: string]: [string, string, { [key: string]: n
     'markermineral': ['Mineral Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }],
     'markerhive': ['Hive Resource Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'jelly': 5 }],
     'markerstabilizer': ['Stabilizer Flag', 'polestar', { 'newbucks': 50, 'pink': 5, 'petal': 1 }],
-    'dreamlantern': ['Dream Lantern', 'ancient', { 'newbucks': 10000, 'honey': 50, 'crystal': 50, 'lava': 10, 'sand': 10, 'diamond': 1 }],
+    'dreamlantern': ['Dream Lantern', 'door', { 'newbucks': 10000, 'honey': 50, 'crystal': 50, 'lava': 10, 'sand': 10, 'diamond': 1 }],
     'radiantprojector': ['Radiant Projector', 'viktor', { 'newbucks': 500, 'hunter': 10, 'boom': 10, 'sand': 5, 'lava': 5 }],
     'disruptiondetector': ['Disruption Detector', 'gigi', { 'newbucks': 500, 'prisma': 10, 'petal': 5, 'dream': 5 }]
 };
@@ -742,18 +744,18 @@ export const decorationsList: { [key: string]: [string, string, { [key: string]:
     'tarrstandee': ['Tarr Standee', 'polestar', { 'newbucks': 500, 'hunter': 10, 'boom': 5, 'glass': 3 }, 'fun'],
     'musictile': ['Music Tile', 'polestar', { 'newbucks': 50, 'saber': 3, 'tabby': 3, 'radiant': 1 }, 'fun'],
     'musicpillar': ['Music Pilar', 'polestar', { 'newbucks': 50, 'hunter': 3, 'cotton': 3, 'radiant': 1 }, 'fun'],
-    'anglerfountain': ['Angler Fountain', 'ancient', { 'newbucks': 9000, 'sloomber': 25, 'prisma': 20, 'brine': 10, 'aqua': 10 }, 'labyrinth'],
-    'magmafountain': ['Magma Fountain', 'ancient', { 'newbucks': 7000, 'twin': 25, 'fire': 25, 'primordy': 10, 'magma': 10 }, 'labyrinth'],
-    'ancientroundpillar': ['Ancient Round Pillar', 'ancient', { 'newbucks': 100, 'twin': 10, 'blackindigo': 3 }, 'labyrinth'],
-    'ancientarchedwall': ['Ancient Arched Wall', 'ancient', { 'newbucks': 200, 'rock': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
-    'excavationlights': ['Excavation Lights', 'ancient', { 'newbucks': 150, 'dervish': 10, 'aqua': 5, 'dream': 5, }, 'labyrinth'],
-    'goldslimefloorpanel': ['Gold Slime Floor Panel', 'ancient', { 'newbucks': 1000, 'sloomber': 25, 'flutter': 25, 'aqua': 10, 'dream': 10 }, 'labyrinth'],
-    'goldtwistedtree': ['Gold Twisted Tree', 'ancient', { 'newbucks': 1000, 'sloomber': 20, 'petal': 15, 'aqua': 5, 'dream': 5 }, 'labyrinth'],
-    'ancientpurpleoak': ['Ancient Purple Oak', 'ancient', { 'newbucks': 200, 'sloomber': 10, 'petal': 5, 'wax': 5 }, 'labyrinth'],
-    'youngcedaroak': ['Young Cedaroak', 'ancient', { 'newbucks': 200, 'twin': 10, 'petal': 5, 'wildHoney': 5 }, 'labyrinth'],
-    'pottedlavaplants': ['Potted Lava Plants', 'ancient', { 'newbucks': 150, 'tangle': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
-    'walllighting': ['Ancient Wall Lighting', 'ancient', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'],
-    'aquarium': ['Aquarium', 'ancient', { 'newbucks': 6000, 'twin': 25, 'hunter': 25, 'puddle': 5, 'aqua': 10 }, 'labyrinth'],
+    'anglerfountain': ['Angler Fountain', 'door', { 'newbucks': 9000, 'sloomber': 25, 'prisma': 20, 'brine': 10, 'aqua': 10 }, 'labyrinth'],
+    'magmafountain': ['Magma Fountain', 'door', { 'newbucks': 7000, 'twin': 25, 'fire': 25, 'primordy': 10, 'magma': 10 }, 'labyrinth'],
+    'ancientroundpillar': ['Ancient Round Pillar', 'door', { 'newbucks': 100, 'twin': 10, 'blackindigo': 3 }, 'labyrinth'],
+    'ancientarchedwall': ['Ancient Arched Wall', 'door', { 'newbucks': 200, 'rock': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
+    'excavationlights': ['Excavation Lights', 'door', { 'newbucks': 150, 'dervish': 10, 'aqua': 5, 'dream': 5, }, 'labyrinth'],
+    'goldslimefloorpanel': ['Gold Slime Floor Panel', 'door', { 'newbucks': 1000, 'sloomber': 25, 'flutter': 25, 'aqua': 10, 'dream': 10 }, 'labyrinth'],
+    'goldtwistedtree': ['Gold Twisted Tree', 'door', { 'newbucks': 1000, 'sloomber': 20, 'petal': 15, 'aqua': 5, 'dream': 5 }, 'labyrinth'],
+    'ancientpurpleoak': ['Ancient Purple Oak', 'door', { 'newbucks': 200, 'sloomber': 10, 'petal': 5, 'wax': 5 }, 'labyrinth'],
+    'youngcedaroak': ['Young Cedaroak', 'door', { 'newbucks': 200, 'twin': 10, 'petal': 5, 'wildHoney': 5 }, 'labyrinth'],
+    'pottedlavaplants': ['Potted Lava Plants', 'door', { 'newbucks': 150, 'tangle': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
+    'walllighting': ['Ancient Wall Lighting', 'door', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'],
+    'aquarium': ['Aquarium', 'door', { 'newbucks': 6000, 'twin': 25, 'hunter': 25, 'puddle': 5, 'aqua': 10 }, 'labyrinth'],
 };
 
 export const decorationsDescription: { [key: string]: string } = {

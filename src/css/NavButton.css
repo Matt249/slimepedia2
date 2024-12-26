@@ -1,30 +1,43 @@
 :root {
     --rotation: 5deg;
     --scale-growth: 1.2;
+    --btn-size: 100px;
+}
+
+@media (min-width: 2000px) {
+    :root {
+        --btn-size: 150px;
+    }
 }
 
 .button {
     position: relative;
     background-color: #0000;
     transition: background-color .5s;
-    width: fit-content;
+    width: calc(var(--btn-size) * 1.3);
     height: fit-content;
     border-radius: 10%;
     text-align: center;
     cursor: var(--pointer-style);
     user-select: none;
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .image-frame {
-    padding: 12%;
+    padding: 15px;
     background-color: var(--item-color);
+    border-radius: 25%;
+    width: var(--btn-size);
+    height: var(--btn-size);
     transition:
         border-radius .2s,
         background-color .2s;
-    ;
-    border-radius: 25%;
-    width: fit-content;
-    height: fit-content;
 }
 
 .button:hover {
@@ -50,20 +63,28 @@
 }
 
 .image-button {
-    width: 100px;
-    height: auto;
+    width: var(--btn-size);
+    height: var(--btn-size);
     margin: 0;
     transition: transform .25s;
 }
 
 .button>p {
-    white-space: nowrap;
+    display: table-cell;
+    margin: 0;
+    white-space: normal;
     font-weight: bold;
-    font-size: 1.5em;
     transform: scale(1);
     transition: transform .25s;
     text-decoration: none;
     color: var(--text-color);
+    width: 100%;
+    font-size: calc(var(--btn-size) / 5);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.2em;
+    height: 2.4em;
+    vertical-align: middle;
 }
 
 .button.btn-selected>p {

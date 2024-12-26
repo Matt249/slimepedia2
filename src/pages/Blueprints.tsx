@@ -29,6 +29,32 @@ enum BlueprintType {
     DECORATIONS = 'decorations'
 }
 
+const blueprintMatcher = (blueprint: string, type: BlueprintType) => {
+    switch (type) {
+        case BlueprintType.UPGRADES:
+            return upgradesList[blueprint];
+        case BlueprintType.UTILITIES:
+            return utilitiesList[blueprint];
+        case BlueprintType.WARP:
+            return warpGadgets[blueprint];
+        case BlueprintType.DECORATIONS:
+            return decorationsList[blueprint];
+    }
+}
+
+const descriptionMatcher = (blueprint: string, type: BlueprintType) => {
+    switch (type) {
+        case BlueprintType.UPGRADES:
+            return upgradeDescriptions[blueprint];
+        case BlueprintType.UTILITIES:
+            return utilitiesDescription[blueprint];
+        case BlueprintType.WARP:
+            return warpDescriptions[blueprint];
+        case BlueprintType.DECORATIONS:
+            return decorationsDescription[blueprint];
+    }
+}
+
 const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, type }) => {
     const { recipeListAdder } = useRecipeContext();
     const [quantity, setQuantity] = useState(1);
@@ -37,26 +63,8 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
     }, [name]);
     const increaseQuantity = () => setQuantity(prevQtty => prevQtty + (prevQtty < 99 ? 1 : 0));
     const decreaseQuantity = () => setQuantity(prevQtty => prevQtty - (prevQtty > 1 ? 1 : 0));
-    let recipe: { [key: string]: number } = {};
-    switch (type) {
-        case BlueprintType.UPGRADES:
-            recipe = upgradesList[name][2];
-            break;
-
-        case BlueprintType.UTILITIES:
-            recipe = utilitiesList[name][2];
-            break;
-
-        case BlueprintType.WARP:
-            recipe = warpGadgets[name][2];
-            break;
-
-        case BlueprintType.DECORATIONS:
-            recipe = decorationsList[name][2];
-            break;
-        default:
-            break;
-    }
+    console.log(name, type);
+    const recipe = blueprintMatcher(name, type)[2];
 
     return (
         <div className='recipe-list'>
@@ -82,6 +90,56 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
         </div>
     );
 };
+
+const BlueprintInfos: React.FC<{ blueprint: string | null, type: BlueprintType }> = ({
+    blueprint,
+    type
+}) => {
+    if (blueprint === null)
+        return (
+            <div className='blueprint-infos'>
+                <div className='blueprint-title-box'>
+                    <img src={blueprintImg} alt='No Blueprint' />
+                    <h1>Select a blueprint</h1>
+                    <h2>Select an upgrade to view its details</h2>
+                </div>
+                <div className='blueprint-requirements-box little-box'>
+                    <img />
+                    <div>
+                        <h3>Requirements</h3>
+                        <h4></h4>
+                    </div>
+                </div>
+                <div className='blueprint-recipe-box'>
+                    <h2>Recipe</h2>
+                </div>
+            </div>
+        );
+    const folder = type === BlueprintType.DECORATIONS ? 'deco' : 'gadgets';
+    const blueprintInfos = blueprintMatcher(blueprint, type);
+    const blueprintDescription = descriptionMatcher(blueprint, type);
+    console.log(blueprint, type);
+    return (
+        <div className='blueprint-infos'>
+            <div className='blueprint-title-box'>
+                <img src={mediaFetcher(`${folder}/${blueprint}.png`)} alt={blueprintDescription} />
+                <h1>{blueprintInfos[0]}</h1>
+                <h2>{blueprintDescription}</h2>
+            </div>
+            <div className='blueprint-requirements-box little-box'>
+                <img src={mediaFetcher(`${unlockRequirements[blueprintInfos[1]][1]}.png`)} alt={unlockRequirements[blueprintInfos[1]][0]} />
+                <div>
+                    <h3>Requirements</h3>
+                    <h4>{unlockRequirements[blueprintInfos[1]][0]}</h4>
+                </div>
+            </div>
+            <div className='blueprint-recipe-box'>
+                <h2>Recipe</h2>
+                <CraftingList name={blueprint} type={type} />
+            </div>
+        </div>
+    );
+}
 
 interface UpgradeItemListProps {
     selected: boolean;
@@ -154,7 +212,7 @@ const UpgradesPage: React.FC = () => {
             <div className='vac-upgrade-list'>
                 {upgradeNames.map((upgradeName) => (
                     <UpgradeItemList
-                        selected={upgrade === upgradeName && tier === upgradePacks[upgradeName][1]}
+                        selected={upgrade === upgradeName}
                         key={upgradeName}
                         upgradePack={[upgradeName, upgradePacks[upgradeName][0], upgradePacks[upgradeName][1]]}
                         tier={tier}
@@ -162,12 +220,12 @@ const UpgradesPage: React.FC = () => {
                 ))}
             </div >
             <div className='vac-upgrade-info'>
-                <div className='vac-upgrade-title-box'>
+                <div className='blueprint-title-box'>
                     <img src={upgrade === null ? upgradeImg : mediaFetcher(`upgrades/${upgrade}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
                     <h1>{upgrade === null ? 'Select an upgrade' : upgradesList[upgrade + tier][0]}</h1>
-                    <h3>{upgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[upgrade + tier]}</h3>
+                    <h2>{upgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[upgrade + tier]}</h2>
                 </div>
-                <div className='vac-upgrade-recipe-box'>
+                <div className='blueprint-recipe-box'>
                     <h2>Recipe</h2>
                     {(upgrade !== null && tier !== null) && <CraftingList name={upgrade + tier} type={BlueprintType.UPGRADES} />}
                 </div>
@@ -178,11 +236,13 @@ const UpgradesPage: React.FC = () => {
                     <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][1][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
                     <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][1][1]}</p>
                 </div>
-                <div className='vac-upgrade-requirements-box'>
-                    <h2>Requirements</h2>
+                <div className='blueprint-requirements-box little-box'>
                     {(upgrade === null) ? '' : (<>
                         <img src={mediaFetcher(`${unlockRequirements[upgradesList[upgrade + tier][1]][1]}.png`)} alt={upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]} />
-                        <p>{upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]}</p>
+                        <div>
+                            <h3>Requirements</h3>
+                            <h4>{upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]}</h4>
+                        </div>
                     </>)}
                 </div>
             </div>
@@ -203,26 +263,7 @@ const UtilitiesPage: React.FC = () => {
                     </NavLink>
                 ))}
             </div>
-            <div className='blueprint-infos'>
-                <div className='vac-upgrade-title-box'>
-                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? 'No Blueprint' : utilitiesList[blueprint][0]} />
-                    <h1>{blueprint === null ? 'Select a blueprint' : utilitiesList[blueprint][0]}</h1>
-                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : utilitiesDescription[blueprint]}</h3>
-                </div>
-                <div className='vac-upgrade-recipe-box'>
-                    <h2>Recipe</h2>
-                    {blueprint !== null && <CraftingList name={blueprint} type={BlueprintType.UTILITIES} />}
-                </div>
-                <div className='blueprint-requirements-box'>
-                    <h2>Requirements</h2>
-                    {blueprint !== null && (
-                        <>
-                            <img src={mediaFetcher(`${unlockRequirements[utilitiesList[blueprint][1]][1]}.png`)} alt={unlockRequirements[utilitiesList[blueprint][1]][0]} />
-                            <p>{unlockRequirements[utilitiesList[blueprint][1]][0]}</p>
-                        </>
-                    )}
-                </div>
-            </div>
+            <BlueprintInfos blueprint={blueprint} type={BlueprintType.UTILITIES} />
         </>
     )
 };
@@ -240,26 +281,7 @@ const WarpPage: React.FC = () => {
                     </NavLink>
                 ))}
             </div>
-            <div className='blueprint-infos'>
-                <div className='vac-upgrade-title-box'>
-                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`gadgets/${blueprint}.png`)} alt={blueprint === null ? '' : warpGadgets[blueprint][0]} />
-                    <h1>{blueprint === null ? 'Select a blueprint' : warpGadgets[blueprint][0]}</h1>
-                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : warpDescriptions[blueprint]}</h3>
-                </div>
-                <div className='vac-upgrade-recipe-box'>
-                    <h2>Recipe</h2>
-                    {blueprint !== null && <CraftingList name={blueprint} type={BlueprintType.WARP} />}
-                </div>
-                <div className='blueprint-requirements-box'>
-                    <h2>Requirements</h2>
-                    {blueprint !== null && (
-                        <>
-                            <img src={mediaFetcher(`${unlockRequirements[warpGadgets[blueprint][1]][1]}.png`)} alt={unlockRequirements[warpGadgets[blueprint][1]][0]} />
-                            <p>{unlockRequirements[warpGadgets[blueprint][1]][0]}</p>
-                        </>
-                    )}
-                </div>
-            </div>
+            <BlueprintInfos blueprint={blueprint} type={BlueprintType.WARP} />
         </>
     );
 };
@@ -287,35 +309,7 @@ const DecorationsPage: React.FC = () => {
                     ))}
                 </div>
             </div>
-            <div className='blueprint-infos decoration'>
-                <div className='vac-upgrade-title-box'>
-                    <img src={blueprint === null ? blueprintImg : mediaFetcher(`deco/${blueprint}.png`)} alt={blueprint === null ? '' : decorationsList[blueprint][0]} />
-                    <h1>{blueprint === null ? 'Select a blueprint' : decorationsList[blueprint][0]}</h1>
-                    <h3>{blueprint === null ? 'Select an upgrade to view its details' : decorationsDescription[blueprint]}</h3>
-                </div>
-                <div className='vac-upgrade-recipe-box'>
-                    <h2>Recipe</h2>
-                    {blueprint !== null && <CraftingList name={blueprint} type={BlueprintType.DECORATIONS} />}
-                </div>
-                <div className='blueprint-requirements-box'>
-                    <h2>Requirements</h2>
-                    {blueprint !== null && (
-                        <>
-                            <img src={mediaFetcher(`${unlockRequirements[decorationsList[blueprint][1]][1]}.png`)} alt={unlockRequirements[decorationsList[blueprint][1]][0]} />
-                            <p>{unlockRequirements[decorationsList[blueprint][1]][0]}</p>
-                        </>
-                    )}
-                </div>
-                <div className='decoration-theme'>
-                    <h2>Theme</h2>
-                    {blueprint !== null && (
-                        <>
-                            <img src={mediaFetcher(`${themeList[decorationsList[blueprint][3]][1]}.png`)} alt={decorationsList[blueprint][0]} />
-                            <p>{themeList[decorationsList[blueprint][3]][0]}</p>
-                        </>
-                    )}
-                </div>
-            </div>
+            <BlueprintInfos blueprint={blueprint} type={BlueprintType.DECORATIONS} />
         </>
     );
 };

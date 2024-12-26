@@ -16,7 +16,6 @@ export const resourcesNames: string[] = [
     'magma',
     'blackindigo',
     'dream',
-    'petal',
     'royal',
     'prisma',
     'drift',

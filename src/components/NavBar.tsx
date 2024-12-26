@@ -7,7 +7,7 @@ import houseNight from '../assets/wallpapers/houseNight.png';
 import { mediaFetcher } from "../media-manager";
 
 export const NavBar = () => {
-    const navBtnSize = 100;
+    const navBtnSize = undefined //100;
     const noLink = { textDecoration: 'none' };
 
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');

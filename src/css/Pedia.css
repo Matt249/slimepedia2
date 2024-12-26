@@ -11,13 +11,27 @@
     --pedia-paragrah-size: 1em;
 }
 
+@media (min-width: 2000px) {
+    :root {
+        --object-name-size: 3.5em;
+        --object-subname-size: 1.8em;
+        --little-box-title-size: 1.7em;
+        --little-box-subtitle-size: 1.4em;
+        --little-box-image-size: 75px;
+        --little-box-gap: 25px;
+        --pedia-title-size: 2.1em;
+        --pedia-paragrah-size: 1.5em;
+        --desc-title-img-size: 40px;
+        --pedia-paragrah-size: 1.5em;
+    }
+}
+
 .list-slime,
 .list-food {
-    margin: 10px;
     padding: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 0;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--menu-color-1);
@@ -26,7 +40,6 @@
 
 .list-slime {
     flex: 0 0 auto;
-    margin: 10px;
 }
 
 .list-food {
@@ -39,6 +52,9 @@
     position: relative;
     display: flex;
     flex-flow: column nowrap;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+    padding: 20px;
 }
 
 .slime-infos {
@@ -65,10 +81,10 @@
     background-color: var(--item-color);
     border-radius: 20px;
     padding: 20px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 10px;
     grid-area: image;
 }
 
@@ -89,8 +105,10 @@
 }
 
 .image-container {
-    flex: 0 1;
     position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
 }
 
 .img-plort {
@@ -102,49 +120,11 @@
 }
 
 .img-main {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     flex: 1 1;
     transform: scale(.75) translate(0, -15%);
-}
-
-.little-box {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--little-box-gap);
-    background-color: var(--item-color);
-    padding: 20px;
-    border-radius: 20px;
-    height: fit-content;
-    grid-area: info;
-    overflow: hidden;
-}
-
-.little-box>img {
-    width: var(--little-box-image-size);
-    height: auto;
-}
-
-.little-box>div {
-    width: 100%;
-}
-
-.little-box>div>h3,
-.little-box>div>h4 {
-    text-align: left;
-    margin: 0;
-    color: var(--text-color)
-}
-
-.little-box>div>h3 {
-    font-size: var(--little-box-title-size);
-    font-weight: 700;
-}
-
-.little-box>div>h4 {
-    font-size: var(--little-box-subtitle-size);
-    font-weight: 500;
 }
 
 .infos-box>div>p {
@@ -309,7 +289,6 @@ br {
 
 .list-container {
     flex: 0 0 auto;
-    margin: 10px;
     width: fit-content;
     border-radius: 20px;
     overflow: hidden;
@@ -360,6 +339,10 @@ br {
         "image type fav"
         "image spawn spawn";
     gap: 20px;
+    padding: 20px;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    box-sizing: border-box;
 }
 
 .presentation {
@@ -371,8 +354,11 @@ br {
     position: relative;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-
     gap: 20px;
+    padding: 20px;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    box-sizing: border-box;
 }
 
 .presentation-resources {
@@ -380,6 +366,7 @@ br {
     grid-template-areas:
         "image desc desc"
         "image spawn spawn";
+
 }
 
 .presentation-toys {
@@ -432,20 +419,5 @@ br {
     .list-slime,
     .list-food {
         grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
-@media (min-width: 2000px) {
-    :root {
-        --object-name-size: 3.5em;
-        --object-subname-size: 1.8em;
-        --little-box-title-size: 1.7em;
-        --little-box-subtitle-size: 1.4em;
-        --little-box-image-size: 75px;
-        --little-box-gap: 25px;
-        --pedia-title-size: 2.1em;
-        --pedia-paragrah-size: 1.5em;
-        --desc-title-img-size: 40px;
-        --pedia-paragrah-size: 1.5em;
     }
 }

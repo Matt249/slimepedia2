@@ -13,6 +13,11 @@
   --main-menu-title-size: 3.5em;
   --main-menu-subtitle-size: 2em;
   --pointer-style: pointer;
+  --paragraph-size: 1.5em;
+  --little-box-title-size: 1.2em;
+  --little-box-subtitle-size: 1em;
+  --little-box-image-size: 50px;
+  --little-box-gap: 15px;
 }
 
 @media (min-width: 2000px) {
@@ -25,16 +30,53 @@
     --main-menu-title-size: 4em;
     --main-menu-subtitle-size: 2.5em;
     --img-size: 100px;
+    --paragraph-size: 2em;
+    --little-box-title-size: 1.7em;
+    --little-box-subtitle-size: 1.4em;
+    --little-box-image-size: 75px;
+    --little-box-gap: 25px;
   }
 
 }
 
-div, nav {
+div,
+nav {
   transition: background-color .2s ease-in-out;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, button {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+button {
   transition: color 1.2s ease-in-out;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--main-menu-title-size);
+}
+
+h2 {
+  font-size: var(--main-menu-subtitle-size);
+}
+
+h3 {
+  font-size: var(--tab-font-size);
+}
+
+h4,
+h5,
+h6 {
+  font-size: var(--small-text-size);
+}
+
+p {
+  font-size: var(--paragraph-size);
 }
 
 body {
@@ -104,19 +146,6 @@ body {
   min-height: 0;
 }
 
-.box-layout {
-  border-radius: 20px;
-  background-color: var(--menu-color-0);
-  padding: 20px;
-}
-
-.box-layout-secondary {
-  border-radius: 20px;
-  background-color: var(--menu-color-1);
-  padding: 20px;
-  margin: 10px;
-}
-
 nav {
   flex-shrink: 0;
   display: flex;
@@ -124,6 +153,9 @@ nav {
   justify-content: space-between;
   overflow-x: hidden;
   height: fit-content;
+  background-color: var(--menu-color-0);
+  border-radius: 20px;
+  padding: 20px;
 }
 
 
@@ -132,4 +164,45 @@ nav {
   margin: -20px;
   padding: 20px;
   border-radius: 20px;
+}
+
+.little-box {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--little-box-gap);
+  background-color: var(--item-color);
+  padding: 20px;
+  border-radius: 20px;
+  height: fit-content;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: 100%;
+}
+
+.little-box>img {
+  width: var(--little-box-image-size);
+  height: auto;
+}
+
+.little-box>div {
+  width: 100%;
+}
+
+.little-box>div>h3,
+.little-box>div>h4 {
+  text-align: left;
+  margin: 0;
+  color: var(--text-color)
+}
+
+.little-box>div>h3 {
+  font-size: var(--little-box-title-size);
+  font-weight: 700;
+}
+
+.little-box>div>h4 {
+  font-size: var(--little-box-subtitle-size);
+  font-weight: 500;
 }

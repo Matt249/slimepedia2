@@ -1,14 +1,10 @@
-:root {
-    --pink-slime: #f45d8c;
-}
-
 .pin-button {
     position: absolute;
     width: 75px;
     height: 75px;
     bottom: 10px;
     right: 10px;
-    background-color: var(--pink-slime);
+    background-color: #f45d8c;
     border-radius: 50px;
     transition:
         border-radius .2s ease-in-out,
@@ -252,6 +248,7 @@
     color: var(--text-color);
 }
 
+.vac-upgrade-item.selected,
 .vac-upgrade-item:hover {
     background-color: var(--menu-color-1);
 }
@@ -363,13 +360,12 @@
 
 .blueprint-infos>div>h2,
 .vac-upgrade-info>div>h2 {
-    font-size: 2em;
+/*     font-size: 2em;
     font-weight: bold;
     margin: 0;
-}
+ */}
 
-.blueprint-title-box,
-.vac-upgrade-title-box {
+.blueprint-title-box {
     grid-area: header;
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -378,21 +374,21 @@
         "icon title"
         "icon description"
     ;
-    gap: 10px;
+    column-gap: 50px;
     align-items: center;
     padding: 20px;
 
 }
 
 .blueprint-title-box>img,
-.vac-upgrade-title-box>img {
+.blueprint-title-box>img {
     grid-area: icon;
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 90%;
+    max-width: 90%;
 }
 
 .blueprint-title-box>h1,
-.vac-upgrade-title-box>h1 {
+.blueprint-title-box>h1 {
     grid-area: title;
     margin: 0;
     font-size: 2.5em;
@@ -400,32 +396,33 @@
     margin: 0;
 }
 
-.blueprint-title-box>h3,
-.vac-upgrade-title-box>h3 {
+.blueprint-title-box>h2,
+.blueprint-title-box>h2 {
     grid-area: description;
     font-size: 1.5em;
     font-weight: normal;
-    margin: 0;
     text-align: center;
+    margin: 0;
 }
 
 .blueprint-recipe-box,
-.vac-upgrade-recipe-box {
+.blueprint-recipe-box {
     grid-area: recipe;
     align-items: center;
+    overflow: scroll;
 }
 
 .blueprint-recipe-box>div>img,
-.vac-upgrade-recipe-box img {
+.blueprint-recipe-box img {
     height: 1.7em;
 }
 
 .blueprint-infos>div>h2,
 .vac-upgrade-info>div>h2 {
-    font-size: 1.7em;
+/*     font-size: 1.7em;
     font-weight: bold;
     margin: 0 0 10px 0;
-}
+ */}
 
 .blueprint-recipe-list,
 .recipe-list {
@@ -435,6 +432,8 @@
     align-items: stretch;
     padding: 0;
     margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .blueprint-recipe-list>div,
@@ -474,6 +473,8 @@
     grid-template-rows: 1fr;
     gap: 10px;
     align-items: center;
+    box-sizing: border-box;
+    max-height: 100%;
 }
 
 .vac-upgrade-effect-box>img {
@@ -492,39 +493,16 @@
     text-align: left;
 }
 
-.blueprint-requirements-box,
-.vac-upgrade-requirements-box {
-    position: relative;
-    grid-area: unlock;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 50px !important;
-}
-
-.blueprint-requirements-box>h2,
-.vac-upgrade-requirements-box>h2 {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.blueprint-requirements-box>p,
-.vac-upgrade-requirements-box>p {
-    font-size: 1.4em;
-    margin: 0;
-    text-align: center;
-}
-
 .blueprint-requirements-box {
-    flex-flow: column nowrap;
-    gap: 20px;
+    grid-area: unlock;
 }
 
-.blueprint-requirements-box>img {
-    height: 100px;
-    width: auto;
+.little-box.blueprint-requirements-box>div>h3 {
+    font-size: 1.7em;
+}
+
+.little-box.blueprint-requirements-box>div>h4 {
+    font-size: 1.2em;
 }
 
 .vac-upgrade-requirements-box {
@@ -552,7 +530,7 @@
 }
 
 .blueprint-infos {
-    flex: 10;
+    flex: 1 0 40vw;
     padding: 0;
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -562,15 +540,6 @@
         "unlock recipe"
     ;
     gap: 20px;
-}
-
-.blueprint-infos.decoration {
-    flex: 1 0 40vw;
-    grid-template-rows: 2fr 1fr 1fr;
-    grid-template-areas:
-        "header header"
-        "theme recipe"
-        "unlock recipe";
 }
 
 .decoration-list {
@@ -605,7 +574,6 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    padding-top: 50px !important;
 }
 
 .decoration-theme>h2 {

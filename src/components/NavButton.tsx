@@ -26,20 +26,6 @@ export const NavButton: React.FC<NavButtonProps> = ({
         setTiltingSafe(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : "random");
     }, [tilting]);
 
-    const paddingBtn = size / 10;
-    const paddingFrame = size / 6.66;
-    const buttonStyle = {
-        padding: paddingBtn + 'px'
-    }
-    const imgStyle = {
-        width: size + 'px',
-        height: size + 'px'
-    }
-    const titleStyle = {
-        margin: "5px -" + paddingBtn + "px 0 -" + paddingBtn + "px",
-        width: (Number(size) + (2 * (paddingFrame + paddingBtn))) + 'px',
-        fontSize: (size / 6) + 'px',
-    }
     const randomHandler = () => {
         switch (tiltingSafe) {
             case 'left':
@@ -53,12 +39,18 @@ export const NavButton: React.FC<NavButtonProps> = ({
         }
     }
     const [randomNumber, setRandomNumber] = useState(randomHandler());
+
     return (
-        <div className={"button" + (selected ? " btn-selected" : "")} onClick={action} onMouseLeave={() => setRandomNumber(randomHandler())} style={buttonStyle}>
+        <div
+            className={"button" + (selected ? " btn-selected" : "")}
+            onClick={action}
+            onMouseLeave={() => setRandomNumber(randomHandler())}
+            style={{ '--btn-size': `${size}px` } as React.CSSProperties}
+        >
             <div className='image-frame'>
-                <img src={mediaFetcher(icon + '.png')} alt={name} className={'image-button img-btn-' + randomNumber} style={imgStyle} />
+                <img src={mediaFetcher(icon + '.png')} alt={name} className={'image-button img-btn-' + randomNumber} />
             </div>
-            <p className='btn-name' style={titleStyle}>{name}</p>
+            <p>{name}</p>
         </div>
     );
 }
