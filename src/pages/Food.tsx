@@ -11,6 +11,8 @@ import pediaAbout from '/src/assets/misc/pediaabout.png';
 import pediaQuestion from '/src/assets/misc/pediaquestion.png';
 import noneImg from '/src/assets/misc/none.png';
 import arrow from '/src/assets/misc/arrow.png';
+import foodImg from '/src/assets/food/food.png';
+import pinkImg from '/src/assets/slimes/pink.png';
 import '../css/Pedia.css';
 
 interface FoodTabsProps {
@@ -56,7 +58,7 @@ const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
 interface FoodListProps {
     actualFoodList: string[];
     wideScreen: boolean;
-    food: string;
+    food: string | null;
     filter: string;
 }
 
@@ -78,19 +80,49 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, f
 );
 
 interface FoodDetailsProps {
-    food: string;
+    food: string | null;
     topBtn: boolean;
     setFilter: (filter: string) => void;
 }
 
-const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFilter }) => {
-    const favSlimeCalc = (currentFood: string): keyof typeof slimesList | 'none' => {
+const FoodDetails: React.FC<FoodDetailsProps> = ({ food, topBtn, setFilter }) => {
+    if (food === null)
+        return (
+            <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
+                <div className="image-title">
+                    <div className="info-title">
+                        <h1>Select food</h1>
+                        <h2>Click on food to get it&apos;s information</h2>
+                    </div>
+                    <div className="image-container">
+                        <img />
+                    </div>
+                </div>
+                <div className='little-box food-type disabled'>
+                    <img src={foodImg} alt='Food Icon' />
+                    <div>
+                        <h3>Food type</h3>
+                        <h4>No food selected</h4>
+                    </div>
+                </div>
+                <div className='little-box food-fav disabled'>
+                    <img src={pinkImg} alt='None' />
+                    <div>
+                        <h3>Favorite of</h3>
+                        <h4>No slime selected</h4>
+                    </div>
+                </div>
+                <Biomes spawnList={[]} />
+            </div>
+        );
+    const favSlimeCalc = (currentFood: string | null) => {
+        if (currentFood === null)
+            return null;
         for (const slime in slimesList)
-            if (slimesList[slime as keyof typeof slimesList][2] === currentFood)
-                return slime as keyof typeof slimesList;
-        return 'none';
+            if (slimesList[slime][2] === currentFood)
+                return slime;
+        return null;
     };
-    const food = foodNames.includes(foodName) ? foodName : 'carrot';
     const favSlime = favSlimeCalc(food);
     return (
         <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
@@ -104,13 +136,13 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFi
                 </div>
             </div>
             <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}>
-                <img src={foodList[food][1] === 'none' ? noneImg : mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
+                <img src={foodList[food][1] === null ? noneImg : mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
                 <div>
                     <h3>Food type</h3>
                     <h4>{foodSingular[foodList[food][1]]}</h4>
                 </div>
             </div>
-            {favSlime === 'none' ?
+            {favSlime === null ?
                 <div className='little-box food-fav'>
                     <img src={noneImg} alt='None' />
                     <div>
@@ -135,11 +167,26 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food: foodName, topBtn, setFi
 };
 
 interface FoodDescriptionProps {
-    food: string;
+    food: string | null;
     topBtn: boolean;
 }
 
 const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBtn }) => {
+    if (foodName === null)
+        return (
+            <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
+                <div className='desc-title'>
+                    <img src={pediaAbout} alt='Slimeology' />
+                    <h3>About</h3>
+                </div>
+                <p>Select a food to get it&apos;s description</p>
+                <div className='desc-title'>
+                    <img src={pediaQuestion} alt='Rancher Risks' />
+                    <h3>On the ranch</h3>
+                </div>
+                <p>Select a food to get it&apos;s description</p>
+            </div>
+        );
     const food = foodNames.includes(foodName) ? foodName : 'carrot';
     return (
         <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
@@ -161,7 +208,7 @@ export const Food = () => {
     const { food: foodName } = useParams<{ food: string }>();
     const navigate = useNavigate(); // Utilisez useNavigate pour la redirection
     const [filter, setFilter] = useState('any');
-    const [food, setFood] = useState('carrot');
+    const [food, setFood] = useState<string | null>(null);
 
     useEffect(() => {
         if (foodName) {
@@ -173,12 +220,12 @@ export const Food = () => {
                 setFood(foodName);
             else {
                 setFood('carrot');
-                navigate('/food/carrot'); // Redirection si foodName n'est pas valide
+                navigate('/food/carrot');
             }
         }
         else {
-            setFood('carrot');
-            navigate('/food/carrot'); // Redirection si foodName est undefined
+            setFood(null);
+            navigate('/food');
         }
     }, [foodName, navigate]);
 

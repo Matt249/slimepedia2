@@ -206,3 +206,7 @@ nav {
   font-size: var(--little-box-subtitle-size);
   font-weight: 500;
 }
+
+.little-box.disabled>div>h4 {
+  opacity: 0;
+}

@@ -20,10 +20,10 @@ export const NavButton: React.FC<NavButtonProps> = ({
     selected = false,
     tilting = "random"
 }) => {
-    const [tiltingSafe, setTiltingSafe] = useState(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : "random");
+    const [tiltingSafe, setTiltingSafe] = useState(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : 'random');
 
     useEffect(() => {
-        setTiltingSafe(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : "random");
+        setTiltingSafe(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : 'random');
     }, [tilting]);
 
     const randomHandler = () => {

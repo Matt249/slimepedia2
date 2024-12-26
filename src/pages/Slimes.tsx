@@ -6,9 +6,11 @@ import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js'
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import largo from '/src/assets/misc/largo.png';
-import none from '/src/assets/misc/none.png';
-import arrow from '/src/assets/misc/arrow.png';
+import largoImg from '/src/assets/misc/largo.png';
+import noneImg from '/src/assets/misc/none.png';
+import arrowImg from '/src/assets/misc/arrow.png';
+import foodAnyImg from '/src/assets/food/food.png';
+import toysImg from '/src/assets/misc/toys.png';
 import pediaSlime from '/src/assets/misc/pediaslime.png';
 import pediaRisks from '/src/assets/misc/pediarisks.png';
 import pediaPlort from '/src/assets/misc/pediaplort.png';
@@ -16,17 +18,62 @@ import React from 'react';
 import '../css/Pedia.css';
 
 interface SlimeDetailsProps {
-    currentSlimeList: [string, string, string, boolean, string[], string];
-    selectedSlime: string;
+    currentSlimeList: [string, string, string, boolean, string[], string] | null;
+    selectedSlime: string | null;
 }
 
 const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedSlime }) => {
+    if (currentSlimeList === null || selectedSlime === null) {
+        return (
+            <>
+                <div className="image-title">
+                    <div className="info-title">
+                        <h1>Select a slime</h1>
+                        <h2>Click on a slime on the list to get their information</h2>
+                    </div>
+                    <div className='image-container'>
+                        <img alt='No slime selected' className='img-main disabled' />
+                    </div>
+                    <img alt='No slime selected' className='img-plort disabled' />
+                </div>
+                <div className='little-box box-food disabled'>
+                    <img src={foodAnyImg} alt='No slime selected' />
+                    <div>
+                        <h3>Diet</h3>
+                        <h4>No slime selected</h4>
+                    </div>
+                </div>
+                <div className='little-box box-fav disabled'>
+                    <img src={foodAnyImg} alt='No slime selected' />
+                    <div>
+                        <h3>Favorite Food</h3>
+                        <h4>No slime selected</h4>
+                    </div>
+                </div>
+                <div className='little-box box-largo disabled'>
+                    <img src={largoImg} alt='No slime selected' />
+                    <div>
+                        <h3>Largo-able</h3>
+                        <h4>No slime selected</h4>
+                    </div>
+                </div>
+                <div className='little-box box-toy disabled'>
+                    <img src={toysImg} alt='No slime selected' />
+                    <div>
+                        <h3>Favorite Toy</h3>
+                        <h4>No slime selected</h4>
+                    </div>
+                </div>
+                <Biomes spawnList={[]} />
+            </>
+        );
+    }
     const slimeName = currentSlimeList[0];
-    const slimeIcon = selectedSlime === "none" ? none : mediaFetcher(`slimes/${selectedSlime}.png`);
-    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? none : mediaFetcher(`plorts/${selectedSlime}.png`);
-    const foodTypeIcon = currentSlimeList[1] === "none" ? none : mediaFetcher(`food/${currentSlimeList[1]}.png`);
-    const favFoodIcon = currentSlimeList[2] === "none" ? none : mediaFetcher(`food/${currentSlimeList[2]}.png`);
-    const favToyIcon = currentSlimeList[5] === "none" ? none : mediaFetcher(`toys/${currentSlimeList[5]}.png`);
+    const slimeIcon = selectedSlime === "none" ? noneImg : mediaFetcher(`slimes/${selectedSlime}.png`);
+    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? noneImg : mediaFetcher(`plorts/${selectedSlime}.png`);
+    const foodTypeIcon = currentSlimeList[1] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[1]}.png`);
+    const favFoodIcon = currentSlimeList[2] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[2]}.png`);
+    const favToyIcon = currentSlimeList[5] === "none" ? noneImg : mediaFetcher(`toys/${currentSlimeList[5]}.png`);
     const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
 
     return (
@@ -80,7 +127,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                 </div>
             }
             <div className='little-box box-largo'>
-                <img src={(currentSlimeList[3]) ? largo : none} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
+                <img src={(currentSlimeList[3]) ? largoImg : noneImg} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
                 <div>
                     <h3>Largo-able</h3>
                     <h4>{(currentSlimeList[3]) ? "Yes" : "No"}</h4>
@@ -138,11 +185,11 @@ const SlimeDescription: React.FC<SlimeDescriptionProps> = ({ slimepediaEntry, to
 export const Slimes = () => {
     const { slime: slimeName } = useParams();
 
-    const slime = slimeName || 'pink';
+    const slime = slimeName || null;
     const [topBtn, setTopBtn] = useState(false);
     useEffect(() => setTopBtn(false), [slime]);
-    const currentSlimeList = slimesList[slime];
-    const slimepediaEntry = useMemo(() => slimepedia[slime] ? slimepedia[slime] : slimepedia['lorem'], [slime]);
+    const currentSlimeList = slime === null ? null : slimesList[slime];
+    const slimepediaEntry: [string, string, string] = useMemo(() => slime === null ? ['', '', ''] : slimepedia[slime] as [string, string, string], [slime]);
 
     const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
     useEffect(() => {
@@ -184,7 +231,7 @@ export const Slimes = () => {
                     <SlimeDetails currentSlimeList={currentSlimeList} selectedSlime={slime} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={arrow} alt='Expand arrow' />
+                    <img src={arrowImg} alt='Expand arrow' />
                 </div>
                 <SlimeDescription slimepediaEntry={slimepediaEntry} topBtn={topBtn} />
             </div>
