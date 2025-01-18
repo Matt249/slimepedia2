@@ -4,7 +4,7 @@
     --region-pedia-size: 1.1em;
     --ranch-pedia-size: 1.5em;
     --special-margin: 20px 0 0 0;
-    --tab-img-size: 100px;
+    --animation-delay: .2s;
 }
 
 @media (min-width: 2000px) {
@@ -14,7 +14,6 @@
         --region-pedia-size: 1.7em;
         --ranch-pedia-size: 2em;
         --special-margin: 40px 0 10px 0;
-        --tab-img-size: 150px;
     }
 }
 
@@ -49,6 +48,7 @@
 }
 
 .region-tab {
+    height: 8vh;
     flex: 1;
     position: relative;
     display: flex;
@@ -81,14 +81,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     filter: opacity(0);
-    transition: filter .2s ease-in-out;
+    transition: filter var(--animation-delay) ease-in-out;
 }
 
 .region-icon {
     width: auto;
-    height: var(--image-size);
+    height: 90%;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-delay) ease-in-out;
 }
 
 .region-name {
@@ -96,8 +96,8 @@
     color: var(--text-color);
     text-shadow: none;
     transition:
-        color .2s ease-in-out,
-        text-shadow .2s ease-in-out;
+        color var(--animation-delay) ease-in-out,
+        text-shadow var(--animation-delay) ease-in-out;
 }
 
 .region-tab.region-selected>.region-video,
@@ -174,6 +174,8 @@
     width: 100%;
 }
 
+/* Region Music Player ================================================= */
+
 .region-music-player {
     position: absolute;
     top: 0;
@@ -182,7 +184,8 @@
     padding-right: 70px;
     max-width: calc(100% - 40px);
     width: auto;
-    height: 50px;
+    aspect-ratio: auto;
+    height: 10%;
     border-radius: 50px;
     overflow: auto;
     background-color: var(--menu-color-1);
@@ -192,13 +195,21 @@
     align-items: center;
     gap: 20px;
     box-sizing: border-box;
-    transition: max-width .2s ease-in-out;
+    transition:
+        max-width var(--animation-delay) ease-in-out 0s,
+        padding var(--animation-delay) ease-in-out 0s,
+        aspect-ratio var(--animation-delay) ease-in-out .2s;
+
 }
 
 .region-music-player.disabled {
-    max-width: 50px;
+    aspect-ratio: 1;
     padding-right: 0;
     overflow: hidden;
+    transition:
+        max-width var(--animation-delay) ease-in-out var(--animation-delay),
+        padding var(--animation-delay) ease-in-out var(--animation-delay),
+        aspect-ratio var(--animation-delay) ease-in-out 0s;
 }
 
 .region-music-player>div {
@@ -208,11 +219,55 @@
     gap: 10px;
     border-radius: 50px;
     padding: 0 10px;
-    transition: background-color .2s ease-in-out;
+    transition: background-color var(--animation-delay) ease-in-out var(--animation-delay);
 }
 
 .region-music-player.disabled>div {
     background-color: #0000;
+    transition: background-color var(--animation-delay) ease-in-out 0s;
+}
+
+.region-music-player.disabled>div>img.music-time,
+.region-music-player.disabled>div>img.music-element-icon {
+    transform: scale(0);
+    transition: transform var(--animation-delay) ease-in-out 0s;
+}
+
+.region-music-player>img,
+.region-music-player>div>img {
+    width: auto;
+    height: 100%;
+    transform: scale(.6);
+    transition: transform var(--animation-delay) ease-in-out var(--animation-delay);
+}
+
+.region-music-player>div {
+    height: 100%;
+}
+
+.region-music-player>div>img.music-element-icon {
+    transform: scale(.8) translateY(-5%);
+    cursor: var(--pointer-style);
+    transition: transform var(--animation-delay) ease-in-out var(--animation-delay);
+}
+
+.region-music-player>div>img.music-element-icon.music-current,
+.region-music-player>div>img.music-element-icon:hover {
+    transform: scale(1) translateY(-10%);
+}
+
+.music-player-icon {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    transform: scale(.6);
+    cursor: var(--pointer-style);
+    transition: transform var(--animation-delay) ease-in-out 0s;
+}
+
+.music-player-icon:hover {
+    transform: scale(.8);
 }
 
 .dreamland-music {
@@ -231,44 +286,7 @@
     background-color: #86EBF7;
 }
 
-.region-music-player.disabled>div>img:not(.music-player-icon),
-.region-music-player.disabled>img:not(.music-player-icon) {
-    transform: scale(0);
-}
-
-.region-music-player>img:not(.music-player-icon, .music-time),
-.region-music-player>div>img:not(.music-player-icon, .music-time) {
-    width: 50px;
-    height: 50px;
-    transform: scale(.8) translateY(-5%);
-    cursor: var(--pointer-style);
-    transition: transform .2s ease-in-out;
-}
-
-.music-time {
-    width: 50px;
-    height: 50px;
-    transform: scale(.8);
-}
-
-.music-player-icon {
-    position: absolute;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    transform: scale(.6);
-    cursor: var(--pointer-style);
-    transition: transform .2s ease-in-out;
-}
-
-.music-player-icon:hover {
-    transform: scale(.8);
-}
-
-.region-music-player>div>img.music-current,
-.region-music-player>img.music-current {
-    transform: scale(1) translateY(-10%);
-}
+/* Region Main Page ==================================================== */
 
 .region-main-page {
     position: absolute;
@@ -348,7 +366,7 @@
     position: relative;
     background-color: var(--menu-color-1);
     color: var(--text-color);
-    padding: var(--main-menu-subtitle-size) 20px 20px 20px;
+    padding: var(--main-menu-subtitle-size) 5% 5% 5%;
     border-radius: 20px;
 }
 
@@ -385,8 +403,14 @@
 }
 
 .region-pedia>p>span {
+    font-size: var(--region-pedia-size);
     display: inline-block;
     margin-bottom: 20px;
+}
+
+.ranch-pedia>p>span:last-child,
+.region-pedia>p>span:last-child {
+    margin-bottom: 0;
 }
 
 .region-slimes,
@@ -437,7 +461,7 @@
 
 .region-element-content>img {
     transform: scale(.9);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-delay) ease-in-out;
 }
 
 .region-element-content:hover>img {
@@ -467,7 +491,7 @@
     width: calc(var(--element-size) * .8);
     height: calc(var(--element-size) * .8);
     transform: scale(.8);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-delay) ease-in-out;
 }
 
 .region-connections>div>img:hover:not(.no-hover),
@@ -513,7 +537,7 @@
 .region-element-resource>img {
     height: auto;
     width: var(--element-size);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-delay) ease-in-out;
 }
 
 .region-element-resource:hover>img {
@@ -572,11 +596,18 @@
 
 .ranch-connection {
     position: relative;
-    display: flex;
-    flex-flow: row nowrap;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(auto, 1fr));
+    grid-template-rows: 1fr;
+    gap: 10%;
     justify-content: space-around;
     align-items: center;
+}
+
+.ranch-element-image {
+    width: 100%;
+    height: auto;
+    cursor: var(--pointer-style);
 }
 
 .box-title {
@@ -664,7 +695,7 @@
     width: calc(var(--element-size) * .8);
     height: auto;
     transform: scale(var(--special-img-scale));
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-delay) ease-in-out;
 }
 
 .ranch-special-feature>h3 {
@@ -687,8 +718,8 @@
 }
 
 .ranch-pedia>p>span {
-    display: inline-block;
     font-size: var(--ranch-pedia-size);
+    display: inline-block;
     margin-bottom: 20px;
     padding: 0;
 }

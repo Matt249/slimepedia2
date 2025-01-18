@@ -290,7 +290,6 @@ const DecorationsPage: React.FC = () => {
     const isLargeScreen = useMediaQuery('(min-width: 2000px)');
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName || null
-    const lastOption = Object.keys(themeList)[Object.keys(themeList).length - 1];
     const [decoFilter, setDecoFilter] = useState<string | null>(null);
     return (
         <>
@@ -301,7 +300,7 @@ const DecorationsPage: React.FC = () => {
                         <Tab key={theme} title={themeList[theme][0]} icon={themeList[theme][1]} action={() => setDecoFilter(theme)} selected={theme === decoFilter} />
                     ))}
                 </div>
-                <div className='blueprint-list' style={{ borderRadius: `${decoFilter === null ? '0' : '20px'} ${decoFilter === lastOption ? '0' : '20px'} 20px 20px` }}>
+                <div className='blueprint-list'>
                     {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
                         <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
                             <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={isLargeScreen ? 125 : 100} />
