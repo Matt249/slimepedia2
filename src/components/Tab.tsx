@@ -17,6 +17,13 @@ export const Tab: React.FC<TabProps> = ({
 }) => {
     return (
         <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
+            <div className="left-corner">
+                <div></div>
+            </div>
+            <div className="right-corner">
+                <div></div>
+            </div>
+            <div className="bottom-space"></div>
             <img src={mediaFetcher(`${icon}.png`)} alt={title} />
             <p>{title}</p>
         </div>

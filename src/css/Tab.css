@@ -18,6 +18,11 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     cursor: var(--pointer-style);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    height: 8vh;
 }
 
 .tab:not(.selected-tab) {
@@ -41,10 +46,11 @@
 }
 
 .tab>img {
-    width: var(--tab-icon-size);
-    height: var(--tab-icon-size);
+    width: auto;
+    height: 100%;
     transform: scale(.9);
     transition: transform .3s;
+    flex: 1 1 auto;
 }
 
 .tab:hover>img,
@@ -53,7 +59,7 @@
 }
 
 .tab>p {
-    margin: 0 0 10px 0;
+    margin: 0;
     text-align: center;
     color: var(--text-color);
     font-size: var(--small-text-size);
