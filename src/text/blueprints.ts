@@ -755,7 +755,7 @@ export const decorationsList: { [key: string]: [string, string, { [key: string]:
     'youngcedaroak': ['Young Cedaroak', 'door', { 'newbucks': 200, 'twin': 10, 'petal': 5, 'wildHoney': 5 }, 'labyrinth'],
     'pottedlavaplants': ['Potted Lava Plants', 'door', { 'newbucks': 150, 'tangle': 10, 'petal': 5, 'blackindigo': 5 }, 'labyrinth'],
     'walllighting': ['Ancient Wall Lighting', 'door', { 'newbucks': 50, 'rock': 3, 'primordy': 3, 'diamond': 1 }, 'labyrinth'],
-    'aquarium': ['Aquarium', 'door', { 'newbucks': 6000, 'twin': 25, 'hunter': 25, 'puddle': 5, 'aqua': 10 }, 'labyrinth'],
+    'aquarium': ['Aquarium', 'door', { 'newbucks': 6000, 'twin': 25, 'hunter': 25, 'puddle': 5, 'aqua': 10 }, 'labyrinth'], 
 };
 
 export const decorationsDescription: { [key: string]: string } = {

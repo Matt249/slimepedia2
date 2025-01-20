@@ -562,8 +562,9 @@
     display: flex;
     flex-flow: row nowrap;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: hidden;
     gap: 10px;
+    border-radius: 10px 10px 0 0;
 }
 
 .decoration-tabs>div {

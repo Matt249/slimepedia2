@@ -25,6 +25,7 @@
     justify-content: space-between;
     gap: 10px;
     height: 8vh;
+    overflow: visible;
 }
 
 .tab:not(.selected-tab) {
@@ -71,6 +72,7 @@
     position: absolute;
     bottom: -20px;
     height: 20px;
+    width: calc(100% + 40px);
     background-color: var(--menu-color-1);
 }
 
