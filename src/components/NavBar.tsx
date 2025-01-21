@@ -30,10 +30,10 @@ export const NavBar = () => {
             <NavLink style={noLink} to="/slimes">
                 <NavButton name="Slimes" icon="slimes/pink" size={navBtnSize} tilting="left" />
             </NavLink>
-            <NavLink style={noLink} to="/food/carrot">
+            <NavLink style={noLink} to="/food">
                 <NavButton name="Food" icon="food/food" size={navBtnSize} tilting="right" />
             </NavLink>
-            <NavLink style={noLink} to="/items/resources/brine">
+            <NavLink style={noLink} to="/items">
                 <NavButton name="Items" icon="misc/res" size={navBtnSize} tilting="left" />
             </NavLink>
             <NavLink style={noLink} to="/map">
