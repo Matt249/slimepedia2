@@ -63,7 +63,6 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
     }, [name]);
     const increaseQuantity = () => setQuantity(prevQtty => prevQtty + (prevQtty < 99 ? 1 : 0));
     const decreaseQuantity = () => setQuantity(prevQtty => prevQtty - (prevQtty > 1 ? 1 : 0));
-    console.log(name, type);
     const recipe = blueprintMatcher(name, type)[2];
 
     return (
@@ -118,7 +117,6 @@ const BlueprintInfos: React.FC<{ blueprint: string | null, type: BlueprintType }
     const folder = type === BlueprintType.DECORATIONS ? 'deco' : 'gadgets';
     const blueprintInfos = blueprintMatcher(blueprint, type);
     const blueprintDescription = descriptionMatcher(blueprint, type);
-    console.log(blueprint, type);
     return (
         <div className='blueprint-infos'>
             <div className='blueprint-title-box'>
