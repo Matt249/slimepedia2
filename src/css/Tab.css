@@ -68,14 +68,6 @@
     font-size: var(--small-text-size);
 }
 
-.bottom-space {
-    position: absolute;
-    bottom: -20px;
-    height: 20px;
-    width: calc(100% + 40px);
-    background-color: var(--menu-color-1);
-}
-
 .left-corner,
 .right-corner {
     position: absolute;

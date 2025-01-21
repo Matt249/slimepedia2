@@ -23,7 +23,6 @@ export const Tab: React.FC<TabProps> = ({
             <div className="right-corner">
                 <div></div>
             </div>
-            <div className="bottom-space"></div>
             <img src={mediaFetcher(`${icon}.png`)} alt={title} />
             <p>{title}</p>
         </div>
