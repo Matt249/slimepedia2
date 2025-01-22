@@ -24,7 +24,9 @@
     }
 }
 
+
 @media (max-width: 1600px) {
+
     .list-slime,
     .list-food {
         grid-template-columns: 1fr 1fr 1fr;
@@ -66,7 +68,9 @@
     display: grid;
     overflow: hidden;
     height: 100%;
-    transition: height .2s ease-in-out, padding .2s ease-in-out;
+    transition:
+        height .2s ease-in-out,
+        padding .2s ease-in-out;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
@@ -76,80 +80,10 @@
     gap: 20px;
 }
 
-.food-presentation,
-.slime-infos,
-.presentation {
-    transition: height .2s ease-in-out, padding .2s ease-in-out;
-    padding: 20px;
-    background-color: var(--menu-color-1);
-    border-radius: 20px;
-    box-sizing: border-box;
-}
-
 .food-presentation.hidden-infos,
 .slime-infos.hidden-infos {
     height: 0;
     padding: 0;
-}
-
-.presentation {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 20px;
-}
-
-.image-title,
-.food-presentation,
-.slime-infos {
-    background-color: var(--menu-color-1);
-    border-radius: 20px;
-}
-
-.desc {
-    background-color: var(--item-color);
-    border-radius: 20px;
-    overflow: auto;
-    text-align: justify;
-    transition: height .5s, padding .5s .2s;
-}
-
-.desc-title {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    gap: 10px;
-    padding: 2px 5px;
-    height: fit-content;
-    border-radius: 1000px;
-    background-color: #45537A;
-}
-
-.desc-title>h3 {
-    font-size: var(--pedia-title-size);
-    color: white;
-    margin: 0;
-}
-
-.desc>p {
-    font-size: var(--pedia-paragrah-size);
-    margin: 0;
-    overflow: hidden;
-}
-
-.shown-desc,
-.shown-desc>p {
-    height: fit-content;
-    padding: 20px;
-}
-
-.hidden-desc,
-.hidden-desc>p {
-    height: 0;
-    padding: 0;
-    margin: 0;
 }
 
 .image-title {
@@ -268,6 +202,7 @@
     margin-top: 0;
 }
 
+
 .arrow-btn {
     --taille-btn: 25px;
     width: var(--taille-btn);
@@ -304,6 +239,70 @@
 .bot-btn {
     bottom: 0;
     transform: translate(-50%, 50%) rotate(0deg);
+}
+
+.desc {
+    background-color: var(--item-color);
+    flex-grow: 10;
+    margin: 0;
+    border-radius: 20px;
+    transition: height .5s, padding .5s .2s;
+    overflow: auto;
+    text-align: justify;
+    font-size: 20px;
+}
+
+.desc:last-child {
+    padding-bottom: 0;
+}
+
+.desc-title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 5px;
+    height: fit-content;
+    border-radius: 1000px;
+    background-color: #45537A;
+}
+
+.desc-title>img {
+    height: var(--desc-title-img-size);
+}
+
+.desc-title>h3 {
+    font-size: var(--pedia-title-size);
+    color: white;
+}
+
+.desc>p {
+    font-size: var(--pedia-paragrah-size);
+    margin: 0;
+    overflow: hidden;
+
+}
+
+.desc-title>h3 {
+    margin: 0;
+}
+
+br {
+    margin: 10px 0;
+
+}
+
+.shown-desc,
+.shown-desc>p {
+    height: fit-content;
+    padding: 20px;
+}
+
+.hidden-desc,
+.hidden-desc>p {
+    height: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .list-container {
@@ -343,11 +342,51 @@
     position: relative;
 }
 
+
+.food-presentation {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transition:
+        height .2s ease-in-out,
+        padding .2s ease-in-out;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "image type fav"
+        "image spawn spawn";
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+.presentation {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    transition: height .5s;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
 .presentation-resources {
     grid-template-rows: auto 1fr;
     grid-template-areas:
         "image desc desc"
         "image spawn spawn";
+
 }
 
 .presentation-toys {
@@ -378,7 +417,9 @@
 .toy {
     overflow: hidden;
     height: 100%;
-    transition: height .5s ease-in-out, margin .5s ease-in-out, padding .5s ease-in-out;
+    transition: height .5s ease-in-out,
+        margin .5s ease-in-out,
+        padding .5s ease-in-out;
 }
 
 .toy-price {
