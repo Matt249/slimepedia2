@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom"
 import { NavButton } from "./NavButton"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import React from "react";
 import houseDay from '../assets/wallpapers/houseDay.png';
 import houseNight from '../assets/wallpapers/houseNight.png';
@@ -11,8 +11,8 @@ export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
 
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
-    const toggleTheme = () => {
-        setDarkMode(!darkMode);
+    console.log(localStorage.getItem('darkMode'), typeof localStorage.getItem('darkMode'), darkMode);
+    useEffect(() => {
         const rootElement = document.querySelector(':root') as HTMLElement | null;
         if (rootElement) {
             const rootStyle: CSSStyleDeclaration = (rootElement as HTMLElement).style;
@@ -24,7 +24,8 @@ export const NavBar = () => {
             rootStyle.setProperty('--pointer-style', 'url(' + (mediaFetcher('ui/map.png')) + '), pointer');
         }
         document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
-    }
+        localStorage.setItem('darkMode', darkMode.toString());
+    }, [darkMode]);
     return (
         <nav className="box-layout">
             <NavLink style={noLink} to="/slimes">
@@ -53,7 +54,7 @@ export const NavBar = () => {
             </NavLink>
 
             <div className="theme-btn-container">
-                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} size={navBtnSize} action={() => toggleTheme()} tilting="random" />
+                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} size={navBtnSize} action={() => setDarkMode(!darkMode)} tilting="random" />
             </div>
         </nav>
     )
