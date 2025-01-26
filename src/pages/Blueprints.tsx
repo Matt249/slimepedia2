@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
+import { Minus } from '../components/Minus';
+import { Plus } from '../components/Plus';
 import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
 import { Tab } from '../components/Tab';
@@ -56,7 +58,7 @@ const descriptionMatcher = (blueprint: string, type: BlueprintType) => {
 }
 
 const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, type }) => {
-    const { recipeListAdder } = useRecipeContext();
+    const { addToRecipeList } = useRecipeContext();
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {
         setQuantity(1);
@@ -70,8 +72,8 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             <div className='quantity-selector'>
                 <Down onClick={() => decreaseQuantity()} />
                 <div></div>
-                <h2 onClick={() => recipeListAdder(name, type, quantity)}>{quantity}</h2>
-                <img src={crossImg} alt='Add to the list' onClick={() => recipeListAdder(name, type, quantity)} />
+                <h2 onClick={() => addToRecipeList(name, type, quantity)}>{quantity}</h2>
+                <img src={crossImg} alt='Add to the list' onClick={() => addToRecipeList(name, type, quantity)} />
                 <div></div>
                 <Down onClick={() => increaseQuantity()} />
             </div>
@@ -256,7 +258,7 @@ const UtilitiesPage: React.FC = () => {
         <>
             <div className='blueprint-list'>
                 {utilitiesNames.map((utilitiesNames) => (
-                    <NavLink key={utilitiesNames} to={`/blueprints/utilities/${utilitiesNames}`} className='warp-item'>
+                    <NavLink key={utilitiesNames} to={`/blueprints/utilities/${utilitiesNames}`} className='blueprint-item'>
                         <NavButton key={utilitiesNames} name={utilitiesList[utilitiesNames][0]} icon={`gadgets/${utilitiesNames}`} tilting='none' size={isLargeScreen ? 125 : 100} />
                     </NavLink>
                 ))}
@@ -274,7 +276,7 @@ const WarpPage: React.FC = () => {
         <>
             <div className='blueprint-list'>
                 {warpNames.map((warpName) => (
-                    <NavLink key={warpName} to={`/blueprints/warp/${warpName}`} className='warp-item'>
+                    <NavLink key={warpName} to={`/blueprints/warp/${warpName}`} className='blueprint-item'>
                         <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} tilting='none' size={isLargeScreen ? 125 : 100} />
                     </NavLink>
                 ))}
@@ -300,7 +302,7 @@ const DecorationsPage: React.FC = () => {
                 </div>
                 <div className='blueprint-list'>
                     {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
-                        <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='warp-item'>
+                        <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='blueprint-item'>
                             <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={isLargeScreen ? 125 : 100} />
                         </NavLink>
                     ))}
@@ -312,7 +314,7 @@ const DecorationsPage: React.FC = () => {
 };
 
 const RecipeMenu: React.FC = () => {
-    const { resetList, craftList } = useRecipeContext();
+    const { recipeList, resetList, craftList, decreaseBlueprint, craftRecipeMatcher, addToRecipeList, resetBlueprint } = useRecipeContext();
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     return (
         <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
@@ -323,20 +325,56 @@ const RecipeMenu: React.FC = () => {
                 <img src={trashImg} alt='Clear the list' onClick={() => resetList()} />
                 <img src={crossImg} alt='Close' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
-            <div className='pin-item-list'>
-                {Object.keys(craftList).map((item) => (
-                    <div
-                        key={item}
-                        className='pin-item-element'
-                    >
-                        <img
-                            src={mediaFetcher(`${recipeElements[item][1]}.png`)}
-                            alt={recipeElements[item][0]}
-                            title={recipeElements[item][0]}
-                        />
-                        <p>{recipeElements[item][0]}: </p>
-                        <h3>{craftList[item]}</h3>
-                    </div>))}
+            <div>
+                <div className='pin-list-header'>
+                    <h1>Blueprints</h1>
+                </div>
+                <div className='pin-list'>
+                    {(Object.keys(craftList).length === 0) ?
+                        (<div className='craft-list-empty'>
+                            <h1>No blueprint selected</h1>
+                        </div>) :
+                        Object.keys(recipeList.current).map((blueprint) => {
+                            const type = recipeList.current[blueprint][0];
+                            const name = craftRecipeMatcher(blueprint, type)[0];
+                            return (
+                                <div
+                                    className='pin-element pin-blueprint-element'
+                                    key={blueprint}
+                                >
+                                    <img src={mediaFetcher(type === BlueprintType.UPGRADES ? ('upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `${type === BlueprintType.DECORATIONS ? 'deco' : 'gadgets'}/${blueprint}.png`)} />
+                                    <p>{name}: </p>
+                                    <Plus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
+                                    <h3>{recipeList.current[blueprint][1]}</h3>
+                                    <Minus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
+                                    <img onClick={()=> resetBlueprint(blueprint)} src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
+                                </div>
+                            )
+                        })}
+                </div>
+                <div className='pin-list-header'>
+                    <h1>Resources</h1>
+                </div>
+                <div className='pin-list'>
+                    {(Object.keys(craftList).length === 0) ?
+                        (<div className='craft-list-empty'>
+                            <h1>No resources needed</h1>
+                        </div>) :
+                        Object.keys(craftList).map((item) => (
+                            <div
+                                key={item}
+                                className='pin-element pin-item-element'
+                            >
+                                <img
+                                    src={mediaFetcher(`${recipeElements[item][1]}.png`)}
+                                    alt={recipeElements[item][0]}
+                                    title={recipeElements[item][0]}
+                                />
+                                <p>{recipeElements[item][0]}: </p>
+                                <h3>{craftList[item]}</h3>
+                            </div>
+                        ))}
+                </div>
             </div>
         </div>
     );

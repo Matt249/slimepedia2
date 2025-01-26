@@ -49,11 +49,15 @@ export const mediaFetcher = (path: string): string => {
     const requiredFolder = pathList[0];
     const folder = folders[requiredFolder];
     if (!folder) {
-        console.error(`Folder not found: ${requiredFolder}`);
+        console.error(`Folder not found: ${path}`);
         return noneImg;
     }
     const cleanedFile = requiredFile.replace(/\?.*$/, '');
-    return folder[cleanedFile] || noneImg;
+    if (folder[cleanedFile] === undefined) {
+        console.error(`File not found: ${requiredFile}`);
+        return noneImg;
+    }
+    return folder[cleanedFile];
 };
 
 initializeFolders();

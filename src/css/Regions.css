@@ -366,7 +366,7 @@
     position: relative;
     background-color: var(--menu-color-1);
     color: var(--text-color);
-    padding: var(--main-menu-subtitle-size) 5% 5% 5%;
+    padding: var(--main-menu-subtitle-size) 1vw 1vh 1vw;
     border-radius: 20px;
 }
 

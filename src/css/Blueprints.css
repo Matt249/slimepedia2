@@ -47,6 +47,11 @@
     transform: scale(0) rotate(0);
 }
 
+.pin-button.opened>div {
+    overflow-x: clip;
+    overflow-y: auto;
+}
+
 .pin-button>img:hover {
     transform: scale(1.2) rotate(-5deg);
 }
@@ -82,25 +87,100 @@
     text-align: left;
 }
 
-.pin-item-list {
-    padding: 0 20px;
-    overflow-y: auto;
+.pin-list-header {
+    width: 100%;
+    margin: 10px
 }
 
-.pin-item-element {
+.pin-list-header>h1 {
+    font-size: 2em;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+}
+
+.pin-list {
+    padding: 0 20px;
+}
+
+.craft-list-empty {
+    overflow: hidden;
+}
+
+.craft-list-empty>h1 {
+    font-size: 1.5em;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    margin: 2vh -100%;
+}
+
+.craft-list-empty>h1::before {
+    content: "···································································";
+    margin-right: 10px;
+    letter-spacing: 2px;
+}
+
+.craft-list-empty>h1::after {
+    content: "···································································";
+    margin-left: 10px;
+    letter-spacing: 2px;
+}
+
+.pin-element {
     display: grid;
-    grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
     align-items: center;
     gap: 10px;
 }
 
-.pin-item-element>img {
-    height: 40px;
-    width: 40px;
+.pin-blueprint-element {
+    grid-template-columns: auto 1fr auto auto auto auto;
 }
 
-.pin-item-element>p {
+.pin-item-element {
+    grid-template-columns: auto 1fr auto;
+}
+
+.pin-blueprint-element>.clear-item-img {
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 20px;
+    background-color: var(--menu-color-1);
+    cursor: var(--pointer-style);
+    transition: background-color .2s ease-in-out;
+}
+
+.pin-element>img,
+.pin-element>svg {
+    transform: scale(1);
+    cursor: var(--pointer-style);
+}
+
+.pin-element>img:hover,
+.pin-element>svg:hover {
+    transform: scale(1.2);
+}
+
+.pin-element>svg {
+    fill: var(--text-color);
+    transition:
+        fill .2s ease-in-out,
+        transform .2s ease-in-out;
+}
+
+.pin-element>img {
+    height: 40px;
+    width: 40px;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
+}
+
+.pin-element>p {
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
@@ -108,13 +188,13 @@
     font-size: 1.1em;
 }
 
-.pin-item-element>p::after {
+.pin-element>p::after {
     content: "...................................................................................................................................................................................................................";
-    font-weight: 100;
-    letter-spacing: 2px;
+    font-weight: bold;
+    letter-spacing: 4px;
 }
 
-.pin-item-element>h3 {
+.pin-element>h3 {
     text-align: right;
     font-size: 1.2em;
     font-weight: bold;
@@ -358,13 +438,6 @@
     padding: 20px;
 }
 
-.blueprint-infos>div>h2,
-.vac-upgrade-info>div>h2 {
-/*     font-size: 2em;
-    font-weight: bold;
-    margin: 0;
- */}
-
 .blueprint-title-box {
     grid-area: header;
     display: grid;
@@ -416,13 +489,6 @@
 .blueprint-recipe-box img {
     height: 1.7em;
 }
-
-.blueprint-infos>div>h2,
-.vac-upgrade-info>div>h2 {
-/*     font-size: 1.7em;
-    font-weight: bold;
-    margin: 0 0 10px 0;
- */}
 
 .blueprint-recipe-list,
 .recipe-list {
@@ -518,7 +584,7 @@
 .blueprint-list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 20px;
+    gap: 0;
     overflow-x: hidden;
     overflow-y: auto;
     background-color: var(--menu-color-1);
@@ -544,6 +610,10 @@
         "unlock recipe"
     ;
     gap: 20px;
+}
+
+.blueprint-infos {
+    padding: 0;
 }
 
 .decoration-list {
