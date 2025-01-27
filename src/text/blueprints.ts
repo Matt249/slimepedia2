@@ -404,8 +404,8 @@ export const utilitiesDescription: { [key: string]: string } = {
     'markerhive': "A useful marker to call attention to any nearby hive resources.",
     'markerstabilizer': "A useful marker to call attention to any nearby stabilizers.",
     'dreamlantern': "When turned on, the calming aura of this device will put slimes to sleep, and help them stay asleep trough all kinds of disruptions. Tough the mechanism is not fully understood, it seems if must briefly reset every three days, after which it requires manual activation.",
-    'radiantprojector': "A projector that will help you project radiant energy.",
-    'disruptiondetector': "This device can help restart long-dormant devices in the Grey Labyrinth."
+    'radiantprojector': "This device can help restart long-dormant devices in the Grey Labyrinth.",
+    'disruptiondetector': "This device can detect nearby active and incoming prisma disruptions before they even happen."
 };
 
 export const themeList: { [key: string]: [string, string] } = {

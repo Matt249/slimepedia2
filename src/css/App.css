@@ -53,7 +53,7 @@ h6,
 p,
 a,
 button {
-  transition: color 1.2s ease-in-out;
+  transition: color .2s ease-in-out;
   margin: 0;
 }
 
@@ -77,6 +77,11 @@ h6 {
 
 p {
   font-size: var(--paragraph-size);
+}
+
+svg {
+  fill: var(--text-color);
+  transition: fill .2s ease-in-out;
 }
 
 body {
