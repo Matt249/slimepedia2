@@ -19,10 +19,10 @@ import utilitiesImg from '/src/assets/misc/utilities.png';
 import warpImg from '/src/assets/misc/warp.png';
 import decorationsImg from '/src/assets/misc/decorations.png';
 import shopImg from '/src/assets/misc/shop.png';
-import crossImg from '/src/assets/misc/cross.png';
 import trashImg from '/src/assets/misc/trash.png';
 import blueprintImg from '/src/assets/misc/blueprint.png';
 import '../css/Blueprints.css';
+import MemoXmark from '../components/Xmark';
 
 enum BlueprintType {
     UPGRADES = 'upgrades',
@@ -73,7 +73,7 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
                 <Down onClick={() => decreaseQuantity()} />
                 <div></div>
                 <h2 onClick={() => addToRecipeList(name, type, quantity)}>{quantity}</h2>
-                <img src={crossImg} alt='Add to the list' onClick={() => addToRecipeList(name, type, quantity)} />
+                <Plus onClick={() => addToRecipeList(name, type, quantity)} />
                 <div></div>
                 <Down onClick={() => increaseQuantity()} />
             </div>
@@ -323,7 +323,7 @@ const RecipeMenu: React.FC = () => {
                 <img src={shopImg} alt='Shop icon' />
                 <h1>Recipes Ingredients List</h1>
                 <img src={trashImg} alt='Clear the list' onClick={() => resetList()} />
-                <img src={crossImg} alt='Close' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+                <MemoXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
             <div>
                 <div className='pin-list-header'>

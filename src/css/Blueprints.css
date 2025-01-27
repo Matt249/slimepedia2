@@ -1,3 +1,7 @@
+:root {
+    --svg-scale: 1.7;
+}
+
 .pin-button {
     position: absolute;
     width: 75px;
@@ -87,6 +91,16 @@
     text-align: left;
 }
 
+.pin-header>svg {
+    font-size: 1.8em;
+    transform: scale(1);
+    transition: transform .2s ease-in-out;
+}
+
+.pin-header>svg:hover {
+    transform: scale(1.2);
+}
+
 .pin-list-header {
     width: 100%;
     margin: 10px
@@ -167,7 +181,6 @@
 }
 
 .pin-element>svg {
-    fill: var(--text-color);
     transition:
         fill .2s ease-in-out,
         transform .2s ease-in-out;
@@ -228,11 +241,11 @@
 
 
 .quantity-selector>svg {
-    fill: var(--text-color);
     cursor: var(--pointer-style);
-    transition: fill .2s ease-in-out;
-    --svg-scale: 1.7;
-    transition: transform .2s ease-in-out;
+    transition:
+        fill .2s ease-in-out,
+        transform .2s ease-in-out;
+    font-size: 1.7em;
 }
 
 .quantity-selector>svg:first-child {
@@ -405,7 +418,6 @@
 .arrow-right>svg {
     height: 50px;
     width: 50px;
-    fill: var(--text-color);
     cursor: var(--pointer-style);
     transition: transform .2s ease-in-out;
 }
@@ -549,7 +561,6 @@
 
 .vac-upgrade-effect-box>svg {
     height: 4em;
-    fill: var(--text-color);
     transform: rotate(-90deg);
 }
 
