@@ -1,0 +1,70 @@
+
+.weather-list,
+.weather-info {
+    margin: 0;
+    background-color: var(--menu-color-1);
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.weather-list {
+    position: relative;
+    flex: 0 0 auto;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px;
+    overflow: clip;
+}
+
+.weather-info {
+    flex: 1 1 auto;
+}
+
+.weather-element {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--item-color);
+    border-radius: 20px;
+    overflow-x: hidden;
+    z-index: 10;
+}
+
+.weather-element>*:not(video) {
+    z-index: 10;
+}
+
+.weather-element>img {
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.weather-element>h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.weather-element:hover>img {
+    transform: scale(1.2);
+}
+
+.weather-element>video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.weather-element>video:not(.video-rain) {
+    display: none;
+}

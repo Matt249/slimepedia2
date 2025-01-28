@@ -7,12 +7,13 @@ function lazyWithDefault<T extends ComponentType>(factory: () => Promise<{ defau
     return React.lazy(factory);
 }
 
+const Header = lazyWithDefault(() => import("../pages/Header"));
 const Slimes = lazyWithDefault(() => import("../pages/Slimes"));
 const Food = lazyWithDefault(() => import("../pages/Food"));
 const Items = lazyWithDefault(() => import("../pages/Items"));
 const Map = lazyWithDefault(() => import("../pages/Map"));
 const Regions = lazyWithDefault(() => import("../pages/Regions"));
-const Header = lazyWithDefault(() => import("../pages/Header"));
+const Weather = lazyWithDefault(() => import("../pages/Weather"));
 const Blueprints = lazyWithDefault(() => import("../pages/Blueprints"));
 const Buildings = lazyWithDefault(() => import("../pages/Buildings"));
 
@@ -34,7 +35,8 @@ export default function Index() {
                     <Route path="/map/*" element={<Map />} />
                     <Route path="/regions" element={<Regions />} />
                     <Route path="/regions/:region" element={<Regions />} />
-                    <Route path="/weather" element={<Header />} />
+                    <Route path="/regions/:regionType/:region" element={<Regions />} />
+                    <Route path="/weather" element={<Weather />} />
                     <Route path="/blueprints" element={<Blueprints />} />
                     <Route path="/blueprints/:tab" element={<Blueprints />} />
                     <Route path="/blueprints/:tab/:blueprint" element={<Blueprints />} />

@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../text/regions';
 import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
-import { NavLink, useParams } from 'react-router-dom';
-import React from 'react';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 import Down from '../components/Down';
 import podImg from '/src/assets/misc/pod.png';
 import noneImg from '/src/assets/misc/none.png';
@@ -305,30 +304,28 @@ export const Regions = () => {
         return '';
     };
 
-    const { region: regionName } = useParams();
-    const region = (regionName && (regionsIds.includes(regionName) || ranchIds.includes(regionName))) ? regionName : 'fields';
+    const { regionType: regionTypeName, region: regionName } = useParams();
+    const regionType = regionTypeName && ['region', 'ranch'].includes(regionTypeName) ? regionTypeName : null;
+    if (!regionType) return <Navigate to='/regions/region/fields' />;
+    const [selectedTab, setSelectedTab] = useState(regionType);
+    const region = (regionName && ((regionsIds.includes(regionName) && regionType === 'region') || (ranchIds.includes(regionName) && regionType === 'ranch'))) ? regionName : null;
+    if (!region) return <Navigate to={`/regions/${regionType}/${regionType === 'region' ? 'fields' : 'consevatory'}`} />;
     const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
-    const actualSelection = ranchIds.includes(region) ? 'ranch' : 'regions';
     const regionDescriptionRef = useRef<HTMLDivElement>(null);
+
+    const descriptionChoice = () => {
+        if (regionType === 'region') return <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
+        if (regionType === 'ranch') return <RanchDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
+        return null;
+    }
+
 
     const scrollToSection = () => {
         if (regionDescriptionRef.current)
             regionDescriptionRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
     };
 
-    const listOfRegions = actualSelection === 'regions' ? regionsIds : ranchIds;
-
-    const descriptionChoice = () => {
-        switch (actualSelection) {
-            case 'regions':
-                return <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
-            case 'ranch':
-                return <RanchDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
-            default:
-                return <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
-        }
-    }
-
+    const listOfRegions = selectedTab === 'region' ? regionsIds : ranchIds;
 
     const handleMouseEnter = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
         if ((e.target as HTMLVideoElement).readyState >= 3)
@@ -358,16 +355,12 @@ export const Regions = () => {
         <div>
             <div className='region-tab-list'>
                 <div className='regions-tabs'>
-                    <NavLink to='/regions/fields' style={{ textDecoration: 'none' }}>
-                        <Tab title='World Regions' icon='misc/world' selected={actualSelection === 'regions'} />
-                    </NavLink>
-                    <NavLink to='/regions/conservatory' style={{ textDecoration: 'none' }}>
-                        <Tab title='Ranch' icon='misc/patch' selected={actualSelection === 'ranch'} />
-                    </NavLink>
+                    <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab('region')} />
+                    <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab('ranch')} />
                 </div>
-                <div className='regions-list' style={{ borderRadius: `${actualSelection === 'regions' ? '0' : '20px'} ${actualSelection === 'ranch' ? '0' : '20px'} 20px 20px` }}>
+                <div className='regions-list' style={{ borderRadius: `${selectedTab === 'region' ? '0 20px' : '20px 0'} 20px 20px` }}>
                     {listOfRegions.map(regionItem => (
-                        <NavLink to={`/regions/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
+                        <NavLink to={`/regions/${selectedTab}/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
                             <div
                                 className={'region-tab' + (regionItem === region ? ' region-selected' : '')}
                                 key={regionInfos[regionItem][0]}
