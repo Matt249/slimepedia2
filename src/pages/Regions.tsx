@@ -304,14 +304,18 @@ export const Regions = () => {
         return '';
     };
 
+    const regionDescriptionRef = useRef<HTMLDivElement>(null);
     const { regionType: regionTypeName, region: regionName } = useParams();
     const regionType = regionTypeName && ['region', 'ranch'].includes(regionTypeName) ? regionTypeName : null;
-    if (!regionType) return <Navigate to='/regions/region/fields' />;
     const [selectedTab, setSelectedTab] = useState(regionType);
     const region = (regionName && ((regionsIds.includes(regionName) && regionType === 'region') || (ranchIds.includes(regionName) && regionType === 'ranch'))) ? regionName : null;
+    const regionMusic = (region === null || region === 'sea') ? null : ranchIds.includes(region) ? 'conservatory' : region;
+
+    const mainPlayer = useRef<HTMLVideoElement>(null);
+    const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+
+    if (!regionType) return <Navigate to='/regions/region/fields' />;
     if (!region) return <Navigate to={`/regions/${regionType}/${regionType === 'region' ? 'fields' : 'consevatory'}`} />;
-    const regionMusic = region === 'sea' ? null : ranchIds.includes(region) ? 'conservatory' : region;
-    const regionDescriptionRef = useRef<HTMLDivElement>(null);
 
     const descriptionChoice = () => {
         if (regionType === 'region') return <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />;
@@ -341,8 +345,6 @@ export const Regions = () => {
         backgroundImage: `url(${mediaFetcher(`wait/${region}.jpg`)})`
     };
 
-    const mainPlayer = useRef<HTMLVideoElement>(null);
-    const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
     const handleTabClick = (regionItem: string) => {
         if (videoRefs.current[regionItem]) {
@@ -350,6 +352,7 @@ export const Regions = () => {
             videoRefs.current[regionItem].play();
         }
     };
+
 
     return (
         <div>
