@@ -306,7 +306,7 @@ export const Regions = () => {
 
     const regionDescriptionRef = useRef<HTMLDivElement>(null);
     const { regionType: regionTypeName, region: regionName } = useParams();
-    const regionType = regionTypeName && ['region', 'ranch'].includes(regionTypeName) ? regionTypeName : null;
+    const regionType = regionTypeName && ['region', 'ranch'].includes(regionTypeName) ? regionTypeName : 'region';
     const [selectedTab, setSelectedTab] = useState(regionType);
     const region = (regionName && ((regionsIds.includes(regionName) && regionType === 'region') || (ranchIds.includes(regionName) && regionType === 'ranch'))) ? regionName : null;
     const regionMusic = (region === null || region === 'sea') ? null : ranchIds.includes(region) ? 'conservatory' : region;
