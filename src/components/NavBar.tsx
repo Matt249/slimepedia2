@@ -11,7 +11,6 @@ export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
 
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
-    console.log(localStorage.getItem('darkMode'), typeof localStorage.getItem('darkMode'), darkMode);
     useEffect(() => {
         const rootElement = document.querySelector(':root') as HTMLElement | null;
         if (rootElement) {
