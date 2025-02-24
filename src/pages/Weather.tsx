@@ -4,23 +4,23 @@ import { weatherList, weatherNames } from "../text/weather";
 import { mediaFetcher } from "../media-manager";
 
 export const Weather: React.FC = () => {
-    const backgroundImage = {
-        backgroundImage: `url(${mediaFetcher('wait/archway.jpg')})`,
-    }
     return (
         <div>
-            <div className="weather-list" x>
+            <div className="weather-list">
                 {weatherNames.map((weather: string) => (
                     <div
                         key={weather}
                         className="weather-element"
-                        style={backgroundImage}
                     >
                         <img src={mediaFetcher(`world/${weather}.png`)} />
                         <h1>{weatherList[weather][0]}</h1>
-                        {/* <video autoPlay loop muted className={`video-${weather}`}>
-                            <source src={mediaFetcher(`videos/ps.webm`)} type="video/webm" />
-                        </video> */}
+                        <video
+                            className={`video-${weather}`}
+                            onMouseEnter={(e) => e.currentTarget.play()}
+                            onMouseLeave={(e) => e.currentTarget.pause()}
+                            src={mediaFetcher(`videos/${weatherList[weather][1]}.webm`)}
+                            muted
+                        />
                     </div>
                 ))
                 }

@@ -8,7 +8,7 @@
 }
 
 .weather-list {
-    position: relative;
+    padding: 20px;
     flex: 0 0 auto;
     aspect-ratio: 1;
     display: grid;
@@ -16,7 +16,6 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 20px;
     overflow: clip;
-    background-clip: content-box;
 }
 
 .weather-info {
@@ -24,6 +23,7 @@
 }
 
 .weather-element {
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -31,7 +31,7 @@
     gap: 10px;
     background-color: var(--item-color);
     border-radius: 20px;
-    overflow-x: hidden;
+    overflow: clip;
     z-index: 10;
     background-attachment: fixed;
     background-position: top right;
@@ -50,7 +50,7 @@
 }
 
 .weather-element>h1 {
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 700;
 }
 
@@ -62,12 +62,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: auto;
     height: 100%;
     object-fit: cover;
     z-index: 1;
+    filter: opacity(0) blur(10px);
+    transition: filter 0.2s ease-in-out;
 }
 
-.weather-element>video:not(.video-rain) {
-    display: none;
+.weather-element:hover>video {
+    filter: opacity(1) blur(0);
 }
