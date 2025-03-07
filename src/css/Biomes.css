@@ -8,6 +8,8 @@
 }
 
 .spawn-list-container {
+    position: relative;
+    z-index: 2;
     background-color: var(--item-color);
     padding: 15px;
     border-radius: 20px;
