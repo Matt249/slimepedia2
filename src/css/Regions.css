@@ -1,7 +1,7 @@
 :root {
     --special-img-scale: .8;
     --special-size: 1em;
-    --region-pedia-size: 1.1em;
+    --region-pedia-size: 2vh;
     --ranch-pedia-size: 1.5em;
     --special-margin: 20px 0 0 0;
     --animation-delay: .2s;
@@ -11,9 +11,8 @@
     :root {
         --special-img-scale: .9;
         --special-size: 1.3em;
-        --region-pedia-size: 1.7em;
         --ranch-pedia-size: 2em;
-        --special-margin: 40px 0 10px 0;
+        --special-margin: 50px 0 10px 0;
     }
 }
 
@@ -537,6 +536,7 @@
 .region-element-resource>img {
     height: auto;
     width: var(--element-size);
+    transform: scale(.9);
     transition: transform var(--animation-delay) ease-in-out;
 }
 
