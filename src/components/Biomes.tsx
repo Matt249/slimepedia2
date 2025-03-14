@@ -6,6 +6,7 @@ import React from 'react';
 import '../css/Biomes.css';
 
 const light = true;
+const animationDelay = 200;
 
 interface BiomesProps {
     spawnList: string[];
@@ -48,15 +49,17 @@ export const Biomes: React.FC<BiomesProps> = ({
                                 }
                             }}
                             onMouseLeave={() => {
-                                const videoRef = videoRefs.current[index];
-                                if (videoRef) {
-                                    try {
-                                        videoRef.pause();
-                                    } catch (e) {
-                                        console.error(e);
-                                        console.error(videoRefs, index);
+                                setTimeout(() => {
+                                    const videoRef = videoRefs.current[index];
+                                    if (videoRef) {
+                                        try {
+                                            videoRef.pause();
+                                        } catch (e) {
+                                            console.error(e);
+                                            console.error(videoRefs, index);
+                                        }
                                     }
-                                }
+                                }, animationDelay); // Délai de 500 ms
                             }}
                         >
                             <video
@@ -94,15 +97,17 @@ export const Biomes: React.FC<BiomesProps> = ({
                                     }
                                 }}
                                 onMouseLeave={() => {
-                                    const videoRef = videoRefs.current[index];
-                                    if (videoRef) {
-                                        try {
-                                            videoRef.pause();
-                                        } catch (e) {
-                                            console.error(e);
-                                            console.error(videoRefs, index);
+                                    setTimeout(() => {
+                                        const videoRef = videoRefs.current[index];
+                                        if (videoRef) {
+                                            try {
+                                                videoRef.pause();
+                                            } catch (e) {
+                                                console.error(e);
+                                                console.error(videoRefs, index);
+                                            }
                                         }
-                                    }
+                                    }, 500); // Délai de 500 ms
                                 }}
                             >
                                 <video

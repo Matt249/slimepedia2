@@ -109,15 +109,16 @@
     position: absolute;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(1.2);
     border-radius: 10px;
     z-index: -5;
     width: 100%;
     height: auto;
     object-fit: cover;
     object-position: center;
-    filter: opacity(0);
-    transition: filter var(--animation-speed) 0s ease-in-out;
+    filter: opacity(0) blur(10px);
+    transition: filter var(--animation-speed) 0s ease-in-out,
+        transform var(--animation-speed) 0s ease-in-out;
 }
 
 .biome-item,
@@ -136,8 +137,10 @@
 
 .biome-item:hover>.biome-list-video {
     z-index: 5;
-    filter: opacity(1);
-    transition: filter var(--animation-speed) ease-in-out;
+    filter: opacity(1) blur(0);
+    transform: translateY(-50%) scale(1);
+    transition: filter var(--animation-speed) ease-in-out,
+        transform var(--animation-speed) ease-in-out;
 }
 
 .biome-item.biome-item-hover:hover>div>.biome-name {

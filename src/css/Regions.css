@@ -78,9 +78,16 @@
     height: auto;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    filter: opacity(0);
-    transition: filter var(--animation-delay) ease-in-out;
+    transform: translate(-50%, -50%) scale(1.2);
+    filter: opacity(0) blur(10px);
+    transition: filter var(--animation-delay) ease-in-out,
+        transform var(--animation-delay) ease-in-out;
+}
+
+.region-tab.region-selected>.region-video,
+.region-tab:hover>.region-video {
+    filter: opacity(1) blur(0);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .region-icon {
@@ -88,6 +95,11 @@
     height: 90%;
     transform: scale(1);
     transition: transform var(--animation-delay) ease-in-out;
+}
+
+.region-tab.region-selected>.region-icon,
+.region-tab:hover>.region-icon {
+    transform: scale(1.1);
 }
 
 .region-name {
@@ -99,15 +111,7 @@
         text-shadow var(--animation-delay) ease-in-out;
 }
 
-.region-tab.region-selected>.region-video,
-.region-tab:hover>.region-video {
-    filter: opacity(1);
-}
 
-.region-tab.region-selected>.region-icon,
-.region-tab:hover>.region-icon {
-    transform: scale(1.1);
-}
 
 .region-tab.region-selected>.region-name,
 .region-tab:hover>.region-name {

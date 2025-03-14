@@ -244,6 +244,8 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
     </div>
 );
 
+const animationDelay = 200;
+
 export const Regions = () => {
 
     const [musicMenu, setMusicMenu] = useState(false);
@@ -337,8 +339,10 @@ export const Regions = () => {
     };
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
-        if ((e.target as HTMLVideoElement).readyState >= 3)
-            (e.target as HTMLVideoElement).pause();
+        setTimeout(() => {
+            if ((e.target as HTMLVideoElement).readyState >= 3)
+                (e.target as HTMLVideoElement).pause();
+        }, animationDelay); // Délai de 500 ms
     };
 
     const backgroudRegion = {

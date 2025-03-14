@@ -30,8 +30,8 @@ export const spawnLocationsList: { [key: string]: [string, string, boolean] } = 
     'pb': ['bluffs', 'Powderfall Bluffs', false],
     'gl': ['labyrinth', 'Grey Labyrinth', false],
     'se': ['sea', 'The Slime Sea', false],
-    'ws': ['tornado', 'Level 3 Wind Storm', false],
-    'ps': ['vines', 'Level 3 Pollen Storm', false],
+    'ws': ['cyclone', 'Level 3 Wind Storm', false],
+    'ps': ['vine', 'Level 3 Pollen Storm', false],
     'ls': ['lightning', 'Level 3 Thunderstorm', false],
     'pm': ['shop', 'Pronto Mart', false]
 };

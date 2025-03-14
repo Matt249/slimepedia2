@@ -67,11 +67,15 @@
     object-fit: cover;
     z-index: 1;
     filter: opacity(0) blur(10px);
-    transition: filter 0.2s ease-in-out;
+    transform: scale(1.2);
+    transition:
+        filter 0.2s ease-in-out,
+        transform 0.2s ease-in-out;
 }
 
 .weather-element:hover>video {
     filter: opacity(1) blur(0);
+    transform: scale(1);
 }
 
 .weather-info {
@@ -87,25 +91,32 @@
     overflow: hidden;
 }
 
+.weather-info>*:not(video) {
+    z-index: 2;
+}
+
 .weather-info-title {
     grid-area: title;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto 1fr;
-    grid-template-areas: 
-    "icon title"
-    "icon description"
-    "icon pedia";
+    grid-template-areas:
+        "icon title"
+        "icon description"
+        "icon pedia";
     gap: 20px;
+    color: white;
 }
 
 .weather-info-content {
     grid-area: content;
     display: grid;
-    grid-template-columns: 1fr 700px;
-    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 700px;
+    grid-template-rows: 1fr 1fr;
     gap: 20px;
-    grid-template-areas: "test spawn";
+    grid-template-areas:
+        "effects effects spawn"
+        "slimes related spawn";
     overflow: hidden;
 }
 
@@ -125,9 +136,12 @@
 
 .weather-info-title>img {
     grid-area: icon;
-    width: 12vw; /* Prendre toute la largeur disponible */
-    height: auto; /* Garder les proportions de l'image */
-    object-fit: cover; /* Couvrir toute la zone disponible */
+    width: 12vw;
+    /* Prendre toute la largeur disponible */
+    height: auto;
+    /* Garder les proportions de l'image */
+    object-fit: cover;
+    /* Couvrir toute la zone disponible */
 }
 
 .weather-info-title>h1 {
@@ -150,4 +164,16 @@
     font-size: 1.5rem;
     font-weight: 400;
     text-align: justify;
+}
+
+.effects-box {
+    grid-area: effects;
+}
+
+.slimes-box {
+    grid-area: slimes;
+}
+
+.related-box {
+    grid-area: related;
 }
