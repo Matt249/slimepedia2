@@ -20,7 +20,7 @@
   --little-box-gap: 15px;
 }
 
-@media (min-width: 2000px) {
+/* @media (min-width: 2000px) {
   :root {
     --element-size: 150px;
     --tab-font-size: 2.3em;
@@ -37,6 +37,10 @@
     --little-box-gap: 25px;
   }
 
+} */
+
+html {
+  font-size: 13px;
 }
 
 div,

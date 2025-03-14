@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useRef } from "react";
 import '../css/Weather.css';
 import { weatherList, weatherNames } from "../text/weather";
 import { mediaFetcher } from "../media-manager";
 import { Biomes } from "../components/Biomes";
 
 export const Weather: React.FC = () => {
+    const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+
+    const handleMouseEnter = (weather: string) => {
+        if (videoRefs.current[weather]) {
+            videoRefs.current[weather]!.play();
+        }
+    };
+
+    const handleMouseLeave = (weather: string) => {
+        if (videoRefs.current[weather]) {
+            videoRefs.current[weather]!.pause();
+        }
+    };
+
     return (
         <div>
             <div className="weather-list">
@@ -12,19 +26,21 @@ export const Weather: React.FC = () => {
                     <div
                         key={weather}
                         className="weather-element"
+                        onMouseEnter={() => handleMouseEnter(weather)}
+                        onMouseLeave={() => handleMouseLeave(weather)}
                     >
                         <img src={mediaFetcher(`world/${weather}.png`)} />
-                        <h1>{weatherList[weather][0]}</h1>
                         <video
+                            ref={(el) => (videoRefs.current[weather] = el)}
                             className={`video-${weather}`}
-                            onMouseEnter={(e) => e.currentTarget.play()}
-                            onMouseLeave={(e) => e.currentTarget.pause()}
                             src={mediaFetcher(`videos/${weatherList[weather][1]}.webm`)}
                             muted
+                            loop
+                            disablePictureInPicture
                         />
+                        <div className="weather-element-title"><h1>{weatherList[weather][0]}</h1></div>
                     </div>
-                ))
-                }
+                ))}
             </div>
             <div className="weather-info">
                 <video className="video-weather" src={mediaFetcher("videos/ra.webm")} autoPlay loop muted />

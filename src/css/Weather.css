@@ -23,51 +23,69 @@
 
 .weather-element {
     position: relative;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     background-color: var(--item-color);
     border-radius: 20px;
     overflow: clip;
     z-index: 10;
-    background-attachment: fixed;
-    background-position: top right;
 }
 
 .weather-element>*:not(video) {
     z-index: 10;
 }
 
-.weather-element>img {
-    width: 60%;
-    height: 60%;
-    object-fit: cover;
-    transform: scale(1);
+.weather-element-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--item-color);
+    border-radius: 20px 20px 0 0;
+    transform: translateY(0);
+    transform-origin: top;
     transition: transform 0.2s ease-in-out;
+    z-index: 10;
+}
+
+.weather-element:hover>.weather-element-title {
+    transform: translateY(-100%);
+}
+
+.weather-element-title>h1 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.weather-element>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 70%;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.weather-element:hover>img {
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 .weather-element>h1 {
     flex: 0 0 auto;
-    font-size: 2rem;
+    font-size: 1vh;
     font-weight: 700;
-}
-
-.weather-element:hover>img {
-    transform: scale(1.2);
 }
 
 .weather-element>video {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: auto;
     height: 100%;
-    object-fit: cover;
     z-index: 1;
     filter: opacity(0) blur(10px);
-    transform: scale(1.2);
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
     transition:
         filter 0.2s ease-in-out,
         transform 0.2s ease-in-out;
@@ -75,7 +93,7 @@
 
 .weather-element:hover>video {
     filter: opacity(1) blur(0);
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1.2);
 }
 
 .weather-info {
@@ -118,6 +136,14 @@
         "effects effects spawn"
         "slimes related spawn";
     overflow: hidden;
+}
+
+.weather-info-content>div {
+    position: relative;
+    background-color: var(--item-color);
+    border-radius: 20px;
+    padding: 20px;
+    overflow: clip;
 }
 
 .weather-info>video {
