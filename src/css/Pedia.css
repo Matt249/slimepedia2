@@ -69,8 +69,8 @@
     overflow: hidden;
     height: 100%;
     transition:
-        height .2s ease-in-out,
-        padding .2s ease-in-out;
+        height var(--animation-speed) ease-in-out,
+        padding var(--animation-speed) ease-in-out;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: auto auto 1fr;
     grid-template-areas:
@@ -162,7 +162,9 @@
 
 .link-to-food {
     cursor: var(--pointer-style);
-    transition: border-radius .3s;
+    transition:
+        background-color var(--animation-speed) ease-in-out,
+        border-radius var(--animation-speed) ease-in-out;
 }
 
 .link-to-food:hover {
@@ -170,17 +172,12 @@
 }
 
 .link-to-food>img {
-    transition: transform .3s;
-}
-
-.link-to-food h3,
-.link-to-food h4 {
-    transition: color .3s;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .link-to-food:hover h3,
 .link-to-food:hover h4 {
-    color: #444;
+    color: var(--link-color);
 }
 
 .link-to-food:hover>img {
@@ -212,7 +209,7 @@
     border-radius: var(--taille-btn);
     position: absolute;
     left: calc(50% - 10px);
-    transition: all .3s;
+    transition: all var(--animation-speed) ease-in-out;
     z-index: 10;
     cursor: var(--pointer-style);
 }
@@ -246,7 +243,9 @@
     flex-grow: 10;
     margin: 0;
     border-radius: 20px;
-    transition: height .5s, padding .5s .2s;
+    transition:
+        height var(--animation-speed) ease-in-out,
+        padding calc(var(--animation-speed) * 2.5) ease-in-out var(--animation-speed);
     overflow: auto;
     text-align: justify;
     font-size: 20px;
@@ -348,8 +347,9 @@ br {
     height: 100%;
     max-height: 100%;
     transition:
-        height .2s ease-in-out,
-        padding .2s ease-in-out;
+        background-color var(--animation-speed) ease-in-out,
+        height var(--animation-speed) ease-in-out,
+        padding var(--animation-speed) ease-in-out;
     overflow: hidden;
     position: relative;
     display: grid;
@@ -369,7 +369,7 @@ br {
     width: 100%;
     height: 100%;
     max-height: 100%;
-    transition: height .5s;
+    transition: height var(--animation-speed) ease-in-out;
     overflow: hidden;
     position: relative;
     display: grid;
@@ -417,9 +417,9 @@ br {
 .toy {
     overflow: hidden;
     height: 100%;
-    transition: height .5s ease-in-out,
-        margin .5s ease-in-out,
-        padding .5s ease-in-out;
+    transition: height var(--animation-speed) ease-in-out,
+        margin var(--animation-speed) ease-in-out,
+        padding var(--animation-speed) ease-in-out;
 }
 
 .toy-price {

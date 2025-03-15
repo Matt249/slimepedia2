@@ -4,6 +4,7 @@ import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import '../css/Biomes.css';
+import { weatherID } from '../text/weather';
 
 const light = true;
 const animationDelay = 200;
@@ -18,7 +19,7 @@ export const Biomes: React.FC<BiomesProps> = ({
 }) => {
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-    const biomeBlacklist = ['pm', 'ps', 'ws'];
+    const biomeBlacklist = ['pm'];
 
     useEffect(() => {
         videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || null);
@@ -81,7 +82,7 @@ export const Biomes: React.FC<BiomesProps> = ({
                             </div>
                         </div>
                         :
-                        <NavLink key={index} to={`/regions/${spawnLocationsList[biome][0]}`} style={{ textDecoration: 'none' }}>
+                        <NavLink key={index} to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`} style={{ textDecoration: 'none' }}>
                             <div
                                 key={index}
                                 className="biome-item biome-item-hover"

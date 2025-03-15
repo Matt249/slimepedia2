@@ -21,6 +21,7 @@ export const NavBar = () => {
             rootStyle.setProperty('--item-color', darkMode ? '#222' : '#D2B394');
             rootStyle.setProperty('--text-color', darkMode ? '#fff' : '#000');
             rootStyle.setProperty('--pointer-style', 'url(' + (mediaFetcher('ui/map.png')) + '), pointer');
+            rootStyle.setProperty('--link-color', darkMode ? 'lightskyblue' : '252466');
         }
         document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
         localStorage.setItem('darkMode', darkMode.toString());

@@ -70,7 +70,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
     }
     const slimeName = currentSlimeList[0];
     const slimeIcon = selectedSlime === "none" ? noneImg : mediaFetcher(`slimes/${selectedSlime}.png`);
-    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? noneImg : mediaFetcher(`plorts/${selectedSlime}.png`);
+    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? undefined : mediaFetcher(`plorts/${selectedSlime}.png`);
     const foodTypeIcon = currentSlimeList[1] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[1]}.png`);
     const favFoodIcon = currentSlimeList[2] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[2]}.png`);
     const favToyIcon = currentSlimeList[5] === "none" ? noneImg : mediaFetcher(`toys/${currentSlimeList[5]}.png`);
@@ -86,7 +86,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                 <div className='image-container'>
                     <img src={slimeIcon} className='img-main' alt={'Picture of ' + slimeName} />
                 </div>
-                <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />
+                {plortIcon && <img src={plortIcon} className='img-plort' alt={'Plort of ' + slimeName} />}
             </div>
             {foodTypesNames.includes(currentSlimeList[1]) ?
                 <NavLink to={`/food/${currentSlimeList[1]}`} style={{ textDecoration: 'none' }}>

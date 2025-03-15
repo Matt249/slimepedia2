@@ -70,18 +70,18 @@ export const regionPedia: { [key: string]: string } = {
 }
 
 export const regionsConnections: {[key: string]: [string[], string[]]} = {
-    'conservatory': [[], ['fields', 'den', 'gully', 'archway']],
-    'den': [['conservatory'], ['digsite']],
-    'gully': [['conservatory'], ['tidepools']],
-    'archway': [['conservatory'], []],
-    'tidepools': [['gully'], []],
-    'digsite': [['den'], []],
-    'fields': [['conservatory'], ['strand', 'valley']],
-    'strand': [['fields'], ['labyrinth']],
-    'valley': [['fields'], ['bluffs', 'labyrinth']],
-    'bluffs': [['valley'], []],
-    'labyrinth': [['strand', 'valley'], []],
-    'sea': [['conservatory', 'fields', 'strand', 'valley', 'bluffs'], []]
+    'conservatory': [['region/fields'], ['ranch/den', 'ranch/gully', 'ranch/archway']],
+    'den': [['ranch/conservatory'], ['ranch/digsite']],
+    'gully': [['ranch/conservatory'], ['ranch/tidepools']],
+    'archway': [['ranch/conservatory'], []],
+    'tidepools': [['ranch/gully'], []],
+    'digsite': [['ranch/den'], []],
+    'fields': [['ranch/conservatory'], ['region/strand', 'region/valley']],
+    'strand': [['region/fields'], ['region/labyrinth']],
+    'valley': [['region/fields'], ['region/bluffs', 'region/labyrinth']],
+    'bluffs': [['region/valley'], []],
+    'labyrinth': [['region/strand', 'region/valley'], []],
+    'sea': [['ranch/conservatory', 'region/fields', 'region/strand', 'region/valley', 'region/bluffs'], []]
 }
 
 export const regionsResourcesInfos: { [key: string]: [string, string, string] } = {

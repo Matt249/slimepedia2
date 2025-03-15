@@ -11,17 +11,17 @@
     background-color: #f45d8c;
     border-radius: 50px;
     transition:
-        border-radius .2s ease-in-out,
-        width .2s ease-in-out,
-        height .2s ease-in-out,
-        background-color .2s ease-in-out;
+        border-radius var(--animation-speed) ease-in-out,
+        width var(--animation-speed) ease-in-out,
+        height var(--animation-speed) ease-in-out,
+        background-color var(--animation-speed) ease-in-out;
     box-shadow: var(--text-shadow);
     overflow: hidden;
 }
 
 .pin-button.opened {
-    width: 600px;
-    height: 400px;
+    width: 30vw;
+    height: 35vh;
     border-radius: 25px;
     background-color: var(--menu-color-1);
     display: flex;
@@ -43,7 +43,7 @@
     margin: 10px;
     cursor: var(--pointer-style);
     transform: scale(1) rotate(0);
-    transition: transform .2s ease-in-out 0s;
+    transition: transform var(--animation-speed) ease-in-out 0s;
     z-index: 15;
 }
 
@@ -72,7 +72,7 @@
     background-color: var(--item-color);
     overflow: hidden;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .pin-button:not(.opened)>div {
@@ -94,7 +94,7 @@
 .pin-header>svg {
     font-size: 1.8em;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .pin-header>svg:hover {
@@ -166,7 +166,7 @@
     border-radius: 20px;
     background-color: var(--menu-color-1);
     cursor: var(--pointer-style);
-    transition: background-color .2s ease-in-out;
+    transition: background-color var(--animation-speed) ease-in-out;
 }
 
 .pin-element>img,
@@ -182,15 +182,15 @@
 
 .pin-element>svg {
     transition:
-        fill .2s ease-in-out,
-        transform .2s ease-in-out;
+        fill var(--animation-speed) ease-in-out,
+        transform var(--animation-speed) ease-in-out;
 }
 
 .pin-element>img {
     height: 40px;
     width: 40px;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .pin-element>p {
@@ -226,7 +226,7 @@
 .quantity-selector>img {
     transform: rotate(45deg) scale(1);
     cursor: var(--pointer-style);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .quantity-selector>img:hover {
@@ -243,8 +243,8 @@
 .quantity-selector>svg {
     cursor: var(--pointer-style);
     transition:
-        fill .2s ease-in-out,
-        transform .2s ease-in-out;
+        fill var(--animation-speed) ease-in-out,
+        transform var(--animation-speed) ease-in-out;
     font-size: 1.7em;
 }
 
@@ -267,7 +267,7 @@
 /* Blueprint Styles */
 
 .blueprints-category {
-    width: auto;
+    width: 17vw;
     display: grid;
     grid-template-rows: repeat(auto-fill, 1fr);
     gap: 20px;
@@ -283,7 +283,7 @@
     border-radius: 20px;
     background-color: var(--menu-color-1);
     cursor: var(--pointer-style);
-    transition: background-color .5s;
+    transition: background-color var(--animation-speed) ease-in-out;
     text-decoration: none;
 }
 
@@ -301,10 +301,12 @@
     height: 75px;
     border-radius: 20px;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .blueprints-tab>h1 {
+    width: 100%;
+    text-align: center;
     font-size: var(--main-menu-subtitle-size);
     font-weight: bold;
     margin: 0;
@@ -332,11 +334,12 @@
 }
 
 .vac-upgrade-item {
+    height: 7vh;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 0;
     border-radius: 20px;
-    transition: background-color .2s ease-in-out;
+    transition: background-color var(--animation-speed) ease-in-out;
     text-decoration: none;
     color: var(--text-color);
 }
@@ -357,7 +360,7 @@
     background-color: var(--menu-color-1);
     border-radius: 20px;
     cursor: var(--pointer-style);
-    transition: background-color .2s ease-in-out;
+    transition: background-color var(--animation-speed) ease-in-out;
     text-decoration: none;
 }
 
@@ -365,7 +368,7 @@
     height: 50px;
     border-radius: 20px;
     transform: scale(1);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .vac-upgrade-pack:hover>img,
@@ -419,7 +422,7 @@
     height: 50px;
     width: 50px;
     cursor: var(--pointer-style);
-    transition: transform .2s ease-in-out;
+    transition: transform var(--animation-speed) ease-in-out;
 }
 
 .arrow-left.disabled>svg,

@@ -37,6 +37,7 @@ export default function Index() {
                     <Route path="/regions/:region" element={<Regions />} />
                     <Route path="/regions/:regionType/:region" element={<Regions />} />
                     <Route path="/weather" element={<Weather />} />
+                    <Route path="/weather/:weather" element={<Weather />} />
                     <Route path="/blueprints" element={<Blueprints />} />
                     <Route path="/blueprints/:tab" element={<Blueprints />} />
                     <Route path="/blueprints/:tab/:blueprint" element={<Blueprints />} />

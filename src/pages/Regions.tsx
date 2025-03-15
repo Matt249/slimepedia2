@@ -76,15 +76,14 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
         <div className='region-connections'>
             <h2 className='box-title'>Region Connections</h2>
             <div className='region-from'>
-                {(regionsConnections[region][0].length) ? regionsConnections[region][0].map(regionArg => (
-                    <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                        <img
-                            src={mediaFetcher(`world/${regionArg}.png`)}
-                            alt={regionInfos[regionArg][0]}
-                            key={regionArg}
-                        />
-                    </NavLink>
-                )) : (
+                {(regionsConnections[region][0].length) ? regionsConnections[region][0].map(regionArg => {
+                    const regionName = regionArg.split("/")[1];
+                    return (
+                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
+                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                        </NavLink>
+                    )
+                }) : (
                     <img className='region-no-connection' src={noneImg} alt='No Region' />
                 )}
             </div>
@@ -98,16 +97,15 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                 <Down />
             </div>
             <div className='region-from'>
-                {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => (
-                    <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                        <img
-                            src={mediaFetcher(`world/${regionArg}.png`)}
-                            alt={regionInfos[regionArg][0]}
-                            key={regionArg}
-                        />
-                    </NavLink>
-                )) : (
-                    <img className='no-hover' src={noneImg} alt='No Region' />
+                {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
+                    const regionName = regionArg.split("/")[1];
+                    return (
+                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
+                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                        </NavLink>
+                    )
+                }) : (
+                    <img className='region-no-connection' src={noneImg} alt='No Region' />
                 )}
             </div>
         </div>
@@ -166,43 +164,41 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                 })}
             </p>
         </div>
-        {region !== 'conservatory' && (
-            <div className='ranch-connection ranch-in'>
-                <h2 className='box-title'>Accessed by</h2>
-                {regionsConnections[region][0].map((place) => (
-                    <NavLink to={`/regions/${place}`} style={{ textDecoration: 'none' }} key={place}>
-                        <div
-                            className="ranch-element"
-                            key={place}
-                        >
-                            <div className="region-element-content">
-                                <img
-                                    src={mediaFetcher(`world/${regionInfos[place][1]}.png`)}
-                                    alt={regionInfos[place][0]}
-                                    title={regionInfos[place][0]}
-                                />
-                            </div>
-                        </div>
-                    </NavLink>
-                ))}
-
+        <div className='region-connections'>
+            <h2 className='box-title'>Ranch Connections</h2>
+            <div className='region-from'>
+                {(regionsConnections[region][0].length) ? regionsConnections[region][0].map(regionArg => {
+                    const regionName = regionArg.split("/")[1];
+                    return (
+                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
+                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                        </NavLink>
+                    )
+                }) : (
+                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                )}
             </div>
-        )}
-        <div className='ranch-connection ranch-out'>
-            <h2 className='box-title'>Leads to</h2>
-            {(regionsConnections[region][1].length) ? regionsConnections[region][1].map((place) => (
-                <NavLink to={`/regions/${place}`} style={{ textDecoration: 'none' }} key={place}>
-                    <img
-                        className='ranch-element-image'
-                        src={mediaFetcher(`world/${regionInfos[place][1]}.png`)}
-                        alt={regionInfos[place][0]}
-                        title={regionInfos[place][0]}
-                    />
-                    {/*</div></div>*/}
-                </NavLink>
-            )) :
-                <h3 className='ranch-nowhere'>Nowhere</h3>
-            }
+            <div className='region-connection-separator'>
+                <Down />
+            </div>
+            <div>
+                <img className='no-hover' src={mediaFetcher(`world/${region}.png`)} alt='Current Biome' />
+            </div>
+            <div className='region-connection-separator'>
+                <Down />
+            </div>
+            <div className='region-from'>
+                {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
+                    const regionName = regionArg.split("/")[1];
+                    return (
+                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
+                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                        </NavLink>
+                    )
+                }) : (
+                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                )}
+            </div>
         </div>
         <div className='ranch-box ranch-cost'>
             <h2 className='box-title'>Expansion Cost</h2>
@@ -244,36 +240,35 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
     </div>
 );
 
-const animationDelay = 200;
+const animationDelay = 300;
 
-export const Regions = () => {
-
+export const Regions: React.FC = () => {
     const [musicMenu, setMusicMenu] = useState(false);
     const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
-    const themeDayRef = useRef(null);
-    const relaxDayRef = useRef(null);
-    const ambientDayRef = useRef(null);
-    const themeNightRef = useRef(null);
-    const relaxNightRef = useRef(null);
-    const ambientNightRef = useRef(null);
+    const themeDayRef = useRef<HTMLAudioElement | null>(null);
+    const relaxDayRef = useRef<HTMLAudioElement | null>(null);
+    const ambientDayRef = useRef<HTMLAudioElement | null>(null);
+    const themeNightRef = useRef<HTMLAudioElement | null>(null);
+    const relaxNightRef = useRef<HTMLAudioElement | null>(null);
+    const ambientNightRef = useRef<HTMLAudioElement | null>(null);
 
-    const waterworksDayThemeRef = useRef(null);
-    const waterworksDayAmbientRef = useRef(null);
-    const waterworksNightThemeRef = useRef(null);
-    const waterworksNightAmbientRef = useRef(null);
-    const lavaDayThemeRef = useRef(null);
-    const lavaDayAmbientRef = useRef(null);
-    const lavaNightThemeRef = useRef(null);
-    const lavaNightAmbientRef = useRef(null);
-    const labyrinthDayThemeRef = useRef(null);
-    const labyrinthDayAmbientRef = useRef(null);
-    const labyrinthNightThemeRef = useRef(null);
-    const labyrinthNightAmbientRef = useRef(null);
-    const dreamlandDayThemeRef = useRef(null);
-    const dreamlandDayAmbientRef = useRef(null);
-    const dreamlandNightThemeRef = useRef(null);
-    const dreamlandNightAmbientRef = useRef(null);
+    const waterworksDayThemeRef = useRef<HTMLAudioElement | null>(null);
+    const waterworksDayAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const waterworksNightThemeRef = useRef<HTMLAudioElement | null>(null);
+    const waterworksNightAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const lavaDayThemeRef = useRef<HTMLAudioElement | null>(null);
+    const lavaDayAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const lavaNightThemeRef = useRef<HTMLAudioElement | null>(null);
+    const lavaNightAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const labyrinthDayThemeRef = useRef<HTMLAudioElement | null>(null);
+    const labyrinthDayAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const labyrinthNightThemeRef = useRef<HTMLAudioElement | null>(null);
+    const labyrinthNightAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const dreamlandDayThemeRef = useRef<HTMLAudioElement | null>(null);
+    const dreamlandDayAmbientRef = useRef<HTMLAudioElement | null>(null);
+    const dreamlandNightThemeRef = useRef<HTMLAudioElement | null>(null);
+    const dreamlandNightAmbientRef = useRef<HTMLAudioElement | null>(null);
 
     const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>) => {
         if (currentAudio)
@@ -325,7 +320,6 @@ export const Regions = () => {
         return null;
     }
 
-
     const scrollToSection = () => {
         if (regionDescriptionRef.current)
             regionDescriptionRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -342,21 +336,17 @@ export const Regions = () => {
         setTimeout(() => {
             if ((e.target as HTMLVideoElement).readyState >= 3)
                 (e.target as HTMLVideoElement).pause();
-        }, animationDelay); // Délai de 500 ms
+        }, animationDelay);
+    };
+
+    const handleVideoLoaded = () => {
+        mainPlayer.current!.currentTime = videoRefs.current[region!]!.currentTime;
+        mainPlayer.current!.play();
     };
 
     const backgroudRegion = {
         backgroundImage: `url(${mediaFetcher(`wait/${region}.jpg`)})`
     };
-
-
-    const handleTabClick = (regionItem: string) => {
-        if (videoRefs.current[regionItem]) {
-            videoRefs.current[regionItem].currentTime = 0;
-            videoRefs.current[regionItem].play();
-        }
-    };
-
 
     return (
         <div>
@@ -371,7 +361,6 @@ export const Regions = () => {
                             <div
                                 className={'region-tab' + (regionItem === region ? ' region-selected' : '')}
                                 key={regionInfos[regionItem][0]}
-                                onClick={() => handleTabClick(regionItem)}
                             >
                                 <video
                                     ref={el => videoRefs.current[regionItem] = el}
@@ -396,14 +385,12 @@ export const Regions = () => {
                     <video
                         ref={mainPlayer}
                         className='region-background-video'
-                        src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
+                        src={mediaFetcher(`videos/${regionInfos[region!][2]}.webm`)}
                         disablePictureInPicture
                         autoPlay
                         loop
                         muted
-                        onLoadedData={e => {
-                            (e.target as HTMLVideoElement).play();
-                        }}
+                        onLoadedData={handleVideoLoaded} // Ajoutez cet événement
                     >
                         Video Background
                     </video>

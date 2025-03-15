@@ -1,10 +1,18 @@
 :root {
-    --animation-speed: .2s;
-    --hover-size: 150px;
+    --hover-size: 17vh;
     --small-text-size: 1.1em;
     --normal-text-size: 1.5em;
     --big-text-size: 2em;
-    --img-size: 40px;
+    --img-size: 5vh;
+}
+
+@media (min-width: 2000px) {
+    :root {
+        /* --hover-size: 250px; */
+        --small-text-size: 1.5em;
+        --normal-text-size: 2em;
+        --big-text-size: 2.5em;
+    }
 }
 
 .spawn-list-container {
@@ -25,6 +33,7 @@
     overflow: hidden;
     height: 1lh;
     transition:
+        color var(--animation-speed) ease-in-out,
         margin var(--animation-speed) ease-in-out,
         font-size var(--animation-speed) ease-in-out,
         height var(--animation-speed) ease-in-out;
@@ -41,6 +50,7 @@
     overflow: hidden;
     cursor: var(--pointer-style);
     transition:
+        background-color var(--animation-speed) ease-in-out,
         height var(--animation-speed) ease-in-out,
         padding var(--animation-speed) ease-in-out;
 }
@@ -117,7 +127,8 @@
     object-fit: cover;
     object-position: center;
     filter: opacity(0) blur(10px);
-    transition: filter var(--animation-speed) 0s ease-in-out,
+    transition:
+        filter var(--animation-speed) 0s ease-in-out,
         transform var(--animation-speed) 0s ease-in-out;
 }
 
@@ -139,7 +150,8 @@
     z-index: 5;
     filter: opacity(1) blur(0);
     transform: translateY(-50%) scale(1);
-    transition: filter var(--animation-speed) ease-in-out,
+    transition:
+        filter var(--animation-speed) ease-in-out,
         transform var(--animation-speed) ease-in-out;
 }
 
@@ -152,20 +164,4 @@
 
 .spawn-list-hover:hover>div>div>.biome-name {
     font-size: var(--small-text-size);
-}
-
-@media (min-width: 2000px) {
-    :root {
-        --hover-size: 250px;
-        --small-text-size: 1.5em;
-        --normal-text-size: 2em;
-        --big-text-size: 2.5em;
-        --img-size: 70px;
-    }
-}
-
-@media (max-width: 1000px) {
-    :root {
-        --hover-size: 100px;
-    }
 }

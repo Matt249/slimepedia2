@@ -1,4 +1,4 @@
-export const weatherNames: string[] = [
+export const weatherName: string[] = [
     'rain',
     'snow',
     'thunder',
@@ -10,17 +10,26 @@ export const weatherNames: string[] = [
     'slimefall'
 ];
 
-export const weatherList: { [key: string]: [string, string, string] } = {
-    clear: ['Clear', 'cl', 'Clear Skies'],
-    rain: ['Rain', 'ra', 'Moody, dreary, cozy, wonderful'],
-    snow: ['Snow', 'sn', 'Walking in a wiggly wonderland'],
-    thunder: ['Thunderstorm', 'ls', 'Hair-raising, if slimes had hair'],
-    lightning: ['Lightning Strike', 'ls', 'When nature means business'],
-    wind: ['Wind', 'ws', 'Hold on to your plorts!'],
-    cyclone: ['Cyclone', 'ws', 'Dizzy as a dervish'],
-    pollen: ['Pollen', 'ps', 'ah- ah- AH- AHLUVSLIMES!'],
-    vine: ['Vine Tangle', 'ps', 'Getting to the root of the pollen'],
-    slimefall: ['Slimefall', 'sf', 'Oh come on...']
+export const weatherID: string[] = [
+    'ra',
+    'sn',
+    'ls',
+    'ws',
+    'ps',
+    'sf'
+];
+
+export const weatherList: { [key: string]: [string, string, string, string, string[], string, string[], boolean] } = {
+    clear: ['Clear', 'cl', 'Clear Skies', '', [], '', ['co', 'rf', 'ss', 'ev', 'pb', 'gl'], false],
+    rain: ['Rain', 'ra', 'Moody, dreary, cozy, wonderful', 'That\'s wet !', [], 'rain', ['co', 'rf', 'ss', 'ev', 'gl'], true],
+    snow: ['Snow', 'sn', 'Walking in a wiggly wonderland', 'That\'s cold !', [], 'snow', ['pb'], false],
+    thunder: ['Thunderstorm', 'ls', 'Hair-raising, if slimes had hair', 'That\'s loud !', [], 'lightning', ['co', 'rf', 'ss', 'ev', 'pb'], false],
+    lightning: ['Lightning Strike', 'ls', 'When nature means business', 'That\'s bright !', ['mote', 'glass'], 'thunder', ['co', 'rf', 'ss', 'ev', 'pb'], true],
+    wind: ['Wind', 'ws', 'Hold on to your plorts!', 'That\'s windy !', [], 'cyclone', ['co', 'rf', 'ss', 'ev', 'pb'], false],
+    cyclone: ['Cyclone', 'ws', 'Dizzy as a dervish', 'That\'s spinning !', ['dervish', 'drift'], 'wind', ['co', 'rf', 'ss', 'ev', 'pb'], true],
+    pollen: ['Pollen', 'ps', 'ah- ah- AH- AHLUVSLIMES!', 'That\'s sneezy !', [], 'vine', ['co', 'rf', 'ss', 'ev', 'gl'], false],
+    vine: ['Vine Tangle', 'ps', 'Getting to the root of the pollen', 'That\'s thorny !', ['tangle'], 'pollen', ['co', 'rf', 'ss', 'ev', 'gl'], true],
+    slimefall: ['Slimefall', 'sf', 'Oh come on...', 'That\'s slimy !', ['tarr'], 'slimefall', ['co', 'rf', 'ss', 'ev', 'pb'], false]
 };
 
 export const weatherPedia: { [key: string]: string } = {
@@ -35,3 +44,12 @@ export const weatherPedia: { [key: string]: string } = {
     vine: 'A strange phenomenon occurs on Rainbow Island when pollen clouds swell to unusual levels: plant life in the area will grow rapidly, and erratically, spreading creeping vines in all directions. These vines will spawn large buds that blossom into fruits and veggies, and make for a great hunting ground for the wild tangle slimes that sometimes appear.',
     slimefall: 'Even by the standards of Rainbow Island, slimefall is an unusual sight, with dozens of slimes raining down from the clouds above. As with many things, the slimes don\'t seem to be particularly bothered by it all, but a rancher would do well to remain cautious. With so many new slimes dropped into an area at once, slimefall can easily lead to Tarr outbreaks.'
 };
+
+export const weatherSpawn: { [key: string]: [string, string, string] } = {
+    'mote': ['Lightning Mote', 'resources/mote.png', '/items/resource/mote'],
+    'glass': ['Glass Shard', 'resources/glass.png', '/items/resource/glass'],
+    'dervish': ['Dervish Slime', 'slimes/dervish.png', '/slimes/dervish'],
+    'drift': ['Driftwood', 'resources/drift.png', '/items/resource/drift'],
+    'tangle': ['Tangle Slime', 'slimes/tangle.png', '/slimes/tangle'],
+    'tarr': ['Tarr', 'slimes/tarr.png', '/slimes/tarr']
+}

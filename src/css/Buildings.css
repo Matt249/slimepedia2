@@ -41,12 +41,12 @@
 }
 
 .building-title>h1 {
-    font-size: 2.5em;
+    font-size: var(--main-menu-title-size);
     font-weight: bold;
 }
 
 .building-title>h2 {
-    font-size: 1.5em;
+    font-size: var(--main-menu-subtitle-size);
     font-weight: normal;
     font-style: italic;
 }

@@ -1,51 +1,40 @@
 :root {
-  --menu-color-0: #EFE7D4;
-  --menu-color-1: #E9DDC7;
-  --item-color: #D2B394;
-  --text-color: #000;
-  --background-color: var(--menu-color-0);
-  --text-shadow: 0px 0px 5px #000;
-  --element-size: 100px;
-  --tab-font-size: 1.6em;
-  --small-text-size: 1.2em;
-  --image-size: 70px;
-  --main-menu-icon-size: 200px;
-  --main-menu-title-size: 3.5em;
-  --main-menu-subtitle-size: 2em;
-  --pointer-style: pointer;
-  --paragraph-size: 1.5em;
-  --little-box-title-size: 1.2em;
-  --little-box-subtitle-size: 1em;
-  --little-box-image-size: 50px;
-  --little-box-gap: 15px;
+	--menu-color-0: #EFE7D4;
+	--menu-color-1: #E9DDC7;
+	--item-color: #D2B394;
+	--text-color: #000;
+	--background-color: var(--menu-color-0);
+	--text-shadow: 0px 0px 5px #000;
+	--element-size: 10vh;
+	--tab-font-size: 1.6em;
+	--small-text-size: 1.2em;
+	--image-size: 9vh;
+	--main-menu-icon-size: 25vh;
+	--main-menu-title-size: 4em;
+	--main-menu-subtitle-size: 2em;
+	--pointer-style: pointer;
+	--paragraph-size: 1.5em;
+	--little-box-title-size: 1.2em;
+	--little-box-subtitle-size: 1em;
+	--little-box-image-size: 80%;
+	--little-box-gap: 10vw;
+	--animation-speed: .3s;
+	--link-color: #252466;
 }
 
-/* @media (min-width: 2000px) {
-  :root {
-    --element-size: 150px;
-    --tab-font-size: 2.3em;
-    --small-text-size: 1.5em;
-    --image-size: 120px;
-    --main-menu-icon-size: 300px;
-    --main-menu-title-size: 4em;
-    --main-menu-subtitle-size: 3em;
-    --img-size: 100px;
-    --paragraph-size: 2em;
-    --little-box-title-size: 1.7em;
-    --little-box-subtitle-size: 1.4em;
-    --little-box-image-size: 75px;
-    --little-box-gap: 25px;
-  }
-
-} */
+@media (prefers-reduced-motion: reduce) {
+	:root {
+		--animation-speed: 0s;
+	}
+}
 
 html {
-  font-size: 13px;
+	font-size: 1.6vh;
 }
 
 div,
 nav {
-  transition: background-color .2s ease-in-out;
+	transition: background-color var(--animation-speed) ease-in-out;
 }
 
 h1,
@@ -57,165 +46,171 @@ h6,
 p,
 a,
 button {
-  transition: color .2s ease-in-out;
-  margin: 0;
+	transition: color var(--animation-speed) ease-in-out;
+	margin: 0;
 }
 
 h1 {
-  font-size: var(--main-menu-title-size);
+	font-size: var(--main-menu-title-size);
 }
 
 h2 {
-  font-size: var(--main-menu-subtitle-size);
+	font-size: var(--main-menu-subtitle-size);
 }
 
 h3 {
-  font-size: var(--tab-font-size);
+	font-size: var(--tab-font-size);
 }
 
 h4,
 h5,
 h6 {
-  font-size: var(--small-text-size);
+	font-size: var(--small-text-size);
 }
 
 p {
-  font-size: var(--paragraph-size);
+	font-size: var(--paragraph-size);
 }
 
 svg {
-  fill: var(--text-color);
-  transition: fill .2s ease-in-out;
+	fill: var(--text-color);
+	transition: fill var(--animation-speed) ease-in-out;
 }
 
 body {
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: var(--background-color);
-  color: var(--text-color);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	overflow: hidden;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
 
 .slimepedia-app {
-  text-align: center;
-  height: 100vh;
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 20px;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow: hidden;
+	text-align: center;
+	height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 20px;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .slimepedia-logo {
-  height: 350px;
-  pointer-events: none;
+	height: 350px;
+	pointer-events: none;
 }
 
 .slimepedia-header {
-  flex-grow: 5;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  text-shadow: 0px -1px 4px rgba(0, 0, 0, 0.39);
-  overflow-y: hidden;
-  transition: height .5s;
+	flex-grow: 5;
+	height: max-content;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+	text-shadow: 0px -1px 4px rgba(0, 0, 0, 0.39);
+	overflow-y: hidden;
+	transition: height .5s ease-in-out;
 }
 
 .slimepedia-header>h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 3em;
+	margin: 0;
+	padding: 0;
+	font-size: 3em;
 }
 
 .slimepedia-header>h2>a {
-  margin: 0;
-  padding: 0;
-  font-size: 1.5em;
-  color: rgb(107, 107, 255);
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
+	margin: 0;
+	padding: 0;
+	font-size: 1.5em;
+	color: rgb(107, 107, 255);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
 }
 
 .slimepedia-app>div:not(.pin-button) {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  gap: 20px;
-  height: 100%;
-  background-color: var(--menu-color-0);
-  border-radius: 20px;
-  padding: 20px;
-  min-height: 0;
+	position: relative;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	gap: 20px;
+	height: 100%;
+	background-color: var(--menu-color-0);
+	border-radius: 20px;
+	padding: 20px;
+	min-height: 0;
 }
 
 nav {
-  flex-shrink: 0;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  overflow-x: hidden;
-  height: fit-content;
-  background-color: var(--menu-color-0);
-  border-radius: 20px;
-  padding: 20px;
+	flex-shrink: 0;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	overflow-x: hidden;
+	height: fit-content;
+	background-color: var(--menu-color-0);
+	border-radius: 20px;
+	padding: 20px;
 }
 
 
 .theme-btn-container {
-  background-color: var(--menu-color-1);
-  margin: -20px;
-  padding: 20px;
-  border-radius: 20px;
+	background-color: var(--menu-color-1);
+	margin: -20px;
+	padding: 20px;
+	border-radius: 20px;
 }
 
 .little-box {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--little-box-gap);
-  background-color: var(--item-color);
-  padding: 20px;
-  border-radius: 20px;
-  height: fit-content;
-  overflow: hidden;
-  box-sizing: border-box;
-  min-height: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--little-box-gap);
+	background-color: var(--item-color);
+	padding: 20px;
+	border-radius: 20px;
+	height: fit-content;
+	overflow: hidden;
+	box-sizing: border-box;
+	min-height: 100%;
 }
 
 .little-box>img {
-  width: var(--little-box-image-size);
-  height: auto;
+	width: var(--little-box-image-size);
+	height: auto;
 }
 
 .little-box>div {
-  width: 100%;
+	width: 100%;
 }
 
 .little-box>div>h3,
 .little-box>div>h4 {
-  text-align: left;
-  margin: 0;
-  color: var(--text-color)
+	text-align: left;
+	margin: 0;
+	color: var(--text-color)
 }
 
 .little-box>div>h3 {
-  font-size: var(--little-box-title-size);
-  font-weight: 700;
+	font-size: var(--little-box-title-size);
+	font-weight: 700;
 }
 
 .little-box>div>h4 {
-  font-size: var(--little-box-subtitle-size);
-  font-weight: 500;
+	font-size: var(--little-box-subtitle-size);
+	font-weight: 500;
 }
 
 .little-box.disabled>div>h4 {
-  opacity: 0;
+	opacity: 0;
 }

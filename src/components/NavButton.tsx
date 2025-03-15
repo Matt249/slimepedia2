@@ -25,9 +25,7 @@ export const NavButton: React.FC<NavButtonProps> = ({
     useEffect(() => {
         setTiltingSafe(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : 'random');
     }, [tilting]);
-    if (selected) {
-        console.log('selected', name);
-    }
+
     const randomHandler = () => {
         switch (tiltingSafe) {
             case 'left':
