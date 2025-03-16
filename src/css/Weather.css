@@ -135,13 +135,20 @@
     width: auto;
     height: 5vh;
     transform: scale(1);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition:
+        transform var(--animation-speed) ease-in-out,
+        filter var(--animation-speed) ease-in-out;
     z-index: 10;
+}
+
+.music-player {
+    filter: grayscale(1)
 }
 
 .music-played,
 .top-buttons>div>img:hover {
     transform: scale(1.2);
+    filter: grayscale(0);
 }
 
 .weather-list>a {
@@ -161,7 +168,7 @@
         "icon title"
         "icon description"
         "icon pedia";
-    gap: 20px;
+    column-gap: 20px;
     color: white;
     transform: translateY(0);
     transition: transform var(--animation-speed) ease-in-out;
@@ -185,7 +192,7 @@
     transition: transform var(--animation-speed) ease-in-out;
 }
 
-.weather-content-hidden  {
+.weather-content-hidden {
     transform: translateY(calc(100% + 20px));
 }
 

@@ -58,10 +58,10 @@ export const Weather: React.FC = () => {
     return (
         <div>
             <div className="top-buttons">
-                {weatherList[weather][7] && <audio ref={weatherMusicRef} src={mediaFetcher(`music/${weather}.ogg`)} />}
+                <audio ref={weatherMusicRef} src={mediaFetcher(`music/${weatherList[weather][7] ? weather : 'fields-day-theme'}.ogg`)} />
                 <div>
                     <img src={mediaFetcher('misc/mapCursor.png')} onClick={() => setPanel(!panel)} />
-                    {weatherList[weather][7] && weatherMusicRef.current && <img src={mediaFetcher('misc/audio.png')} className={weatherMusicRef.current!.paused ? '' : 'music-played'} onClick={() => handleMusicPlay()} />}
+                    {weatherList[weather][7] && weatherMusicRef.current && <img src={mediaFetcher('misc/audio.png')} className={'music-player' + weatherMusicRef.current!.paused ? '' : ' music-played'} onClick={() => handleMusicPlay()} />}
                 </div>
             </div>
 
@@ -78,10 +78,11 @@ export const Weather: React.FC = () => {
                         <video
                             ref={(el) => (videoRefs.current[weatherName] = el)}
                             className={`video-${weatherName}`}
-                            src={mediaFetcher(`videos/${weatherList[weatherName][1]}.webm`)}
+                            src={mediaFetcher(`videos/${weatherList[weatherName][1]}.light.webm`)}
                             muted
                             loop
                             disablePictureInPicture
+                            autoPlay={weatherName === weather}
                         />
                         <div className="weather-element-title"><h1>{weatherList[weatherName][0]}</h1></div>
                     </NavLink>

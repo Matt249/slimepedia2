@@ -250,13 +250,23 @@
 
 .region-music-player>div>img.music-element-icon {
     transform: scale(.8) translateY(-5%);
+    filter: grayscale(1);
     cursor: var(--pointer-style);
-    transition: transform var(--animation-speed) ease-in-out var(--animation-speed);
+    transition:
+        transform var(--animation-speed) ease-in-out var(--animation-speed),
+        filter var(--animation-speed) ease-in-out;
 }
 
 .region-music-player>div>img.music-element-icon.music-current,
 .region-music-player>div>img.music-element-icon:hover {
     transform: scale(1) translateY(-10%);
+    transition:
+        transform var(--animation-speed) ease-in-out 0s,
+        filter var(--animation-speed) ease-in-out;
+}
+
+.region-music-player>div>img.music-element-icon.music-current {
+    filter: grayscale(0);
 }
 
 .music-player-icon {
