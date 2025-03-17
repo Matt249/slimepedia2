@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import '../css/Weather.css';
 import { weatherList, weatherName, weatherPedia, weatherSpawn } from "../text/weather";
 import { mediaFetcher } from "../media-manager";
@@ -12,12 +12,6 @@ export const Weather: React.FC = () => {
     const backgroundVideoRef = useRef<HTMLVideoElement>(null);
     const { weather } = useParams<{ weather: string }>();
     const weatherMusicRef = useRef<HTMLAudioElement>(null);
-
-    useEffect(() => {
-        if (weatherMusicRef.current) {
-            console.log("Audio ref updated:", weatherMusicRef.current);
-        }
-    }, [weather]);
 
     const handleMouseEnter = (weather: string) => {
         if (videoRefs.current[weather])
@@ -44,7 +38,6 @@ export const Weather: React.FC = () => {
     };
 
     const handleMusicPlay = () => {
-        console.log(weatherMusicRef.current);
         if (weatherMusicRef.current) {
             if (weatherMusicRef.current.paused) {
                 weatherMusicRef.current.volume = 0.1;
