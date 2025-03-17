@@ -11,6 +11,7 @@ export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
 
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+
     useEffect(() => {
         const rootElement = document.querySelector(':root') as HTMLElement | null;
         if (rootElement) {
@@ -25,7 +26,15 @@ export const NavBar = () => {
         }
         document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
         localStorage.setItem('darkMode', darkMode.toString());
+        window.dispatchEvent(new Event('darkModeChange'));
     }, [darkMode]);
+
+    const toggleDarkMode = () => {
+        const newDarkMode = !darkMode;
+        setDarkMode(newDarkMode);
+        localStorage.setItem('darkMode', newDarkMode.toString());
+        window.dispatchEvent(new Event('darkModeChange'));
+    };
 
     return (
         <nav className="box-layout">
@@ -71,8 +80,10 @@ export const NavBar = () => {
             </NavLink>
 
             <div className="theme-btn-container">
-                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} size={navBtnSize} action={() => setDarkMode(!darkMode)} tilting="random" selected={false} />
+                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} size={navBtnSize} action={toggleDarkMode} tilting="random" selected={false} />
             </div>
         </nav>
     );
 }
+
+export default NavBar;
