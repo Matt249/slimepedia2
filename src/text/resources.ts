@@ -1,26 +1,27 @@
 export const resourcesNames: string[] = [
+    'primordy',
     'brine',
     'sand',
     'lava',
-    'primordy',
+    'wax',
+    'honey',
     'jelly',
     'radiant',
     'diamond',
-    'wax',
-    'honey',
     'fossil',
     'snowflake',
     'sunsap',
-    'aqua',
-    'petal',
-    'magma',
-    'blackindigo',
-    'dream',
-    'royal',
-    'prisma',
-    'drift',
+    'mote',
     'glass',
-    'mote'
+    'drift',
+    'magma',
+    'aqua',
+    'dream',
+    'petal',
+    'blackindigo',
+    'royal',
+    'snowball',
+    'prisma',
 ];
 
 export const resourcesList: { [key: string]: [string, string[]] } = {
@@ -46,6 +47,7 @@ export const resourcesList: { [key: string]: [string, string[]] } = {
     'drift': ['Drift Crystal', ['ws']],
     'glass': ['Storm Glass', ['ls']],
     'mote': ['Lightning Mote', ['ls']],
+    'snowball': ['Snowball', ['pb']],
 };
 
 export const resPedia: { [key: string]: [string, string] } = {
@@ -136,5 +138,9 @@ export const resPedia: { [key: string]: [string, string] } = {
     'prisma': [
         'Prismatic plorts of possibilities with a purpose.', 
         'Unlike other objects affected by prisma disruptions, these plorts appear to be especially sensitive to the temporal distortions that appear throughout the Grey Labyrinth. The ancient beings that created the Grey Labyrinth seem to have had a special use in mind for these plorts when they designed the megastructure. Perhaps the plorts themselves are the key to delving further into the structure\'s mysteries?'
+    ],
+    'snowball': [
+        'Slime-approved way to have fun and chill out.',
+        'Curiously, snowballs can be found fully formed in neat piles within frigid regions of the Far, Far Range. While it is unknown how or why these piles were formed, all signed point towards a symbiotic relationship between slimes and things that are a super fun, awesome time in snow. Nature is truly magical.'
     ],
 };

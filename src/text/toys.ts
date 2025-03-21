@@ -1,13 +1,13 @@
 export const toyNames: string[] = [
     'ball',
+    'bomb',
     'bouncy',
-    'yarn',
+    'moon',
+    'worm',
     'puffer',
+    'yarn',
     'duck',
     'trash',
-    'worm',
-    'moon',
-    'bomb',
     'fox'
 ]
 

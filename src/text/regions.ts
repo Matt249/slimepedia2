@@ -1,5 +1,5 @@
 export const regionsIds = ['fields', 'strand', 'valley', 'bluffs', 'labyrinth', 'sea'];
-export const ranchIds = ['conservatory', 'den', 'gully', 'archway', 'tidepools', 'digsite'];
+export const ranchIds = ['conservatory', 'archway', 'den', 'gully', 'tidepools', 'digsite'];
 export const RegAndRanchIds = regionsIds.concat(ranchIds);
 
 export const regionInfos: {[key: string]: [string, string, string, string, string, number, number, number]} = {
@@ -9,7 +9,7 @@ export const regionInfos: {[key: string]: [string, string, string, string, strin
     'valley': ['Ember Valley', 'valley', 'ev', 'The ancient world stirs beneath your feet with every step.', 'ev', 33, 0, 0],
     'bluffs': ['Powderfall Bluffs', 'bluffs', 'pb', 'A lost era echoing trough halls of shimmering ice.', 'pb', 23, 0, 0],
     'conservatory': ['The Conservatory', 'conservatory', 'co', 'Your gateway to a prismatic paradise.', 'co', 0, 8, 0],
-    'labyrinth': ['Grey Labyrinth', 'labyrinth', 'gl', 'An imposing layer cake whose depths hide ancient, prismatic secrets.', 'gl', 19, 0, 0],
+    'labyrinth': ['The Grey Labyrinth', 'labyrinth', 'gl', 'An imposing layer cake whose depths hide ancient, prismatic secrets.', 'gl', 19, 0, 0],
     'den': ['The Den', 'den', 'td', 'This dark, damp, mushroom-covered expansion to the conservatory is a refuge from the sun for slimes and ranchers alike.', 'co', 1, 5, 1800],
     'gully': ['The Gully', 'gully', 'gu', 'This expansion to the Conservatory is surrounded by tall rock formations and covered in amber grass.', 'gu', 1, 5, 1800],
     'archway': ['The Archway', 'archway', 'ar', 'An expansion to the conservatory set amongst ancient ruins and fields of rainbow grass.', 'ar', 1, 5, 1800],
