@@ -10,6 +10,7 @@ interface NavButtonProps {
     action?: () => void;
     selected?: boolean;
     tilting?: string;
+    visible?: boolean;
 }
 
 export const NavButton: React.FC<NavButtonProps> = ({
@@ -18,7 +19,8 @@ export const NavButton: React.FC<NavButtonProps> = ({
     size = 100,
     action = () => { },
     selected = false,
-    tilting = "random"
+    tilting = "random",
+    visible = true
 }) => {
     const [tiltingSafe, setTiltingSafe] = useState(['left', 'none', 'right', 'random'].includes(tilting) ? tilting : 'random');
 
@@ -45,7 +47,7 @@ export const NavButton: React.FC<NavButtonProps> = ({
             className={"button" + (selected ? " btn-selected" : "")}
             onClick={action}
             onMouseLeave={() => setRandomNumber(randomHandler())}
-            style={{ '--btn-size': `${size}px` } as React.CSSProperties}
+            style={{ '--btn-size': `${size}px`, visibility: visible ? 'shown' : 'hidden' } as React.CSSProperties}
         >
             <div className='image-frame'>
                 <img src={mediaFetcher(icon + '.png')} alt={name} className={'image-button img-btn-' + randomNumber} />

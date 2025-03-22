@@ -603,6 +603,7 @@
     overflow-y: auto;
     background-color: var(--menu-color-1);
     border-radius: 20px;
+    width: fit-content;
 }
 
 .blueprint-list>a {
@@ -634,11 +635,12 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    gap: 0;
     align-items: stretch;
+    gap: 0;
     padding: 0;
     margin: 0;
     overflow: hidden;
+    width: fit-content;
 }
 
 .decoration-tabs {
@@ -649,6 +651,7 @@
     overflow-y: hidden;
     gap: 10px;
     border-radius: 10px 10px 0 0;
+    width: 100%;
 }
 
 .decoration-tabs>div {

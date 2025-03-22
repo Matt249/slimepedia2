@@ -73,7 +73,7 @@ export const NavBar = () => {
                     <NavButton name="Blueprints" icon="misc/blueprint" size={navBtnSize} tilting="none" selected={isActive} />
                 )}
             </NavLink>
-            <NavLink style={noLink} to="/buildings/corral">
+            <NavLink style={noLink} to="/buildings">
                 {({ isActive }) => (
                     <NavButton name="Buildings" icon="misc/patch" size={navBtnSize} tilting="none" selected={isActive} />
                 )}

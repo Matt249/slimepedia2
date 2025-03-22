@@ -14,9 +14,6 @@
 	--main-menu-subtitle-size: 2em;
 	--pointer-style: pointer;
 	--paragraph-size: 1.5em;
-	--little-box-title-size: 1.2em;
-	--little-box-subtitle-size: 1em;
-	--little-box-image-size: 80%;
 	--little-box-gap: 10vw;
 	--animation-speed: .3s;
 	--link-color: #252466;
@@ -175,7 +172,7 @@ nav {
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--little-box-gap);
+	gap: 20px;
 	background-color: var(--item-color);
 	padding: 20px;
 	border-radius: 20px;
@@ -186,7 +183,7 @@ nav {
 }
 
 .little-box>img {
-	width: var(--little-box-image-size);
+	width: 5vh;
 	height: auto;
 }
 
@@ -202,12 +199,12 @@ nav {
 }
 
 .little-box>div>h3 {
-	font-size: var(--little-box-title-size);
+	font-size: 1.2em;
 	font-weight: 700;
 }
 
 .little-box>div>h4 {
-	font-size: var(--little-box-subtitle-size);
+	font-size: 1em;
 	font-weight: 500;
 }
 

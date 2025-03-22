@@ -36,7 +36,12 @@ export const Buildings = () => {
     }
     const upgradeList = () => {
         if (buildingUpgrades[activeBuilding].length === 0)
-            return <h2 className='no-upgrades'>No upgrades available for this building.</h2>;
+            return (
+                <>
+                    <NavButton icon='misc/upgrade' name='Upgrade' size={wideScreen ? 100 : 75} selected={false} tilting='none' visible={false} />
+                    <h2>No upgrades available for this building.</h2>
+                </>
+            );
         return buildingUpgrades[activeBuilding].map((upgrade, index) => {
             return (
                 <NavLink key={index} to={`/buildings/${activeBuilding}/${upgrade[0]}`} style={linkStyle}>
@@ -79,7 +84,7 @@ export const Buildings = () => {
             );
         }
         if (!upgrade)
-            return <Navigate to='/buildings/' />;
+            return <Navigate to='/buildings/corral' />;
         return (
             <div className='upgrade-infos upgrade-infos-available'>
                 <div className='upgrade-title'>
