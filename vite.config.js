@@ -11,11 +11,6 @@ export default defineConfig({
   build: {
     outDir: process.env.VITE_BUILD_PATH || 'dist',
   },
-/*   resolve: {
-    alias: {
-      '@': path.resolve(path.dirname(import.meta.url), './src'),
-    },
-  }, */
   server: {
     port: 3000
   },
