@@ -1,8 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { spawnLocationsList } from '../text/regions';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
-import React from 'react';
 import '../css/Biomes.css';
 import { weatherID } from '../text/weather';
 
@@ -36,7 +35,7 @@ export const Biomes: React.FC<BiomesProps> = ({
                 {spawnList.map((biome, index) => {
                     return (biomeBlacklist.includes(biome) ?
                         <div
-                            key={index}
+                            key={biome}
                             className="biome-item biome-item-hover"
                             onMouseEnter={() => {
                                 const videoRef = videoRefs.current[index];
@@ -82,9 +81,9 @@ export const Biomes: React.FC<BiomesProps> = ({
                             </div>
                         </div>
                         :
-                        <NavLink key={index} to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`} style={{ textDecoration: 'none' }}>
+                        <NavLink key={biome} to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`} style={{ textDecoration: 'none' }}>
                             <div
-                                key={index}
+                                key={biome}
                                 className="biome-item biome-item-hover"
                                 onMouseEnter={() => {
                                     const videoRef = videoRefs.current[index];

@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { slimeNames } from './text/slimes.js';
 import { mediaFetcher } from './media-manager.js';
-import React from 'react';
 import Routes from './routes/index.jsx';
 import './css/App.css';
 
