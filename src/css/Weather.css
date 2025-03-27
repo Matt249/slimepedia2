@@ -2,18 +2,18 @@
 .weather-info {
     margin: 0;
     background-color: var(--menu-color-1);
-    border-radius: 20px;
-    padding: 20px;
+    border-radius: var(--border-size);
+    padding: var(--border-size);
 }
 
 .weather-list {
-    padding: 20px;
+    padding: var(--border-size);
     flex: 0 0 auto;
     aspect-ratio: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px;
+    gap: var(--border-size);
     overflow: clip;
 }
 
@@ -24,7 +24,7 @@
 .weather-element {
     position: relative;
     background-color: var(--item-color);
-    border-radius: 20px;
+    border-radius: var(--border-size);
     overflow: clip;
     z-index: 3;
 }
@@ -40,10 +40,10 @@
     width: 100%;
     padding: 5px 0;
     background-color: var(--item-color);
-    border-radius: 20px 20px 0 0;
+    border-radius: var(--border-size) var(--border-size) 0 0;
     transform: translateY(0);
     transform-origin: top;
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
     z-index: 3;
 }
 
@@ -65,7 +65,7 @@
     height: 70%;
     transform: translate(-50%, -50%) scale(1);
     transform-origin: center;
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .weather-element.selected>img,
@@ -90,8 +90,8 @@
     transform: translate(-50%, -50%) scale(1);
     transform-origin: center;
     transition:
-        filter var(--animation-speed) ease-in-out,
-        transform var(--animation-speed) ease-in-out;
+        filter var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .weather-element.selected>video,
@@ -103,13 +103,15 @@
 .weather-info {
     grid-area: main;
     position: relative;
-    border-radius: 20px;
-    padding: 20px;
-    gap: 20px;
+    border-radius: var(--border-size);
+    padding: var(--border-size);
+    gap: var(--border-size);
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
-    grid-template-areas: "title" "content";
+    grid-template-areas:
+        "title"
+        "content";
     overflow: hidden;
 }
 
@@ -117,7 +119,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: calc(1vh + 20px);
+    padding: calc(1vh + var(--border-size));
     width: fit-content;
     height: fit-content;
 }
@@ -136,8 +138,8 @@
     height: 5vh;
     transform: scale(1);
     transition:
-        transform var(--animation-speed) ease-in-out,
-        filter var(--animation-speed) ease-in-out;
+        transform var(--animation-speed) var(--animation-function),
+        filter var(--animation-speed) var(--animation-function);
     z-index: 10;
 }
 
@@ -168,14 +170,14 @@
         "icon title"
         "icon description"
         "icon pedia";
-    column-gap: 20px;
+    column-gap: var(--border-size);
     color: white;
     transform: translateY(0);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .weather-title-hidden {
-    transform: translateY(calc(-100% - 20px));
+    transform: translateY(calc(-100% - var(--border-size)));
 }
 
 .weather-info-content {
@@ -183,17 +185,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
     grid-template-rows: 1fr 1fr;
-    gap: 20px;
+    gap: var(--border-size);
     grid-template-areas:
         "effects effects spawn"
         "slimes related spawn";
     overflow: hidden;
     transform: translateY(0);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .weather-content-hidden {
-    transform: translateY(calc(100% + 20px));
+    transform: translateY(calc(100% + var(--border-size)));
 }
 
 .weather-info>video {
@@ -242,7 +244,7 @@
 }
 
 .weather-box {
-    padding-top: calc(var(--ranch-pedia-size) + 20px);
+    padding-top: calc(var(--ranch-pedia-size) + var(--border-size));
     position: relative;
     display: flex;
     flex-flow: row nowrap;
@@ -250,7 +252,7 @@
     align-items: center;
     justify-content: center;
     background-color: var(--item-color);
-    border-radius: 20px;
+    border-radius: var(--border-size);
 }
 
 .weather-box-title {
@@ -269,7 +271,7 @@
     height: 8vh;
     object-fit: cover;
     transform: scale(1.3);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .weather-box>a:hover>img {
@@ -285,7 +287,7 @@
     grid-area: slimes;
     display: flex;
     flex-flow: row nowrap;
-    gap: 20px;
+    gap: var(--border-size);
     align-items: center;
     justify-content: center;
     overflow: hidden;

@@ -1,7 +1,7 @@
 .region-menu {
   height: 100%;
   padding: 0;
-  border-radius: 20px;
+  border-radius: var(--border-size);
   position: relative;
   background-color: #1084B2;
 }

@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
 import { buildingNames, buildingList, buildingUpgrades, usageList } from '../text/buildings';
 import { mediaFetcher } from '../media-manager';
@@ -26,7 +25,7 @@ export const Buildings = () => {
                     <NavButton
                         icon={'buildings/' + building}
                         name={buildingList[building][0]}
-                        size={wideScreen ? 150 : 100}
+                        size={1.25}
                         selected={building[0] === activeBuilding}
                         tilting='none'
                     />
@@ -38,7 +37,7 @@ export const Buildings = () => {
         if (buildingUpgrades[activeBuilding].length === 0)
             return (
                 <>
-                    <NavButton icon='misc/upgrade' name='Upgrade' size={wideScreen ? 100 : 75} selected={false} tilting='none' visible={false} />
+                    <NavButton icon='misc/upgrade' name='Upgrade' size={.8} selected={false} tilting='none' visible={false} />
                     <h2>No upgrades available for this building.</h2>
                 </>
             );
@@ -49,7 +48,7 @@ export const Buildings = () => {
                         key={index}
                         icon={'buildings/' + upgrade[0]}
                         name={upgrade[1]}
-                        size={wideScreen ? 100 : 75}
+                        size={.8}
                         selected={upgrade[0] === currentUpgrade}
                         tilting='none'
                     />
@@ -57,19 +56,7 @@ export const Buildings = () => {
             )
         });
     }
-    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
-    useEffect(() => {
-        const handleResize = () => {
-            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
-        };
 
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
     const upgradeInfo = () => {
         const upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
         if (!currentUpgrade) {

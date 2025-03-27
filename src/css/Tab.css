@@ -10,12 +10,12 @@
 
 .tab {
     position: relative;
-    padding: 10px 20px;
+    padding: calc(var(--border-size) / 2) var(--border-size);
     transition:
-        background-color var(--animation-speed) ease-in-out,
-        border-radius var(--animation-speed) ease-in-out,
-        margin var(--animation-speed) ease-in-out,
-        padding var(--animation-speed) ease-in-out;
+        background-color var(--animation-speed) var(--animation-function),
+        border-radius var(--animation-speed) var(--animation-function),
+        margin var(--animation-speed) var(--animation-function),
+        padding var(--animation-speed) var(--animation-function);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     cursor: var(--pointer-style);
@@ -37,7 +37,7 @@
 }
 
 .selected-tab {
-    padding-bottom: 20px;
+    padding-bottom: var(--border-size);
     margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -52,7 +52,7 @@
     width: auto;
     height: 100%;
     transform: scale(1);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
     flex: 1 1 auto;
 }
 
@@ -68,22 +68,13 @@
     font-size: var(--small-text-size);
 }
 
-.left-corner,
-.right-corner {
-    position: absolute;
-    bottom: 0;
-    width: 20px;
-    height: 20px;
-    background-color: var(--menu-color-1);
-}
-
 .left-corner {
-    left: -20px;
+    left: calc(-1 * var(--border-size));
     clip-path: polygon(0 100%, 100% 0, 100% 100%);
 }
 
 .right-corner {
-    right: -20px;
+    right: calc(-1 * var(--border-size));
     clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
 
@@ -93,24 +84,31 @@
     height: 100%;
     background-color: var(--menu-color-0);
     transition:
-        border-radius var(--animation-speed) ease-in-out,
-        background-color var(--animation-speed) ease-in-out;
+        border-radius var(--animation-speed) var(--animation-function),
+        background-color var(--animation-speed) var(--animation-function);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
 
 .selected-tab>div {
-    height: 20px;
+    position: absolute;
+    bottom: 0;
+    width: var(--border-size);
+    height: var(--border-size);
+    transition:
+        height var(--animation-speed) var(--animation-function),
+        background-color var(--animation-speed) var(--animation-function);
+    background-color: var(--menu-color-1);
 }
 
 .selected-tab>.left-corner>div {
-    border-bottom-right-radius: 20px;
+    border-bottom-right-radius: var(--border-size);
 }
 
 .selected-tab>.right-corner>div {
-    border-bottom-left-radius: 20px;
+    border-bottom-left-radius: var(--border-size);
 }
 
 .tab.tab:not(.selected-tab)>div {
-    width: 0;
+    height: 0;
 }

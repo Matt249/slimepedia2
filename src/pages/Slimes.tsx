@@ -32,9 +32,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                         <h2>Click on a slime on the list to get their information</h2>
                     </div>
                     <div className='image-container'>
-                        <img alt='No slime selected' className='img-main disabled' />
                     </div>
-                    <img alt='No slime selected' className='img-plort disabled' />
                 </div>
                 <div className='little-box box-food disabled'>
                     <img src={foodAnyImg} alt='No slime selected' />
@@ -191,20 +189,6 @@ export const Slimes = () => {
     const currentSlimeList = slime === null ? null : slimesList[slime];
     const slimepediaEntry: [string, string, string] = useMemo(() => slime === null ? ['', '', ''] : slimepedia[slime] as [string, string, string], [slime]);
 
-    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
-    useEffect(() => {
-        const handleResize = () => {
-            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
     if (slimeName && !slimeNames.includes(slimeName)) {
         return (
             <Navigate to='/slimes/pink' />
@@ -219,7 +203,7 @@ export const Slimes = () => {
                         <NavButton
                             key={slimeName}
                             icon={`slimes/${slimeName}`}
-                            size={wideScreen ? 125 : 100}
+                            size={1.25}
                             name={slimesList[slimeName][0]}
                             selected={slimeName === slime}
                         />
@@ -227,7 +211,7 @@ export const Slimes = () => {
                 ))}
             </div>
             <div className='slime-presentation box-layout-secondary'>
-                <div className={'slime-infos' + (topBtn ? ' hidden-infos' : '')}>
+                <div className={'pedia-infos slime-infos' + (topBtn ? ' hidden-infos' : '')}>
                     <SlimeDetails currentSlimeList={currentSlimeList} selectedSlime={slime} />
                 </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>

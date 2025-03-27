@@ -3,7 +3,7 @@
     --special-size: 1em;
     --region-pedia-size: 1.2em;
     --ranch-pedia-size: 1.5em;
-    --special-margin: 20px 0 0 0;
+    --special-margin: var(--border-size) 0 0 0;
 }
 
 @media (min-width: 2000px) {
@@ -40,7 +40,7 @@
 .regions-list {
     flex: 1;
     background-color: var(--menu-color-1);
-    padding: 20px;
+    padding: var(--border-size);
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -54,8 +54,8 @@
     align-items: center;
     gap: 1vw;
     overflow: hidden;
-    padding: 10px 20px;
-    border-radius: 20px;
+    padding: 10px var(--border-size);
+    border-radius: var(--border-size);
     min-width: 20vw;
     cursor: var(--pointer-style);
 }
@@ -80,8 +80,8 @@
     transform: translate(-50%, -50%) scale(1.2);
     filter: opacity(0) blur(10px);
     transition:
-        filter var(--animation-speed) ease-in-out,
-        transform var(--animation-speed) ease-in-out;
+        filter var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .region-tab.region-selected>.region-video,
@@ -94,7 +94,7 @@
     width: auto;
     height: 90%;
     transform: scale(1);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .region-tab.region-selected>.region-icon,
@@ -107,8 +107,8 @@
     color: var(--text-color);
     text-shadow: none;
     transition:
-        color var(--animation-speed) ease-in-out,
-        text-shadow var(--animation-speed) ease-in-out;
+        color var(--animation-speed) var(--animation-function),
+        text-shadow var(--animation-speed) var(--animation-function);
 }
 
 
@@ -129,7 +129,7 @@
     position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
-    border-radius: 20px;
+    border-radius: var(--border-size);
 }
 
 .region-presentation>div:not(.region-background) {
@@ -183,7 +183,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    margin: 20px;
+    margin: var(--border-size);
     padding-right: 70px;
     max-width: calc(100% - 40px);
     width: auto;
@@ -196,12 +196,12 @@
     flex-flow: row-reverse nowrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px;
+    gap: var(--border-size);
     box-sizing: border-box;
     transition:
-        max-width var(--animation-speed) ease-in-out 0s,
-        padding var(--animation-speed) ease-in-out 0s,
-        aspect-ratio var(--animation-speed) ease-in-out var(--animation-speed);
+        max-width var(--animation-speed) var(--animation-function) 0s,
+        padding var(--animation-speed) var(--animation-function) 0s,
+        aspect-ratio var(--animation-speed) var(--animation-function) var(--animation-speed);
 
 }
 
@@ -210,9 +210,9 @@
     padding-right: 0;
     overflow: hidden;
     transition:
-        max-width var(--animation-speed) ease-in-out var(--animation-speed),
-        padding var(--animation-speed) ease-in-out var(--animation-speed),
-        aspect-ratio var(--animation-speed) ease-in-out 0s;
+        max-width var(--animation-speed) var(--animation-function) var(--animation-speed),
+        padding var(--animation-speed) var(--animation-function) var(--animation-speed),
+        aspect-ratio var(--animation-speed) var(--animation-function) 0s;
 }
 
 .region-music-player>div {
@@ -222,18 +222,18 @@
     gap: 10px;
     border-radius: 50px;
     padding: 0 10px;
-    transition: background-color var(--animation-speed) ease-in-out var(--animation-speed);
+    transition: background-color var(--animation-speed) var(--animation-function) var(--animation-speed);
 }
 
 .region-music-player.disabled>div {
     background-color: #0000;
-    transition: background-color var(--animation-speed) ease-in-out 0s;
+    transition: background-color var(--animation-speed) var(--animation-function) 0s;
 }
 
 .region-music-player.disabled>div>img.music-time,
 .region-music-player.disabled>div>img.music-element-icon {
     transform: scale(0);
-    transition: transform var(--animation-speed) ease-in-out 0s;
+    transition: transform var(--animation-speed) var(--animation-function) 0s;
 }
 
 .region-music-player>img,
@@ -241,7 +241,7 @@
     width: auto;
     height: 100%;
     transform: scale(.6);
-    transition: transform var(--animation-speed) ease-in-out var(--animation-speed);
+    transition: transform var(--animation-speed) var(--animation-function) var(--animation-speed);
 }
 
 .region-music-player>div {
@@ -253,16 +253,16 @@
     filter: grayscale(1);
     cursor: var(--pointer-style);
     transition:
-        transform var(--animation-speed) ease-in-out var(--animation-speed),
-        filter var(--animation-speed) ease-in-out;
+        transform var(--animation-speed) var(--animation-function) var(--animation-speed),
+        filter var(--animation-speed) var(--animation-function);
 }
 
 .region-music-player>div>img.music-element-icon.music-current,
 .region-music-player>div>img.music-element-icon:hover {
     transform: scale(1) translateY(-10%);
     transition:
-        transform var(--animation-speed) ease-in-out 0s,
-        filter var(--animation-speed) ease-in-out;
+        transform var(--animation-speed) var(--animation-function) 0s,
+        filter var(--animation-speed) var(--animation-function);
 }
 
 .region-music-player>div>img.music-element-icon.music-current {
@@ -276,7 +276,7 @@
     height: 50px;
     transform: scale(.6);
     cursor: var(--pointer-style);
-    transition: transform var(--animation-speed) ease-in-out 0s;
+    transition: transform var(--animation-speed) var(--animation-function) 0s;
 }
 
 .music-player-icon:hover {
@@ -312,7 +312,7 @@
     transform: translate(-50%, -50%);
     width: 100%;
     height: auto;
-    padding: 20px 0;
+    padding: var(--border-size) 0;
 }
 
 .region-main-page>img {
@@ -329,7 +329,7 @@
 
 .region-main-page>h1 {
     font-size: var(--main-menu-title-size);
-    margin: 20px 0 10px 0;
+    margin: var(--border-size) 0 10px 0;
 }
 
 .region-main-page>h2 {
@@ -362,12 +362,12 @@
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: minmax(auto, 5fr) minmax(auto, 1fr) minmax(auto, 1fr);
     grid-template-areas:
-        'pedia     slimes    food'
-        'pedia     connections    connections'
+        'pedia slimes food'
+        'pedia connections connections'
         'resources resources pods'
     ;
-    gap: 20px;
-    padding: 20px;
+    gap: var(--border-size);
+    padding: var(--border-size);
     box-sizing: border-box;
     height: 0;
     min-height: 100%;
@@ -380,7 +380,7 @@
     background-color: var(--menu-color-1);
     color: var(--text-color);
     padding: calc(var(--ranch-pedia-size) + 1vh) 1vw 1vh 1vw;
-    border-radius: 20px;
+    border-radius: var(--border-size);
 }
 
 .region-element {
@@ -393,7 +393,7 @@
 .region-element>img {
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: var(--border-size);
     object-fit: contain;
 }
 
@@ -418,7 +418,7 @@
 .region-pedia>p>span {
     font-size: var(--region-pedia-size);
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: var(--border-size);
 }
 
 .ranch-pedia>p>span:last-child,
@@ -474,7 +474,7 @@
 
 .region-element-content>img {
     transform: scale(.9);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .region-element-content:hover>img {
@@ -505,7 +505,7 @@
     width: auto;
     height: calc(var(--element-size) * .7);
     transform: scale(1);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .region-connections>div>img:hover:not(.no-hover),
@@ -552,7 +552,7 @@
     height: var(--element-size);
     width: auto;
     transform: scale(.9);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .region-element-resource:hover>img {
@@ -585,8 +585,8 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-auto-rows: 1fr;
-    gap: 20px;
-    padding: 20px;
+    gap: var(--border-size);
+    padding: var(--border-size);
     box-sizing: border-box;
     height: 0;
     min-height: 100%;
@@ -678,7 +678,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
-    padding: 30px 10px 20px 10px;
+    padding: 30px 10px var(--border-size) 10px;
 }
 
 .ranch-description>.ranch-special-feature {
@@ -702,7 +702,7 @@
     width: calc(var(--element-size) * .8);
     height: auto;
     transform: scale(var(--special-img-scale));
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .ranch-special-feature>h3 {
@@ -727,7 +727,7 @@
 .ranch-pedia>p>span {
     font-size: var(--region-pedia-size);
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: var(--border-size);
     padding: 0;
 }
 

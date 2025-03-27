@@ -7,7 +7,6 @@ import houseNight from '../assets/wallpapers/houseNight.png';
 import { mediaFetcher } from "../media-manager";
 
 export const NavBar = () => {
-    const navBtnSize = undefined; //100;
     const noLink = { textDecoration: 'none' };
 
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
@@ -40,47 +39,47 @@ export const NavBar = () => {
         <nav className="box-layout">
             <NavLink style={noLink} to="/slimes">
                 {({ isActive }) => (
-                    <NavButton name="Slimes" icon="slimes/pink" size={navBtnSize} tilting="left" selected={isActive} />
+                    <NavButton name="Slimes" icon="slimes/pink" tilting="left" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/food">
                 {({ isActive }) => (
-                    <NavButton name="Food" icon="food/food" size={navBtnSize} tilting="right" selected={isActive} />
+                    <NavButton name="Food" icon="food/food" tilting="right" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/items">
                 {({ isActive }) => (
-                    <NavButton name="Items" icon="misc/res" size={navBtnSize} tilting="left" selected={isActive} />
+                    <NavButton name="Items" icon="misc/res" tilting="left" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/map">
                 {({ isActive }) => (
-                    <NavButton name="Interactive Map" icon="misc/map" size={navBtnSize} tilting="none" selected={isActive} />
+                    <NavButton name="Interactive Map" icon="misc/map" tilting="none" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/regions/fields">
                 {({ isActive }) => (
-                    <NavButton name="Regions" icon="misc/world" size={navBtnSize} tilting="left" selected={isActive} />
+                    <NavButton name="Regions" icon="misc/world" tilting="left" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/weather">
                 {({ isActive }) => (
-                    <NavButton name="Weather" icon="misc/weather" size={navBtnSize} tilting="none" selected={isActive} />
+                    <NavButton name="Weather" icon="misc/weather" tilting="none" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/blueprints">
                 {({ isActive }) => (
-                    <NavButton name="Blueprints" icon="misc/blueprint" size={navBtnSize} tilting="none" selected={isActive} />
+                    <NavButton name="Blueprints" icon="misc/blueprint" tilting="none" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/buildings">
                 {({ isActive }) => (
-                    <NavButton name="Buildings" icon="misc/patch" size={navBtnSize} tilting="none" selected={isActive} />
+                    <NavButton name="Buildings" icon="misc/patch" tilting="none" selected={isActive} />
                 )}
             </NavLink>
 
             <div className="theme-btn-container">
-                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} size={navBtnSize} action={toggleDarkMode} tilting="random" selected={false} />
+                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} action={toggleDarkMode} tilting="random" selected={false} />
             </div>
         </nav>
     );

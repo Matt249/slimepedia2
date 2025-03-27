@@ -12,7 +12,6 @@ interface BiomesProps {
     spawnList: string[];
 }
 
-
 export const Biomes: React.FC<BiomesProps> = ({
     spawnList = [],
 }) => {
@@ -24,6 +23,83 @@ export const Biomes: React.FC<BiomesProps> = ({
         videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || null);
     }, [spawnList]);
 
+    const renderBiomeItem = (biome: string, index: number) => {
+        const content = (
+            <>
+                <video
+                    ref={(el) => (videoRefs.current[index] = el)}
+                    className="biome-list-video"
+                    src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
+                    preload="auto"
+                    loop
+                    muted
+                    disablePictureInPicture
+                />
+                <div className="biome-list-overlay">
+                    <img
+                        className="biome-image"
+                        src={mediaFetcher(`world/${spawnLocationsList[biome][0]}.png`)}
+                        alt={spawnLocationsList[biome][1]}
+                    />
+                    <h4 className="biome-name">{spawnLocationsList[biome][1]}</h4>
+                </div>
+            </>
+        );
+
+        const handleMouseEnter = () => {
+            const videoRef = videoRefs.current[index];
+            if (videoRef) {
+                try {
+                    videoRef.play();
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        };
+
+        const handleMouseLeave = () => {
+            setTimeout(() => {
+                const videoRef = videoRefs.current[index];
+                if (videoRef) {
+                    try {
+                        videoRef.pause();
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+            }, animationDelay);
+        };
+
+        if (biomeBlacklist.includes(biome)) {
+            return (
+                <div
+                    key={biome}
+                    className="biome-item biome-item-hover"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    {content}
+                </div>
+            );
+        } else {
+            return (
+                <NavLink
+                    key={biome}
+                    to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`}
+                    style={{ textDecoration: 'none' }}
+                >
+                    <div
+                        className="biome-item biome-item-hover"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {content}
+                    </div>
+                </NavLink>
+            );
+        }
+    };
+
     return (
         <div className="spawn-list-container">
             <h3 className={listHovered ? 'hidden-title' : ''}>Found in</h3>
@@ -32,105 +108,7 @@ export const Biomes: React.FC<BiomesProps> = ({
                 onMouseEnter={() => setListHovered(true)}
                 onMouseLeave={() => setListHovered(false)}
             >
-                {spawnList.map((biome, index) => {
-                    return (biomeBlacklist.includes(biome) ?
-                        <div
-                            key={biome}
-                            className="biome-item biome-item-hover"
-                            onMouseEnter={() => {
-                                const videoRef = videoRefs.current[index];
-                                if (videoRef) {
-                                    try {
-                                        videoRef.play();
-                                    } catch (e) {
-                                        console.error(e);
-                                        console.error(videoRefs, index);
-                                    }
-                                }
-                            }}
-                            onMouseLeave={() => {
-                                setTimeout(() => {
-                                    const videoRef = videoRefs.current[index];
-                                    if (videoRef) {
-                                        try {
-                                            videoRef.pause();
-                                        } catch (e) {
-                                            console.error(e);
-                                            console.error(videoRefs, index);
-                                        }
-                                    }
-                                }, animationDelay); // Délai de 500 ms
-                            }}
-                        >
-                            <video
-                                ref={(el) => videoRefs.current[index] = el}
-                                className="biome-list-video"
-                                src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
-                                preload='auto'
-                                loop
-                                muted
-                                disablePictureInPicture
-                            />
-                            <div className='biome-list-overlay'>
-                                <img
-                                    className="biome-image"
-                                    src={mediaFetcher(`world/${spawnLocationsList[biome][0]}.png`)}
-                                    alt={spawnLocationsList[biome][1]}
-                                />
-                                <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>
-                            </div>
-                        </div>
-                        :
-                        <NavLink key={biome} to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`} style={{ textDecoration: 'none' }}>
-                            <div
-                                key={biome}
-                                className="biome-item biome-item-hover"
-                                onMouseEnter={() => {
-                                    const videoRef = videoRefs.current[index];
-                                    if (videoRef) {
-                                        try {
-                                            videoRef.play();
-                                        } catch (e) {
-                                            console.error(e);
-                                            console.error(videoRefs, index);
-                                        }
-                                    }
-                                }}
-                                onMouseLeave={() => {
-                                    setTimeout(() => {
-                                        const videoRef = videoRefs.current[index];
-                                        if (videoRef) {
-                                            try {
-                                                videoRef.pause();
-                                            } catch (e) {
-                                                console.error(e);
-                                                console.error(videoRefs, index);
-                                            }
-                                        }
-                                    }, 500); // Délai de 500 ms
-                                }}
-                            >
-                                <video
-                                    ref={(el) => videoRefs.current[index] = el}
-                                    className="biome-list-video"
-                                    src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
-                                    preload='auto'
-                                    loop
-                                    muted
-                                    disablePictureInPicture
-                                />
-                                <div className='biome-list-overlay'>
-                                    <img
-                                        className="biome-image"
-                                        src={mediaFetcher(`world/${spawnLocationsList[biome][0]}.png`)}
-                                        alt={spawnLocationsList[biome][1]}
-                                    />
-                                    <h4 className='biome-name'>{spawnLocationsList[biome][1]}</h4>
-                                </div>
-                            </div>
-                        </NavLink>
-                    )
-                })}
+                {spawnList.map((biome, index) => renderBiomeItem(biome, index))}
             </div>
         </div>
     );

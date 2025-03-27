@@ -4,7 +4,7 @@
 	--item-color: #D2B394;
 	--text-color: #000;
 	--background-color: var(--menu-color-0);
-	--text-shadow: 0px 0px 5px #000;
+	--text-shadow: 0 0 calc(var(--border-size) / 4) #000;
 	--element-size: 10vh;
 	--tab-font-size: 1.6em;
 	--small-text-size: 1.2em;
@@ -15,8 +15,10 @@
 	--pointer-style: pointer;
 	--paragraph-size: 1.5em;
 	--little-box-gap: 10vw;
-	--animation-speed: .3s;
+	--animation-speed: .3s; /* default: .3s */
 	--link-color: #252466;
+	--border-size: 1em;
+	--animation-function: ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,7 +33,7 @@ html {
 
 div,
 nav {
-	transition: background-color var(--animation-speed) ease-in-out;
+	transition: background-color var(--animation-speed) var(--animation-function);
 }
 
 h1,
@@ -43,7 +45,7 @@ h6,
 p,
 a,
 button {
-	transition: color var(--animation-speed) ease-in-out;
+	transition: color var(--animation-speed) var(--animation-function);
 	margin: 0;
 }
 
@@ -71,7 +73,7 @@ p {
 
 svg {
 	fill: var(--text-color);
-	transition: fill var(--animation-speed) ease-in-out;
+	transition: fill var(--animation-speed) var(--animation-function);
 }
 
 body {
@@ -93,14 +95,14 @@ body {
 	height: 100vh;
 	display: flex;
 	flex-flow: column nowrap;
-	gap: 20px;
-	padding: 20px;
+	gap: var(--border-size);
+	padding: var(--border-size);
 	box-sizing: border-box;
 	overflow: hidden;
 }
 
 .slimepedia-logo {
-	height: 350px;
+	height: 40vh;
 	pointer-events: none;
 }
 
@@ -111,11 +113,11 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-size: calc(10px + 2vmin);
+	font-size: var(--main-menu-subtitle-size);
 	color: white;
-	text-shadow: 0px -1px 4px rgba(0, 0, 0, 0.39);
+	text-shadow: var(--text-shadow);
 	overflow-y: hidden;
-	transition: height .5s ease-in-out;
+	transition: height .5s var(--animation-function);
 }
 
 .slimepedia-header>h1 {
@@ -130,7 +132,7 @@ body {
 	font-size: 1.5em;
 	color: rgb(107, 107, 255);
 	text-decoration: underline;
-	text-decoration-thickness: 2px;
+	text-decoration-thickness: .02lh;
 }
 
 .slimepedia-app>div:not(.pin-button) {
@@ -139,11 +141,11 @@ body {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: stretch;
-	gap: 20px;
+	gap: var(--border-size);
 	height: 100%;
 	background-color: var(--menu-color-0);
-	border-radius: 20px;
-	padding: 20px;
+	border-radius: var(--border-size);
+	padding: var(--border-size);
 	min-height: 0;
 }
 
@@ -155,16 +157,16 @@ nav {
 	overflow-x: hidden;
 	height: fit-content;
 	background-color: var(--menu-color-0);
-	border-radius: 20px;
-	padding: 20px;
+	border-radius: var(--border-size);
+	padding: var(--border-size);
 }
 
 
 .theme-btn-container {
 	background-color: var(--menu-color-1);
-	margin: -20px;
-	padding: 20px;
-	border-radius: 20px;
+	margin: calc(-1 * var(--border-size));
+	padding: var(--border-size);
+	border-radius: var(--border-size);
 }
 
 .little-box {
@@ -172,10 +174,10 @@ nav {
 	flex-flow: row nowrap;
 	align-items: center;
 	justify-content: space-between;
-	gap: 20px;
+	gap: var(--border-size);
 	background-color: var(--item-color);
-	padding: 20px;
-	border-radius: 20px;
+	padding: var(--border-size);
+	border-radius: var(--border-size);
 	height: fit-content;
 	overflow: hidden;
 	box-sizing: border-box;

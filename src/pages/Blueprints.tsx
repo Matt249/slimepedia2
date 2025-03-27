@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
 import { Minus } from '../components/Minus';
@@ -12,15 +12,13 @@ import {
     upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription,
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
-import useMediaQuery from '../useMediaQueries';
-import React from 'react';
-import upgradeImg from '/src/assets/misc/upgrade.png';
-import utilitiesImg from '/src/assets/misc/utilities.png';
-import warpImg from '/src/assets/misc/warp.png';
-import decorationsImg from '/src/assets/misc/decorations.png';
-import shopImg from '/src/assets/misc/shop.png';
-import trashImg from '/src/assets/misc/trash.png';
-import blueprintImg from '/src/assets/misc/blueprint.png';
+import upgradeImg from '../assets/misc/upgrade.png';
+import utilitiesImg from '../assets/misc/utilities.png';
+import warpImg from '../assets/misc/warp.png';
+import decorationsImg from '../assets/misc/decorations.png';
+import shopImg from '../assets/misc/shop.png';
+import trashImg from '../assets/misc/trash.png';
+import blueprintImg from '../assets/misc/blueprint.png';
 import '../css/Blueprints.css';
 import MemoXmark from '../components/Xmark';
 
@@ -251,7 +249,6 @@ const UpgradesPage: React.FC = () => {
 };
 
 const UtilitiesPage: React.FC = () => {
-    const isLargeScreen = useMediaQuery('(min-width: 2000px)');
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName || null;
     return (
@@ -259,7 +256,7 @@ const UtilitiesPage: React.FC = () => {
             <div className='blueprint-list'>
                 {utilitiesNames.map((utilitiesNames) => (
                     <NavLink key={utilitiesNames} to={`/blueprints/utilities/${utilitiesNames}`} className='blueprint-item'>
-                        <NavButton key={utilitiesNames} name={utilitiesList[utilitiesNames][0]} icon={`gadgets/${utilitiesNames}`} tilting='none' size={isLargeScreen ? 125 : 100} />
+                        <NavButton key={utilitiesNames} name={utilitiesList[utilitiesNames][0]} icon={`gadgets/${utilitiesNames}`} tilting='none' size={1.25} />
                     </NavLink>
                 ))}
             </div>
@@ -269,7 +266,6 @@ const UtilitiesPage: React.FC = () => {
 };
 
 const WarpPage: React.FC = () => {
-    const isLargeScreen = useMediaQuery('(min-width: 2000px)');
     const { blueprint: warpName } = useParams();
     const blueprint = warpName || null;
     return (
@@ -277,7 +273,7 @@ const WarpPage: React.FC = () => {
             <div className='blueprint-list'>
                 {warpNames.map((warpName) => (
                     <NavLink key={warpName} to={`/blueprints/warp/${warpName}`} className='blueprint-item'>
-                        <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} tilting='none' size={isLargeScreen ? 125 : 100} />
+                        <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} tilting='none' size={1.25} />
                     </NavLink>
                 ))}
             </div>
@@ -287,7 +283,6 @@ const WarpPage: React.FC = () => {
 };
 
 const DecorationsPage: React.FC = () => {
-    const isLargeScreen = useMediaQuery('(min-width: 2000px)');
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName || null
     const [decoFilter, setDecoFilter] = useState<string | null>(null);
@@ -303,7 +298,7 @@ const DecorationsPage: React.FC = () => {
                 <div className='blueprint-list'>
                     {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
                         <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='blueprint-item'>
-                            <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={isLargeScreen ? 125 : 100} />
+                            <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={1.25} />
                         </NavLink>
                     ))}
                 </div>

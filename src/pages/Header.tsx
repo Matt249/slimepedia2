@@ -29,8 +29,6 @@ export const Header: React.FC = () => {
         };
     }, []);
 
-    console.log('Header rendered', darkMode);
-
     return (
         <header className="slimepedia-header">
             <img src={darkMode ? phosphor : pink} className="slimepedia-logo" alt="Slime Logo" />

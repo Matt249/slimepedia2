@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { Tab } from '../components/Tab';
@@ -26,8 +25,6 @@ const matchMainList = (list: string) => {
 
 const matchInfosList = (list: string) => {
     switch (list) {
-        case 'resources':
-            return resourcesList;
         case 'toys':
             return toysList;
         default:
@@ -43,20 +40,6 @@ export const Items = () => {
     const item = (itemName && matchMainList(tab).includes(itemName)) ? itemName : matchMainList(tab)[0];
     const itemsNames = matchMainList(tab);
     const infosItems = matchInfosList(tab);
-
-    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
-    useEffect(() => {
-        const handleResize = () => {
-            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     if (itemName && !itemsNames.includes(itemName)) {
         return tab === 'toys' ? <Navigate to='/items/toys/ball' /> : <Navigate to='/items/resource/brine' />;
@@ -81,7 +64,7 @@ export const Items = () => {
                         />
                     </NavLink>
                 </div>
-                <div className='list-food' style={{ borderRadius: `${tab === firstOption ? '0' : '20px'} ${tab === lastOption ? ' 0 ' : '20px'} 20px 20px` }}>
+                <div className='list-food' style={{ borderRadius: `${tab === firstOption ? '0' : 'var(--border-size)'} ${tab === lastOption ? ' 0 ' : 'var(--border-size)'} var(--border-size) var(--border-size)` }}>
                     {itemsNames.map((itemName) => {
                         return (
                             <NavLink key={itemName} to={`/items/${tab}/${itemName}`} style={{ textDecoration: 'none' }}>
@@ -89,7 +72,7 @@ export const Items = () => {
                                     key={itemName}
                                     icon={tab + '/' + itemName}
                                     name={infosItems[itemName][0]}
-                                    size={wideScreen ? 125 : 100}
+                                    size={1.25}
                                     selected={itemName === item}
                                 />
                             </NavLink>

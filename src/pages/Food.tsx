@@ -57,20 +57,19 @@ const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
 
 interface FoodListProps {
     actualFoodList: string[];
-    wideScreen: boolean;
     food: string | null;
     filter: string;
 }
 
-const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, filter }) => (
-    <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : '20px'} ${filter === 'special' ? ' 0 ' : '20px'} 20px 20px` }}>
+const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => (
+    <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : 'var(--border-size)'} ${filter === 'special' ? ' 0 ' : 'var(--border-size)'} var(--border-size) var(--border-size)` }}>
         {actualFoodList.map((foodId) => (
             <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
                 <NavButton
                     key={foodId}
                     icon={`food/${foodId}`}
                     name={foodList[foodId][0]}
-                    size={wideScreen ? 125 : 100}
+                    size={1.25}
                     tilting={['ash', 'water'].includes(foodId) ? 'none' : 'random'}
                     selected={food === foodId}
                 />
@@ -81,21 +80,19 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, wideScreen, food, f
 
 interface FoodDetailsProps {
     food: string | null;
-    topBtn: boolean;
     setFilter: (filter: string) => void;
 }
 
-const FoodDetails: React.FC<FoodDetailsProps> = ({ food, topBtn, setFilter }) => {
+const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
     if (food === null)
         return (
-            <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
+            <>
                 <div className="image-title">
                     <div className="info-title">
                         <h1>Select food</h1>
                         <h2>Click on food to get it&apos;s information</h2>
                     </div>
                     <div className="image-container">
-                        <img />
                     </div>
                 </div>
                 <div className='little-box food-type disabled'>
@@ -113,7 +110,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, topBtn, setFilter }) =>
                     </div>
                 </div>
                 <Biomes spawnList={[]} />
-            </div>
+            </>
         );
     const favSlimeCalc = (currentFood: string | null) => {
         if (currentFood === null)
@@ -125,7 +122,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, topBtn, setFilter }) =>
     };
     const favSlime = favSlimeCalc(food);
     return (
-        <div className={'food-presentation' + (topBtn ? ' hidden-infos' : '')}>
+        <>
             <div className="image-title">
                 <div className="info-title">
                     <h1>{foodList[food][0]}</h1>
@@ -162,7 +159,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, topBtn, setFilter }) =>
                 </NavLink>
             }
             <Biomes spawnList={foodList[food][2]} />
-        </div>
+        </>
     )
 };
 
@@ -231,20 +228,6 @@ export const Food = () => {
 
     const [topBtn, setTopBtn] = useState(false);
 
-    const [wideScreen, setWideScreen] = useState(window.matchMedia("(min-width: 2560px)").matches);
-    useEffect(() => {
-        const handleResize = () => {
-            setWideScreen(window.matchMedia("(min-width: 2560px)").matches);
-        };
-
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
     const actualFoodList = useMemo(() => {
         switch (filter) {
             case 'fruits':
@@ -264,10 +247,12 @@ export const Food = () => {
         <div>
             <div className='list-container'>
                 <FoodTabs filter={filter} setFilter={setFilter} />
-                <FoodList actualFoodList={actualFoodList} wideScreen={wideScreen} food={food} filter={filter} />
+                <FoodList actualFoodList={actualFoodList} food={food} filter={filter} />
             </div>
-            <div className='food-container box-layout-secondary'>
-                <FoodDetails food={food} topBtn={topBtn} setFilter={setFilter} />
+            <div className='slime-presentation box-layout-secondary'>
+                <div className={'pedia-infos food-infos' + (topBtn ? ' hidden-infos' : '')}>
+                    <FoodDetails food={food} setFilter={setFilter} />
+                </div>
                 <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
                     <img src={arrow} alt='Arrow' />
                 </div>

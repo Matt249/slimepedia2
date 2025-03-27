@@ -8,7 +8,7 @@
     display: grid;
     margin: 0;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--menu-color-1);
     grid-template-columns: 1fr 1fr;
     gap: 10px;
@@ -20,7 +20,7 @@
 .building-presentation {
     height: 100%;
     display: grid;
-    gap: 20px;
+    gap: var(--border-size);
     grid-template-columns: minmax(0, 2fr) 1fr 1fr;
     grid-template-rows: 2fr auto 2fr auto;
     grid-template-areas:
@@ -35,7 +35,7 @@
     z-index: 12;
     margin: 0;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--menu-color-1);
 }
 
@@ -60,12 +60,12 @@
     grid-area: desc;
     margin: 0;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--menu-color-1);
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    gap: 20px
+    gap: var(--border-size)
 }
 
 .building-description>p {
@@ -85,10 +85,10 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: var(--border-size);
     background-color: var(--menu-color-1);
-    padding: 20px;
-    border-radius: 20px;
+    padding: var(--border-size);
+    border-radius: var(--border-size);
     height: fit-content;
     grid-area: info;
     overflow: hidden;
@@ -130,9 +130,9 @@
 .upgrade-list {
     position: relative;
     grid-area: upgrade-list;
-    margin: 0 calc(-1 * 20px) 0 0;
+    margin: 0 calc(-1 * var(--border-size)) 0 0;
     padding: 10px;
-    border-radius: 20px 0 0 20px;
+    border-radius: var(--border-size) 0 0 var(--border-size);
     background-color: var(--menu-color-1);
     overflow: visible;
 }
@@ -161,10 +161,10 @@
 
 .fake-border {
     position: absolute;
-    top: -20px;
+    top: calc(-1 * var(--border-size));
     right: 0;
-    width: 20px;
-    height: 20px;
+    width: var(--border-size);
+    height: var(--border-size);
     background-color: white;
 }
 
@@ -176,7 +176,7 @@
 
 .fb-1 {
     z-index: 11;
-    border-radius: 0 0 20px 0;
+    border-radius: 0 0 var(--border-size) 0;
     background-color: var(--menu-color-0);
 }
 
@@ -184,15 +184,15 @@
     position: relative;
     grid-area: upgrade;
     margin: 0;
-    padding: 20px;
-    border-radius: 20px 20px 20px 0;
+    padding: var(--border-size);
+    border-radius: var(--border-size) var(--border-size) var(--border-size) 0;
     background-color: var(--menu-color-1);
 }
 
 .upgrade-infos-available {
     grid-area: upgrade;
     display: grid;
-    gap: 20px;
+    gap: var(--border-size);
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100px 1fr;
     grid-template-areas:
@@ -215,7 +215,7 @@
 }
 
 .upgrade-no-infos>div>h3 {
-    margin: 20px 0;
+    margin: var(--border-size) 0;
     font-weight: bold;
     font-size: calc(var(--infos-title-size) * 1.5);
 }
@@ -227,14 +227,14 @@
 }
 
 .upgrade-infos>div {
-    padding: 20px;
+    padding: var(--border-size);
 }
 
 .upgrade-img {
     grid-area: image;
     position: relative;
     margin: 0;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--item-color);
 }
 
@@ -250,7 +250,7 @@
 .upgrade-title {
     grid-area: title;
     position: relative;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--item-color);
 }
 
@@ -268,7 +268,7 @@
 
 .upgrade-cost {
     grid-area: cost;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--item-color);
     display: flex;
     flex-flow: row nowrap;
@@ -290,7 +290,7 @@
 
 .upgrade-desc {
     grid-area: desc;
-    border-radius: 20px;
+    border-radius: var(--border-size);
     background-color: var(--item-color);
 }
 

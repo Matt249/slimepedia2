@@ -355,7 +355,7 @@ export const Regions: React.FC = () => {
                     <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab('region')} />
                     <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab('ranch')} />
                 </div>
-                <div className='regions-list' style={{ borderRadius: `${selectedTab === 'region' ? '0 20px' : '20px 0'} 20px 20px` }}>
+                <div className='regions-list' style={{ borderRadius: `${selectedTab === 'region' ? '0 var(--border-size)' : 'var(--border-size) 0'} var(--border-size) var(--border-size)` }}>
                     {listOfRegions.map(regionItem => (
                         <NavLink to={`/regions/${selectedTab}/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
                             <div

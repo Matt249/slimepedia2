@@ -2,8 +2,8 @@
     position: relative;
     z-index: 2;
     background-color: var(--item-color);
-    padding: 15px;
-    border-radius: 20px;
+    padding: var(--border-size);
+    border-radius: var(--border-size);
     grid-area: spawn;
     overflow-x: hidden;
     overflow-y: auto;
@@ -11,31 +11,31 @@
 
 .spawn-list-container>h3 {
     text-align: left;
-    margin: 0 0 10px 15px;
+    margin: 0 0 calc(vazr(--border-size) / 2) var(--border-size);
     font-size: 2em;
     overflow: hidden;
     height: 1lh;
     transition:
-        color var(--animation-speed) ease-in-out,
-        margin var(--animation-speed) ease-in-out,
-        font-size var(--animation-speed) ease-in-out,
-        height var(--animation-speed) ease-in-out;
+        color var(--animation-speed) var(--animation-function),
+        margin var(--animation-speed) var(--animation-function),
+        font-size var(--animation-speed) var(--animation-function),
+        height var(--animation-speed) var(--animation-function);
 }
 
 .biome-item {
     position: relative;
     display: flex;
     background-color: var(--item-color);
-    border-radius: 20px;
-    padding: 5px 10px;
+    border-radius: var(--border-size);
+    padding: calc(var(--border-size) / 4) calc(var(--border-size) / 2);
     align-items: flex-start;
     height: 5vh;
     overflow: hidden;
     cursor: var(--pointer-style);
     transition:
-        background-color var(--animation-speed) ease-in-out,
-        height var(--animation-speed) ease-in-out,
-        padding var(--animation-speed) ease-in-out;
+        background-color var(--animation-speed) var(--animation-function),
+        height var(--animation-speed) var(--animation-function),
+        padding var(--animation-speed) var(--animation-function);
 }
 
 .biome-list-overlay {
@@ -43,8 +43,8 @@
     height: fit-content;
     flex-flow: row nowrap;
     align-items: stretch;
-    gap: 7px;
-    transition: margin-top var(--animation-speed) ease-in-out;
+    gap: calc(var(--border-size) / 2);
+    transition: margin-top var(--animation-speed) var(--animation-function);
 }
 
 .biome-name {
@@ -54,14 +54,14 @@
     vertical-align: middle;
     color: var(--text-color);
     transition:
-        color var(--animation-speed) ease-in-out,
-        text-shadow var(--animation-speed) ease-in-out,
-        font-size var(--animation-speed) ease-in-out,
-        margin-top var(--animation-speed) ease-in-out;
+        color var(--animation-speed) var(--animation-function),
+        text-shadow var(--animation-speed) var(--animation-function),
+        font-size var(--animation-speed) var(--animation-function),
+        margin-top var(--animation-speed) var(--animation-function);
 }
 
 .spawn-list-container .hidden-title {
-    font-size: 0px;
+    font-size: 0;
     height: 0;
     margin: 0;
 }
@@ -78,7 +78,7 @@
     width: 5vh;
     height: auto;
     transform: scale(1);
-    transition: transform var(--animation-speed) ease-in-out;
+    transition: transform var(--animation-speed) var(--animation-function);
 }
 
 .spawn-list-hover:hover>.biome-item {
@@ -103,16 +103,16 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%) scale(1.2);
-    border-radius: 10px;
+    border-radius: calc(var(--border-size) / 2);
     z-index: -5;
     width: 100%;
     height: auto;
     object-fit: cover;
     object-position: center;
-    filter: opacity(0) blur(10px);
+    filter: opacity(0) blur(var(--border-size));
     transition:
-        filter var(--animation-speed) 0s ease-in-out,
-        transform var(--animation-speed) 0s ease-in-out;
+        filter var(--animation-speed) 0s var(--animation-function),
+        transform var(--animation-speed) 0s var(--animation-function);
 }
 
 .biome-item,
@@ -126,7 +126,7 @@
 
 .biome-item:hover.biome-item {
     height: 17vh;
-    padding: 10px;
+    padding: calc(var(--border-size) / 2);
 }
 
 .biome-item:hover>.biome-list-video {
@@ -134,15 +134,15 @@
     filter: opacity(1) blur(0);
     transform: translateY(-50%) scale(1);
     transition:
-        filter var(--animation-speed) ease-in-out,
-        transform var(--animation-speed) ease-in-out;
+        filter var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .biome-item.biome-item-hover:hover>div>.biome-name {
     color: white;
     font-size: 2em;
     margin: auto 0;
-    text-shadow: 0px 0px 5px #000;
+    text-shadow: var(--text-shadow);
 }
 
 .spawn-list-hover:hover>div>div>.biome-name {
