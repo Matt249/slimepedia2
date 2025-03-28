@@ -12,9 +12,7 @@ interface BiomesProps {
     spawnList: string[];
 }
 
-export const Biomes: React.FC<BiomesProps> = ({
-    spawnList = [],
-}) => {
+export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const biomeBlacklist = ['pm'];
@@ -23,7 +21,40 @@ export const Biomes: React.FC<BiomesProps> = ({
         videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || null);
     }, [spawnList]);
 
+    const handleVideoLoadAndPlay = async (videoRef: HTMLVideoElement) => {
+        try {
+            if (videoRef.readyState < 3) {
+                await new Promise<void>((resolve, reject) => {
+                    videoRef.onloadeddata = () => resolve();
+                    videoRef.onerror = () => reject(new Error(`Failed to load video: ${videoRef.src}`));
+                });
+            }
+            await videoRef.play();
+        } catch (error) {
+            console.error("Error loading and playing video:", error);
+        }
+    };
+
+    const handleMouseEnter = async (videoRef: HTMLVideoElement | null) => {
+        if (videoRef) {
+            await handleVideoLoadAndPlay(videoRef);
+        }
+    };
+
+    const handleMouseLeave = async (videoRef: HTMLVideoElement | null) => {
+        setTimeout(async () => {
+            if (videoRef) {
+                try {
+                    videoRef.pause();
+                } catch (error) {
+                    console.error("Error pausing video:", error);
+                }
+            }
+        }, animationDelay);
+    };
+
     const renderBiomeItem = (biome: string, index: number) => {
+        const videoRef = videoRefs.current[index];
         const content = (
             <>
                 <video
@@ -46,68 +77,29 @@ export const Biomes: React.FC<BiomesProps> = ({
             </>
         );
 
-        const handleVideoLoadAndPlay = async (videoRef: HTMLVideoElement) => {
-            try {
-                if (videoRef.readyState < 3) {
-                    await new Promise<void>((resolve, reject) => {
-                        videoRef.onloadeddata = () => resolve();
-                        videoRef.onerror = () => reject(new Error(`Failed to load video: ${videoRef.src}`));
-                    });
-                }
-                await videoRef.play();
-            } catch (error) {
-                console.error("Error loading and playing video:", error);
-            }
-        };
-
-        const handleMouseEnter = async () => {
-            const videoRef = videoRefs.current[index];
-            if (videoRef) {
-                await handleVideoLoadAndPlay(videoRef);
-            }
-        };
-
-        const handleMouseLeave = async () => {
-            setTimeout(async () => {
-                const videoRef = videoRefs.current[index];
-                if (videoRef) {
-                    try {
-                        videoRef.pause();
-                    } catch (error) {
-                        console.error("Error pausing video:", error);
-                    }
-                }
-            }, animationDelay);
+        const containerProps = {
+            className: "biome-item",
+            onMouseEnter: () => handleMouseEnter(videoRef),
+            onMouseLeave: () => handleMouseLeave(videoRef),
         };
 
         if (biomeBlacklist.includes(biome)) {
             return (
-                <div
-                    key={biome}
-                    className="biome-item"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                >
+                <div key={biome} {...containerProps}>
                     {content}
                 </div>
             );
-        } else {
-            return (
-                <NavLink
-                    key={biome}
-                    to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`}
-                    style={{ textDecoration: 'none' }}
-                >
-                    <div
-                        className="biome-item"
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        {content}
-                    </div>
-                </NavLink>
-            );
         }
+
+        return (
+            <NavLink
+                key={biome}
+                to={`/${weatherID.includes(biome) ? 'weather' : 'regions'}/${spawnLocationsList[biome][0]}`}
+                style={{ textDecoration: 'none' }}
+            >
+                <div {...containerProps}>{content}</div>
+            </NavLink>
+        );
     };
 
     return (
