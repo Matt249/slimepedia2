@@ -13,7 +13,7 @@ export const initializeFolders = () => {
 
     const createFolderObject = (globResult: Record<string, undefined>): FolderObject => {
         return Object.entries(globResult).reduce((acc: FolderObject, [path, module]) => {
-            const fileName = (path.split('/').pop() || '').split('?')[0];
+            const fileName = (path.split('/').pop() ?? '').split('?')[0];
             acc[fileName] = module;
             return acc;
         }, {});

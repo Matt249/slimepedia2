@@ -1,13 +1,3 @@
-:root {
-    --tab-icon-size: 50px;
-}
-
-@media (min-width: 2000px) {
-    :root {
-        --tab-icon-size: 75px;
-    }
-}
-
 .tab {
     position: relative;
     padding: calc(var(--border-size) / 2) var(--border-size);

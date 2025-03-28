@@ -70,8 +70,10 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             <div className='quantity-selector'>
                 <Down onClick={() => decreaseQuantity()} />
                 <div></div>
-                <h2 onClick={() => addToRecipeList(name, type, quantity)}>{quantity}</h2>
-                <Plus onClick={() => addToRecipeList(name, type, quantity)} />
+                <button onClick={() => addToRecipeList(name, type, quantity)}>
+                    <h2>{quantity}</h2>
+                    <Plus />
+                </button>
                 <div></div>
                 <Down onClick={() => increaseQuantity()} />
             </div>
@@ -103,10 +105,8 @@ const BlueprintInfos: React.FC<{ blueprint: string | null, type: BlueprintType }
                     <h2>Select an upgrade to view its details</h2>
                 </div>
                 <div className='blueprint-requirements-box little-box'>
-                    <img />
                     <div>
                         <h3>Requirements</h3>
-                        <h4></h4>
                     </div>
                 </div>
                 <div className='blueprint-recipe-box'>
@@ -167,8 +167,8 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
             </NavLink>
             <div className='vac-upgrade-tiers'>
                 {tier > 1 && upgradePack[2] >= 1 ? (
-                    <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier - 1}`}>
-                        <div className='arrow-left' onClick={() => setTier(tier - 1)}>
+                    <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier - 1}`} onClick={() => setTier(tier - 1)}>
+                        <div className='arrow-left'>
                             <Down />
                         </div>
                     </NavLink>
@@ -179,8 +179,8 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
                 )}
                 <h2>{tier}</h2>
                 {tier < upgradePack[2] && upgradePack[2] >= 1 ? (
-                    <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier + 1}`}>
-                        <div className='arrow-right' onClick={() => setTier(tier + 1)}>
+                    <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier + 1}`} onClick={() => setTier(tier + 1)}>
+                        <div className='arrow-right'>
                             <Down />
                         </div>
                     </NavLink>
@@ -198,7 +198,7 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
 const UpgradesPage: React.FC = () => {
     const { blueprint: upgradeName, tier: selectedTier } = useParams();
     const tier = selectedTier ? parseInt(selectedTier, 10) : 1;
-    const upgrade = upgradeName || null;
+    const upgrade = upgradeName ?? null;
     if (upgrade !== null) {
         if (!upgradeNames.includes(upgrade))
             return (<Navigate to='/blueprints/upgrades' />);
@@ -250,7 +250,7 @@ const UpgradesPage: React.FC = () => {
 
 const UtilitiesPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
-    const blueprint = blueprintName || null;
+    const blueprint = blueprintName ?? null;
     return (
         <>
             <div className='blueprint-list'>
@@ -267,7 +267,7 @@ const UtilitiesPage: React.FC = () => {
 
 const WarpPage: React.FC = () => {
     const { blueprint: warpName } = useParams();
-    const blueprint = warpName || null;
+    const blueprint = warpName ?? null;
     return (
         <>
             <div className='blueprint-list'>
@@ -284,7 +284,7 @@ const WarpPage: React.FC = () => {
 
 const DecorationsPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
-    const blueprint = blueprintName || null
+    const blueprint = blueprintName ?? null
     const [decoFilter, setDecoFilter] = useState<string | null>(null);
     return (
         <>
@@ -332,17 +332,18 @@ const RecipeMenu: React.FC = () => {
                         Object.keys(recipeList.current).map((blueprint) => {
                             const type = recipeList.current[blueprint][0];
                             const name = craftRecipeMatcher(blueprint, type)[0];
+                            const currentType = type === BlueprintType.DECORATIONS ? 'deco' : 'gadgets'
                             return (
                                 <div
                                     className='pin-element pin-blueprint-element'
                                     key={blueprint}
                                 >
-                                    <img src={mediaFetcher(type === BlueprintType.UPGRADES ? ('upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `${type === BlueprintType.DECORATIONS ? 'deco' : 'gadgets'}/${blueprint}.png`)} />
+                                    <img src={mediaFetcher(type === BlueprintType.UPGRADES ? ('upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `${currentType}/${blueprint}.png`)} alt='Icon of blueprint' />
                                     <p>{name}: </p>
                                     <Plus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <h3>{recipeList.current[blueprint][1]}</h3>
                                     <Minus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
-                                    <img onClick={()=> resetBlueprint(blueprint)} src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
+                                    <img onClick={() => resetBlueprint(blueprint)} src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
                                 </div>
                             )
                         })}
@@ -377,7 +378,7 @@ const RecipeMenu: React.FC = () => {
 
 export const Blueprints: React.FC = () => {
     const { tab: tabName } = useParams();
-    const tab = tabName || 'upgrades';
+    const tab = tabName ?? 'upgrades';
 
     const renderPage = () => {
         switch (tab) {

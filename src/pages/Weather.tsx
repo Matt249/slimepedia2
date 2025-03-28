@@ -15,7 +15,7 @@ export const Weather: React.FC = () => {
 
     const handleMouseEnter = (weather: string) => {
         if (videoRefs.current[weather])
-            videoRefs.current[weather]!.play();
+            videoRefs.current[weather].play();
     };
 
     const handleMouseLeave = (weatherName: string) => {
@@ -51,10 +51,18 @@ export const Weather: React.FC = () => {
     return (
         <div>
             <div className="top-buttons">
-                <audio ref={weatherMusicRef} src={mediaFetcher(`music/${weatherList[weather][7] ? weather : 'fields-day-theme'}.ogg`)} />
+                <audio ref={weatherMusicRef} src={mediaFetcher(`music/${weatherList[weather][7] ? weather : 'fields-day-theme'}.ogg`)}>
+                    <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A00:00:00.000%20--%3E%2000:00:10.000%0AWeather%20Music" srcLang="en" label="English captions" />
+                </audio>
                 <div>
-                    <img src={mediaFetcher('misc/mapCursor.png')} onClick={() => setPanel(!panel)} />
-                    {weatherList[weather][7] && weatherMusicRef.current && <img src={mediaFetcher('misc/audio.png')} className={'music-player' + weatherMusicRef.current!.paused ? '' : ' music-played'} onClick={() => handleMusicPlay()} />}
+                    <button onClick={() => setPanel(!panel)}>
+                        <img src={mediaFetcher('misc/mapCursor.png')} alt="Toggle fullscreen" />
+                    </button>
+                    {weatherList[weather][7] && weatherMusicRef.current &&
+                        <button onClick={() => handleMusicPlay()} className={'music-player' + weatherMusicRef.current.paused ? '' : ' music-played'}>
+                            <img src={mediaFetcher('misc/audio.png')} alt='Play weather music' />
+                        </button>
+                    }
                 </div>
             </div>
 
@@ -67,7 +75,7 @@ export const Weather: React.FC = () => {
                         onMouseEnter={() => handleMouseEnter(weatherName)}
                         onMouseLeave={() => handleMouseLeave(weatherName)}
                     >
-                        <img src={mediaFetcher(`world/${weatherName}.png`)} />
+                        <img src={mediaFetcher(`world/${weatherName}.png`)} alt={weatherList[weatherName][0] + ' icon'} />
                         <video
                             ref={(el) => (videoRefs.current[weatherName] = el)}
                             className={`video-${weatherName}`}
@@ -92,7 +100,7 @@ export const Weather: React.FC = () => {
                     onLoadedData={handleVideoLoaded}
                 />
                 <div className={"weather-info-title" + (panel ? "" : " weather-title-hidden")}>
-                    <img src={mediaFetcher(`world/${weather}.png`)} />
+                    <img src={mediaFetcher(`world/${weather}.png`)} alt={weatherList[weather][0] + ' icon'} />
                     <h1>{weatherList[weather][0]}</h1>
                     <h2>{weatherList[weather][2]}</h2>
                     <p>{weatherPedia[weather]}</p>
@@ -105,17 +113,17 @@ export const Weather: React.FC = () => {
                     <div className="weather-box related-weater-box">
                         <h2 className='weather-box-title'>Related Weather</h2>
                         <NavLink to={`/weather/${weatherList[weather][5]}`}>
-                            <img src={mediaFetcher(`world/${[weatherList[weather][5]]}.png`)} />
+                            <img src={mediaFetcher(`world/${weatherList[weather][5]}.png`)} alt={weatherList[weatherList[weather][5]][0] + ' icon'} />
                         </NavLink>
                     </div>
                     <div className="weather-box spawning-slimes-box">
                         <h2 className='weather-box-title'>Slimes/Resources</h2>
                         {weatherList[weather][4].length !== 0 ? weatherList[weather][4].map((element) => (
                             <NavLink to={weatherSpawn[element][2]} key={element}>
-                                <img src={mediaFetcher(weatherSpawn[element][1])} title={weatherSpawn[element][0]} />
+                                <img src={mediaFetcher(weatherSpawn[element][1])} title={weatherSpawn[element][0]} alt={weatherSpawn[element][0]} />
                             </NavLink>
                         )) :
-                            <img src={noneImg} />
+                            <img src={noneImg} alt='No effects' />
                         }
                     </div>
                     <Biomes spawnList={weatherList[weather][6]} />

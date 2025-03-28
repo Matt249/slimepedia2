@@ -126,7 +126,6 @@
     font-size: 1.5em;
     font-weight: normal;
     font-style: italic;
-    margin: 0;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
@@ -468,23 +467,19 @@
 
 }
 
-.blueprint-title-box>img,
 .blueprint-title-box>img {
     grid-area: icon;
     max-height: 90%;
     max-width: 90%;
 }
 
-.blueprint-title-box>h1,
 .blueprint-title-box>h1 {
     grid-area: title;
     margin: 0;
     font-size: 2.5em;
     font-weight: bold;
-    margin: 0;
 }
 
-.blueprint-title-box>h2,
 .blueprint-title-box>h2 {
     grid-area: description;
     font-size: 1.5em;
@@ -493,7 +488,6 @@
     margin: 0;
 }
 
-.blueprint-recipe-box,
 .blueprint-recipe-box {
     grid-area: recipe;
     align-items: center;
@@ -625,10 +619,6 @@
         "unlock recipe"
     ;
     gap: var(--border-size);
-}
-
-.blueprint-infos {
-    padding: 0;
 }
 
 .decoration-list {

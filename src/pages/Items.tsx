@@ -7,9 +7,9 @@ import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import React from 'react';
-import pedia from '/src/assets/misc/pediatut.png';
-import buck from '/src/assets/misc/buck.png';
-import noneIcon from '/src/assets/misc/none.png';
+import pedia from '../assets/misc/pediatut.png';
+import buck from '../assets/misc/buck.png';
+import noneIcon from '../assets/misc/none.png';
 import '../css/Pedia.css';
 
 const matchMainList = (list: string) => {
@@ -24,12 +24,9 @@ const matchMainList = (list: string) => {
 }
 
 const matchInfosList = (list: string) => {
-    switch (list) {
-        case 'toys':
-            return toysList;
-        default:
-            return resourcesList;
-    }
+    if ('toys' === list)
+        return toysList;
+    return resourcesList;
 }
 
 export const Items = () => {
@@ -94,9 +91,9 @@ export const Items = () => {
                     <div className='little-box infos-box'>
                         <img src={pedia} alt="Pedia Informations Icon" />
                         <div>
-                            {(tab === 'resources' ? resPedia[item][1] : toyDesc[item]).split("\n").map((item, idx) => {
+                            {(tab === 'resources' ? resPedia[item][1] : toyDesc[item]).split("\n").map((item) => {
                                 return (
-                                    <p key={idx}>
+                                    <p key={item}>
                                         {item}
                                     </p>
                                 )
@@ -110,33 +107,43 @@ export const Items = () => {
                             <h4>500</h4>
                         </div>
                     </div>
-                    {(tab === 'toys') ? infosItems[item][1] === "none" ?
-                        <div className='little-box toy-fav'>
-                            <img src={noneIcon} alt='None' />
-                            <div>
-                                <h3>Favorite of</h3>
-                                <h4>Nobody</h4>
-                            </div>
-                        </div>
-                        :
-                        <NavLink to={`/slimes/${toysList[item][1]}`} style={{ textDecoration: 'none' }}>
-                            <div className='little-box toy-fav link-to-food'>
-                                <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[toysList[item][1]][0]} />
-                                <div>
-                                    <h3>Favorite of</h3>
-                                    <h4>{slimesList[toysList[item][1]][0]}</h4>
+                    {(() => {
+                        if (tab === 'toys') {
+                            if (infosItems[item][1] === "none") {
+                                return (
+                                    <div className='little-box toy-fav'>
+                                        <img src={noneIcon} alt='None' />
+                                        <div>
+                                            <h3>Favorite of</h3>
+                                            <h4>Nobody</h4>
+                                        </div>
+                                    </div>
+                                );
+                            } else {
+                                return (
+                                    <NavLink to={`/slimes/${toysList[item][1]}`} style={{ textDecoration: 'none' }}>
+                                        <div className='little-box toy-fav link-to-food'>
+                                            <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[toysList[item][1]][0]} />
+                                            <div>
+                                                <h3>Favorite of</h3>
+                                                <h4>{slimesList[toysList[item][1]][0]}</h4>
+                                            </div>
+                                        </div>
+                                    </NavLink>
+                                );
+                            }
+                        } else {
+                            return (
+                                <div className="little-box toy-fav toy-hide">
+                                    <img src={noneIcon} alt='None' />
+                                    <div>
+                                        <h3>Favorite of</h3>
+                                        <h4>None</h4>
+                                    </div>
                                 </div>
-                            </div>
-                        </NavLink>
-                        :
-                        <div className="little-box toy-fav toy-hide">
-                            <img src={noneIcon} alt='None' />
-                            <div>
-                                <h3>Favorite of</h3>
-                                <h4>None</h4>
-                            </div>
-                        </div>
-                    }
+                            );
+                        }
+                    })()}
                     <Biomes spawnList={tab !== 'toys' ? resourcesList[item][1] : ['pm']} />
                 </div>
             </div>

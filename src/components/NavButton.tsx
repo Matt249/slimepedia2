@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { mediaFetcher } from '../media-manager';
-import React from 'react';
 import '../css/NavButton.css';
 
 interface NavButtonProps {
@@ -43,7 +42,7 @@ export const NavButton: React.FC<NavButtonProps> = ({
     const [randomNumber, setRandomNumber] = useState(randomHandler());
 
     return (
-        <div
+        <button
             className={"button" + (selected ? " btn-selected" : "")}
             onClick={action}
             onMouseLeave={() => setRandomNumber(randomHandler())}
@@ -53,6 +52,6 @@ export const NavButton: React.FC<NavButtonProps> = ({
                 <img src={mediaFetcher(icon + '.png')} alt={name} className={'image-button img-btn-' + randomNumber} />
             </div>
             <p>{name}</p>
-        </div>
+        </button>
     );
 }

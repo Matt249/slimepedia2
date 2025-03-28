@@ -9,20 +9,6 @@
     --desc-title-img-size: 1.8em;
 }
 
-/* @media (min-width: 2000px) {
-    :root {
-        --object-name-size: 3.5em;
-        --object-subname-size: 1.8em;
-        --little-box-title-size: 1.7em;
-        --little-box-subtitle-size: 1.4em;
-        --little-box-image-size: 75px;
-        --pedia-title-size: 2.1em;
-        --pedia-paragrah-size: 1.5em;
-        --desc-title-img-size: 40px;
-    }
-} */
-
-
 @media (max-width: 1600px) {
 
     .list-slime,
@@ -279,6 +265,7 @@
 .desc-title>h3 {
     font-size: var(--pedia-title-size);
     color: white;
+    margin: 0;
 }
 
 .desc>p {
@@ -287,10 +274,6 @@
     overflow: hidden;
     height: fit-content;
     padding: var(--border-size);
-}
-
-.desc-title>h3 {
-    margin: 0;
 }
 
 br {

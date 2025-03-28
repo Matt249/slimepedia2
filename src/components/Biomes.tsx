@@ -46,11 +46,11 @@ export const Biomes: React.FC<BiomesProps> = ({
             </>
         );
 
-        const handleMouseEnter = () => {
+        const handleMouseEnter = async () => {
             const videoRef = videoRefs.current[index];
             if (videoRef) {
                 try {
-                    videoRef.play();
+                    await videoRef.play();
                 } catch (e) {
                     console.error(e);
                 }
@@ -74,7 +74,7 @@ export const Biomes: React.FC<BiomesProps> = ({
             return (
                 <div
                     key={biome}
-                    className="biome-item biome-item-hover"
+                    className="biome-item"
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
@@ -89,7 +89,7 @@ export const Biomes: React.FC<BiomesProps> = ({
                     style={{ textDecoration: 'none' }}
                 >
                     <div
-                        className="biome-item biome-item-hover"
+                        className="biome-item"
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                     >
@@ -103,13 +103,17 @@ export const Biomes: React.FC<BiomesProps> = ({
     return (
         <div className="spawn-list-container">
             <h3 className={listHovered ? 'hidden-title' : ''}>Found in</h3>
-            <div
+            <button
                 className="spawn-list-hover"
                 onMouseEnter={() => setListHovered(true)}
                 onMouseLeave={() => setListHovered(false)}
+                onClick={(e) => {
+                    setListHovered((prev) => !prev);
+                    e.preventDefault();
+                }}
             >
                 {spawnList.map((biome, index) => renderBiomeItem(biome, index))}
-            </div>
+            </button>
         </div>
     );
 };

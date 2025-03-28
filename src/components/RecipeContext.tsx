@@ -93,8 +93,18 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updateCraftList();
     }, [blueprintList]);
 
+    const contextValue = React.useMemo(() => ({
+        recipeList: blueprintList,
+        craftList,
+        addToRecipeList,
+        decreaseBlueprint,
+        resetList,
+        craftRecipeMatcher,
+        resetBlueprint
+    }), [craftList]);
+
     return (
-        <RecipeContext.Provider value={{ recipeList: blueprintList, craftList, addToRecipeList, decreaseBlueprint, resetList, craftRecipeMatcher, resetBlueprint }}>
+        <RecipeContext.Provider value={contextValue}>
             {children}
         </RecipeContext.Provider>
     );

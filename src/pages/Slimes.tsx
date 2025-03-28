@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { slimeNames, slimesList, slimesText, slimepedia } from '../text/slimes.js';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes.js';
@@ -6,15 +6,14 @@ import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js'
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import largoImg from '/src/assets/misc/largo.png';
-import noneImg from '/src/assets/misc/none.png';
-import arrowImg from '/src/assets/misc/arrow.png';
-import foodAnyImg from '/src/assets/food/food.png';
-import toysImg from '/src/assets/misc/toys.png';
-import pediaSlime from '/src/assets/misc/pediaslime.png';
-import pediaRisks from '/src/assets/misc/pediarisks.png';
-import pediaPlort from '/src/assets/misc/pediaplort.png';
-import React from 'react';
+import largoImg from '../assets/misc/largo.png';
+import noneImg from '../assets/misc/none.png';
+import arrow from '../assets/misc/arrow.png';
+import foodAnyImg from '../assets/food/food.png';
+import toysImg from '../assets/misc/toys.png';
+import pediaSlime from '../assets/misc/pediaslime.png';
+import pediaRisks from '../assets/misc/pediarisks.png';
+import pediaPlort from '../assets/misc/pediaplort.png';
 import '../css/Pedia.css';
 
 interface SlimeDetailsProps {
@@ -183,11 +182,11 @@ const SlimeDescription: React.FC<SlimeDescriptionProps> = ({ slimepediaEntry, to
 export const Slimes = () => {
     const { slime: slimeName } = useParams();
 
-    const slime = slimeName || null;
+    const slime = slimeName ?? null;
     const [topBtn, setTopBtn] = useState(false);
     useEffect(() => setTopBtn(false), [slime]);
     const currentSlimeList = slime === null ? null : slimesList[slime];
-    const slimepediaEntry: [string, string, string] = useMemo(() => slime === null ? ['', '', ''] : slimepedia[slime] as [string, string, string], [slime]);
+    const slimepediaEntry: [string, string, string] = useMemo(() => slime === null ? ['', '', ''] : slimepedia[slime], [slime]);
 
     if (slimeName && !slimeNames.includes(slimeName)) {
         return (
@@ -214,9 +213,20 @@ export const Slimes = () => {
                 <div className={'pedia-infos slime-infos' + (topBtn ? ' hidden-infos' : '')}>
                     <SlimeDetails currentSlimeList={currentSlimeList} selectedSlime={slime} />
                 </div>
-                <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
-                    <img src={arrowImg} alt='Expand arrow' />
-                </div>
+                <a
+                    role='link'
+                    className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')}
+                    onClick={() => setTopBtn(!topBtn)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setTopBtn(!topBtn);
+                        }
+                    }}
+                    tabIndex={0}
+                >
+                    <img src={arrow} alt='Arrow' />
+                </a>
                 <SlimeDescription slimepediaEntry={slimepediaEntry} topBtn={topBtn} />
             </div>
         </div>

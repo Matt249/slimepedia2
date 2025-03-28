@@ -3,9 +3,9 @@ import { buildingNames, buildingList, buildingUpgrades, usageList } from '../tex
 import { mediaFetcher } from '../media-manager';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import React from 'react';
-import upgradeImg from '/src/assets/misc/upgrade.png';
-import buck from '/src/assets/misc/buck.png';
-import pediaTut from '/src/assets/misc/pediatut.png';
+import upgradeImg from '../assets/misc/upgrade.png';
+import buck from '../assets/misc/buck.png';
+import pediaTut from '../assets/misc/pediatut.png';
 import '../css/Buildings.css';
 
 const defaultBuilding = 'corral';
@@ -16,8 +16,8 @@ const linkStyle = {
 
 export const Buildings = () => {
     const { building, upgrade } = useParams();
-    const activeBuilding = building ? building : defaultBuilding;
-    const currentUpgrade = upgrade ? upgrade : null;
+    const activeBuilding = building ?? defaultBuilding;
+    const currentUpgrade = upgrade ?? null;
     const buildingsButtons = () => {
         return buildingNames.map((building) => {
             return (
@@ -26,7 +26,7 @@ export const Buildings = () => {
                         icon={'buildings/' + building}
                         name={buildingList[building][0]}
                         size={1.25}
-                        selected={building[0] === activeBuilding}
+                        selected={building === activeBuilding}
                         tilting='none'
                     />
                 </NavLink>
@@ -41,11 +41,11 @@ export const Buildings = () => {
                     <h2>No upgrades available for this building.</h2>
                 </>
             );
-        return buildingUpgrades[activeBuilding].map((upgrade, index) => {
+        return buildingUpgrades[activeBuilding].map((upgrade) => {
             return (
-                <NavLink key={index} to={`/buildings/${activeBuilding}/${upgrade[0]}`} style={linkStyle}>
+                <NavLink key={upgrade[0]} to={`/buildings/${activeBuilding}/${upgrade[0]}`} style={linkStyle}>
                     <NavButton
-                        key={index}
+                        key={upgrade[0]}
                         icon={'buildings/' + upgrade[0]}
                         name={upgrade[1]}
                         size={.8}

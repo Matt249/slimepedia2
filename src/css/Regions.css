@@ -26,6 +26,11 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 10px;
+    flex: 1;
+    background-color: var(--menu-color-1);
+    padding: var(--border-size);
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .regions-tabs {
@@ -35,14 +40,6 @@
     gap: 10px;
     padding: 0;
     width: 100%;
-}
-
-.regions-list {
-    flex: 1;
-    background-color: var(--menu-color-1);
-    padding: var(--border-size);
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 
 .region-tab {
@@ -122,9 +119,6 @@
 .region-presentation {
     height: 100%;
     width: 100%;
-}
-
-.region-presentation {
     flex: 1;
     position: relative;
     overflow-x: hidden;
@@ -184,13 +178,13 @@
     top: 0;
     right: 0;
     margin: var(--border-size);
-    padding-right: 70px;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 2 * var(--border-size));
     width: auto;
     aspect-ratio: auto;
-    height: 10%;
+    height: 8%;
     border-radius: 50px;
-    overflow: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
     background-color: var(--menu-color-1);
     display: flex;
     flex-flow: row-reverse nowrap;
@@ -200,9 +194,12 @@
     box-sizing: border-box;
     transition:
         max-width var(--animation-speed) var(--animation-function) 0s,
-        padding var(--animation-speed) var(--animation-function) 0s,
+        padding 0s,
         aspect-ratio var(--animation-speed) var(--animation-function) var(--animation-speed);
+}
 
+.region-music-player:not(.region-labyrinth) {
+    padding-left: var(--border-size);
 }
 
 .region-music-player.disabled {
@@ -215,87 +212,87 @@
         aspect-ratio var(--animation-speed) var(--animation-function) 0s;
 }
 
-.region-music-player>div {
-    display: flex;
-    flex-flow: row-reverse nowrap;
-    align-items: center;
-    gap: 10px;
-    border-radius: 50px;
-    padding: 0 10px;
-    transition: background-color var(--animation-speed) var(--animation-function) var(--animation-speed);
-}
-
-.region-music-player.disabled>div {
-    background-color: #0000;
-    transition: background-color var(--animation-speed) var(--animation-function) 0s;
-}
-
-.region-music-player.disabled>div>img.music-time,
-.region-music-player.disabled>div>img.music-element-icon {
+.region-music-player.disabled>img,
+.region-music-player.disabled>button:not(.music-player-icon) {
     transform: scale(0);
-    transition: transform var(--animation-speed) var(--animation-function) 0s;
 }
 
-.region-music-player>img,
-.region-music-player>div>img {
+.music-time,
+.music-element-icon {
+    width: auto;
+    height: 80%;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+}
+
+.music-element-icon>img {
     width: auto;
     height: 100%;
-    transform: scale(.6);
-    transition: transform var(--animation-speed) var(--animation-function) var(--animation-speed);
-}
-
-.region-music-player>div {
-    height: 100%;
-}
-
-.region-music-player>div>img.music-element-icon {
-    transform: scale(.8) translateY(-5%);
-    filter: grayscale(1);
+    transform: translateY(-10%);
+    filter: grayscale(1) brightness(0.7);
+    transition:
+        transform var(--animation-speed) var(--animation-function),
+        filter var(--animation-speed) var(--animation-function);
     cursor: var(--pointer-style);
-    transition:
-        transform var(--animation-speed) var(--animation-function) var(--animation-speed),
-        filter var(--animation-speed) var(--animation-function);
 }
 
-.region-music-player>div>img.music-element-icon.music-current,
-.region-music-player>div>img.music-element-icon:hover {
-    transform: scale(1) translateY(-10%);
-    transition:
-        transform var(--animation-speed) var(--animation-function) 0s,
-        filter var(--animation-speed) var(--animation-function);
+.music-element-icon:hover>img {
+    transform: translateY(-10%) scale(1.2);
+    filter: grayscale(1) brightness(0.85);
 }
 
-.region-music-player>div>img.music-element-icon.music-current {
-    filter: grayscale(0);
+.music-element-icon.music-current>img {
+    filter: grayscale(0) brightness(1);
+    transform: scale(1.2) translateY(-10%);
 }
 
 .music-player-icon {
-    position: absolute;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    transform: scale(.6);
+    width: fit-content;
+    aspect-ratio: 1;
+    height: 100%;
     cursor: var(--pointer-style);
+    background: transparent;
+    border: none;
+    transform: scale(1);
     transition: transform var(--animation-speed) var(--animation-function) 0s;
 }
 
-.music-player-icon:hover {
-    transform: scale(.8);
+.music-player-icon>img {
+    width: auto;
+    height: 65%;
 }
 
-.dreamland-music {
+.music-player-icon:hover {
+    transform: scale(1.2);
+}
+
+.music-section {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: var(--border-size);
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--border-size);
+    border-radius: 100vh;
+    width: fit-content;
+    height: 100%;
+}
+
+.music-section-dreamland {
     background-color: #f9ccff;
 }
 
-.labyrinth-music {
+.music-section-labyrinth {
     background-color: #4ed6ac;
 }
 
-.lava-music {
+.music-section-lava {
     background-color: #FC8400;
 }
 
-.waterworks-music {
+.music-section-waterworks {
     background-color: #86EBF7;
 }
 
@@ -360,7 +357,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: minmax(auto, 5fr) minmax(auto, 1fr) minmax(auto, 1fr);
+    grid-template-rows: minmax(auto, 5fr) minmax(auto, 1fr) calc(var(--element-size) + 3.5vh);
     grid-template-areas:
         'pedia slimes food'
         'pedia connections connections'
@@ -386,8 +383,11 @@
 .region-element {
     position: relative;
     width: 100%;
-    height: 100%;
     cursor: var(--pointer-style);
+    flex-basis: calc(33.333% - 10px);
+    box-sizing: border-box;
+    height: fit-content;
+    overflow: hidden;
 }
 
 .region-element>img {
@@ -441,14 +441,6 @@
     grid-auto-rows: max-content;
     overflow-x: hidden;
     overflow-y: auto;
-}
-
-.region-element {
-    position: relative;
-    flex-basis: calc(33.333% - 10px);
-    box-sizing: border-box;
-    height: fit-content;
-    overflow: hidden;
 }
 
 .region-element::before {
@@ -569,8 +561,8 @@
 }
 
 .region-pods>img {
-    width: var(--element-size);
-    height: var(--element-size);
+    width: calc(var(--element-size) * .9);
+    height: calc(var(--element-size) * .9);
     transform: scale(.9);
 }
 
@@ -591,9 +583,6 @@
     height: 0;
     min-height: 100%;
     overflow: hidden;
-}
-
-.ranch-description {
     grid-template-areas:
         'pedia connections connections'
         'pedia cost slots'
@@ -706,18 +695,13 @@
 }
 
 .ranch-special-feature>h3 {
-    color: var(--text-color);
+    margin: 0;
+    font-size: var(--special-size);
 }
 
 .special-hover:hover>img {
     cursor: var(--pointer-style);
     transform: scale(1.2);
-}
-
-
-.ranch-special-feature>h3 {
-    margin: 0;
-    font-size: var(--special-size);
 }
 
 .ranch-element>div>img {

@@ -11,6 +11,7 @@
 }
 
 .button {
+    all: unset;
     position: relative;
     background-color: #0000;
     transition: background-color var(--animation-speed) var(--animation-function);

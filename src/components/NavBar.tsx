@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { NavButton } from "./NavButton";
-import { useEffect, useState } from "react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import houseDay from '../assets/wallpapers/houseDay.png';
 import houseNight from '../assets/wallpapers/houseNight.png';
 import { mediaFetcher } from "../media-manager";
@@ -12,9 +11,9 @@ export const NavBar = () => {
     const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
 
     useEffect(() => {
-        const rootElement = document.querySelector(':root') as HTMLElement | null;
+        const rootElement = document.querySelector(':root') as HTMLElement;
         if (rootElement) {
-            const rootStyle: CSSStyleDeclaration = (rootElement as HTMLElement).style;
+            const rootStyle: CSSStyleDeclaration = rootElement.style;
             rootStyle.setProperty('--background-color', darkMode ? '#000' : '#EFE7D4');
             rootStyle.setProperty('--menu-color-0', darkMode ? '#000' : '#EFE7D4');
             rootStyle.setProperty('--menu-color-1', darkMode ? '#181818' : '#E9DDC7');

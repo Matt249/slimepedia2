@@ -1,11 +1,10 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
-import React from 'react';
-import worldImg from '/src/assets/map/output.png';
+import worldImg from '../assets/map/output.png';
 import 'leaflet/dist/leaflet.css';
 import '../css/Map.css';
 
-export const Map = () => {
+export const WorldMap = () => {
     const center: [number, number] = [0, 0];
     const zoom: number = 1;
     const mapRef = useRef<L.Map | null>(null);
@@ -30,4 +29,4 @@ export const Map = () => {
     );
 }
 
-export default Map;
+export default WorldMap;

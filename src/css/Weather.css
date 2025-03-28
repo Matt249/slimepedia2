@@ -17,10 +17,6 @@
     overflow: clip;
 }
 
-.weather-info {
-    flex: 1 1 auto;
-}
-
 .weather-element {
     position: relative;
     background-color: var(--item-color);
@@ -101,6 +97,7 @@
 }
 
 .weather-info {
+    flex: 1 1 auto;
     grid-area: main;
     position: relative;
     border-radius: var(--border-size);
@@ -132,7 +129,7 @@
     z-index: 10;
 }
 
-.top-buttons>div>img {
+.top-buttons>div>button>img {
     position: relative;
     width: auto;
     height: 5vh;
@@ -143,12 +140,18 @@
     z-index: 10;
 }
 
-.music-player {
+.top-buttons>div>button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.music-player>img {
     filter: grayscale(1)
 }
 
-.music-played,
-.top-buttons>div>img:hover {
+.music-played>img,
+.top-buttons>div>button>img:hover {
     transform: scale(1.2);
     filter: grayscale(0);
 }
@@ -206,7 +209,6 @@
     height: auto;
     object-fit: cover;
     transform: translate(-50%, -50%);
-    object-fit: cover;
     z-index: 1;
 }
 

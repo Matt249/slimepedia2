@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
@@ -6,13 +6,12 @@ import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodType
 import { Tab } from '../components/Tab';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
-import React from 'react';
-import pediaAbout from '/src/assets/misc/pediaabout.png';
-import pediaQuestion from '/src/assets/misc/pediaquestion.png';
-import noneImg from '/src/assets/misc/none.png';
-import arrow from '/src/assets/misc/arrow.png';
-import foodImg from '/src/assets/food/food.png';
-import pinkImg from '/src/assets/slimes/pink.png';
+import pediaAbout from '../assets/misc/pediaabout.png';
+import pediaQuestion from '../assets/misc/pediaquestion.png';
+import noneImg from '../assets/misc/none.png';
+import arrow from '../assets/misc/arrow.png';
+import foodImg from '../assets/food/food.png';
+import pinkImg from '../assets/slimes/pink.png';
 import '../css/Pedia.css';
 
 interface FoodTabsProps {
@@ -132,13 +131,24 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                     <img src={mediaFetcher(`food/${food}.png`)} className='img-main' alt={foodList[food][0]} />
                 </div>
             </div>
-            <div className={'little-box food-type link-to-food'} onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}>
+            <a
+                role='link'
+                className={'little-box food-type link-to-food'}
+                onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special');
+                    }
+                }}
+                tabIndex={0}
+            >
                 <img src={foodList[food][1] === null ? noneImg : mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
                 <div>
                     <h3>Food type</h3>
                     <h4>{foodSingular[foodList[food][1]]}</h4>
                 </div>
-            </div>
+            </a>
             {favSlime === null ?
                 <div className='little-box food-fav'>
                     <img src={noneImg} alt='None' />
@@ -253,9 +263,20 @@ export const Food = () => {
                 <div className={'pedia-infos food-infos' + (topBtn ? ' hidden-infos' : '')}>
                     <FoodDetails food={food} setFilter={setFilter} />
                 </div>
-                <div className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')} onClick={() => setTopBtn(!topBtn)}>
+                <a
+                    role='link'
+                    className={'arrow-btn ' + (topBtn ? 'top-btn' : 'bot-btn')}
+                    onClick={() => setTopBtn(!topBtn)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            setTopBtn(!topBtn);
+                        }
+                    }}
+                    tabIndex={0}
+                >
                     <img src={arrow} alt='Arrow' />
-                </div>
+                </a>
                 <FoodDescription food={food} topBtn={topBtn} />
             </div>
         </div>

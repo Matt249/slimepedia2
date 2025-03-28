@@ -16,7 +16,19 @@ export const Tab: React.FC<TabProps> = ({
     action = () => { },
 }) => {
     return (
-        <div className={"tab" + (selected ? " selected-tab" : "")} onClick={action}>
+        <a
+            className={"tab" + (selected ? " selected-tab" : "")}
+            onClick={action}
+            role="tab"
+            tabIndex={0}
+            aria-selected={selected}
+            onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    action();
+                }
+            }}
+        >
             <div className="left-corner">
                 <div></div>
             </div>
@@ -25,6 +37,6 @@ export const Tab: React.FC<TabProps> = ({
             </div>
             <img src={mediaFetcher(`${icon}.png`)} alt={title} />
             <p>{title}</p>
-        </div>
+        </a>
     )
 };
