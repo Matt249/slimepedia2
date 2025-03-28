@@ -1,7 +1,7 @@
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { Tab } from '../components/Tab';
-import { resourcesList, resourcesNames, resPedia } from '../text/resources';
+import { resourceList, resourcesNames, resourcePedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
@@ -26,7 +26,7 @@ const matchMainList = (list: string) => {
 const matchInfosList = (list: string) => {
     if ('toys' === list)
         return toysList;
-    return resourcesList;
+    return resourceList;
 }
 
 export const Items = () => {
@@ -82,7 +82,7 @@ export const Items = () => {
                     <div className="image-title">
                         <div className="info-title">
                             <h1>{infosItems[item][0]}</h1>
-                            <h2>{tab === 'toys' ? 'Playtime gets the wiggles out.' : resPedia[item][0]}</h2>
+                            <h2>{tab === 'toys' ? 'Playtime gets the wiggles out.' : resourceList[item][2]}</h2>
                         </div>
                         <div className="image-container">
                             <img src={mediaFetcher(`${tab}/${item}.png`)} className='img-main' alt={infosItems[item][0]} />
@@ -91,7 +91,7 @@ export const Items = () => {
                     <div className='little-box infos-box'>
                         <img src={pedia} alt="Pedia Informations Icon" />
                         <div>
-                            {(tab === 'resources' ? resPedia[item][1] : toyDesc[item]).split("\n").map((item) => {
+                            {(tab === 'resources' ? resourcePedia[item] : toyDesc[item]).split("\n").map((item) => {
                                 return (
                                     <p key={item}>
                                         {item}
@@ -144,7 +144,7 @@ export const Items = () => {
                             );
                         }
                     })()}
-                    <Biomes spawnList={tab !== 'toys' ? resourcesList[item][1] : ['pm']} />
+                    <Biomes spawnList={tab !== 'toys' ? resourceList[item][1] : ['pm']} />
                 </div>
             </div>
         </div>
