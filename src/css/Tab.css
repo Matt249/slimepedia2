@@ -1,6 +1,6 @@
 .tab {
     position: relative;
-    padding: calc(var(--border-size) / 2) var(--border-size);
+    padding: var(--border-size);
     transition:
         background-color var(--animation-speed) var(--animation-function),
         border-radius var(--animation-speed) var(--animation-function),
@@ -20,14 +20,13 @@
 
 .tab:not(.selected-tab) {
     background-color: var(--menu-color-0);
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: var(--border-size);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
 .selected-tab {
-    padding-bottom: var(--border-size);
+    padding-bottom: calc(var(--border-size) * 2);
     margin-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -68,6 +67,11 @@
     clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
 
+.tab-corner {
+    position: absolute;
+    bottom: 0;
+}
+
 .left-corner>div,
 .right-corner>div {
     width: 100%;
@@ -81,8 +85,6 @@
 }
 
 .selected-tab>div {
-    position: absolute;
-    bottom: 0;
     width: var(--border-size);
     height: var(--border-size);
     transition:

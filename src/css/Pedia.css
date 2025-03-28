@@ -301,10 +301,11 @@ br {
 
 .food-tabs,
 .items-tabs {
+    height: fit-content;
     flex: 0 0 auto;
     display: grid;
     grid-template-rows: 1fr;
-    gap: 10px;
+    gap: var(--border-size);
     padding: 0;
     width: 100%;
     overflow-x: hidden;

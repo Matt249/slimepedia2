@@ -90,6 +90,10 @@
     vertical-align: middle;
 }
 
+.button.btn-selected>.image-frame {
+    background-color: transparent;
+}
+
 .button.btn-selected>p {
     font-weight: bolder;
     transform: scale(1.1);

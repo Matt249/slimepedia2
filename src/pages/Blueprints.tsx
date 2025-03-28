@@ -199,54 +199,84 @@ const UpgradesPage: React.FC = () => {
     const { blueprint: upgradeName, tier: selectedTier } = useParams();
     const tier = selectedTier ? parseInt(selectedTier, 10) : 1;
     const upgrade = upgradeName ?? null;
-    if (upgrade !== null) {
-        if (!upgradeNames.includes(upgrade))
-            return (<Navigate to='/blueprints/upgrades' />);
-        else if (tier < 1 || tier > upgradePacks[upgrade][1])
-            return (<Navigate to={`/blueprints/upgrades/${upgrade}`} />);
-    }
+
+    const validateUpgrade = () => {
+        if (upgrade !== null) {
+            if (!upgradeNames.includes(upgrade)) return <Navigate to='/blueprints/upgrades' />;
+            if (tier < 1 || tier > upgradePacks[upgrade][1]) return <Navigate to={`/blueprints/upgrades/${upgrade}`} />;
+        }
+        return null;
+    };
+
+    const renderUpgradeList = () => (
+        <div className='vac-upgrade-list'>
+            {upgradeNames.map((upgradeName) => (
+                <UpgradeItemList
+                    selected={upgrade === upgradeName}
+                    key={upgradeName}
+                    upgradePack={[upgradeName, upgradePacks[upgradeName][0], upgradePacks[upgradeName][1]]}
+                    tier={tier}
+                />
+            ))}
+        </div>
+    );
+
+    const renderUpgradeInfo = () => (
+        <div className='vac-upgrade-info'>
+            <UpgradeTitleBox upgrade={upgrade} tier={tier} />
+            <UpgradeRecipeBox upgrade={upgrade} tier={tier} />
+            <UpgradeEffectBox upgrade={upgrade} tier={tier} />
+            <UpgradeRequirementsBox upgrade={upgrade} tier={tier} />
+        </div>
+    );
+
     return (
         <>
-            <div className='vac-upgrade-list'>
-                {upgradeNames.map((upgradeName) => (
-                    <UpgradeItemList
-                        selected={upgrade === upgradeName}
-                        key={upgradeName}
-                        upgradePack={[upgradeName, upgradePacks[upgradeName][0], upgradePacks[upgradeName][1]]}
-                        tier={tier}
-                    />
-                ))}
-            </div >
-            <div className='vac-upgrade-info'>
-                <div className='blueprint-title-box'>
-                    <img src={upgrade === null ? upgradeImg : mediaFetcher(`upgrades/${upgrade}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
-                    <h1>{upgrade === null ? 'Select an upgrade' : upgradesList[upgrade + tier][0]}</h1>
-                    <h2>{upgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[upgrade + tier]}</h2>
-                </div>
-                <div className='blueprint-recipe-box'>
-                    <h2>Recipe</h2>
-                    {(upgrade !== null && tier !== null) && <CraftingList name={upgrade + tier} type={BlueprintType.UPGRADES} />}
-                </div>
-                <div className='vac-upgrade-effect-box'>
-                    <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][0][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
-                    <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][0][1]}</p>
-                    <Down />
-                    <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][1][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
-                    <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][1][1]}</p>
-                </div>
-                <div className='blueprint-requirements-box little-box'>
-                    {(upgrade === null) ? '' : (<>
-                        <img src={mediaFetcher(`${unlockRequirements[upgradesList[upgrade + tier][1]][1]}.png`)} alt={upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]} />
-                        <div>
-                            <h3>Requirements</h3>
-                            <h4>{upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]}</h4>
-                        </div>
-                    </>)}
-                </div>
-            </div>
+            {validateUpgrade()}
+            {renderUpgradeList()}
+            {renderUpgradeInfo()}
         </>
     );
 };
+
+const UpgradeTitleBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
+    <div className='blueprint-title-box'>
+        <img src={upgrade === null ? upgradeImg : mediaFetcher(`upgrades/${upgrade}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <h1>{upgrade === null ? 'Select an upgrade' : upgradesList[upgrade + tier][0]}</h1>
+        <h2>{upgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[upgrade + tier]}</h2>
+    </div>
+);
+
+const UpgradeRecipeBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
+    <div className='blueprint-recipe-box'>
+        <h2>Recipe</h2>
+        {(upgrade !== null && tier !== null) && <CraftingList name={upgrade + tier} type={BlueprintType.UPGRADES} />}
+    </div>
+);
+
+const UpgradeEffectBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
+    <div className='vac-upgrade-effect-box'>
+        <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][0][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][0][1]}</p>
+        <Down />
+        <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][1][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][1][1]}</p>
+    </div>
+);
+
+const UpgradeRequirementsBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
+    <div className='blueprint-requirements-box little-box'>
+        {(upgrade === null) ? '' : (
+            <>
+                <img src={mediaFetcher(`${unlockRequirements[upgradesList[upgrade + tier][1]][1]}.png`)} alt={upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]} />
+                <div>
+                    <h3>Requirements</h3>
+                    <h4>{upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]}</h4>
+                </div>
+            </>
+        )}
+    </div>
+);
 
 const UtilitiesPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
@@ -313,11 +343,15 @@ const RecipeMenu: React.FC = () => {
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     return (
         <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
-            <img src={shopImg} alt='Shop icon' onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+            <button onClick={() => setRecipeMenuToggle(!recipeMenuToggle)}>
+                <img src={shopImg} alt='Shop icon' />
+            </button>
             <div className='pin-header'>
                 <img src={shopImg} alt='Shop icon' />
                 <h1>Recipes Ingredients List</h1>
-                <img src={trashImg} alt='Clear the list' onClick={() => resetList()} />
+                <button onClick={() => resetList()}>
+                    <img src={trashImg} alt='Clear the list' />
+                </button>
                 <MemoXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
             <div>
@@ -343,7 +377,9 @@ const RecipeMenu: React.FC = () => {
                                     <Plus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <h3>{recipeList.current[blueprint][1]}</h3>
                                     <Minus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
-                                    <img onClick={() => resetBlueprint(blueprint)} src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
+                                    <button onClick={() => resetBlueprint(blueprint)}>
+                                        <img src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
+                                    </button>
                                 </div>
                             )
                         })}

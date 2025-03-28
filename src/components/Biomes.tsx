@@ -46,25 +46,35 @@ export const Biomes: React.FC<BiomesProps> = ({
             </>
         );
 
-        const handleMouseEnter = async () => {
-            const videoRef = videoRefs.current[index];
-            if (videoRef) {
-                try {
-                    await videoRef.play();
-                } catch (e) {
-                    console.error(e);
+        const handleVideoLoadAndPlay = async (videoRef: HTMLVideoElement) => {
+            try {
+                if (videoRef.readyState < 3) {
+                    await new Promise<void>((resolve, reject) => {
+                        videoRef.onloadeddata = () => resolve();
+                        videoRef.onerror = () => reject(new Error(`Failed to load video: ${videoRef.src}`));
+                    });
                 }
+                await videoRef.play();
+            } catch (error) {
+                console.error("Error loading and playing video:", error);
             }
         };
 
-        const handleMouseLeave = () => {
-            setTimeout(() => {
+        const handleMouseEnter = async () => {
+            const videoRef = videoRefs.current[index];
+            if (videoRef) {
+                await handleVideoLoadAndPlay(videoRef);
+            }
+        };
+
+        const handleMouseLeave = async () => {
+            setTimeout(async () => {
                 const videoRef = videoRefs.current[index];
                 if (videoRef) {
                     try {
                         videoRef.pause();
-                    } catch (e) {
-                        console.error(e);
+                    } catch (error) {
+                        console.error("Error pausing video:", error);
                     }
                 }
             }, animationDelay);

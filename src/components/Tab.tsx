@@ -29,10 +29,10 @@ export const Tab: React.FC<TabProps> = ({
                 }
             }}
         >
-            <div className="left-corner">
+            <div className="left-corner tab-corner">
                 <div></div>
             </div>
-            <div className="right-corner">
+            <div className="right-corner tab-corner">
                 <div></div>
             </div>
             <img src={mediaFetcher(`${icon}.png`)} alt={title} />
