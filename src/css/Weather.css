@@ -179,6 +179,12 @@
     transition: transform var(--animation-speed) var(--animation-function);
 }
 
+.weather-info-title>h1,
+.weather-info-title>h2,
+.weather-info-title>p {
+    text-shadow: var(--text-shadow);
+}
+
 .weather-title-hidden {
     transform: translateY(calc(-100% - var(--border-size)));
 }
