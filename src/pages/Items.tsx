@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { Tab } from '../components/Tab';
@@ -6,7 +7,6 @@ import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
 import { mediaFetcher } from '../media-manager';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import React from 'react';
 import pedia from '../assets/misc/pediatut.png';
 import buck from '../assets/misc/buck.png';
 import noneIcon from '../assets/misc/none.png';
@@ -33,8 +33,8 @@ export const Items = () => {
     const firstOption = 'resources';
     const lastOption = 'toys';
     const { tab: tabName, item: itemName } = useParams();
-    const tab = (tabName && ['resources', 'toys'].includes(tabName)) ? tabName : firstOption;
-    const item = (itemName && matchMainList(tab).includes(itemName)) ? itemName : matchMainList(tab)[0];
+    const [tab, setTab] = useState((tabName && ['resources', 'toys'].includes(tabName)) ? tabName : firstOption);
+    const item = (itemName && (resourcesNames.includes(itemName) || toyNames.includes(itemName))) ? itemName : matchMainList(tab)[0];
     const itemsNames = matchMainList(tab);
     const infosItems = matchInfosList(tab);
 
@@ -46,20 +46,18 @@ export const Items = () => {
         <div>
             <div className='list-container'>
                 <div className='items-tabs'>
-                    <NavLink to='/items/resources' style={{ textDecoration: 'none' }}>
-                        <Tab
-                            title='Resources'
-                            icon='misc/res'
-                            selected={tab === 'resources'}
-                        />
-                    </NavLink>
-                    <NavLink to='/items/toys' style={{ textDecoration: 'none' }}>
-                        <Tab
-                            title='Toys'
-                            icon='misc/toys'
-                            selected={tab === 'toys'}
-                        />
-                    </NavLink>
+                    <Tab
+                        title='Resources'
+                        icon='misc/res'
+                        selected={tab === 'resources'}
+                        action={() => setTab(firstOption)}
+                    />
+                    <Tab
+                        title='Toys'
+                        icon='misc/toys'
+                        selected={tab === 'toys'}
+                        action={() => setTab(lastOption)}
+                    />
                 </div>
                 <div className='list-food' style={{ borderRadius: `${tab === firstOption ? '0' : 'var(--border-size)'} ${tab === lastOption ? ' 0 ' : 'var(--border-size)'} var(--border-size) var(--border-size)` }}>
                     {itemsNames.map((itemName) => {

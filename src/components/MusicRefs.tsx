@@ -97,26 +97,28 @@ export const MusicRefs: React.FC<{ region: string }> = ({ region: regionName }) 
                 <button className={'music-player-icon'} onClick={() => setMusicMenu(!musicMenu)}>
                     <img src={musicImg} alt='Open music list' />
                 </button>
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-ambient' ? 'music-current' : ''}`} onClick={() => playAudio(ambientNightRef, currentAudio, setCurrentAudio)}>
-                    <img src={cheerfulStatue} alt='Cheerful Statue' />
-                </button>
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-relax' ? 'music-current' : ''}`} onClick={() => playAudio(relaxNightRef, currentAudio, setCurrentAudio)}>
-                    <img src={happyStatue} alt='Happy Statue' />
-                </button>
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-theme' ? 'music-current' : ''}`} onClick={() => playAudio(themeNightRef, currentAudio, setCurrentAudio)}>
-                    <img src={overjoyedStatue} alt='Overjoyed Statue' />
-                </button>
-                <img src={moonImg} className='music-time' alt='Night Music' />
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-ambient' ? 'music-current' : ''}`} onClick={() => playAudio(ambientDayRef, currentAudio, setCurrentAudio)}>
-                    <img src={cheerfulStatue} alt='Cheerful Statue' />
-                </button>
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-relax' ? 'music-current' : ''}`} onClick={() => playAudio(relaxDayRef, currentAudio, setCurrentAudio)}>
-                    <img src={happyStatue} alt='Happy Statue' />
-                </button>
-                <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-theme' ? 'music-current' : ''}`} onClick={() => playAudio(themeDayRef, currentAudio, setCurrentAudio)}>
-                    <img src={overjoyedStatue} alt='Overjoyed Statue' />
-                </button>
-                <img src={sunImg} className='music-time' alt='Day Music' />
+                <div>
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-ambient' ? 'music-current' : ''}`} onClick={() => playAudio(ambientNightRef, currentAudio, setCurrentAudio)}>
+                        <img src={cheerfulStatue} alt='Cheerful Statue' />
+                    </button>
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-relax' ? 'music-current' : ''}`} onClick={() => playAudio(relaxNightRef, currentAudio, setCurrentAudio)}>
+                        <img src={happyStatue} alt='Happy Statue' />
+                    </button>
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-theme' ? 'music-current' : ''}`} onClick={() => playAudio(themeNightRef, currentAudio, setCurrentAudio)}>
+                        <img src={overjoyedStatue} alt='Overjoyed Statue' />
+                    </button>
+                    <img src={moonImg} className='music-time' alt='Night Music' />
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-ambient' ? 'music-current' : ''}`} onClick={() => playAudio(ambientDayRef, currentAudio, setCurrentAudio)}>
+                        <img src={cheerfulStatue} alt='Cheerful Statue' />
+                    </button>
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-relax' ? 'music-current' : ''}`} onClick={() => playAudio(relaxDayRef, currentAudio, setCurrentAudio)}>
+                        <img src={happyStatue} alt='Happy Statue' />
+                    </button>
+                    <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-day-theme' ? 'music-current' : ''}`} onClick={() => playAudio(themeDayRef, currentAudio, setCurrentAudio)}>
+                        <img src={overjoyedStatue} alt='Overjoyed Statue' />
+                    </button>
+                    <img src={sunImg} className='music-time' alt='Day Music' />
+                </div>
             </div>
         </>
     )
@@ -187,15 +189,17 @@ export const LabyMusicRefs: React.FC = () => {
                 <button className={'music-player-icon'} onClick={() => setMusicMenu(!musicMenu)}>
                     <img src={musicImg} alt='Open music list' />
                 </button>
-                {sections.map((section) => (
-                    <MusicSection
-                        key={section}
-                        sectionName={section}
-                        refsList={refsList}
-                        currentAudio={currentAudio}
-                        setCurrentAudio={setCurrentAudio}
-                    />
-                ))}
+                <div>
+                    {sections.map((section) => (
+                        <MusicSection
+                            key={section}
+                            sectionName={section}
+                            refsList={refsList}
+                            currentAudio={currentAudio}
+                            setCurrentAudio={setCurrentAudio}
+                        />
+                    ))}
+                </div>
             </div>
         </>
     );

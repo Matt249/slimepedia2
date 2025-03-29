@@ -15,7 +15,8 @@
 	--pointer-style: pointer;
 	--paragraph-size: 1.5em;
 	--little-box-gap: 10vw;
-	--animation-speed: .3s; /* default: .3s */
+	--animation-speed: .3s;
+	/* default: .3s */
 	--link-color: #252466;
 	--border-size: 1em;
 	--animation-function: ease-in-out;
@@ -47,6 +48,11 @@ a,
 button {
 	transition: color var(--animation-speed) var(--animation-function);
 	margin: 0;
+}
+
+a,
+button {
+	cursor: pointer;
 }
 
 h1 {

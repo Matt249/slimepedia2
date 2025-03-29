@@ -34,21 +34,29 @@
     border-radius: 25px;
 }
 
-.pin-button>img {
+.pin-button>button {
     position: absolute;
     bottom: 1vh;
     right: 1vh;
     height: 5vh;
     width: 5vh;
     margin: 10px;
+    padding: 0;
     cursor: var(--pointer-style);
     transform: scale(1) rotate(0) translate(25%, 25%);
     transition: transform var(--animation-speed) var(--animation-function) 0s;
     z-index: 15;
+    background-color: transparent;
+    border: none;
 }
 
-.pin-button.opened>img {
+.pin-button.opened>button:not(:hover) {
     transform: scale(0) rotate(0) translate(25%, 25%);
+}
+
+.pin-button>button>img {
+    height: 100%;
+    width: 100%;
 }
 
 .pin-button.opened>div {
@@ -66,9 +74,10 @@
     grid-template-columns: auto 1fr auto auto;
     grid-template-rows: 1fr;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 25px 25px 0 0;
+    gap: var(--border-size);
+    padding: calc(var(--border-size) / 2);
+    border-radius: var(--border-size) var(--border-size) 0 0;
+    height: calc(var(--border-size) * 2);
     background-color: var(--item-color);
     overflow: hidden;
     transform: scale(1);
@@ -79,9 +88,18 @@
     transform: scale(0);
 }
 
+.pin-header>button,
 .pin-header>img {
-    height: 30px;
-    width: 30px;
+    height: calc(var(--border-size) * 2);
+    width: auto;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+}
+
+.pin-header>button>img {
+    height: 100%;
+    width: 100%;
 }
 
 .pin-header>h1 {
@@ -92,6 +110,7 @@
 }
 
 .pin-header>svg {
+    cursor: pointer;
     font-size: 1.8em;
     transform: scale(1);
     transition: transform var(--animation-speed) var(--animation-function);
@@ -115,7 +134,7 @@
 }
 
 .pin-list {
-    padding: 0 var(--border-size);
+    padding: 0 var(--border-size) var(--border-size) var(--border-size);
 }
 
 .craft-list-empty {
@@ -159,13 +178,24 @@
     grid-template-columns: auto 1fr auto;
 }
 
-.pin-blueprint-element>.clear-item-img {
-    height: 1.5em;
-    width: 1.5em;
-    border-radius: var(--border-size);
-    background-color: var(--menu-color-1);
+.pin-blueprint-element>button {
+    height: 2em;
+    width: 2em;
+    background-color: transparent;
+    border: none;
+    padding: 0;
     cursor: var(--pointer-style);
-    transition: background-color var(--animation-speed) var(--animation-function);
+    transform: scale(1);
+    transition: transform var(--animation-speed) var(--animation-function);
+}
+
+.pin-blueprint-element>button:hover {
+    transform: scale(1.2);
+}
+
+.pin-blueprint-element>button>img {
+    height: 100%;
+    width: 100%;
 }
 
 .pin-element>img,
@@ -512,7 +542,7 @@
 .blueprint-recipe-box {
     grid-area: recipe;
     align-items: center;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .blueprint-recipe-box>div>img,
