@@ -12,6 +12,7 @@ export default defineConfig({
     outDir: process.env.VITE_BUILD_PATH || 'dist',
   },
   server: {
-    port: 3000
+    host: process.env.DEV_SERVER_HOST || 'localhost',
+    port: process.env.VITE_DEV_SERVER_PORT || 3000
   },
 });
