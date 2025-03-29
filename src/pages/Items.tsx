@@ -39,7 +39,7 @@ export const Items = () => {
     const infosItems = matchInfosList(tab);
 
     if (itemName && !itemsNames.includes(itemName)) {
-        return tab === 'toys' ? <Navigate to='/items/toys/ball' /> : <Navigate to='/items/resource/brine' />;
+        return tab === 'toys' ? <Navigate to={'/items/toys/' + toyNames[0]} /> : <Navigate to={'/items/resource/' + resourcesNames[0]} />;
     }
 
     return (
