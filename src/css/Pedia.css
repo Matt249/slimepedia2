@@ -1,22 +1,3 @@
-:root {
-    --object-name-size: 2.5em;
-    --object-subname-size: 1.3em;
-    --little-box-title-size: 1.2em;
-    --little-box-subtitle-size: 1em;
-    --little-box-image-size: 5em;
-    --pedia-title-size: 1.5em;
-    --pedia-paragrah-size: 1.5em;
-    --desc-title-img-size: 1.8em;
-}
-
-@media (max-width: 1600px) {
-
-    .list-slime,
-    .list-food {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-}
-
 .list-slime,
 .list-food {
     padding: 10px;
@@ -72,7 +53,6 @@
     grid-template-areas:
         "image type fav"
         "image spawn spawn";
-
 }
 
 .pedia-infos.hidden-infos {
@@ -98,12 +78,12 @@
 }
 
 .info-title>h1 {
-    font-size: var(--object-name-size);
+    font-size: 2.5em;
     font-weight: bold;
 }
 
 .info-title>h2 {
-    font-size: var(--object-subname-size);
+    font-size: 1.3em;
     font-weight: normal;
     font-style: italic;
 }
@@ -138,7 +118,7 @@
     margin: 10px 0;
     text-align: justify;
     line-height: 1;
-    font-size: var(--pedia-paragrah-size);
+    font-size: 1.5em;
 }
 
 .box-food {
@@ -187,7 +167,6 @@
     margin-left: 10px;
     margin-top: 0;
 }
-
 
 .arrow-btn {
     --taille-btn: 25px;
@@ -258,18 +237,18 @@
 }
 
 .desc-title>img {
-    height: var(--desc-title-img-size);
+    height: 1.8em;
     width: auto;
 }
 
 .desc-title>h3 {
-    font-size: var(--pedia-title-size);
+    font-size: 1.5em;
     color: white;
     margin: 0;
 }
 
 .desc>p {
-    font-size: var(--pedia-paragrah-size);
+    font-size: 1.5em;
     margin: 0;
     overflow: hidden;
     height: fit-content;
@@ -278,7 +257,6 @@
 
 br {
     margin: 10px 0;
-
 }
 
 .hidden-desc {
@@ -341,7 +319,6 @@ br {
     grid-template-areas:
         "image desc desc"
         "image spawn spawn";
-
 }
 
 .presentation-toys {

@@ -1,13 +1,7 @@
 :root {
     --rotation: 5deg;
     --scale-growth: 1.2;
-    --btn-size: 100px;
-}
-
-@media (min-width: 2000px) {
-    :root {
-        --btn-size: 150px;
-    }
+    --btn-size: 5em;
 }
 
 .button {

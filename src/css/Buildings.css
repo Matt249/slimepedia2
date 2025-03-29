@@ -1,9 +1,3 @@
-:root {
-    --infos-title-size: 1.2em;
-    --infos-desc-size: 1em;
-    --infos-gap: 10px;
-}
-
 .buildings-list {
     display: grid;
     margin: 0;
@@ -110,12 +104,12 @@
 }
 
 .little-box-buildings>div>h3 {
-    font-size: var(--infos-title-size);
+    font-size: var(--small-text-size);
     font-weight: 700;
 }
 
 .little-box-buildings>div>h4 {
-    font-size: var(--infos-desc-size);
+    font-size: 1em;
     font-weight: 500;
 }
 
@@ -217,13 +211,13 @@
 .upgrade-no-infos>div>h3 {
     margin: var(--border-size) 0;
     font-weight: bold;
-    font-size: calc(var(--infos-title-size) * 1.5);
+    font-size: calc(var(--small-text-size) * 1.5);
 }
 
 .upgrade-no-infos>div>p {
     margin: 0;
     font-weight: 500;
-    font-size: calc(var(--infos-desc-size) * 1.2);
+    font-size: 1.2em;
 }
 
 .upgrade-infos>div {

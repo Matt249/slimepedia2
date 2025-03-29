@@ -1,7 +1,3 @@
-:root {
-    --svg-scale: 1.7;
-}
-
 .pin-button {
     position: absolute;
     width: 6vh;
@@ -299,7 +295,7 @@
 }
 
 .quantity-selector>svg:first-child {
-    transform: rotate(90deg) scale(var(--svg-scale));
+    transform: rotate(90deg) scale(1.7);
 }
 
 .quantity-selector>svg:first-child:hover {
@@ -307,7 +303,7 @@
 }
 
 .quantity-selector>svg:last-child {
-    transform: rotate(-90deg) scale(var(--svg-scale));
+    transform: rotate(-90deg) scale(1.7);
 }
 
 .quantity-selector>svg:last-child:hover {
