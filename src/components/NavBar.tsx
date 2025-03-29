@@ -1,37 +1,51 @@
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { NavButton } from "./NavButton";
-import React, { useEffect, useState } from "react";
 import houseDay from '../assets/wallpapers/houseDay.png';
 import houseNight from '../assets/wallpapers/houseNight.png';
-import { mediaFetcher } from "../media-manager";
 
 export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
 
-    const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+    // Détecter la préférence initiale du mode sombre
+    const getInitialDarkMode = () => {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode !== null) {
+            return savedDarkMode === 'true';
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+
+    const [darkMode, setDarkMode] = useState(getInitialDarkMode);
 
     useEffect(() => {
-        const rootElement = document.querySelector(':root') as HTMLElement;
-        if (rootElement) {
-            const rootStyle: CSSStyleDeclaration = rootElement.style;
-            rootStyle.setProperty('--background-color', darkMode ? '#000' : '#EFE7D4');
-            rootStyle.setProperty('--menu-color-0', darkMode ? '#000' : '#EFE7D4');
-            rootStyle.setProperty('--menu-color-1', darkMode ? '#181818' : '#E9DDC7');
-            rootStyle.setProperty('--item-color', darkMode ? '#222' : '#D2B394');
-            rootStyle.setProperty('--text-color', darkMode ? '#fff' : '#000');
-            rootStyle.setProperty('--pointer-style', 'url(' + (mediaFetcher('ui/map.png')) + '), pointer');
-            rootStyle.setProperty('--link-color', darkMode ? 'lightskyblue' : '252466');
-        }
+        // Basculer entre les thèmes en modifiant l'attribut data-theme
+        const rootElement = document.documentElement;
+        rootElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+
+        // Mettre à jour l'image de fond
         document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
+
+        // Sauvegarder la préférence dans localStorage
         localStorage.setItem('darkMode', darkMode.toString());
-        window.dispatchEvent(new Event('darkModeChange'));
     }, [darkMode]);
 
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        const handleChange = (e: MediaQueryListEvent) => {
+            // Ne changer dynamiquement que si l'utilisateur n'a pas explicitement choisi un thème
+            const savedDarkMode = localStorage.getItem('darkMode');
+            if (savedDarkMode === null) {
+                setDarkMode(e.matches);
+            }
+        };
+
+        mediaQuery.addEventListener('change', handleChange);
+        return () => mediaQuery.removeEventListener('change', handleChange);
+    }, []);
+
     const toggleDarkMode = () => {
-        const newDarkMode = !darkMode;
-        setDarkMode(newDarkMode);
-        localStorage.setItem('darkMode', newDarkMode.toString());
-        window.dispatchEvent(new Event('darkModeChange'));
+        setDarkMode((prevMode) => !prevMode);
     };
 
     return (
@@ -78,10 +92,10 @@ export const NavBar = () => {
             </NavLink>
 
             <div className="theme-btn-container">
-                <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} action={toggleDarkMode} tilting="random" selected={false} />
+            <NavButton name="Switch Theme" icon={darkMode ? 'misc/sun' : 'misc/moon'} action={toggleDarkMode} tilting="random" selected={false} />
             </div>
         </nav>
     );
-}
+};
 
 export default NavBar;
