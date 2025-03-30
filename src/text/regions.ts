@@ -130,5 +130,5 @@ export const regionsResourcesInfos: { [key: string]: [string, string, string] } 
     'spawnPogo': ['Pogofruit Trees', 'food/pogo', '/food/pogo'],
     'spawnCarrot': ['Carrot Patches', 'food/carrot', '/food/carrot'],
     'pond': ['Natural Ponds', 'buildings/pond', '/buildings/pond'],
-    'springpad': ['Jump Pad', 'gadgets/springpad', '/blueprints/utilities/springpad']
+    'springpad': ['Spring Pad', 'gadgets/springpad', '/blueprints/utilities/springpad']
 }

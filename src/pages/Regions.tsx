@@ -100,7 +100,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                         </NavLink>
                     )
                 }) : (
-                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                    <img className='no-hover' src={noneImg} alt='No Region' />
                 )}
             </div>
         </div>
@@ -191,7 +191,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                         </NavLink>
                     )
                 }) : (
-                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                    <img className='no-hover' src={noneImg} alt='No Region' />
                 )}
             </div>
         </div>
