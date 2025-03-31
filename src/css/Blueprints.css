@@ -77,7 +77,9 @@
     background-color: var(--item-color);
     overflow: hidden;
     transform: scale(1);
-    transition: transform var(--animation-speed) var(--animation-function);
+    transition:
+        background-color var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .pin-button:not(.opened)>div {
@@ -109,7 +111,9 @@
     cursor: pointer;
     font-size: 1.8em;
     transform: scale(1);
-    transition: transform var(--animation-speed) var(--animation-function);
+    transition:
+        fill var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .pin-header>svg:hover {
@@ -468,7 +472,9 @@
     height: 50px;
     width: 50px;
     cursor: var(--pointer-style);
-    transition: transform var(--animation-speed) var(--animation-function);
+    transition:
+        fill var(--animation-speed) var(--animation-function),
+        transform var(--animation-speed) var(--animation-function);
 }
 
 .arrow-left.disabled>svg,
@@ -647,6 +653,10 @@
     width: fit-content;
 }
 
+.blueprint-list.decoration {
+    border-radius: 0 0 var(--border-size) var(--border-size);
+}
+
 .blueprint-list>a {
     text-decoration: none;
     display: flex;
@@ -684,15 +694,53 @@
     flex: 0 0 auto;
     display: flex;
     flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
     overflow-x: auto;
     overflow-y: hidden;
     gap: 10px;
-    border-radius: 10px 10px 0 0;
+    border-radius: var(--border-size) var(--border-size) 0 0;
     width: 100%;
+    padding: calc(var(--border-size) * 2) var(--border-size);
+    box-sizing: border-box;
+    background-color: var(--menu-color-1);
 }
 
-.decoration-tabs>div {
-    flex: 1 0 auto;
+.decoration-tab {
+    flex: 0 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--border-size) / 2);
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform var(--animation-speed) var(--animation-function);
+}
+
+.decoration-tab>img {
+    height: 3vh;
+    width: auto;
+}
+
+.decoration-tab.selected,
+.decoration-tab:hover {
+    transform: scale(1.5);
+}
+    
+.decoration-filter-name {
+    background-color: var(--menu-color-1);
+    padding: 0 var(--border-size);
+}
+
+.decoration-filter-name>h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
 }
 
 .decoration-theme {

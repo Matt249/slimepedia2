@@ -20,7 +20,9 @@
 	--border-size: 1em;
 	--animation-function: ease-in-out;
 	color-scheme: light dark;
-	transition: background-color 0.3s ease, color 0.3s ease;
+	transition:
+		background-color var(--animation-speed) var(--animation-function),
+		color var(--animation-speed) var(--animation-function);
 }
 
 [data-theme="dark"] {
@@ -63,8 +65,12 @@ h5,
 h6,
 p,
 a,
+div,
+nav,
 button {
-	transition: color var(--animation-speed) var(--animation-function);
+	transition:
+		background-color var(--animation-speed) var(--animation-function),
+		color var(--animation-speed) var(--animation-function);
 	margin: 0;
 }
 

@@ -409,6 +409,7 @@ export const utilitiesDescription: { [key: string]: string } = {
 };
 
 export const themeList: { [key: string]: [string, string] } = {
+    'any': ['Any', 'misc/decorations'],
     'fields': ['Rainbow Fields', 'world/fields'],
     'valley': ['Ember Valley', 'world/valley'],
     'strand': ['Starlight Strand', 'world/strand'],
