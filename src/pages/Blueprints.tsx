@@ -5,7 +5,6 @@ import { Minus } from '../components/Minus';
 import { Plus } from '../components/Plus';
 import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
-import { Tab } from '../components/Tab';
 import { RecipeProvider, useRecipeContext } from '../components/RecipeContext';
 import {
     decorationsDescription, decorationsList, decorationsNames, recipeElements, themeList, unlockRequirements,
@@ -315,18 +314,20 @@ const WarpPage: React.FC = () => {
 const DecorationsPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName ?? null
-    const [decoFilter, setDecoFilter] = useState<string | null>(null);
+    const [decoFilter, setDecoFilter] = useState<string>('any');
     return (
         <>
             <div className='decoration-list'>
                 <div className='decoration-tabs'>
-                    <Tab title='Any' icon='misc/decorations' action={() => setDecoFilter(null)} selected={decoFilter === null} />
                     {Object.keys(themeList).map((theme) => (
-                        <Tab key={theme} title={themeList[theme][0]} icon={themeList[theme][1]} action={() => setDecoFilter(theme)} selected={theme === decoFilter} />
+                        <button key={theme} className={'decoration-tab' + (decoFilter === theme ? ' selected' : '')} onClick={() => setDecoFilter(theme)} title={themeList[theme][0]}>
+                            <img src={mediaFetcher(`${themeList[theme][1]}.png`)} alt="Any Decoration" />
+                        </button>
                     ))}
                 </div>
-                <div className='blueprint-list'>
-                    {(decoFilter === null ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
+                <div className='decoration-filter-name'><h1>Filter : {themeList[decoFilter][0]}</h1></div>
+                <div className='blueprint-list decoration'>
+                    {(decoFilter === 'any' ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
                         <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='blueprint-item'>
                             <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={1.25} />
                         </NavLink>

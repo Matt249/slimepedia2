@@ -35,29 +35,29 @@
         background-color var(--animation-speed) var(--animation-function);
 }
 
-.button:hover,
-.btn-selected {
-    background-color: var(--item-color);
-}
-.button:hover:not(.btn-selected) {
+.button:hover {
     background-color: var(--menu-color-1);
 }
+
+.btn-selected>.image-frame>img.image-button {
+    transform: scale(1.3);
+}
+
 
 .button:hover>.image-frame,
 .btn-selected>.image-frame {
     border-radius: 15%;
 }
 
-.button:hover>div>.img-btn-0 {
+.button:hover:not(.btn-selected)>div>.img-btn-0 {
     transform: rotate(calc(-1 * var(--rotation))) scale(var(--scale-growth));
 }
 
-.button:hover>div>.img-btn-1,
-.btn-selected>div>.image-button {
+.button:hover:not(.btn-selected)>div>.img-btn-1 {
     transform: rotate(0deg) scale(1.1);
 }
 
-.button:hover>div>.img-btn-2 {
+.button:hover:not(.btn-selected)>div>.img-btn-2 {
     transform: rotate(var(--rotation)) scale(var(--scale-growth));
 }
 
@@ -80,7 +80,7 @@
     text-decoration: none;
     color: var(--text-color);
     width: 100%;
-    font-size: calc(var(--btn-size) / 5);
+    font-size: 1em;
     text-overflow: ellipsis;
     overflow: hidden;
     line-height: 1.2em;

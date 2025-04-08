@@ -108,7 +108,7 @@ export const Weather: React.FC = () => {
                 <div className={"weather-info-content" + (panel ? "" : " weather-content-hidden")}>
                     <div className="weather-box effects-box">
                         <h2 className='weather-box-title'>Effects</h2>
-                        <p>{weatherList[weather][3]}</p>
+                        <p>WIP</p>
                     </div>
                     <div className="weather-box related-weater-box">
                         <h2 className='weather-box-title'>Related Weather</h2>
