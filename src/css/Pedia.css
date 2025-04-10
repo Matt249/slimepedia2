@@ -8,6 +8,27 @@
     overflow-y: auto;
     background-color: var(--menu-color-1);
     border-radius: var(--border-size);
+    transition:
+        width var(--animation-speed) var(--animation-function),
+        background-color var(--animation-speed) var(--animation-function), ;
+}
+
+@media screen and (max-width: 1600px) {
+
+    .list-slime,
+    .list-food {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    .list-slime,
+    .list-food {
+        grid-template-columns: 1fr 1fr;
+    }
+
 }
 
 .list-slime {

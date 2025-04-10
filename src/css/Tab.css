@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    height: 8vh;
+    height: fit-content;
     overflow: visible;
 }
 
@@ -39,7 +39,7 @@
 
 .tab>img {
     width: auto;
-    height: 100%;
+    height: 6vh;
     transform: scale(1);
     transition: transform var(--animation-speed) var(--animation-function);
     flex: 1 1 auto;
