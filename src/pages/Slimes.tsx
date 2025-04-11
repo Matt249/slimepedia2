@@ -15,7 +15,6 @@ import toysImg from '../assets/misc/toys.png';
 import pediaSlime from '../assets/misc/pediaslime.png';
 import pediaRisks from '../assets/misc/pediarisks.png';
 import pediaPlort from '../assets/misc/pediaplort.png';
-import 'overlayscrollbars/overlayscrollbars.css';
 import '../css/Pedia.css';
 
 interface SlimeDetailsProps {

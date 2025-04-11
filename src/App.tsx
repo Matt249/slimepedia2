@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { slimeNames } from './text/slimes.js';
 import { mediaFetcher } from './media-manager.js';
 import Routes from './routes/index.jsx';
+import 'overlayscrollbars/overlayscrollbars.css';
 import './css/App.css';
 
 function App() {
