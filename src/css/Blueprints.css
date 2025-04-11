@@ -589,7 +589,7 @@
 }
 
 .blueprint-recipe-list [data-overlayscrollbars-contents]>div>h3,
-.recipe-list [data-overlayscrollbars-contents]div>h3 {
+.recipe-list [data-overlayscrollbars-contents]>div>h3 {
     font-size: 1.5em;
     margin: 0;
 }
