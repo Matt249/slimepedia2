@@ -3,7 +3,6 @@ import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { Down } from '../components/Down';
 import { Minus } from '../components/Minus';
 import { Plus } from '../components/Plus';
-import { mediaFetcher } from '../media-manager';
 import { NavButton } from '../components/NavButton';
 import { RecipeProvider, useRecipeContext } from '../components/RecipeContext';
 import {
@@ -11,13 +10,6 @@ import {
     upgradeDescriptions, upgradeEffects, upgradeNames, upgradePacks, upgradesList, utilitiesDescription,
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
-import upgradeImg from '../assets/misc/upgrade.png';
-import utilitiesImg from '../assets/misc/utilities.png';
-import warpImg from '../assets/misc/warp.png';
-import decorationsImg from '../assets/misc/decorations.png';
-import shopImg from '../assets/misc/shop.png';
-import trashImg from '../assets/misc/trash.png';
-import blueprintImg from '../assets/misc/blueprint.png';
 import '../css/Blueprints.css';
 import MemoXmark from '../components/Xmark';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
@@ -93,7 +85,7 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             {Object.keys(recipe).map((ingredient) => (
                 <div key={ingredient}>
                     <img
-                        src={mediaFetcher(`${recipeElements[ingredient][1]}.png`)}
+                        src={`/assets/${recipeElements[ingredient][1]}.png`}
                         alt={recipeElements[ingredient][0]}
                         title={recipeElements[ingredient][0]}
                     />
@@ -113,7 +105,7 @@ const BlueprintInfos: React.FC<{ blueprint: string | null, type: BlueprintType }
         return (
             <div className='blueprint-infos'>
                 <div className='blueprint-title-box'>
-                    <img src={blueprintImg} alt='No Blueprint' />
+                    <img src='/assets/misc/blueprint.png' alt='No Blueprint' />
                     <h1>Select a blueprint</h1>
                     <h2>Select an upgrade to view its details</h2>
                 </div>
@@ -133,12 +125,12 @@ const BlueprintInfos: React.FC<{ blueprint: string | null, type: BlueprintType }
     return (
         <div className='blueprint-infos'>
             <div className='blueprint-title-box'>
-                <img src={mediaFetcher(`${folder}/${blueprint}.png`)} alt={blueprintDescription} />
+                <img src={`/assets/${folder}/${blueprint}.png`} alt={blueprintDescription} />
                 <h1>{blueprintInfos[0]}</h1>
                 <h2>{blueprintDescription}</h2>
             </div>
             <div className='blueprint-requirements-box little-box'>
-                <img src={mediaFetcher(`${unlockRequirements[blueprintInfos[1]][1]}.png`)} alt={unlockRequirements[blueprintInfos[1]][0]} />
+                <img src={`/assets/${unlockRequirements[blueprintInfos[1]][1]}.png`} alt={unlockRequirements[blueprintInfos[1]][0]} />
                 <div>
                     <h3>Requirements</h3>
                     <h4>{unlockRequirements[blueprintInfos[1]][0]}</h4>
@@ -167,7 +159,7 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
 
     return (
         <div
-            className={'vac-upgrade-item' + (selected ? ' selected' : '')}
+            className={`vac-upgrade-item${(selected ? ' selected' : '')}`}
             key={upgradePack[0]}
         >
             <NavLink
@@ -175,7 +167,7 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
                 className='vac-upgrade-pack'
             >
 
-                <img src={mediaFetcher(`upgrades/${upgradePack[0]}.png`)} alt={upgradePack[1]} />
+                <img src={`/assets/upgrades/${upgradePack[0]}.png`} alt={upgradePack[1]} />
                 <h2>{upgradePack[1]}</h2>
             </NavLink>
             <div className='vac-upgrade-tiers'>
@@ -264,7 +256,7 @@ const UpgradesPage: React.FC = () => {
 
 const UpgradeTitleBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
     <div className='blueprint-title-box'>
-        <img src={upgrade === null ? upgradeImg : mediaFetcher(`upgrades/${upgrade}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <img src={upgrade === null ? '/assets/misc/upgrade.png' : `/assets/upgrades/${upgrade}.png`} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
         <h1>{upgrade === null ? 'Select an upgrade' : upgradesList[upgrade + tier][0]}</h1>
         <h2>{upgrade === null ? 'Select an upgrade to view its details' : upgradeDescriptions[upgrade + tier]}</h2>
     </div>
@@ -279,10 +271,10 @@ const UpgradeRecipeBox: React.FC<{ upgrade: string | null; tier: number }> = ({ 
 
 const UpgradeEffectBox: React.FC<{ upgrade: string | null; tier: number }> = ({ upgrade, tier }) => (
     <div className='vac-upgrade-effect-box'>
-        <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][0][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <img src={upgrade === null ? '' : `/assets/${upgradeEffects[upgrade + tier][0][0]}.png`} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
         <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][0][1]}</p>
         <Down />
-        <img src={upgrade === null ? '' : mediaFetcher(`${upgradeEffects[upgrade + tier][1][0]}.png`)} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
+        <img src={upgrade === null ? '' : `/assets/${upgradeEffects[upgrade + tier][1][0]}.png`} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
         <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][1][1]}</p>
     </div>
 );
@@ -291,7 +283,7 @@ const UpgradeRequirementsBox: React.FC<{ upgrade: string | null; tier: number }>
     <div className='blueprint-requirements-box little-box'>
         {(upgrade === null) ? '' : (
             <>
-                <img src={mediaFetcher(`${unlockRequirements[upgradesList[upgrade + tier][1]][1]}.png`)} alt={upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]} />
+                <img src={`/assets/${unlockRequirements[upgradesList[upgrade + tier][1]][1]}.png`} alt={upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]} />
                 <div>
                     <h3>Requirements</h3>
                     <h4>{upgrade === null ? '' : unlockRequirements[upgradesList[upgrade + tier][1]][0]}</h4>
@@ -371,8 +363,8 @@ const DecorationsPage: React.FC = () => {
             <div className='decoration-list'>
                 <div className='decoration-tabs'>
                     {Object.keys(themeList).map((theme) => (
-                        <button key={theme} className={'decoration-tab' + (decoFilter === theme ? ' selected' : '')} onClick={() => setDecoFilter(theme)} title={themeList[theme][0]}>
-                            <img src={mediaFetcher(`${themeList[theme][1]}.png`)} alt="Any Decoration" />
+                        <button key={theme} className={`decoration-tab${decoFilter === theme ? ' selected' : ''}`} onClick={() => setDecoFilter(theme)} title={themeList[theme][0]}>
+                            <img src={`/assets/${themeList[theme][1]}.png`} alt="Any Decoration" />
                         </button>
                     ))}
                 </div>
@@ -404,13 +396,13 @@ const RecipeMenu: React.FC = () => {
     return (
         <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
             <button onClick={() => setRecipeMenuToggle(!recipeMenuToggle)}>
-                <img src={shopImg} alt='Shop icon' />
+                <img src='/assets/misc/shop.png' alt='Shop icon' />
             </button>
             <div className='pin-header'>
-                <img src={shopImg} alt='Shop icon' />
+                <img src='/assets/misc/shop.png' alt='Shop icon' />
                 <h1>Recipes Ingredients List</h1>
                 <button onClick={() => resetList()}>
-                    <img src={trashImg} alt='Clear the list' />
+                    <img src='/assets/misc/trash.png' alt='Clear the list' />
                 </button>
                 <MemoXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
@@ -443,13 +435,13 @@ const RecipeMenu: React.FC = () => {
                                     className='pin-element pin-blueprint-element'
                                     key={blueprint}
                                 >
-                                    <img src={mediaFetcher(type === BlueprintType.UPGRADES ? ('upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `${currentType}/${blueprint}.png`)} alt='Icon of blueprint' />
+                                    <img src={type === BlueprintType.UPGRADES ? ('/assets/upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `/assets/${currentType}/${blueprint}.png`} alt='Icon of blueprint' />
                                     <p>{name}: </p>
                                     <Plus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <h3>{recipeList.current[blueprint][1]}</h3>
                                     <Minus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <button onClick={() => resetBlueprint(blueprint)}>
-                                        <img src={trashImg} alt='Clear the blueprint' className='clear-item-img' />
+                                        <img src='/assets/misc/trash.png' alt='Clear the blueprint' className='clear-item-img' />
                                     </button>
                                 </div>
                             )
@@ -469,7 +461,7 @@ const RecipeMenu: React.FC = () => {
                                 className='pin-element pin-item-element'
                             >
                                 <img
-                                    src={mediaFetcher(`${recipeElements[item][1]}.png`)}
+                                    src={`/assets/${recipeElements[item][1]}.png`}
                                     alt={recipeElements[item][0]}
                                     title={recipeElements[item][0]}
                                 />
@@ -510,20 +502,20 @@ export const Blueprints: React.FC = () => {
         <RecipeProvider>
             <div>
                 <div className='blueprints-category'>
-                    <NavLink to='/blueprints/upgrades' className={'blueprints-tab' + (tab === 'upgrades' ? ' selected' : '')}>
-                        <img src={upgradeImg} alt="Upgrade Icon" />
+                    <NavLink to='/blueprints/upgrades' className={`blueprints-tab${tab === 'upgrades' ? ' selected' : ''}`}>
+                        <img src='/assets/misc/upgrade.png' alt="Upgrade Icon" />
                         <h1>Upgrades</h1>
                     </NavLink>
-                    <NavLink to='/blueprints/utilities' className={'blueprints-tab' + (tab === 'utilities' ? ' selected' : '')}>
-                        <img src={utilitiesImg} alt="Utilities" />
+                    <NavLink to='/blueprints/utilities' className={`blueprints-tab${tab === 'utilities' ? ' selected' : ''}`}>
+                        <img src='/assets/misc/utilities.png' alt="Utilities" />
                         <h1>Utilities</h1>
                     </NavLink>
-                    <NavLink to='/blueprints/warp' className={'blueprints-tab' + (tab === 'warp' ? ' selected' : '')}>
-                        <img src={warpImg} alt="Warp Tech" />
+                    <NavLink to='/blueprints/warp' className={`blueprints-tab${tab === 'warp' ? ' selected' : ''}`}>
+                        <img src='/assets/misc/warp.png' alt="Warp Tech" />
                         <h1>Warp Tech</h1>
                     </NavLink>
-                    <NavLink to='/blueprints/decorations' className={'blueprints-tab' + (tab === 'decorations' ? ' selected' : '')}>
-                        <img src={decorationsImg} alt="Decorations" />
+                    <NavLink to='/blueprints/decorations' className={`blueprints-tab${tab === 'decorations' ? ' selected' : ''}`}>
+                        <img src='/assets/misc/decorations.png' alt="Decorations" />
                         <h1>Decoration</h1>
                     </NavLink>
                 </div>

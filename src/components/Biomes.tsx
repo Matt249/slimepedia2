@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { spawnLocationsList } from '../text/regions';
-import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { weatherID } from '../text/weather';
@@ -61,7 +60,7 @@ export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
                 <video
                     ref={(el) => (videoRefs.current[index] = el)}
                     className="biome-list-video"
-                    src={mediaFetcher(`videos/${biome}${light && '.light'}.webm`)}
+                    src={`/assets/videos/${biome}${light && '.light'}.webm`}
                     preload="auto"
                     loop
                     muted
@@ -70,7 +69,7 @@ export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
                 <div className="biome-list-overlay">
                     <img
                         className="biome-image"
-                        src={mediaFetcher(`world/${spawnLocationsList[biome][0]}.png`)}
+                        src={`/assets/world/${spawnLocationsList[biome][0]}.png`}
                         alt={spawnLocationsList[biome][1]}
                     />
                     <h4 className="biome-name">{spawnLocationsList[biome][1]}</h4>

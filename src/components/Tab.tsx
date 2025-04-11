@@ -1,4 +1,3 @@
-import { mediaFetcher } from "../media-manager";
 import React from 'react';
 import "../css/Tab.css";
 
@@ -35,7 +34,7 @@ export const Tab: React.FC<TabProps> = ({
             <div className="right-corner tab-corner">
                 <div></div>
             </div>
-            <img src={mediaFetcher(`${icon}.png`)} alt={title} />
+            <img src={`/assets/${icon}.png`} alt={title} />
             <p>{title}</p>
         </a>
     )

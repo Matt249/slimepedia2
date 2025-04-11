@@ -4,18 +4,10 @@ import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes.js';
 import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js';
 import { toyNames, toysList } from '../text/toys.js';
-import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import largoImg from '../assets/misc/largo.png';
-import noneImg from '../assets/misc/none.png';
-import arrow from '../assets/misc/arrow.png';
-import foodAnyImg from '../assets/food/food.png';
-import toysImg from '../assets/misc/toys.png';
-import pediaSlime from '../assets/misc/pediaslime.png';
-import pediaRisks from '../assets/misc/pediarisks.png';
-import pediaPlort from '../assets/misc/pediaplort.png';
 import '../css/Pedia.css';
+import { Down } from '../components/Down.js';
 
 interface SlimeDetailsProps {
     currentSlimeList: [string, string, string, boolean, string[], string] | null;
@@ -35,28 +27,28 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                     </div>
                 </div>
                 <div className='little-box box-food disabled'>
-                    <img src={foodAnyImg} alt='No slime selected' />
+                    <img src='/assets/food/food.png' alt='No slime selected' />
                     <div>
                         <h3>Diet</h3>
                         <h4>No slime selected</h4>
                     </div>
                 </div>
                 <div className='little-box box-fav disabled'>
-                    <img src={foodAnyImg} alt='No slime selected' />
+                    <img src='/assets/food/food.png' alt='No slime selected' />
                     <div>
                         <h3>Favorite Food</h3>
                         <h4>No slime selected</h4>
                     </div>
                 </div>
                 <div className='little-box box-largo disabled'>
-                    <img src={largoImg} alt='No slime selected' />
+                    <img src='/assets/misc/largo.png' alt='No slime selected' />
                     <div>
                         <h3>Largo-able</h3>
                         <h4>No slime selected</h4>
                     </div>
                 </div>
                 <div className='little-box box-toy disabled'>
-                    <img src={toysImg} alt='No slime selected' />
+                    <img src='/assets/misc/toys.png' alt='No slime selected' />
                     <div>
                         <h3>Favorite Toy</h3>
                         <h4>No slime selected</h4>
@@ -67,11 +59,11 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
         );
     }
     const slimeName = currentSlimeList[0];
-    const slimeIcon = selectedSlime === "none" ? noneImg : mediaFetcher(`slimes/${selectedSlime}.png`);
-    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? undefined : mediaFetcher(`plorts/${selectedSlime}.png`);
-    const foodTypeIcon = currentSlimeList[1] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[1]}.png`);
-    const favFoodIcon = currentSlimeList[2] === "none" ? noneImg : mediaFetcher(`food/${currentSlimeList[2]}.png`);
-    const favToyIcon = currentSlimeList[5] === "none" ? noneImg : mediaFetcher(`toys/${currentSlimeList[5]}.png`);
+    const slimeIcon = selectedSlime === "none" ? '/assets/misc/none.png' : `/assets/slimes/${selectedSlime}.png`;
+    const plortIcon = ["none", "lucky", "tarr"].includes(selectedSlime) ? undefined : `/assets/plorts/${selectedSlime}.png`;
+    const foodTypeIcon = currentSlimeList[1] === "none" ? '/assets/misc/none.png' : `/assets/food/${currentSlimeList[1]}.png`;
+    const favFoodIcon = currentSlimeList[2] === "none" ? '/assets/misc/none.png' : `/assets/food/${currentSlimeList[2]}.png`;
+    const favToyIcon = currentSlimeList[5] === "none" ? '/assets/misc/none.png' : `/assets/toys/${currentSlimeList[5]}.png`;
     const slimeToy = toysList[currentSlimeList[5]] ? toysList[currentSlimeList[5]] : 'none';
 
     return (
@@ -125,7 +117,7 @@ const SlimeDetails: React.FC<SlimeDetailsProps> = ({ currentSlimeList, selectedS
                 </div>
             }
             <div className='little-box box-largo'>
-                <img src={(currentSlimeList[3]) ? largoImg : noneImg} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
+                <img src={(currentSlimeList[3]) ? '/assets/misc/largo.png' : '/assets/misc/none.png'} alt={currentSlimeList[4] ? 'Largo-able' : 'Non largo-able'} />
                 <div>
                     <h3>Largo-able</h3>
                     <h4>{(currentSlimeList[3]) ? "Yes" : "No"}</h4>
@@ -163,17 +155,17 @@ interface SlimeDescriptionProps {
 const SlimeDescription: React.FC<SlimeDescriptionProps> = ({ slimepediaEntry, topBtn }) => (
     <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
         <div className='desc-title'>
-            <img src={pediaSlime} alt='Slimeology' />
+            <img src='/assets/misc/pediaslime.png' alt='Slimeology' />
             <h3>Slimeology</h3>
         </div>
         <p>{slimepediaEntry[0]}</p>
         <div className='desc-title'>
-            <img src={pediaRisks} alt='Rancher Risks' />
+            <img src='/assets/misc/pediarisks.png' alt='Rancher Risks' />
             <h3>Rancher Risks</h3>
         </div>
         <p>{slimepediaEntry[1]}</p>
         <div className='desc-title'>
-            <img src={pediaPlort} alt='Plortonomics' />
+            <img src='/assets/misc/pediaplort.png' alt='Plortonomics' />
             <h3>Plortonomics</h3>
         </div>
         <p>{slimepediaEntry[2]}</p>
@@ -237,7 +229,7 @@ export const Slimes = () => {
                     }}
                     tabIndex={0}
                 >
-                    <img src={arrow} alt='Arrow' />
+                    <Down />
                 </a>
                 <SlimeDescription slimepediaEntry={slimepediaEntry} topBtn={topBtn} />
             </div>

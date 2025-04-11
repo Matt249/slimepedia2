@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { NavButton } from "./NavButton";
-import houseDay from '../assets/wallpapers/houseDay.png';
-import houseNight from '../assets/wallpapers/houseNight.png';
+import NavButton from "./NavButton";
 
 export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
@@ -24,7 +22,7 @@ export const NavBar = () => {
         rootElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
 
         // Mettre à jour l'image de fond
-        document.body.style.backgroundImage = `url(${darkMode ? houseNight : houseDay})`;
+        document.body.style.backgroundImage = `url(${darkMode ? '/assets/wallpapers/houseNight.png' : '/assets/wallpapers/houseDay.png'})`;
 
         // Sauvegarder la préférence dans localStorage
         localStorage.setItem('darkMode', darkMode.toString());

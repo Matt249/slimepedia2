@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
 import { Tab } from '../components/Tab';
 import { resourceList, resourcesNames, resourcePedia } from '../text/resources';
 import { toyNames, toysList, toyDesc } from '../text/toys';
 import { slimesList } from '../text/slimes';
-import { mediaFetcher } from '../media-manager';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
-import pedia from '../assets/misc/pediatut.png';
-import buck from '../assets/misc/buck.png';
-import noneIcon from '../assets/misc/none.png';
 import '../css/Pedia.css';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 const matchMainList = (list: string) => {
     switch (list) {
@@ -95,11 +91,11 @@ export const Items = () => {
                             <h2>{tab === 'toys' ? 'Playtime gets the wiggles out.' : resourceList[item][2]}</h2>
                         </div>
                         <div className="image-container">
-                            <img src={mediaFetcher(`${tab}/${item}.png`)} className='img-main' alt={infosItems[item][0]} />
+                            <img src={`/assets/${tab}/${item}.png`} className='img-main' alt={infosItems[item][0]} />
                         </div>
                     </div>
                     <div className='little-box infos-box'>
-                        <img src={pedia} alt="Pedia Informations Icon" />
+                        <img src='/assets/misc/pediatut.png' alt="Pedia Informations Icon" />
                         <div>
                             {(tab === 'resources' ? resourcePedia[item] : toyDesc[item]).split("\n").map((item) => {
                                 return (
@@ -111,7 +107,7 @@ export const Items = () => {
                         </div>
                     </div>
                     <div className={'little-box toy-price' + (tab !== 'toys' ? ' toy-hide' : '')}>
-                        <img src={buck} alt='Newbuck Icon' />
+                        <img src='/assets/misc/buck.png' alt='Newbuck Icon' />
                         <div>
                             <h3>Price</h3>
                             <h4>500</h4>
@@ -122,7 +118,7 @@ export const Items = () => {
                             if (infosItems[item][1] === "none") {
                                 return (
                                     <div className='little-box toy-fav'>
-                                        <img src={noneIcon} alt='None' />
+                                        <img src='/assets/misc/none.png' alt='None' />
                                         <div>
                                             <h3>Favorite of</h3>
                                             <h4>Nobody</h4>
@@ -133,7 +129,7 @@ export const Items = () => {
                                 return (
                                     <NavLink to={`/slimes/${toysList[item][1]}`} style={{ textDecoration: 'none' }}>
                                         <div className='little-box toy-fav link-to-food'>
-                                            <img src={mediaFetcher(`slimes/${infosItems[item][1]}.png`)} alt={slimesList[toysList[item][1]][0]} />
+                                            <img src={`/assets/slimes/${infosItems[item][1]}.png`} alt={slimesList[toysList[item][1]][0]} />
                                             <div>
                                                 <h3>Favorite of</h3>
                                                 <h4>{slimesList[toysList[item][1]][0]}</h4>
@@ -145,7 +141,7 @@ export const Items = () => {
                         } else {
                             return (
                                 <div className="little-box toy-fav toy-hide">
-                                    <img src={noneIcon} alt='None' />
+                                    <img src='/assets/misc/none.png' alt='None' />
                                     <div>
                                         <h3>Favorite of</h3>
                                         <h4>None</h4>

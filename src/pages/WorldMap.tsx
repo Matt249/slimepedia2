@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { MapContainer, ImageOverlay } from 'react-leaflet';
-import worldImg from '../assets/map/output.png';
 import 'leaflet/dist/leaflet.css';
 import '../css/Map.css';
 
@@ -26,7 +25,7 @@ export const WorldMap = () => {
             zoom={zoom}
             scrollWheelZoom={true}
         >
-            <ImageOverlay url={worldImg} bounds={bounds} />
+            <ImageOverlay url='/assets/map/output.png' bounds={bounds} />
         </MapContainer>
     );
 }

@@ -3,14 +3,9 @@ import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesI
 import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
-import { mediaFetcher } from '../media-manager';
+
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import Down from '../components/Down';
-import podImg from '../assets/misc/pod.png';
-import noneImg from '../assets/misc/none.png';
-import buckImg from '../assets/misc/buck.png';
-import patchImg from '../assets/misc/patch.png';
-import doorImg from '../assets/misc/door.png';
 import '../css/Regions.css';
 import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
@@ -62,7 +57,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     >
                         <div className="region-element-content">
                             <img
-                                src={mediaFetcher(`slimes/${slime}.png`)}
+                                src={`/assets/slimes/${slime}.png`}
                                 alt={slimesList[slime][0]}
                                 title={slimesList[slime][0]}
                             />
@@ -87,7 +82,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     <div className="region-element" key={`${food}-${index}`}>
                         <div className="region-element-content">
                             <img
-                                src={mediaFetcher(`food/${food}.png`)}
+                                src={`/assets/food/${food}.png`}
                                 alt={foodList[food][0]}
                                 title={foodList[food][0]}
                             />
@@ -103,18 +98,18 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     const regionName = regionArg.split("/")[1];
                     return (
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
                         </NavLink>
                     )
                 }) : (
-                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                    <img className='region-no-connection' src='/assets/misc/none.png' alt='No Region' />
                 )}
             </div>
             <div className='region-connection-separator'>
                 <Down />
             </div>
             <div>
-                <img className='no-hover' src={mediaFetcher(`world/${region}.png`)} alt='Current Biome' />
+                <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
             </div>
             <div className='region-connection-separator'>
                 <Down />
@@ -124,11 +119,11 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     const regionName = regionArg.split("/")[1];
                     return (
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
                         </NavLink>
                     )
                 }) : (
-                    <img className='no-hover' src={noneImg} alt='No Region' />
+                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
                 )}
             </div>
         </div>
@@ -153,7 +148,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     key={resource}
                 >
                     <img
-                        src={mediaFetcher(`${regionsResourcesInfos[resource][1]}.png`)}
+                        src={`/assets/${regionsResourcesInfos[resource][1]}.png`}
                         alt={regionsResourcesInfos[resource][0]}
                         title={regionsResourcesInfos[resource][0]}
                     />
@@ -165,7 +160,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                         key={resource}
                     >
                         <img
-                            src={mediaFetcher(`${regionsResourcesInfos[resource][1]}.png`)}
+                            src={`/assets/${regionsResourcesInfos[resource][1]}.png`}
                             alt={regionsResourcesInfos[resource][0]}
                             title={regionsResourcesInfos[resource][0]}
                         />
@@ -175,7 +170,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
         </OverlayScrollbarsComponent>
         <div className='region-pods'>
             <h2 className='box-title'>{region === 'labyrinth' ? 'Ancient Vaults' : 'Tresaure Pods'}</h2>
-            <img src={region === 'labyrinth' ? doorImg : podImg} alt='Pods' />
+            <img src={region === 'labyrinth' ? '/assets/misc/door.png' : '/assets/misc/pod.png'} alt='Pods' />
             <p>{regionInfos[region][5]}</p>
         </div>
     </div >
@@ -216,18 +211,18 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                     const regionName = regionArg.split("/")[1];
                     return (
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
                         </NavLink>
                     )
                 }) : (
-                    <img className='region-no-connection' src={noneImg} alt='No Region' />
+                    <img className='region-no-connection' src='/assets/misc/none.png' alt='No Region' />
                 )}
             </div>
             <div className='region-connection-separator'>
                 <Down />
             </div>
             <div>
-                <img className='no-hover' src={mediaFetcher(`world/${region}.png`)} alt='Current Biome' />
+                <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
             </div>
             <div className='region-connection-separator'>
                 <Down />
@@ -237,28 +232,28 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                     const regionName = regionArg.split("/")[1];
                     return (
                         <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={mediaFetcher(`world/${regionName}.png`)} alt={regionInfos[regionName][0]} />
+                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
                         </NavLink>
                     )
                 }) : (
-                    <img className='no-hover' src={noneImg} alt='No Region' />
+                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
                 )}
             </div>
         </div>
         <div className='ranch-box ranch-cost'>
             <h2 className='box-title'>Expansion Cost</h2>
             <h3>{regionInfos[region][7]}</h3>
-            <img src={buckImg} alt='Newbucks' />
+            <img src='/assets/misc/buck.png' alt='Newbucks' />
         </div>
         <div className='ranch-box ranch-slots'>
             <h2 className='box-title'>Available Slots</h2>
             <h3>{regionInfos[region][6]}</h3>
-            <img src={patchImg} alt='Slots' />
+            <img src='/assets/misc/patch.png' alt='Slots' />
         </div>
         <div className='ranch-box ranch-pods'>
             <h2 className='box-title'>Pod in this Expansion</h2>
             <h3>{regionInfos[region][5]}</h3>
-            <img src={podImg} alt='Slots' />
+            <img src='/assets/misc/pod.png' alt='Slots' />
         </div>
         <div className='ranch-box ranch-special'>
             <h2 className='box-title'>Special Features</h2>
@@ -269,7 +264,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                         className='ranch-special-feature'
                         key={feature}
                     >
-                        <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt={regionsResourcesInfos[feature][0]} />
+                        <img src={`/assets/${regionsResourcesInfos[feature][1]}.png`} alt={regionsResourcesInfos[feature][0]} />
                         <h3>{regionsResourcesInfos[feature][0]}</h3>
                     </div>
                 ) : (
@@ -278,7 +273,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                             className='ranch-special-feature special-hover'
                             key={feature}
                         >
-                            <img src={mediaFetcher(`${regionsResourcesInfos[feature][1]}.png`)} alt={regionsResourcesInfos[feature][0]} />
+                            <img src={`/assets/${regionsResourcesInfos[feature][1]}.png`} alt={regionsResourcesInfos[feature][0]} />
                             <h3>{regionsResourcesInfos[feature][0]}</h3>
                         </div>
                     </NavLink>
@@ -346,7 +341,7 @@ export const Regions: React.FC = () => {
     };
 
     const backgroudRegion = {
-        backgroundImage: `url(${mediaFetcher('wait/' + region + '.jpg')})`
+        backgroundImage: `url("/assets/wait/${region}.jpg")})`
     };
 
     document.title = regionInfos[region][0] + ' - Slimepedia 2';
@@ -377,7 +372,7 @@ export const Regions: React.FC = () => {
                                 <video
                                     ref={el => videoRefs.current[regionItem] = el}
                                     className='region-video'
-                                    src={mediaFetcher(`videos/${regionInfos[regionItem][2]}.light.webm`)}
+                                    src={`/assets/videos/${regionInfos[regionItem][2]}.light.webm`}
                                     onMouseEnter={e => handleMouseEnter(e)}
                                     onMouseLeave={e => { if (regionItem !== region) handleMouseLeave(e) }}
                                     autoPlay={regionItem === region}
@@ -385,7 +380,7 @@ export const Regions: React.FC = () => {
                                 >
                                     {regionInfos[regionItem][0]} Video
                                 </video>
-                                <img className='region-icon' src={mediaFetcher(`world/${regionInfos[regionItem][1]}.png`)} alt={regionInfos[regionItem][0]} />
+                                <img className='region-icon' src={`/assets/world/${regionInfos[regionItem][1]}.png`} alt={regionInfos[regionItem][0]} />
                                 <h2 className='region-name'>{regionInfos[regionItem][0]}</h2>
                             </div>
                         </NavLink>
@@ -397,7 +392,7 @@ export const Regions: React.FC = () => {
                     <video
                         ref={mainPlayer}
                         className='region-background-video'
-                        src={mediaFetcher(`videos/${regionInfos[region][2]}.webm`)}
+                        src={`/assets/videos/${regionInfos[region][2]}.webm`}
                         disablePictureInPicture
                         autoPlay
                         loop
@@ -411,7 +406,7 @@ export const Regions: React.FC = () => {
                     <div className='region-main-page-frame'>
                         {region === 'labyrinth' ? <LabyMusicRefs /> : <MusicRefs region={region} />}
                         <div className='region-main-page'>
-                            <img src={mediaFetcher(`world/${region}.png`)} alt={regionInfos[region][0]} />
+                            <img src={`/assets/world/${region}.png`} alt={regionInfos[region][0]} />
                             <h1>{regionInfos[region][0]}</h1>
                             <h2>{regionInfos[region][3]}</h2>
                         </div>

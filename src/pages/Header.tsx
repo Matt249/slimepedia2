@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import pink from '../assets/slimes/pink.png';
-import phosphor from '../assets/slimes/phosphor.png';
 
 export const Header: React.FC = () => {
     const [darkMode, setDarkMode] = useState<boolean>(localStorage.getItem('darkMode') === 'true');
@@ -31,7 +29,7 @@ export const Header: React.FC = () => {
 
     return (
         <header className="slimepedia-header">
-            <img src={darkMode ? phosphor : pink} className="slimepedia-logo" alt="Slime Logo" />
+            <img src={darkMode ? '../assets/slimes/phosphor.png' : '../assets/slimes/pink.png'} className="slimepedia-logo" alt="Slime Logo" />
             <h1>Slimepedia 2</h1>
         </header>
     );

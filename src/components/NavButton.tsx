@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { mediaFetcher } from '../media-manager';
 import '../css/NavButton.css';
 
 interface NavButtonProps {
@@ -49,9 +48,11 @@ export const NavButton: React.FC<NavButtonProps> = ({
             style={{ '--btn-size': `${size * 5}em`, visibility: visible ? 'shown' : 'hidden' } as React.CSSProperties}
         >
             <div className='image-frame'>
-                <img src={mediaFetcher(icon + '.png')} alt={name} className={'image-button img-btn-' + randomNumber} />
+                <img src={`/assets/${icon}.png`} alt={name} className={`image-button img-btn-${randomNumber}`} />
             </div>
             <p>{name}</p>
         </button>
     );
 }
+
+export default NavButton;

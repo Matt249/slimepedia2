@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import glitch from '../assets/slimes/glitch.png';
 import React from 'react';
 
 export const ErrorPage = () => {
@@ -8,7 +7,7 @@ export const ErrorPage = () => {
 
     return (
         <header className="slimepedia-header">
-            <img src={glitch} className="slimepedia-logo" alt="Pink Slime Logo" />
+            <img src='/assets/slimes/glitch.png' className="slimepedia-logo" alt="Pink Slime Logo" />
             <h1>404: Page not found</h1>
             <h2><NavLink to='/'>Go back to main menu</NavLink></h2>
         </header>

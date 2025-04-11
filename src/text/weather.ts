@@ -46,10 +46,10 @@ export const weatherPedia: { [key: string]: string } = {
 };
 
 export const weatherSpawn: { [key: string]: [string, string, string] } = {
-    'mote': ['Lightning Mote', 'resources/mote.png', '/items/resource/mote'],
-    'glass': ['Glass Shard', 'resources/glass.png', '/items/resource/glass'],
-    'dervish': ['Dervish Slime', 'slimes/dervish.png', '/slimes/dervish'],
-    'drift': ['Driftwood', 'resources/drift.png', '/items/resource/drift'],
-    'tangle': ['Tangle Slime', 'slimes/tangle.png', '/slimes/tangle'],
-    'tarr': ['Tarr', 'slimes/tarr.png', '/slimes/tarr']
+    'mote': ['Lightning Mote', 'resources/mote', '/items/resource/mote'],
+    'glass': ['Glass Shard', 'resources/glass', '/items/resource/glass'],
+    'dervish': ['Dervish Slime', 'slimes/dervish', '/slimes/dervish'],
+    'drift': ['Driftwood', 'resources/drift', '/items/resource/drift'],
+    'tangle': ['Tangle Slime', 'slimes/tangle', '/slimes/tangle'],
+    'tarr': ['Tarr', 'slimes/tarr', '/slimes/tarr']
 }

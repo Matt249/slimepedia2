@@ -1,19 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { NavLink, useParams, useNavigate } from 'react-router-dom';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food.js';
+import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food';
 import { Tab } from '../components/Tab';
 import { slimesList } from '../text/slimes';
-import { mediaFetcher } from '../media-manager';
-import pediaAbout from '../assets/misc/pediaabout.png';
-import pediaQuestion from '../assets/misc/pediaquestion.png';
-import noneImg from '../assets/misc/none.png';
-import arrow from '../assets/misc/arrow.png';
-import foodImg from '../assets/food/food.png';
-import pinkImg from '../assets/slimes/pink.png';
 import '../css/Pedia.css';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 interface FoodTabsProps {
     filter: string;
@@ -69,7 +62,7 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => 
                 autoHideDelay: 500,
             },
         }}
-        className={'list-food' + (filter === 'any' ? ' list-food-first' : '') + (filter == 'special' ? ' list-food-last' : '')}
+        className={`list-food${(filter === 'any' ? ' list-food-first' : '') + (filter == 'special' ? ' list-food-last' : '')}`}
         defer
     >
         {actualFoodList.map((foodId) => (
@@ -105,14 +98,14 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                     </div>
                 </div>
                 <div className='little-box food-type disabled'>
-                    <img src={foodImg} alt='Food Icon' />
+                    <img src='/assets/food/food.png' alt='Food Icon' />
                     <div>
                         <h3>Food type</h3>
                         <h4>No food selected</h4>
                     </div>
                 </div>
                 <div className='little-box food-fav disabled'>
-                    <img src={pinkImg} alt='None' />
+                    <img src='/assets/slimes/pink.png' alt='None' />
                     <div>
                         <h3>Favorite of</h3>
                         <h4>No slime selected</h4>
@@ -138,12 +131,12 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                     <h2>{foodDescription[food]}</h2>
                 </div>
                 <div className="image-container">
-                    <img src={mediaFetcher(`food/${food}.png`)} className='img-main' alt={foodList[food][0]} />
+                    <img src={`/assets/food/${food}.png`} className='img-main' alt={foodList[food][0]} />
                 </div>
             </div>
             <a
                 role='link'
-                className={'little-box food-type link-to-food'}
+                className='little-box food-type link-to-food'
                 onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
@@ -153,7 +146,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                 }}
                 tabIndex={0}
             >
-                <img src={foodList[food][1] === null ? noneImg : mediaFetcher(`food/${foodList[food][1]}.png`)} alt={foodSingular[foodList[food][1]]} />
+                <img src={foodList[food][1] === null ? '/assets/misc/none.png' : `/assets/food/${foodList[food][1]}.png`} alt={foodSingular[foodList[food][1]]} />
                 <div>
                     <h3>Food type</h3>
                     <h4>{foodSingular[foodList[food][1]]}</h4>
@@ -161,7 +154,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
             </a>
             {favSlime === null ?
                 <div className='little-box food-fav'>
-                    <img src={noneImg} alt='None' />
+                    <img src='/assets/misc/none.png' alt='None' />
                     <div>
                         <h3>Favorite of</h3>
                         <h4>Nobody</h4>
@@ -170,7 +163,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                 :
                 <NavLink to={`/slimes/${favSlime}`} style={{ textDecoration: 'none' }}>
                     <div className='little-box food-fav link-to-food'>
-                        <img src={mediaFetcher(`slimes/${favSlime}.png`)} alt={slimesList[favSlime][0]} />
+                        <img src={`/assets/slimes/${favSlime}.png`} alt={slimesList[favSlime][0]} />
                         <div>
                             <h3>Favorite of</h3>
                             <h4>{slimesList[favSlime][0]}</h4>
@@ -193,12 +186,12 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
         return (
             <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
                 <div className='desc-title'>
-                    <img src={pediaAbout} alt='Slimeology' />
+                    <img src='/assets/misc/pediaabout.png' alt='Slimeology' />
                     <h3>About</h3>
                 </div>
                 <p>Select a food to get it&apos;s description</p>
                 <div className='desc-title'>
-                    <img src={pediaQuestion} alt='Rancher Risks' />
+                    <img src='/assets/misc/pediaquestion.png' alt='Rancher Risks' />
                     <h3>On the ranch</h3>
                 </div>
                 <p>Select a food to get it&apos;s description</p>
@@ -208,12 +201,12 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
     return (
         <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
             <div className='desc-title'>
-                <img src={pediaAbout} alt='Slimeology' />
+                <img src='/assets/misc/pediaabout.png' alt='Slimeology' />
                 <h3>About</h3>
             </div>
             <p>{foodpedia[food][0]}</p>
             <div className='desc-title'>
-                <img src={pediaQuestion} alt='Rancher Risks' />
+                <img src='/assets/misc/pediaquestion.png' alt='Rancher Risks' />
                 <h3>On the ranch</h3>
             </div>
             <p>{foodpedia[food][1]}</p>
@@ -287,7 +280,7 @@ export const Food = () => {
                     }}
                     tabIndex={0}
                 >
-                    <img src={arrow} alt='Arrow' />
+                    <img src='/assets/misc/arrow.png' alt='Arrow' />
                 </a>
                 <FoodDescription food={food} topBtn={topBtn} />
             </div>
