@@ -92,7 +92,6 @@ export const Buildings = () => {
         );
     }
 
-    console.log(upgrade);
     const foundUpgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
     const upgradeName = foundUpgrade ? foundUpgrade[1] : undefined;
     if (upgradeName)

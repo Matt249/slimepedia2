@@ -34,9 +34,9 @@ export const buildingUpgrades: { [key: string]: [string, string, number, string]
         ['trough', 'Ash Trough', 500, 'An ash trough allows you to collect the ash of incinerated food at its base, which is eaten exclusively by fire slimes. It\'s gross.']
     ],
     'silo': [
-        ['additional', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
-        ['additional', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
-        ['additional', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
+        ['additional1', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
+        ['additional2', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
+        ['additional3', 'Additional storage', 500, 'A silo can have up to four ports for storing plorts and resources.'],
     ]
 }
 
