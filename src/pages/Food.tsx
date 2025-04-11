@@ -13,6 +13,7 @@ import arrow from '../assets/misc/arrow.png';
 import foodImg from '../assets/food/food.png';
 import pinkImg from '../assets/slimes/pink.png';
 import '../css/Pedia.css';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 interface FoodTabsProps {
     filter: string;
@@ -61,7 +62,16 @@ interface FoodListProps {
 }
 
 const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => (
-    <div className='list-food' style={{ borderRadius: `${filter === 'any' ? '0' : 'var(--border-size)'} ${filter === 'special' ? ' 0 ' : 'var(--border-size)'} var(--border-size) var(--border-size)` }}>
+    <OverlayScrollbarsComponent
+        options={{
+            scrollbars: {
+                autoHide: "move",
+                autoHideDelay: 500,
+            },
+        }}
+        className={'list-food' + (filter === 'any' ? ' list-food-first' : '') + (filter == 'special' ? ' list-food-last' : '')}
+        defer
+    >
         {actualFoodList.map((foodId) => (
             <NavLink key={foodId} to={`/food/${foodId}`} style={{ textDecoration: 'none' }}>
                 <NavButton
@@ -74,7 +84,7 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => 
                 />
             </NavLink>
         ))}
-    </div>
+    </OverlayScrollbarsComponent>
 );
 
 interface FoodDetailsProps {

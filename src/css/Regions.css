@@ -6,14 +6,31 @@
 }
 
 .regions-list {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: calc(var(--border-size) / 2);
     flex: 1;
     background-color: var(--menu-color-1);
     padding: var(--border-size);
     overflow-x: hidden;
     overflow-y: auto;
+    border-radius: var(--border-size);
+    transition: 
+        border-radius var(--animation-speed) var(--animation-function),
+        background-color var(--animation-speed) var(--animation-function);
+}
+
+.regions-list.regions-list-regions {
+    border-top-left-radius: 0;
+}
+
+.regions-list.regions-list-ranch {
+    border-top-right-radius: 0;
+}
+
+.regions-list [data-overlayscrollbars-contents] {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: calc(var(--border-size) / 2);
+    padding: 0;
+    margin: 0;
 }
 
 .regions-tabs {
@@ -175,7 +192,8 @@
     box-sizing: border-box;
 }
 
-.region-music-player>div {
+.region-music-player>div,
+.region-music-player.region-labyrinth [data-overlayscrollbars-contents] {
     flex: 1;
     display: flex;
     flex-flow: row-reverse nowrap;
@@ -395,25 +413,31 @@
 .ranch-pedia,
 .region-pedia {
     grid-area: pedia;
+}
+
+.ranch-pedia [data-overlayscrollbars-contents],
+.region-pedia [data-overlayscrollbars-contents] {
     text-align: justify;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
-.region-pedia>p {
+.ranch-pedia [data-overlayscrollbars-contents],
+.region-pedia [data-overlayscrollbars-contents]>p {
     margin: 0;
     font-size: 1.2em;
     font-weight: normal;
 }
 
-.region-pedia>p>span {
+.ranch-pedia [data-overlayscrollbars-contents]>p>span,
+.region-pedia [data-overlayscrollbars-contents]>p>span {
     font-size: 1.2em;
     display: inline-block;
     margin-bottom: var(--border-size);
 }
 
-.ranch-pedia>p>span:last-child,
-.region-pedia>p>span:last-child {
+.ranch-pedia [data-overlayscrollbars-contents]>p>span:last-child,
+.region-pedia [data-overlayscrollbars-contents]>p>span:last-child {
     margin-bottom: 0;
 }
 
@@ -421,11 +445,12 @@
 .region-food,
 .region-resources,
 .region-pods {
-    padding-top: 40px !important;
+    padding-top: 2em !important;
 }
 
-.region-slimes,
-.region-food {
+.region-slimes [data-overlayscrollbars-contents],
+.region-food [data-overlayscrollbars-contents] {
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     grid-gap: 10px;
@@ -517,12 +542,16 @@
 
 .region-resources {
     grid-area: resources;
+    overflow-y: hidden;
+}
+
+.region-resources [data-overlayscrollbars-contents] {
     display: flex;
     flex-flow: row nowrap;
     align-items: baseline;
     gap: 5px;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: clip;
 }
 
 .region-resources>.region-element-resource {
@@ -688,6 +717,7 @@
 .ranch-special-feature>h3 {
     margin: 0;
     font-size: 1em;
+    color: var(--text-color);
 }
 
 .special-hover:hover>img {
@@ -697,13 +727,6 @@
 
 .ranch-element>div>img {
     width: 100px;
-}
-
-.ranch-pedia>p>span {
-    font-size: 1.2em;
-    display: inline-block;
-    margin-bottom: var(--border-size);
-    padding: 0;
 }
 
 .ranch-nowhere {

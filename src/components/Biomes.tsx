@@ -2,8 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { spawnLocationsList } from '../text/regions';
 import { mediaFetcher } from '../media-manager';
 import { NavLink } from 'react-router-dom';
-import '../css/Biomes.css';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { weatherID } from '../text/weather';
+import '../css/Biomes.css';
 
 const light = true;
 const animationDelay = 200;
@@ -103,7 +104,16 @@ export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
     };
 
     return (
-        <div className="spawn-list-container">
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+            }}
+            className="spawn-list-container"
+            defer
+        >
             <h3 className={listHovered ? 'hidden-title' : ''}>Found in</h3>
             <button
                 className="spawn-list-hover"
@@ -116,6 +126,6 @@ export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
             >
                 {spawnList.map((biome, index) => renderBiomeItem(biome, index))}
             </button>
-        </div>
+        </OverlayScrollbarsComponent>
     );
 };

@@ -36,6 +36,19 @@
 	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+[data-theme="dark"] .os-scrollbar {
+    background-color: transparent; /* Couleur de l'arrière-plan de la scrollbar */
+}
+
+[data-theme="dark"] .os-scrollbar-track {
+    background-color: transparent; /* Couleur de la piste */
+}
+
+[data-theme="dark"] .os-scrollbar-handle {
+    background-color: #555; /* Couleur de la poignée */
+    border-radius: 4px; /* Arrondi de la poignée */
+}
+
 [data-theme="light"] {
 	--menu-color-0: #EFE7D4;
 	--menu-color-1: #E9DDC7;
@@ -45,6 +58,19 @@
 	--link-color: #252466;
 	color-scheme: light;
 	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .os-scrollbar {
+    background-color: transparent; /* Couleur de l'arrière-plan de la scrollbar */
+}
+
+[data-theme="light"] .os-scrollbar-track {
+    background-color: transparent; /* Couleur de la piste */
+}
+
+[data-theme="light"] .os-scrollbar-handle {
+    background-color: var(--item-color); /* Couleur de la poignée */
+    border-radius: 4px; /* Arrondi de la poignée */
 }
 
 @media (prefers-reduced-motion: reduce) {

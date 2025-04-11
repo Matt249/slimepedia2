@@ -244,7 +244,7 @@
 }
 
 /* Recipe List Styles */
-.recipe-list>.quantity-selector {
+.recipe-list [data-overlayscrollbars-contents]>.quantity-selector {
     margin: var(--border-size) 0;
     height: 4vh;
     box-sizing: border-box;
@@ -376,7 +376,7 @@
     flex: 1;
 }
 
-.vac-upgrade-list {
+.vac-upgrade-list [data-overlayscrollbars-contents] {
     display: grid;
     grid-template-rows: repeat(auto-fill, 1fr);
     gap: 10px;
@@ -552,8 +552,8 @@
     height: 1.7em;
 }
 
-.blueprint-recipe-list,
-.recipe-list {
+.blueprint-recipe-list [data-overlayscrollbars-contents],
+.recipe-list [data-overlayscrollbars-contents] {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
@@ -564,8 +564,8 @@
     overflow-y: auto;
 }
 
-.blueprint-recipe-list>div,
-.recipe-list>div {
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div,
+.recipe-list [data-overlayscrollbars-contents]>div {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
@@ -573,8 +573,8 @@
     gap: var(--border-size);
 }
 
-.blueprint-recipe-list>div>p,
-.recipe-list>div>p {
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div>p,
+.recipe-list [data-overlayscrollbars-contents]>div>p {
     font-size: 1.5em;
     margin: 0;
     text-align: left;
@@ -582,14 +582,14 @@
     white-space: nowrap;
 }
 
-.blueprint-recipe-list>div>p::after,
-.recipe-list>div>p::after {
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div>p::after,
+.recipe-list [data-overlayscrollbars-contents]>div>p::after {
     content: "............................................................................................................................";
     font-weight: 100;
 }
 
-.blueprint-recipe-list>div>h3,
-.recipe-list>div>h3 {
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div>h3,
+.recipe-list [data-overlayscrollbars-contents]div>h3 {
     font-size: 1.5em;
     margin: 0;
 }
@@ -642,7 +642,7 @@
     width: auto;
 }
 
-.blueprint-list {
+.blueprint-list [data-overlayscrollbars-contents] {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 0;
@@ -653,11 +653,11 @@
     width: fit-content;
 }
 
-.blueprint-list.decoration {
+.blueprint-list.decoration [data-overlayscrollbars-contents]  {
     border-radius: 0 0 var(--border-size) var(--border-size);
 }
 
-.blueprint-list>a {
+.blueprint-list [data-overlayscrollbars-contents]>a {
     text-decoration: none;
     display: flex;
     flex-flow: column nowrap;

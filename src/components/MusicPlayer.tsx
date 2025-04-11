@@ -7,6 +7,7 @@ import cheerfulStatue from '../assets/deco/cheerfulstatue.png';
 import sunImg from '../assets/misc/sun.png';
 import moonImg from '../assets/misc/moon.png';
 import { ranchIds } from '../text/regions';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>, currentAudio: HTMLAudioElement | null, setCurrentAudio: React.Dispatch<React.SetStateAction<HTMLAudioElement | null>>) => {
     if (currentAudio)
@@ -189,7 +190,15 @@ export const LabyMusicRefs: React.FC = () => {
                 <button className={'music-player-icon'} onClick={() => setMusicMenu(!musicMenu)}>
                     <img src={musicImg} alt='Open music list' />
                 </button>
-                <div>
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            autoHide: "move",
+                            autoHideDelay: 500,
+                        },
+                    }}
+                    defer
+                >
                     {sections.map((section) => (
                         <MusicSection
                             key={section}
@@ -199,7 +208,7 @@ export const LabyMusicRefs: React.FC = () => {
                             setCurrentAudio={setCurrentAudio}
                         />
                     ))}
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
         </>
     );

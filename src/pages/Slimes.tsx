@@ -6,6 +6,7 @@ import { foodList, foodNames, foodTypes, foodTypesNames } from '../text/food.js'
 import { toyNames, toysList } from '../text/toys.js';
 import { mediaFetcher } from '../media-manager.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import largoImg from '../assets/misc/largo.png';
 import noneImg from '../assets/misc/none.png';
 import arrow from '../assets/misc/arrow.png';
@@ -14,6 +15,7 @@ import toysImg from '../assets/misc/toys.png';
 import pediaSlime from '../assets/misc/pediaslime.png';
 import pediaRisks from '../assets/misc/pediarisks.png';
 import pediaPlort from '../assets/misc/pediaplort.png';
+import 'overlayscrollbars/overlayscrollbars.css';
 import '../css/Pedia.css';
 
 interface SlimeDetailsProps {
@@ -196,7 +198,16 @@ export const Slimes = () => {
 
     return (
         <div>
-            <div className='list-slime'>
+            <OverlayScrollbarsComponent
+                className="list-slime"
+                options={{
+                    scrollbars: {
+                        autoHide: "move",
+                        autoHideDelay: 500,
+                    },
+                }}
+                defer
+            >
                 {slimeNames.map((slimeName) => (
                     <NavLink to={`/slimes/${slimeName}`} style={{ textDecoration: 'none' }} key={slimeName}>
                         <NavButton
@@ -208,7 +219,7 @@ export const Slimes = () => {
                         />
                     </NavLink>
                 ))}
-            </div>
+            </OverlayScrollbarsComponent>
             <div className='slime-presentation box-layout-secondary'>
                 <div className={'pedia-infos slime-infos' + (topBtn ? ' hidden-infos' : '')}>
                     <SlimeDetails currentSlimeList={currentSlimeList} selectedSlime={slime} />

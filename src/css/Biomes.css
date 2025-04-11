@@ -1,17 +1,22 @@
+[data-theme="light"] .spawn-list-container .os-scrollbar-handle {
+    background-color: var(--menu-color-1); /* Couleur de la poignée */
+    border-radius: 4px; /* Arrondi de la poignée */
+}
+
 .spawn-list-container {
+    grid-area: spawn;
     position: relative;
     z-index: 2;
     background-color: var(--item-color);
     padding: var(--border-size);
     border-radius: var(--border-size);
-    grid-area: spawn;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: auto;
 }
 
-.spawn-list-container>h3 {
+.spawn-list-container [data-overlayscrollbars-contents]>h3 {
+    padding: 0;
     text-align: left;
-    margin: 0 0 calc(vazr(--border-size) / 2) var(--border-size);
+    margin-bottom: calc(var(--border-size) / 2);
     font-size: 2em;
     overflow: hidden;
     height: 1lh;
@@ -59,7 +64,7 @@
         margin-top var(--animation-speed) var(--animation-function);
 }
 
-.spawn-list-container .hidden-title {
+.spawn-list-container [data-overlayscrollbars-contents]>.hidden-title {
     font-size: 0;
     height: 0;
     margin: 0;
@@ -73,6 +78,7 @@
     flex-flow: column nowrap;
     align-items: stretch;
     gap: 0;
+    overflow: auto;
 }
 
 .biome-image {

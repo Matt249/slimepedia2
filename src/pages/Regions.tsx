@@ -12,7 +12,8 @@ import buckImg from '../assets/misc/buck.png';
 import patchImg from '../assets/misc/patch.png';
 import doorImg from '../assets/misc/door.png';
 import '../css/Regions.css';
-import { LabyMusicRefs, MusicRefs } from '../components/MusicRefs';
+import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 interface RegionDescriptionProps {
     region: string;
@@ -21,7 +22,16 @@ interface RegionDescriptionProps {
 
 const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className='region-description' ref={regionDescriptionRef}>
-        <div className='region-pedia'>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+            }}
+            className='region-pedia'
+            defer
+        >
             <h2 className='box-title'>Slimepedia Entry</h2>
             <p>
                 {regionPedia[region].split("\n").map(function (item) {
@@ -32,8 +42,17 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     )
                 })}
             </p>
-        </div>
-        <div className='region-slimes'>
+        </OverlayScrollbarsComponent>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+            }}
+            className='region-slimes'
+            defer
+        >
             <h2 className='box-title'>Available Slimes</h2>
             {regionElements[region][0].map((slime, index) => (
                 <NavLink to={`/slimes/${slime}`} style={{ textDecoration: 'none' }} key={`${slime}-${index}`}>
@@ -51,8 +70,17 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     </div>
                 </NavLink>
             ))}
-        </div>
-        <div className='region-food'>
+        </OverlayScrollbarsComponent>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+            }}
+            className='region-food'
+            defer
+        >
             <h2 className='box-title'>Available Food</h2>
             {regionElements[region][1].map((food, index) => (
                 <NavLink to={`/food/${food}`} style={{ textDecoration: 'none' }} key={`${food}-${index}`}>
@@ -67,7 +95,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     </div>
                 </NavLink>
             ))}
-        </div>
+        </OverlayScrollbarsComponent>
         <div className='region-connections'>
             <h2 className='box-title'>Region Connections</h2>
             <div className='region-from'>
@@ -104,7 +132,20 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                 )}
             </div>
         </div>
-        <div className='region-resources'>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+                overflow: {
+                    x: 'scroll',
+                    y: 'hidden',
+                }
+            }}
+            className='region-resources'
+            defer
+        >
             <h2 className='box-title'>Available Resources</h2>
             {regionElements[region][2].map(resource => (regionsResourcesInfos[resource][2].length === 0 ?
                 <div
@@ -131,13 +172,13 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                     </div>
                 </NavLink>
             ))}
-        </div>
+        </OverlayScrollbarsComponent>
         <div className='region-pods'>
             <h2 className='box-title'>{region === 'labyrinth' ? 'Ancient Vaults' : 'Tresaure Pods'}</h2>
             <img src={region === 'labyrinth' ? doorImg : podImg} alt='Pods' />
             <p>{regionInfos[region][5]}</p>
         </div>
-    </div>
+    </div >
 );
 
 interface RanchDescriptionProps {
@@ -147,7 +188,16 @@ interface RanchDescriptionProps {
 
 const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescriptionRef }) => (
     <div className={`ranch-description${region === 'conservatory' ? ' ranch-conservatory' : ''}`} ref={regionDescriptionRef}>
-        <div className='ranch-pedia'>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                }
+            }}
+            className='ranch-pedia'
+            defer
+        >
             <h2 className='box-title'>Slimepedia Entry</h2>
             <p>
                 {regionPedia[region].split("\n").map(function (item) {
@@ -158,7 +208,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                     )
                 })}
             </p>
-        </div>
+        </OverlayScrollbarsComponent>
         <div className='region-connections'>
             <h2 className='box-title'>Ranch Connections</h2>
             <div className='region-from'>
@@ -235,7 +285,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                 );
             })}
         </div>
-    </div>
+    </div >
 );
 
 const animationDelay = 300;
@@ -306,7 +356,16 @@ export const Regions: React.FC = () => {
                     <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab('region')} />
                     <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab('ranch')} />
                 </div>
-                <div className='regions-list' style={{ borderRadius: `${selectedTab === 'region' ? '0 var(--border-size)' : 'var(--border-size) 0'} var(--border-size) var(--border-size)` }}>
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            autoHide: "move",
+                            autoHideDelay: 500,
+                        },
+                    }}
+                    className={'regions-list' + (selectedTab === 'region' ? ' regions-list-regions' : ' regions-list-ranch')}
+                    defer
+                >
                     {listOfRegions.map(regionItem => (
                         <NavLink to={`/regions/${selectedTab}/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
                             <div
@@ -329,7 +388,7 @@ export const Regions: React.FC = () => {
                             </div>
                         </NavLink>
                     ))}
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
             <div className='region-presentation'>
                 <div className='region-background' style={backgroudRegion}>

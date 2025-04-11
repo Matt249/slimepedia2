@@ -11,6 +11,7 @@ import pedia from '../assets/misc/pediatut.png';
 import buck from '../assets/misc/buck.png';
 import noneIcon from '../assets/misc/none.png';
 import '../css/Pedia.css';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 const matchMainList = (list: string) => {
     switch (list) {
@@ -59,7 +60,16 @@ export const Items = () => {
                         action={() => setTab(lastOption)}
                     />
                 </div>
-                <div className='list-food' style={{ borderRadius: `${tab === firstOption ? '0' : 'var(--border-size)'} ${tab === lastOption ? ' 0 ' : 'var(--border-size)'} var(--border-size) var(--border-size)` }}>
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            autoHide: "move",
+                            autoHideDelay: 500,
+                        },
+                    }}
+                    className={'list-food ' + (tab === firstOption ? 'list-food-first' : 'list-food-last')}
+                    defer
+                >
                     {itemsNames.map((itemName) => {
                         return (
                             <NavLink key={itemName} to={`/items/${tab}/${itemName}`} style={{ textDecoration: 'none' }}>
@@ -73,7 +83,7 @@ export const Items = () => {
                             </NavLink>
                         );
                     })}
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
             <div className='food-container box-layout-secondary'>
                 <div className={'presentation presentation-' + tab}>

@@ -20,6 +20,7 @@ import trashImg from '../assets/misc/trash.png';
 import blueprintImg from '../assets/misc/blueprint.png';
 import '../css/Blueprints.css';
 import MemoXmark from '../components/Xmark';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 enum BlueprintType {
     UPGRADES = 'upgrades',
@@ -65,7 +66,20 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
     const recipe = blueprintMatcher(name, type)[2];
 
     return (
-        <div className='recipe-list'>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+                overflow: {
+                    x: 'hidden',
+                    y: 'scroll',
+                }
+            }}
+            defer
+            className='recipe-list'
+        >
             <div className='quantity-selector'>
                 <Down onClick={() => decreaseQuantity()} />
                 <div></div>
@@ -87,7 +101,7 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
                     <h3>{recipe[ingredient] * quantity}</h3>
                 </div>
             ))}
-        </div>
+        </OverlayScrollbarsComponent>
     );
 };
 
@@ -208,7 +222,15 @@ const UpgradesPage: React.FC = () => {
     };
 
     const renderUpgradeList = () => (
-        <div className='vac-upgrade-list'>
+        <OverlayScrollbarsComponent
+            options={{
+                scrollbars: {
+                    autoHide: "move",
+                    autoHideDelay: 500,
+                },
+            }}
+            defer
+            className='vac-upgrade-list'>
             {upgradeNames.map((upgradeName) => (
                 <UpgradeItemList
                     selected={upgrade === upgradeName}
@@ -217,7 +239,7 @@ const UpgradesPage: React.FC = () => {
                     tier={tier}
                 />
             ))}
-        </div>
+        </OverlayScrollbarsComponent>
     );
 
     const renderUpgradeInfo = () => (
@@ -282,13 +304,22 @@ const UtilitiesPage: React.FC = () => {
     const blueprint = blueprintName ?? null;
     return (
         <>
-            <div className='blueprint-list'>
+            <OverlayScrollbarsComponent
+                options={{
+                    scrollbars: {
+                        autoHide: "move",
+                        autoHideDelay: 500,
+                    },
+                }}
+                defer
+                className='blueprint-list'
+            >
                 {utilitiesNames.map((utilitiesNames) => (
                     <NavLink key={utilitiesNames} to={`/blueprints/utilities/${utilitiesNames}`} className='blueprint-item'>
                         <NavButton key={utilitiesNames} name={utilitiesList[utilitiesNames][0]} icon={`gadgets/${utilitiesNames}`} tilting='none' size={1.25} />
                     </NavLink>
                 ))}
-            </div>
+            </OverlayScrollbarsComponent>
             <BlueprintInfos blueprint={blueprint} type={BlueprintType.UTILITIES} />
         </>
     )
@@ -299,13 +330,22 @@ const WarpPage: React.FC = () => {
     const blueprint = warpName ?? null;
     return (
         <>
-            <div className='blueprint-list'>
+            <OverlayScrollbarsComponent
+                options={{
+                    scrollbars: {
+                        autoHide: "move",
+                        autoHideDelay: 500,
+                    },
+                }}
+                defer
+                className='blueprint-list'
+            >
                 {warpNames.map((warpName) => (
                     <NavLink key={warpName} to={`/blueprints/warp/${warpName}`} className='blueprint-item'>
                         <NavButton key={warpName} name={warpGadgets[warpName][0]} icon={`gadgets/${warpName}`} tilting='none' size={1.25} />
                     </NavLink>
                 ))}
-            </div>
+            </OverlayScrollbarsComponent>
             <BlueprintInfos blueprint={blueprint} type={BlueprintType.WARP} />
         </>
     );
@@ -326,13 +366,21 @@ const DecorationsPage: React.FC = () => {
                     ))}
                 </div>
                 <div className='decoration-filter-name'><h1>Filter : {themeList[decoFilter][0]}</h1></div>
-                <div className='blueprint-list decoration'>
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            autoHide: "move",
+                            autoHideDelay: 500,
+                        },
+                    }}
+                    defer
+                    className='blueprint-list decoration'>
                     {(decoFilter === 'any' ? decorationsNames : decorationsNames.filter((deco) => decorationsList[deco][3] === decoFilter)).map((decoName) => (
                         <NavLink key={decoName} to={`/blueprints/decorations/${decoName}`} className='blueprint-item'>
                             <NavButton name={decorationsList[decoName][0]} icon={`deco/${decoName}`} tilting='none' selected={decoName === blueprint} size={1.25} />
                         </NavLink>
                     ))}
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
             <BlueprintInfos blueprint={blueprint} type={BlueprintType.DECORATIONS} />
         </>
@@ -355,7 +403,18 @@ const RecipeMenu: React.FC = () => {
                 </button>
                 <MemoXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
-            <div>
+            <OverlayScrollbarsComponent
+                options={{
+                    scrollbars: {
+                        autoHide: "move",
+                        autoHideDelay: 500,
+                    },
+                    overflow: {
+                        x: 'hidden',
+                        y: 'scroll',
+                    }
+                }}
+                defer>
                 <div className='pin-list-header'>
                     <h1>Blueprints</h1>
                 </div>
@@ -408,7 +467,7 @@ const RecipeMenu: React.FC = () => {
                             </div>
                         ))}
                 </div>
-            </div>
+            </OverlayScrollbarsComponent>
         </div>
     );
 };
