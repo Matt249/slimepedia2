@@ -92,6 +92,16 @@ export const Buildings = () => {
         );
     }
 
+    console.log(upgrade);
+    const foundUpgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
+    const upgradeName = foundUpgrade ? foundUpgrade[1] : undefined;
+    if (upgradeName)
+        document.title = `${upgradeName} (${buildingList[activeBuilding][0]}) - Slimepedia 2`;
+    else if (building)
+        document.title = buildingList[activeBuilding][0] + ' - Slimepedia 2';
+    else
+        document.title = 'Buildings - Slimepedia 2';
+
     return (
         <div>
             <div className='buildings-list'>

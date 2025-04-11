@@ -251,6 +251,8 @@ const UpgradesPage: React.FC = () => {
         </div>
     );
 
+    document.title = upgrade === null ? 'Blueprints - Slimepedia' : upgradesList[upgrade + tier][0] + ' - Slimepedia';
+
     return (
         <>
             {validateUpgrade()}
@@ -302,6 +304,9 @@ const UpgradeRequirementsBox: React.FC<{ upgrade: string | null; tier: number }>
 const UtilitiesPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName ?? null;
+
+    document.title = blueprint === null ? 'Blueprints - Slimepedia' : utilitiesList[blueprint][0] + ' - Slimepedia';
+
     return (
         <>
             <OverlayScrollbarsComponent
@@ -328,6 +333,9 @@ const UtilitiesPage: React.FC = () => {
 const WarpPage: React.FC = () => {
     const { blueprint: warpName } = useParams();
     const blueprint = warpName ?? null;
+
+    document.title = blueprint === null ? 'Blueprints - Slimepedia' : warpGadgets[blueprint][0] + ' - Slimepedia';
+
     return (
         <>
             <OverlayScrollbarsComponent
@@ -355,6 +363,9 @@ const DecorationsPage: React.FC = () => {
     const { blueprint: blueprintName } = useParams();
     const blueprint = blueprintName ?? null
     const [decoFilter, setDecoFilter] = useState<string>('any');
+
+    document.title = blueprint === null ? 'Blueprints - Slimepedia' : decorationsList[blueprint][0] + ' - Slimepedia';
+
     return (
         <>
             <div className='decoration-list'>
@@ -490,6 +501,10 @@ export const Blueprints: React.FC = () => {
                 return <></>;
         }
     };
+
+    useEffect(() => {
+        document.title = 'Blueprints - Slimepedia';
+    }, []);
 
     return (
         <RecipeProvider>

@@ -43,6 +43,8 @@ export const Items = () => {
         return tab === 'toys' ? <Navigate to={'/items/toys/' + toyNames[0]} /> : <Navigate to={'/items/resource/' + resourcesNames[0]} />;
     }
 
+    document.title = infosItems[item][0] + ' - Slimepedia 2';
+
     return (
         <div>
             <div className='list-container'>

@@ -3,6 +3,9 @@ import glitch from '../assets/slimes/glitch.png';
 import React from 'react';
 
 export const ErrorPage = () => {
+
+    document.title = '404: Page not found';
+
     return (
         <header className="slimepedia-header">
             <img src={glitch} className="slimepedia-logo" alt="Pink Slime Logo" />

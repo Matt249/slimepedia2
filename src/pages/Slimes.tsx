@@ -195,6 +195,8 @@ export const Slimes = () => {
         );
     }
 
+    document.title = (slimeName ? slimesList[slimeName][0] : 'Slimes') + ' - Slimepedia 2';
+
     return (
         <div>
             <OverlayScrollbarsComponent

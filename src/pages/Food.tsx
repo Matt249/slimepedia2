@@ -263,6 +263,8 @@ export const Food = () => {
         }
     }, [filter]);
 
+    document.title = food === null ? 'Food - Slimepedia' : (foodList[food][0] + ' - Slimepedia');
+
     return (
         <div>
             <div className='list-container'>

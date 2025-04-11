@@ -349,6 +349,8 @@ export const Regions: React.FC = () => {
         backgroundImage: `url(${mediaFetcher('wait/' + region + '.jpg')})`
     };
 
+    document.title = regionInfos[region][0] + ' - Slimepedia 2';
+
     return (
         <div>
             <div className='region-tab-list'>

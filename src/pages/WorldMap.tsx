@@ -17,6 +17,8 @@ export const WorldMap = () => {
         map.setView(center, zoom, { animate: false });
     }, [center, zoom]);
 
+    document.title = 'Interactive Map - Slimepedia 2';
+
     return (
         <MapContainer
             className="region-menu"

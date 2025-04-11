@@ -48,6 +48,8 @@ export const Weather: React.FC = () => {
         }
     };
 
+    document.title = weatherList[weather][0] + ' - Slimepedia 2';
+
     return (
         <div>
             <div className="top-buttons">
