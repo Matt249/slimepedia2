@@ -417,7 +417,8 @@ const RecipeMenu: React.FC = () => {
                         y: 'scroll',
                     }
                 }}
-                defer>
+                defer
+            >
                 <div className='pin-list-header'>
                     <h1>Blueprints</h1>
                 </div>

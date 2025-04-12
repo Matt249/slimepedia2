@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../text/regions';
 import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
-
-import { Navigate, NavLink, useParams } from 'react-router-dom';
-import Down from '../components/Down';
-import '../css/Regions.css';
 import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import Down from '../components/Down';
+import '../css/MusicPlayer.css';
+import '../css/Regions.css';
 
 interface RegionDescriptionProps {
     region: string;

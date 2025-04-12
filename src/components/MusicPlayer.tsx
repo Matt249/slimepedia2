@@ -91,7 +91,15 @@ export const MusicRefs: React.FC<{ region: string }> = ({ region: regionName }) 
                 <button className='music-player-icon' onClick={() => setMusicMenu(!musicMenu)}>
                     <img src='/assets/misc/audio.png' alt='Open music list' />
                 </button>
-                <div>
+                <OverlayScrollbarsComponent
+                    options={{
+                        scrollbars: {
+                            autoHide: "move",
+                            autoHideDelay: 500,
+                        },
+                    }}
+                    defer
+                >
                     <button className={`music-element-icon ${getAudioName(currentAudio) === region + '-night-ambient' ? 'music-current' : ''}`} onClick={() => playAudio(ambientNightRef, currentAudio, setCurrentAudio)}>
                         <img src='/assets/deco/cheerfulstatue.png' alt='Cheerful Statue' />
                     </button>
@@ -112,7 +120,7 @@ export const MusicRefs: React.FC<{ region: string }> = ({ region: regionName }) 
                         <img src='/assets/deco/overjoyedstatue.png' alt='Overjoyed Statue' />
                     </button>
                     <img src='/assets/misc/sun.png' className='music-time' alt='Day Music' />
-                </div>
+                </OverlayScrollbarsComponent>
             </div>
         </>
     )
