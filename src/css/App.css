@@ -26,9 +26,9 @@
 }
 
 [data-theme="dark"] {
-	--menu-color-0: #000;
-	--menu-color-1: #181818;
-	--item-color: #222;
+	--menu-color-0: #000;   
+	--menu-color-1: #111;
+	--item-color: #181818;
 	--text-color: #fff;
 	--background-color: #000;
 	--link-color: lightskyblue;
