@@ -204,29 +204,30 @@
 }
 
 .arrow-btn {
-    --taille-btn: 25px;
-    width: var(--taille-btn);
-    height: var(--taille-btn);
-    padding: 10px;
+    width: 2.5em;
+    height: 2.5em;
+    padding: 0.2em;
     background-color: var(--menu-color-1);
-    border-radius: var(--taille-btn);
+    border-radius: 100%;
     position: absolute;
     left: calc(50% - 10px);
     transition: all var(--animation-speed) var(--animation-function);
     z-index: 10;
     cursor: var(--pointer-style);
+    box-sizing: border-box;
 }
 
 .arrow-btn:hover {
     background-color: var(--item-color);
 }
 
-.arrow-btn:hover>img {
+.arrow-btn:hover>svg {
     filter: brightness(.7);
 }
 
-.arrow-btn>img {
-    transform: translateY(50%) scale(1.1);
+.arrow-btn>svg {
+    fill: var(--text-color);
+    transform: scale(1.1);
     width: 100%;
     height: auto;
 }

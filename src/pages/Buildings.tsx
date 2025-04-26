@@ -73,9 +73,12 @@ export const Buildings = () => {
                 <div className='upgrade-title'>
                     <h3>{upgrade[1]}</h3>
                 </div>
-                <div className='upgrade-cost'>
-                    <p>Cost: {upgrade[2]}</p>
-                    <img src='/assets/misc/buck.png' alt='Newbucks' />
+                <div className='little-box-buildings upgrade-cost building-cost'>
+                    <img src='/assets/misc/buck.png' alt='Newbuck coin' />
+                    <div>
+                        <h3>Cost</h3>
+                        <h4>{upgrade[2]}</h4>
+                    </div>
                 </div>
                 <div className="upgrade-img">
                     <img src={`/assets/buildings/${upgrade[0]}.png`} alt={upgrade[1]} />

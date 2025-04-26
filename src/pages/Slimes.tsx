@@ -7,7 +7,7 @@ import { toyNames, toysList } from '../text/toys.js';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import '../css/Pedia.css';
-import { Down } from '../components/Down.js';
+import { Down } from '../svg/Down.js';
 
 interface SlimeDetailsProps {
     currentSlimeList: [string, string, string, boolean, string[], string] | null;

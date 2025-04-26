@@ -1,3 +1,59 @@
+@keyframes wave-animation {
+    0% {
+        transform: rotate(0.0deg) translate(25%, 25%)
+    }
+
+    10% {
+        transform: rotate(14.0deg) translate(25%, 25%)
+    }
+
+    20% {
+        transform: rotate(-8.0deg) translate(25%, 25%)
+    }
+
+    30% {
+        transform: rotate(14.0deg) translate(25%, 25%)
+    }
+
+    40% {
+        transform: rotate(-4.0deg) translate(25%, 25%)
+    }
+
+    50% {
+        transform: rotate(10.0deg) translate(25%, 25%)
+    }
+
+    60% {
+        transform: rotate(0.0deg) translate(25%, 25%)
+    }
+
+    100% {
+        transform: rotate(0.0deg) translate(25%, 25%)
+    }
+}
+
+@keyframes grow-in-out {
+    0% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.2)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.grow-in-out {
+    animation: grow-in-out calc(var(--animation-speed) * 2) ease-in-out !important;
+}
+
+.add-to-cart {
+    animation: wave-animation calc(var(--animation-speed) * 4) ease-in-out;
+}
+
 .pin-button {
     position: absolute;
     width: 6vh;
@@ -39,6 +95,7 @@
     margin: 10px;
     padding: 0;
     cursor: var(--pointer-style);
+    transform-origin: center;
     transform: scale(1) rotate(0) translate(25%, 25%);
     transition: transform var(--animation-speed) var(--animation-function) 0s;
     z-index: 15;
@@ -653,7 +710,7 @@
     width: fit-content;
 }
 
-.blueprint-list.decoration [data-overlayscrollbars-contents]  {
+.blueprint-list.decoration [data-overlayscrollbars-contents] {
     border-radius: 0 0 var(--border-size) var(--border-size);
 }
 
@@ -730,7 +787,7 @@
 .decoration-tab:hover {
     transform: scale(1.5);
 }
-    
+
 .decoration-filter-name {
     background-color: var(--menu-color-1);
     padding: 0 var(--border-size);

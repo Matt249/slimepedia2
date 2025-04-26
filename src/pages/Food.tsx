@@ -7,6 +7,7 @@ import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodType
 import { Tab } from '../components/Tab';
 import { slimesList } from '../text/slimes';
 import '../css/Pedia.css';
+import { Down } from '../svg/Down';
 
 interface FoodTabsProps {
     filter: string;
@@ -280,7 +281,7 @@ export const Food = () => {
                     }}
                     tabIndex={0}
                 >
-                    <img src='/assets/misc/arrow.png' alt='Arrow' />
+                    <Down />
                 </a>
                 <FoodDescription food={food} topBtn={topBtn} />
             </div>

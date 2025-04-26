@@ -6,7 +6,7 @@ import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
-import Down from '../components/Down';
+import Down from '../svg/Down';
 import '../css/MusicPlayer.css';
 import '../css/Regions.css';
 

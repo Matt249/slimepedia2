@@ -262,24 +262,9 @@
 
 .upgrade-cost {
     grid-area: cost;
-    border-radius: var(--border-size);
     background-color: var(--item-color);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 3px;
-}
-
-.upgrade-cost>p {
-    margin: 0;
-    font-size: 1.5em;
-    font-weight: 500;
-}
-
-.upgrade-cost>img {
-    width: auto;
-    height: 30px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .upgrade-desc {

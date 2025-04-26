@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import { Down } from '../components/Down';
-import { Minus } from '../components/Minus';
-import { Plus } from '../components/Plus';
+import { Down } from '../svg/Down';
+import { Minus } from '../svg/Minus';
+import { Plus } from '../svg/Plus';
 import { NavButton } from '../components/NavButton';
 import { RecipeProvider, useRecipeContext } from '../components/RecipeContext';
 import {
@@ -11,7 +11,7 @@ import {
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
 import '../css/Blueprints.css';
-import MemoXmark from '../components/Xmark';
+import MemoXmark from '../svg/Xmark';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 enum BlueprintType {
@@ -48,7 +48,7 @@ const descriptionMatcher = (blueprint: string, type: BlueprintType) => {
 }
 
 const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, type }) => {
-    const { addToRecipeList } = useRecipeContext();
+    const { addToRecipeList, triggerAnimation, currentElementRef } = useRecipeContext();
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {
         setQuantity(1);
@@ -56,6 +56,7 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
     const increaseQuantity = () => setQuantity(prevQtty => prevQtty + (prevQtty < 99 ? 1 : 0));
     const decreaseQuantity = () => setQuantity(prevQtty => prevQtty - (prevQtty > 1 ? 1 : 0));
     const recipe = blueprintMatcher(name, type)[2];
+    const elementRef = useRef<HTMLButtonElement | null>(null);
 
     return (
         <OverlayScrollbarsComponent
@@ -75,7 +76,14 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             <div className='quantity-selector'>
                 <Down onClick={() => decreaseQuantity()} />
                 <div></div>
-                <button onClick={() => addToRecipeList(name, type, quantity)}>
+                <button
+                    ref={elementRef}
+                    onClick={() => {
+                        triggerAnimation(currentElementRef, "add-to-cart");
+                        triggerAnimation(elementRef, "grow-in-out");
+                        addToRecipeList(name, type, quantity)
+                    }}
+                >
                     <h2>{quantity}</h2>
                     <Plus />
                 </button>
@@ -391,11 +399,11 @@ const DecorationsPage: React.FC = () => {
 };
 
 const RecipeMenu: React.FC = () => {
-    const { recipeList, resetList, craftList, decreaseBlueprint, craftRecipeMatcher, addToRecipeList, resetBlueprint } = useRecipeContext();
+    const { recipeList, resetList, craftList, decreaseBlueprint, craftRecipeMatcher, addToRecipeList, resetBlueprint, currentElementRef } = useRecipeContext();
     const [recipeMenuToggle, setRecipeMenuToggle] = useState(false);
     return (
         <div className={`pin-button ${recipeMenuToggle ? ' opened' : ''}`}>
-            <button onClick={() => setRecipeMenuToggle(!recipeMenuToggle)}>
+            <button onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} ref={currentElementRef}>
                 <img src='/assets/misc/shop.png' alt='Shop icon' />
             </button>
             <div className='pin-header'>

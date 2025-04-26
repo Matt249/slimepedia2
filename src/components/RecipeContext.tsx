@@ -16,6 +16,8 @@ interface RecipeContextType {
     resetList: () => void;
     resetBlueprint: (item: string) => void;
     craftRecipeMatcher: (item: string, type: BlueprintType) => [string, { [key: string]: number }];
+    triggerAnimation: (elementRef: React.MutableRefObject<HTMLButtonElement | null>, animation: string) => void;
+    currentElementRef: React.MutableRefObject<HTMLButtonElement | null>;
 }
 
 const RecipeContext = createContext<RecipeContextType | undefined>(undefined);
@@ -93,6 +95,18 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         updateCraftList();
     }, [blueprintList]);
 
+    const currentElementRef = useRef<HTMLButtonElement | null>(null);
+
+    const triggerAnimation = (elementRef: React.MutableRefObject<HTMLButtonElement | null>, animation: string) => {
+        if (elementRef.current) {
+            elementRef.current.classList.remove(animation);
+            // Forcer le reflow pour relancer l'animation
+            // Force reflow to restart the animation
+            void elementRef.current.offsetWidth;
+            elementRef.current.classList.add(animation);
+        }
+    };
+
     const contextValue = React.useMemo(() => ({
         recipeList: blueprintList,
         craftList,
@@ -100,7 +114,9 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         decreaseBlueprint,
         resetList,
         craftRecipeMatcher,
-        resetBlueprint
+        resetBlueprint,
+        triggerAnimation,
+        currentElementRef
     }), [craftList]);
 
     return (
