@@ -32,7 +32,7 @@ export default function Index() {
                     <Route path="/items/" element={<Items />} />
                     <Route path="/items/:tab" element={<Items />} />
                     <Route path="/items/:tab/:item" element={<Items />} />
-                    <Route path="/map/*" element={<WorldMap />} />
+                    <Route path="/map/" element={<WorldMap />} />
                     <Route path="/regions" element={<Regions />} />
                     <Route path="/regions/:region" element={<Regions />} />
                     <Route path="/regions/:regionType/:region" element={<Regions />} />

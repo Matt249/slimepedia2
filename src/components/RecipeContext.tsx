@@ -100,8 +100,6 @@ export const RecipeProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const triggerAnimation = (elementRef: React.MutableRefObject<HTMLButtonElement | null>, animation: string) => {
         if (elementRef.current) {
             elementRef.current.classList.remove(animation);
-            // Forcer le reflow pour relancer l'animation
-            // Force reflow to restart the animation
             void elementRef.current.offsetWidth;
             elementRef.current.classList.add(animation);
         }

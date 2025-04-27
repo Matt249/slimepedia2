@@ -45,16 +45,16 @@
 }
 
 [data-theme="dark"] .os-scrollbar {
-    background-color: transparent; /* Couleur de l'arrière-plan de la scrollbar */
+    background-color: transparent;
 }
 
 [data-theme="dark"] .os-scrollbar-track {
-    background-color: transparent; /* Couleur de la piste */
+    background-color: transparent;
 }
 
 [data-theme="dark"] .os-scrollbar-handle {
-    background-color: #555; /* Couleur de la poignée */
-    border-radius: 4px; /* Arrondi de la poignée */
+    background-color: #555;
+    border-radius: 4px;
 }
 
 [data-theme="light"] {

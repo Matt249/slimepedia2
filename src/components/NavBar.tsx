@@ -17,7 +17,7 @@ export const NavBar = () => {
         const newDarkMode = !isDarkMode();
         localStorage.setItem('darkMode', String(newDarkMode));
         document.documentElement.setAttribute('data-theme', newDarkMode ? 'dark' : 'light');
-        window.dispatchEvent(new Event('darkModeChange')); // Déclenche l'événement personnalisé
+        window.dispatchEvent(new Event('darkModeChange'));
     };
 
     useEffect(() => {

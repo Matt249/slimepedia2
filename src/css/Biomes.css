@@ -1,6 +1,6 @@
 [data-theme="light"] .spawn-list-container .os-scrollbar-handle {
-    background-color: var(--menu-color-1); /* Couleur de la poignée */
-    border-radius: 4px; /* Arrondi de la poignée */
+    background-color: var(--menu-color-1);
+    border-radius: 4px;
 }
 
 .spawn-list-container {

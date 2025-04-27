@@ -217,7 +217,7 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
 
 export const Food = () => {
     const { food: foodName } = useParams<{ food: string }>();
-    const navigate = useNavigate(); // Utilisez useNavigate pour la redirection
+    const navigate = useNavigate();
     const [filter, setFilter] = useState('any');
     const [food, setFood] = useState<string | null>(null);
 
