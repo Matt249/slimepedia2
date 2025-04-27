@@ -1,40 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavButton from "./NavButton";
 
+const darkModeCheck = () => {
+    const savedDarkMode: string | null = localStorage.getItem('darkMode');
+    if (null === savedDarkMode) {
+        console.info('No saved dark mode preference found. Checking system preference...');
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return savedDarkMode === "dark";
+}
+
 export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
+    const [darkMode, setDarkMode] = useState<boolean>(darkModeCheck());
 
-    const isDarkMode = () => {
-        const savedDarkMode = localStorage.getItem('darkMode');
-        if (savedDarkMode !== null) {
-            return savedDarkMode === 'true';
+    const darkModeHandle = () => {
+        console.info('Dark mode handle triggered');
+        const savedDarkMode: string | null = localStorage.getItem('darkMode');
+        if (null === savedDarkMode) {
+            console.info('No saved dark mode preference found. Checking system preference...');
+            return setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
         }
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    };
-
-    const toggleDarkMode = () => {
-        const newDarkMode = !isDarkMode();
-        localStorage.setItem('darkMode', String(newDarkMode));
-        document.documentElement.setAttribute('data-theme', newDarkMode ? 'dark' : 'light');
-        window.dispatchEvent(new Event('darkModeChange'));
+        
+        setDarkMode(savedDarkMode === "dark");
+        console.log(localStorage.getItem('darkMode'));
     };
 
     useEffect(() => {
-        const savedDarkMode = localStorage.getItem('darkMode');
-        if (savedDarkMode !== null)
-            document.documentElement.setAttribute('data-theme', savedDarkMode === 'true' ? 'dark' : 'light');
-        else
-            document.documentElement.setAttribute('data-theme',
-                window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-            );
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        const handleChange = (e: MediaQueryListEvent) => {
-            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-        }
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
-    }, []);
+        localStorage.setItem('darkMode', darkMode ? 'dark' : 'light');
+        window.dispatchEvent(new Event('darkModeChange'));
+        document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+    }, [darkMode])
 
     return (
         <nav className="box-layout">
@@ -82,8 +79,8 @@ export const NavBar = () => {
             <div className="theme-btn-container">
                 <NavButton
                     name="Switch Theme"
-                    icon={isDarkMode() ? 'misc/sun' : 'misc/moon'}
-                    action={toggleDarkMode}
+                    icon={darkMode ? 'misc/sun' : 'misc/moon'}
+                    action={() => setDarkMode(!darkMode)}
                     tilting="random"
                     selected={false}
                 />

@@ -18,7 +18,7 @@ export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
     const biomeBlacklist = ['pm'];
 
     useEffect(() => {
-        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] || null);
+        videoRefs.current = spawnList.map((_, i) => videoRefs.current[i] ?? null);
     }, [spawnList]);
 
     const handleVideoLoadAndPlay = async (videoRef: HTMLVideoElement) => {

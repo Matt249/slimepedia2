@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { weatherList, weatherName, weatherPedia, weatherSpawn } from "../text/weather";
+import React, { useRef, useState, useEffect } from "react";
+import { weatherName, weatherList, weatherPedia, weatherSpawn } from "../text/weather";
 import { Biomes } from "../components/Biomes";
 import { Navigate, NavLink, useParams } from "react-router-dom";
 import '../css/Weather.css';
@@ -8,8 +8,19 @@ export const Weather: React.FC = () => {
     const [panel, setPanel] = useState<boolean>(true);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
     const backgroundVideoRef = useRef<HTMLVideoElement>(null);
-    const { weather } = useParams<{ weather: string }>();
     const weatherMusicRef = useRef<HTMLAudioElement>(null);
+    const { weather } = useParams<{ weather: string }>();
+    const [weatherMusicAvailable, setWeatherMusicAvailable] = useState<boolean>(false);
+
+    useEffect(() => {
+        console.log(weatherMusicRef.current);
+        if (weather && weatherList[weather][7] && weatherMusicRef.current) {
+            setWeatherMusicAvailable(true);
+        }
+        else {
+            setWeatherMusicAvailable(false);
+        }
+    }, [weather, weatherList, weatherMusicRef]);
 
     const handleMouseEnter = (weather: string) => {
         if (videoRefs.current[weather])
@@ -40,9 +51,9 @@ export const Weather: React.FC = () => {
             if (weatherMusicRef.current.paused) {
                 weatherMusicRef.current.volume = 0.1;
                 weatherMusicRef.current.play();
-            }
-            else
+            } else {
                 weatherMusicRef.current.pause();
+            }
         }
     };
 
@@ -51,15 +62,17 @@ export const Weather: React.FC = () => {
     return (
         <div>
             <div className="top-buttons">
-                <audio ref={weatherMusicRef} src={`/assets/music/${weatherList[weather][7] ? weather : 'fields-day-theme'}.ogg`}>
-                    <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A00:00:00.000%20--%3E%2000:00:10.000%0AWeather%20Music" srcLang="en" label="English captions" />
-                </audio>
                 <div>
                     <button onClick={() => setPanel(!panel)}>
                         <img src='/assets/misc/mapCursor.png' alt="Toggle fullscreen" />
                     </button>
-                    {weatherList[weather][7] && weatherMusicRef.current &&
-                        <button onClick={() => handleMusicPlay()} className={'music-player' + weatherMusicRef.current.paused ? '' : ' music-played'}>
+                    {weatherList[weather][7] &&
+                        <audio ref={weatherMusicRef} src={`/assets/music/${weather}.ogg`}>
+                            <track kind="captions" src="data:text/vtt,WEBVTT%0A%0A00:00:00.000%20--%3E%2000:00:10.000%0AWeather%20Music" srcLang="en" label="English captions" />
+                        </audio>
+                    }
+                    {weatherMusicAvailable &&
+                        <button onClick={() => handleMusicPlay()} className={'music-player' + (weatherMusicRef.current!.paused ? '' : ' music-played')}>
                             <img src='/assets/misc/audio.png' alt='Play weather music' />
                         </button>
                     }
@@ -117,7 +130,7 @@ export const Weather: React.FC = () => {
                         </NavLink>
                     </div>
                     <div className="weather-box spawning-slimes-box">
-                        <h2 className='weather-box-title'>Slimes/Resources</h2>
+                        <h2 className='weather-box-title'>Unique Slimes/Resources</h2>
                         {weatherList[weather][4].length !== 0 ? weatherList[weather][4].map((element) => (
                             <NavLink to={weatherSpawn[element][2]} key={element}>
                                 <img src={`/assets/${weatherSpawn[element][1]}.png`} title={weatherSpawn[element][0]} alt={weatherSpawn[element][0]} />
@@ -131,6 +144,6 @@ export const Weather: React.FC = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Weather;
