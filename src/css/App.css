@@ -25,12 +25,26 @@
 		color var(--animation-speed) var(--animation-function);
 }
 
-[data-theme="dark"] body {
-	background-image: url("/assets/wallpapers/houseNight.png");
+@media (prefers-color-scheme: dark) {
+    :root {
+        --menu-color-0: #000;
+        --menu-color-1: #111;
+        --item-color: #181818;
+        --text-color: #fff;
+        --background-color: #000;
+        --link-color: lightskyblue;
+    }
 }
 
-[data-theme="light"] body {
-	background-image: url("/assets/wallpapers/houseDay.png");
+@media (prefers-color-scheme: light) {
+    :root {
+        --menu-color-0: #EFE7D4;
+        --menu-color-1: #E9DDC7;
+        --item-color: #D2B394;
+        --text-color: #000;
+        --background-color: var(--menu-color-0);
+        --link-color: #252466;
+    }
 }
 
 [data-theme="dark"] {
@@ -41,7 +55,24 @@
 	--background-color: #000;
 	--link-color: lightskyblue;
 	color-scheme: dark;
-	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] {
+	--menu-color-0: #EFE7D4;
+	--menu-color-1: #E9DDC7;
+	--item-color: #D2B394;
+	--text-color: #000;
+	--background-color: var(--menu-color-0);
+	--link-color: #252466;
+	color-scheme: light;
+}
+
+[data-theme="dark"] body {
+	background-image: url("/assets/wallpapers/houseNight.png");
+}
+
+[data-theme="light"] body {
+	background-image: url("/assets/wallpapers/houseDay.png");
 }
 
 [data-theme="dark"] .os-scrollbar {
@@ -55,17 +86,6 @@
 [data-theme="dark"] .os-scrollbar-handle {
     background-color: #555;
     border-radius: 4px;
-}
-
-[data-theme="light"] {
-	--menu-color-0: #EFE7D4;
-	--menu-color-1: #E9DDC7;
-	--item-color: #D2B394;
-	--text-color: #000;
-	--background-color: var(--menu-color-0);
-	--link-color: #252466;
-	color-scheme: light;
-	transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 [data-theme="light"] .os-scrollbar {

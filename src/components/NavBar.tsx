@@ -21,14 +21,17 @@ export const NavBar = () => {
     };
 
     useEffect(() => {
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode !== null)
+            document.documentElement.setAttribute('data-theme', savedDarkMode === 'true' ? 'dark' : 'light');
+        else
+            document.documentElement.setAttribute('data-theme',
+                window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+            );
         const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
         const handleChange = (e: MediaQueryListEvent) => {
-            const savedDarkMode = localStorage.getItem('darkMode');
-            if (savedDarkMode === null) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-            }
-        };
-
+            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+        }
         mediaQuery.addEventListener('change', handleChange);
         return () => mediaQuery.removeEventListener('change', handleChange);
     }, []);

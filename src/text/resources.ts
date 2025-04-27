@@ -31,7 +31,7 @@ export const resourceList: { [key: string]: [string, string[], string] } = {
     'lava': ['Lava Dust', ['ev'], 'A survey on the state of this matter answered \'undecided\'.'],
     'wax': ['Buzz Wax', ['ss', 'ev'], 'Can be used to make a great candle if you enjoy the smell of bee abdominal glands.'],
     'honey': ['Wild Honey', ['ss'], 'Tastes great in tea or in shameful handfuls when no one is looking.'],
-    'jelly': ['Jellystone', ['co', 'gu', 'td', 'tp', 'ds', 'ar', 'rf'], 'It\'s both solid and squishy at the same time.'],
+    'jelly': ['Jellystone', ['co', 'rf'], 'It\'s both solid and squishy at the same time.'],
     'radiant': ['Radiant Ore', ['ss', 'ev'], 'The awesome power of a rainbow and the sleek aesthetic of a lump of mineral.'],
     'diamond': ['Strange Diamond', ['rf', 'ss', 'ev', 'pb', 'gl'], 'Very strange, but even more valuable.'],
     'fossil': ['Slime Fossil', ['pb'], 'If history could smile, it would look like this.'],
