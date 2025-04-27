@@ -13,7 +13,6 @@ export const Weather: React.FC = () => {
     const [weatherMusicAvailable, setWeatherMusicAvailable] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log(weatherMusicRef.current);
         if (weather && weatherList[weather][7] && weatherMusicRef.current) {
             setWeatherMusicAvailable(true);
         }

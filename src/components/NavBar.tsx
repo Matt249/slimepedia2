@@ -4,28 +4,14 @@ import NavButton from "./NavButton";
 
 const darkModeCheck = () => {
     const savedDarkMode: string | null = localStorage.getItem('darkMode');
-    if (null === savedDarkMode) {
-        console.info('No saved dark mode preference found. Checking system preference...');
+    if (null === savedDarkMode)
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
-    }
     return savedDarkMode === "dark";
 }
 
 export const NavBar = () => {
     const noLink = { textDecoration: 'none' };
     const [darkMode, setDarkMode] = useState<boolean>(darkModeCheck());
-
-    const darkModeHandle = () => {
-        console.info('Dark mode handle triggered');
-        const savedDarkMode: string | null = localStorage.getItem('darkMode');
-        if (null === savedDarkMode) {
-            console.info('No saved dark mode preference found. Checking system preference...');
-            return setDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches);
-        }
-        
-        setDarkMode(savedDarkMode === "dark");
-        console.log(localStorage.getItem('darkMode'));
-    };
 
     useEffect(() => {
         localStorage.setItem('darkMode', darkMode ? 'dark' : 'light');
