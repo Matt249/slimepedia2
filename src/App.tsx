@@ -6,8 +6,6 @@ import './css/App.css';
 
 function App() {
     document.title = "Slimepedia 2";
-    document.body.style.backgroundImage = 'url("/assets/wallpapers/houseDay.png")';
-    document.body.style.cursor = 'url("/assets/ui/pointer24.png"), auto';
 
     useEffect(() => {
         const randomSlimeKey = slimeNames[Math.floor(Math.random() * Object.keys(slimeNames).length)];

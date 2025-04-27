@@ -92,16 +92,19 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             </div>
             {Object.keys(recipe).map((ingredient) => (
                 <div key={ingredient}>
-                    <img
-                        src={`/assets/${recipeElements[ingredient][1]}.png`}
-                        alt={recipeElements[ingredient][0]}
-                        title={recipeElements[ingredient][0]}
-                    />
-                    <p>{recipeElements[ingredient][0]}: </p>
+                    <NavLink to={recipeElements[ingredient][2] == null ? '' : `/${recipeElements[ingredient][2]}`}>
+                        <img
+                            src={`/assets/${recipeElements[ingredient][1]}.png`}
+                            alt={recipeElements[ingredient][0]}
+                            title={recipeElements[ingredient][0]}
+                        />
+                        <p>{recipeElements[ingredient][0]}: </p>
+                    </NavLink>
                     <h3>{recipe[ingredient] * quantity}</h3>
                 </div>
-            ))}
-        </OverlayScrollbarsComponent>
+            ))
+            }
+        </OverlayScrollbarsComponent >
     );
 };
 

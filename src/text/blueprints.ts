@@ -1,5 +1,5 @@
-export const recipeElements: { [key: string]: [string, string, string] } = {
-    'newbucks': ['Newbucks', 'misc/buck', ''],
+export const recipeElements: { [key: string]: [string, string, string | null] } = {
+    'newbucks': ['Newbucks', 'misc/buck', null],
     'pink': ['Pink Plort', 'plorts/pink', 'slimes/pink'],
     'cotton': ['Cotton Plort', 'plorts/cotton', 'slimes/cotton'],
     'tabby': ['Tabby Plort', 'plorts/tabby', 'slimes/tabby'],
@@ -45,17 +45,17 @@ export const recipeElements: { [key: string]: [string, string, string] } = {
     'sand': ['Silky Sand', 'resources/sand', 'resources/sand'],
     'diamond': ['Strange Diamond', 'resources/diamond', 'resources/diamond'],
     'tankLiner': ['Tank Liner', 'upgrades/tankLiner', 'upgrades/tankLiner'],
-    'storageCell': ['Storage Cell', 'upgrades/storageCell', ''],
-    'storageUnit': ['Storage Unit', 'upgrades/storageUnit', ''],
-    'powerChip': ['Power Chip', 'upgrades/powerChip', ''],
-    'dashBootModule': ['Dash Boot Module', 'upgrades/dashBootModule', ''],
-    'jetpackDrive': ['Jetpack Drive', 'upgrades/jetpackDrive', ''],
-    'heartModule': ['Heart Module', 'upgrades/heartModule', ''],
-    'sureshotModule': ['Sureshot Module', 'upgrades/sureshotModule', ''],
-    'droneKey': ['Drone Key', 'upgrades/droneKey', ''],
-    'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', ''],
-    'regenModule': ['Regenerator Module', 'upgrades/regenModule', ''],
-    'injectorModule': ['Injector Module', 'upgrades/injectorModule', ''],
+    'storageCell': ['Storage Cell', 'upgrades/storageCell', null],
+    'storageUnit': ['Storage Unit', 'upgrades/storageUnit', null],
+    'powerChip': ['Power Chip', 'upgrades/powerChip', null],
+    'dashBootModule': ['Dash Boot Module', 'upgrades/dashBootModule', null],
+    'jetpackDrive': ['Jetpack Drive', 'upgrades/jetpackDrive', null],
+    'heartModule': ['Heart Module', 'upgrades/heartModule', null],
+    'sureshotModule': ['Sureshot Module', 'upgrades/sureshotModule', null],
+    'droneKey': ['Drone Key', 'upgrades/droneKey', null],
+    'sureshotModule:': ['Sureshot Module', 'upgrades/sureshotModule', null],
+    'regenModule': ['Regenerator Module', 'upgrades/regenModule', null],
+    'injectorModule': ['Injector Module', 'upgrades/injectorModule', null],
 };
 
 export const unlockRequirements: { [key: string]: [string, string] } = {

@@ -47,7 +47,7 @@
 }
 
 .grow-in-out {
-    animation: grow-in-out calc(var(--animation-speed) * 2) ease-in-out !important;
+    animation: grow-in-out var(--animation-speed) ease-in-out !important;
 }
 
 .add-to-cart {
@@ -624,14 +624,22 @@
 .blueprint-recipe-list [data-overlayscrollbars-contents]>div,
 .recipe-list [data-overlayscrollbars-contents]>div {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto;
     grid-template-rows: 1fr;
     align-items: center;
     gap: var(--border-size);
 }
 
-.blueprint-recipe-list [data-overlayscrollbars-contents]>div>p,
-.recipe-list [data-overlayscrollbars-contents]>div>p {
+.recipe-list [data-overlayscrollbars-contents]>div>a {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--border-size);
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div>a>p,
+.recipe-list [data-overlayscrollbars-contents]>div>a>p {
     font-size: 1.5em;
     margin: 0;
     text-align: left;
@@ -639,8 +647,8 @@
     white-space: nowrap;
 }
 
-.blueprint-recipe-list [data-overlayscrollbars-contents]>div>p::after,
-.recipe-list [data-overlayscrollbars-contents]>div>p::after {
+.blueprint-recipe-list [data-overlayscrollbars-contents]>div>a>p::after,
+.recipe-list [data-overlayscrollbars-contents]>div>a>p::after {
     content: "............................................................................................................................";
     font-weight: 100;
 }

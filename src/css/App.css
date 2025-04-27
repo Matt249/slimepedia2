@@ -25,6 +25,14 @@
 		color var(--animation-speed) var(--animation-function);
 }
 
+[data-theme="dark"] body {
+	background-image: url("/assets/wallpapers/houseNight.png");
+}
+
+[data-theme="light"] body {
+	background-image: url("/assets/wallpapers/houseDay.png");
+}
+
 [data-theme="dark"] {
 	--menu-color-0: #000;   
 	--menu-color-1: #111;
@@ -61,16 +69,16 @@
 }
 
 [data-theme="light"] .os-scrollbar {
-    background-color: transparent; /* Couleur de l'arrière-plan de la scrollbar */
+    background-color: transparent;
 }
 
 [data-theme="light"] .os-scrollbar-track {
-    background-color: transparent; /* Couleur de la piste */
+    background-color: transparent;
 }
 
 [data-theme="light"] .os-scrollbar-handle {
-    background-color: var(--item-color); /* Couleur de la poignée */
-    border-radius: 4px; /* Arrondi de la poignée */
+    background-color: var(--item-color);
+    border-radius: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -81,6 +89,21 @@
 
 html {
 	font-size: 1.6vh;
+}
+
+body {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-color: var(--background-color);
+	cursor: url("/assets/ui/pointer24.png"), auto;
+	color: var(--text-color);
+	overflow: hidden;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
 
 h1,
@@ -130,20 +153,6 @@ p {
 svg {
 	fill: var(--text-color);
 	transition: fill var(--animation-speed) var(--animation-function);
-}
-
-body {
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-	background-color: var(--background-color);
-	color: var(--text-color);
-	overflow: hidden;
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
 }
 
 .slimepedia-app {
