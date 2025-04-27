@@ -75,11 +75,11 @@
 	background-image: url("/assets/wallpapers/houseDay.png");
 }
 
-[data-theme="dark"] .os-scrollbar {
+.os-scrollbar {
     background-color: transparent;
 }
 
-[data-theme="dark"] .os-scrollbar-track {
+.os-scrollbar-track {
     background-color: transparent;
 }
 
@@ -88,17 +88,8 @@
     border-radius: 4px;
 }
 
-[data-theme="light"] .os-scrollbar {
-    background-color: transparent;
-}
-
-[data-theme="light"] .os-scrollbar-track {
-    background-color: transparent;
-}
-
 [data-theme="light"] .os-scrollbar-handle {
     background-color: var(--item-color);
-    border-radius: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
