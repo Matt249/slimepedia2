@@ -79,7 +79,7 @@ export const NavBar = () => {
             <div className="theme-btn-container">
                 <NavButton
                     name="Switch Theme"
-                    icon={darkMode ? 'misc/sun' : 'misc/moon'}
+                    icon={darkMode ? 'misc/moon' : 'misc/sun'}
                     action={() => setDarkMode(!darkMode)}
                     tilting="random"
                     selected={false}
