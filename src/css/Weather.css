@@ -153,7 +153,7 @@
 }
 
 .music-played>img,
-.top-buttons>div>button>img:hover {
+.top-buttons>div>button:hover>img:hover {
     transform: scale(1.2);
     filter: grayscale(0);
 }

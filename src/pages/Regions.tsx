@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../text/regions';
@@ -6,9 +6,9 @@ import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
 import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
-import Down from '../svg/Down';
 import '../css/MusicPlayer.css';
 import '../css/Regions.css';
+import { FaAngleDown } from 'react-icons/fa6';
 
 interface RegionDescriptionProps {
     region: string;
@@ -106,13 +106,13 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                 )}
             </div>
             <div className='region-connection-separator'>
-                <Down />
+                <FaAngleDown />
             </div>
             <div>
                 <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
             </div>
             <div className='region-connection-separator'>
-                <Down />
+                <FaAngleDown />
             </div>
             <div className='region-from'>
                 {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
@@ -219,13 +219,13 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                 )}
             </div>
             <div className='region-connection-separator'>
-                <Down />
+                <FaAngleDown />
             </div>
             <div>
                 <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
             </div>
             <div className='region-connection-separator'>
-                <Down />
+                <FaAngleDown />
             </div>
             <div className='region-from'>
                 {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
@@ -285,18 +285,75 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
 
 const animationDelay = 300;
 
+enum RegionType {
+    Region = 'region',
+    Ranch = 'ranch'
+}
+
+const regionFinder: (region: string) => RegionType | null = (region) => {
+    if (regionsIds.includes(region))
+        return RegionType.Region;
+    else if (ranchIds.includes(region))
+        return RegionType.Ranch;
+    else
+        return null;
+}
+
+const regionMatcher: (regionTypeName: string | undefined, regionName: string | undefined) => [RegionType | null, string | null] = (regionTypeName, regionName) => {
+    let regionType: RegionType | null = null;
+    let region: string | null = null;
+
+    if (regionTypeName !== undefined) {
+        if ('region' === regionTypeName)
+            regionType = RegionType.Region;
+        else if ('ranch' === regionTypeName)
+            regionType = RegionType.Ranch;
+        else
+            return [null, null];
+    }
+    if (regionName !== undefined) {
+        const foundRegion = regionFinder(regionName);
+        if (null !== foundRegion) {
+            region = regionName;
+            if (foundRegion !== regionType) {
+                return [null, region];
+            }
+        }
+        else
+            return [null, null];
+    }
+    else
+        return [null, null];
+    return [regionType, region];
+}
+
 export const Regions: React.FC = () => {
     const regionDescriptionRef = useRef<HTMLDivElement>(null);
     const { regionType: regionTypeName, region: regionName } = useParams();
-    const regionType = regionTypeName && ['region', 'ranch'].includes(regionTypeName) ? regionTypeName : 'region';
-    const [selectedTab, setSelectedTab] = useState(regionType);
-    const region = (regionName && ((regionsIds.includes(regionName) && regionType === 'region') || (ranchIds.includes(regionName) && regionType === 'ranch'))) ? regionName : null;
+    const [regionType, region] = regionMatcher(regionTypeName, regionName);
+    const [selectedTab, setSelectedTab] = useState<RegionType | null>();
 
     const mainPlayer = useRef<HTMLVideoElement>(null);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
-    if (!regionType) return <Navigate to='/regions/region/fields' />;
-    if (!region) return <Navigate to={`/regions/${regionType}/${regionType === 'region' ? 'fields' : 'consevatory'}`} />;
+    useEffect(() => {
+        if (regionTypeName === 'region') {
+            setSelectedTab(RegionType.Region);
+        } else if (regionTypeName === 'ranch') {
+            setSelectedTab(RegionType.Ranch);
+        } else {
+            setSelectedTab(null);
+        }
+    }, [regionTypeName]);
+
+    if (regionType === null) {
+        if (region !== null)
+            return <Navigate to={`/regions/${regionFinder(region)}/${region}`} replace />;
+        else
+            return <Navigate to='/regions/region/fields' replace/>;
+    }
+    if (region === null)
+        return <Navigate to='/regions/region/fields' replace />;
 
     const scrollToSection = () => {
         if (regionDescriptionRef.current)
@@ -350,8 +407,8 @@ export const Regions: React.FC = () => {
         <div>
             <div className='region-tab-list'>
                 <div className='regions-tabs'>
-                    <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab('region')} />
-                    <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab('ranch')} />
+                    <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab(RegionType.Region)} />
+                    <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab(RegionType.Ranch)} />
                 </div>
                 <OverlayScrollbarsComponent
                     options={{
@@ -422,7 +479,7 @@ export const Regions: React.FC = () => {
                             tabIndex={0}
                             className='arrow-down'
                         >
-                            <Down />
+                            <FaAngleDown />
                         </a>
                     </div>
                     {(regionType === 'ranch') ? <RanchDescription region={region} regionDescriptionRef={regionDescriptionRef} /> : <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />}

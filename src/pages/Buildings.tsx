@@ -67,7 +67,7 @@ export const Buildings = () => {
             );
         }
         if (!upgrade)
-            return <Navigate to='/buildings/corral' />;
+            return <Navigate to='/buildings/corral' replace />;
         return (
             <div className='upgrade-infos upgrade-infos-available'>
                 <div className='upgrade-title'>

@@ -11,6 +11,7 @@ export const Weather: React.FC = () => {
     const weatherMusicRef = useRef<HTMLAudioElement>(null);
     const { weather } = useParams<{ weather: string }>();
     const [weatherMusicAvailable, setWeatherMusicAvailable] = useState<boolean>(false);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
         if (weather && weatherList[weather][7] && weatherMusicRef.current) {
@@ -36,7 +37,7 @@ export const Weather: React.FC = () => {
 
     if (weather === undefined || weatherName.indexOf(weather) === -1) {
         return (
-            <Navigate to="/weather/rain" />
+            <Navigate to="/weather/rain" replace />
         );
     }
 
@@ -50,8 +51,10 @@ export const Weather: React.FC = () => {
             if (weatherMusicRef.current.paused) {
                 weatherMusicRef.current.volume = 0.1;
                 weatherMusicRef.current.play();
+                setIsPlaying(true); // Met à jour l'état
             } else {
                 weatherMusicRef.current.pause();
+                setIsPlaying(false); // Met à jour l'état
             }
         }
     };
@@ -71,7 +74,7 @@ export const Weather: React.FC = () => {
                         </audio>
                     }
                     {weatherMusicAvailable &&
-                        <button onClick={() => handleMusicPlay()} className={'music-player' + (weatherMusicRef.current!.paused ? '' : ' music-played')}>
+                        <button onClick={() => handleMusicPlay()} className={'music-player' + (isPlaying ? ' music-played' : '')}>
                             <img src='/assets/misc/audio.png' alt='Play weather music' />
                         </button>
                     }

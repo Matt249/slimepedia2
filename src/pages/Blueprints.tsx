@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
-import { Down } from '../svg/Down';
-import { Minus } from '../svg/Minus';
-import { Plus } from '../svg/Plus';
 import { NavButton } from '../components/NavButton';
 import { RecipeProvider, useRecipeContext } from '../components/RecipeContext';
 import {
@@ -11,8 +8,9 @@ import {
     utilitiesList, utilitiesNames, warpDescriptions, warpGadgets, warpNames
 } from '../text/blueprints';
 import '../css/Blueprints.css';
-import MemoXmark from '../svg/Xmark';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { FaAngleDown, FaMinus, FaPlus } from 'react-icons/fa6';
+import { FaXmark } from "react-icons/fa6";
 
 enum BlueprintType {
     UPGRADES = 'upgrades',
@@ -74,7 +72,7 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
             className='recipe-list'
         >
             <div className='quantity-selector'>
-                <Down onClick={() => decreaseQuantity()} />
+                <FaAngleDown onClick={() => decreaseQuantity()} />
                 <div></div>
                 <button
                     ref={elementRef}
@@ -85,10 +83,10 @@ const CraftingList: React.FC<{ name: string; type: BlueprintType }> = ({ name, t
                     }}
                 >
                     <h2>{quantity}</h2>
-                    <Plus />
+                    <FaPlus />
                 </button>
                 <div></div>
-                <Down onClick={() => increaseQuantity()} />
+                <FaAngleDown onClick={() => increaseQuantity()} />
             </div>
             {Object.keys(recipe).map((ingredient) => (
                 <div key={ingredient}>
@@ -185,24 +183,24 @@ const UpgradeItemList: React.FC<UpgradeItemListProps> = ({
                 {tier > 1 && upgradePack[2] >= 1 ? (
                     <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier - 1}`} onClick={() => setTier(tier - 1)}>
                         <div className='arrow-left'>
-                            <Down />
+                            <FaAngleDown />
                         </div>
                     </NavLink>
                 ) : (
                     <div className='arrow-left disabled'>
-                        <Down />
+                        <FaAngleDown />
                     </div>
                 )}
                 <h2>{tier}</h2>
                 {tier < upgradePack[2] && upgradePack[2] >= 1 ? (
                     <NavLink to={`/blueprints/upgrades/${upgradePack[0]}/${tier + 1}`} onClick={() => setTier(tier + 1)}>
                         <div className='arrow-right'>
-                            <Down />
+                            <FaAngleDown />
                         </div>
                     </NavLink>
                 ) : (
                     <div className='arrow-right disabled'>
-                        <Down />
+                        <FaAngleDown />
                     </div>
                 )}
             </div>
@@ -218,8 +216,8 @@ const UpgradesPage: React.FC = () => {
 
     const validateUpgrade = () => {
         if (upgrade !== null) {
-            if (!upgradeNames.includes(upgrade)) return <Navigate to='/blueprints/upgrades' />;
-            if (tier < 1 || tier > upgradePacks[upgrade][1]) return <Navigate to={`/blueprints/upgrades/${upgrade}`} />;
+            if (!upgradeNames.includes(upgrade)) return <Navigate to='/blueprints/upgrades' replace />;
+            if (tier < 1 || tier > upgradePacks[upgrade][1]) return <Navigate to={`/blueprints/upgrades/${upgrade}`} replace />;
         }
         return null;
     };
@@ -284,7 +282,7 @@ const UpgradeEffectBox: React.FC<{ upgrade: string | null; tier: number }> = ({ 
     <div className='vac-upgrade-effect-box'>
         <img src={upgrade === null ? '' : `/assets/${upgradeEffects[upgrade + tier][0][0]}.png`} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
         <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][0][1]}</p>
-        <Down />
+        <FaAngleDown />
         <img src={upgrade === null ? '' : `/assets/${upgradeEffects[upgrade + tier][1][0]}.png`} alt={upgrade === null ? '' : upgradesList[upgrade + tier][0]} />
         <p className='vac-effect-desc'>{upgrade === null ? '' : upgradeEffects[upgrade + tier][1][1]}</p>
     </div>
@@ -415,7 +413,7 @@ const RecipeMenu: React.FC = () => {
                 <button onClick={() => resetList()}>
                     <img src='/assets/misc/trash.png' alt='Clear the list' />
                 </button>
-                <MemoXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
+                <FaXmark onClick={() => setRecipeMenuToggle(!recipeMenuToggle)} />
             </div>
             <OverlayScrollbarsComponent
                 options={{
@@ -449,9 +447,9 @@ const RecipeMenu: React.FC = () => {
                                 >
                                     <img src={type === BlueprintType.UPGRADES ? ('/assets/upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `/assets/${currentType}/${blueprint}.png`} alt='Icon of blueprint' />
                                     <p>{name}: </p>
-                                    <Plus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
+                                    <FaPlus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <h3>{recipeList.current[blueprint][1]}</h3>
-                                    <Minus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
+                                    <FaMinus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <button onClick={() => resetBlueprint(blueprint)}>
                                         <img src='/assets/misc/trash.png' alt='Clear the blueprint' className='clear-item-img' />
                                     </button>

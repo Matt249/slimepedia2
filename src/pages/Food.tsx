@@ -7,7 +7,7 @@ import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodType
 import { Tab } from '../components/Tab';
 import { slimesList } from '../text/slimes';
 import '../css/Pedia.css';
-import { Down } from '../svg/Down';
+import { FaAngleDown } from 'react-icons/fa6';
 
 interface FoodTabsProps {
     filter: string;
@@ -281,7 +281,7 @@ export const Food = () => {
                     }}
                     tabIndex={0}
                 >
-                    <Down />
+                    <FaAngleDown />
                 </a>
                 <FoodDescription food={food} topBtn={topBtn} />
             </div>
