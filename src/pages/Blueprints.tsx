@@ -9,8 +9,7 @@ import {
 } from '../text/blueprints';
 import '../css/Blueprints.css';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import { FaAngleDown, FaMinus, FaPlus } from 'react-icons/fa6';
-import { FaXmark } from "react-icons/fa6";
+import { FaAngleDown, FaMinus, FaPlus, FaXmark } from 'react-icons/fa6';
 
 enum BlueprintType {
     UPGRADES = 'upgrades',
