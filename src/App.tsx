@@ -15,7 +15,10 @@ function App() {
     document.title = "Slimepedia 2";
 
     useEffect(() => {
-        const randomSlimeKey = Object.values(Slime)[Math.floor(Math.random() * Object.keys(Slime).length)];
+        const crypto = window.crypto || window.Crypto;
+        const array = new Uint32Array(1);
+        crypto.getRandomValues(array);
+        const randomSlimeKey = Object.values(Slime)[array[0] % Object.keys(Slime).length];
         const favicon = document.querySelector('link[rel="icon"]');
         if (favicon)
             (favicon as HTMLLinkElement).href = `/assets/slimes/${randomSlimeKey}.png`;
