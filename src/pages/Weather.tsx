@@ -1,15 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import { weatherName, weatherList, weatherPedia, weatherSpawn } from "../text/weather";
+import { Weather, weatherList, weatherPedia, weatherSpawn } from "../text/weather";
 import { Biomes } from "../components/Biomes";
 import { Navigate, NavLink, useParams } from "react-router-dom";
 import '../css/Weather.css';
+import { getEnumValue } from "../App";
 
-export const Weather: React.FC = () => {
+export const WeatherPage: React.FC = () => {
     const [panel, setPanel] = useState<boolean>(true);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
     const backgroundVideoRef = useRef<HTMLVideoElement>(null);
     const weatherMusicRef = useRef<HTMLAudioElement>(null);
-    const { weather } = useParams<{ weather: string }>();
+    const { weather: weatherName } = useParams();
+    const weather = weatherName ? getEnumValue(Weather, weatherName) : Weather.Clear;
     const [weatherMusicAvailable, setWeatherMusicAvailable] = useState<boolean>(false);
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -21,6 +23,9 @@ export const Weather: React.FC = () => {
             setWeatherMusicAvailable(false);
         }
     }, [weather, weatherList, weatherMusicRef]);
+
+    if (weather === null)
+        return <Navigate to='/weather/rain' replace />;
 
     const handleMouseEnter = (weather: string) => {
         if (videoRefs.current[weather])
@@ -34,12 +39,6 @@ export const Weather: React.FC = () => {
             }, 300);
         }
     };
-
-    if (weather === undefined || weatherName.indexOf(weather) === -1) {
-        return (
-            <Navigate to="/weather/rain" replace />
-        );
-    }
 
     const handleVideoLoaded = () => {
         backgroundVideoRef.current!.currentTime = videoRefs.current[weather]!.currentTime;
@@ -82,7 +81,7 @@ export const Weather: React.FC = () => {
             </div>
 
             <div className="weather-list">
-                {weatherName.map((weatherName: string) => (
+                {Object.values(Weather).slice(1).map((weatherName) => (
                     <NavLink
                         to={`/weather/${weatherName}`}
                         key={weatherName}
@@ -127,19 +126,19 @@ export const Weather: React.FC = () => {
                     </div>
                     <div className="weather-box related-weater-box">
                         <h2 className='weather-box-title'>Related Weather</h2>
-                        <NavLink to={`/weather/${weatherList[weather][5]}`}>
-                            <img src={`/assets/world/${weatherList[weather][5]}.png`} alt={weatherList[weatherList[weather][5]][0] + ' icon'} />
-                        </NavLink>
+                        {weatherList[weather][5] !== null &&
+                            <NavLink to={`/weather/${weatherList[weather][5]}`}>
+                                <img src={`/assets/world/${weatherList[weather][5]}.png`} alt={weatherList[weatherList[weather][5]][0] + ' icon'} />
+                            </NavLink>
+                        }
                     </div>
                     <div className="weather-box spawning-slimes-box">
                         <h2 className='weather-box-title'>Unique Slimes/Resources</h2>
-                        {weatherList[weather][4].length !== 0 ? weatherList[weather][4].map((element) => (
+                        {weatherList[weather][4].length !== 0 && weatherList[weather][4].map((element) =>
                             <NavLink to={weatherSpawn[element][2]} key={element}>
                                 <img src={`/assets/${weatherSpawn[element][1]}.png`} title={weatherSpawn[element][0]} alt={weatherSpawn[element][0]} />
                             </NavLink>
-                        )) :
-                            <img src='/assets/misc/none.png' alt='No effects' />
-                        }
+                        )}
                     </div>
                     <Biomes spawnList={weatherList[weather][6]} />
                 </div>
@@ -148,4 +147,4 @@ export const Weather: React.FC = () => {
     );
 };
 
-export default Weather;
+export default WeatherPage;

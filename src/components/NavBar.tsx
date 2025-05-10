@@ -28,7 +28,7 @@ export const NavBar = () => {
             </NavLink>
             <NavLink style={noLink} to="/food">
                 {({ isActive }) => (
-                    <NavButton name="Food" icon="food/food" tilting="right" selected={isActive} />
+                    <NavButton name="Food" icon="food/any" tilting="right" selected={isActive} />
                 )}
             </NavLink>
             <NavLink style={noLink} to="/items">

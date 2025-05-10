@@ -1,47 +1,67 @@
 import { NavButton } from '../components/NavButton';
-import { buildingNames, buildingList, buildingUpgrades, usageList } from '../text/buildings';
+import { buildingList, buildingUpgrades, usageList, Building } from '../text/buildings';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import React from 'react';
 import '../css/Buildings.css';
+import { getEnumValue } from '../App';
 
-const defaultBuilding = 'corral';
 const linkStyle = {
     textDecoration: 'none',
     color: 'var(--text-color)'
 }
 
-export const Buildings = () => {
-    const { building, upgrade } = useParams();
-    const activeBuilding = building ?? defaultBuilding;
-    const currentUpgrade = upgrade ?? null;
-    const buildingsButtons = () => {
-        return buildingNames.map((building) => {
-            return (
-                <NavLink key={building} to={`/buildings/${building}`} style={linkStyle}>
-                    <NavButton
-                        icon={`buildings/${building}`}
-                        name={buildingList[building][0]}
-                        size={1.25}
-                        selected={building === activeBuilding}
-                        tilting='none'
-                    />
-                </NavLink>
-            )
-        });
+const UpgradeInfo: React.FC<{ building: Building | null; currentUpgrade: string | null }> = ({ building, currentUpgrade }) => {
+    if (currentUpgrade == null || building == null) {
+        return (
+            <div className='upgrade-infos upgrade-no-infos'>
+                <div>
+                    <img src='/assets/misc/upgrade.png' alt="Upgrade Icon" />
+                    <h3>Upgrade Information</h3>
+                    <p>Click on an upgrade to see more information about it.</p>
+                </div>
+            </div>
+        );
     }
-    const upgradeList = () => {
-        if (buildingUpgrades[activeBuilding].length === 0)
-            return (
-                <>
-                    <NavButton icon='misc/upgrade' name='Upgrade' size={.8} selected={false} tilting='none' visible={false} />
-                    <h2>No upgrades available for this building.</h2>
-                </>
-            );
-        return buildingUpgrades[activeBuilding].map((upgrade) => {
-            return (
-                <NavLink key={upgrade[0]} to={`/buildings/${activeBuilding}/${upgrade[0]}`} style={linkStyle}>
+
+    const upgrade = buildingUpgrades[building].find(upgrade => upgrade[0] === currentUpgrade);
+    if (!upgrade)
+        return <Navigate to='/buildings/corral' replace />;
+    return (
+        <div className='upgrade-infos upgrade-infos-available'>
+            <div className='upgrade-title'>
+                <h3>{upgrade[1]}</h3>
+            </div>
+            <div className='little-box-buildings upgrade-cost building-cost'>
+                <img src='/assets/misc/buck.png' alt='Newbuck coin' />
+                <div>
+                    <h3>Cost</h3>
+                    <h4>{upgrade[2]}</h4>
+                </div>
+            </div>
+            <div className="upgrade-img">
+                <img src={`/assets/buildings/${upgrade[0]}.png`} alt={upgrade[1]} />
+            </div>
+            <div className='upgrade-desc'>
+                <h4>Description</h4>
+                <p>{upgrade[3]}</p>
+            </div>
+        </div>
+    );
+}
+
+const UpgradeList: React.FC<{ building: Building; currentUpgrade: string | null }> = ({ building, currentUpgrade }) => {
+    if (buildingUpgrades[building].length === 0)
+        return (
+            <>
+                <NavButton icon='misc/upgrade' name='Upgrade' size={.8} selected={false} tilting='none' visible={false} />
+                <h2>No upgrades available for this building.</h2>
+            </>
+        );
+    return (
+        <>
+            {buildingUpgrades[building].map((upgrade) => (
+                <NavLink key={upgrade[0]} to={`/buildings/${building}/${upgrade[0]}`} style={linkStyle}>
                     <NavButton
-                        key={upgrade[0]}
                         icon={`buildings/${upgrade[0]}`}
                         name={upgrade[1]}
                         size={.8}
@@ -49,94 +69,121 @@ export const Buildings = () => {
                         tilting='none'
                     />
                 </NavLink>
-            )
-        });
-    }
+            ))}
+        </>
+    );
+};
 
-    const upgradeInfo = () => {
-        const upgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
-        if (!currentUpgrade) {
-            return (
-                <div className='upgrade-infos upgrade-no-infos'>
-                    <div>
-                        <img src='/assets/misc/upgrade.png' alt="Upgrade Icon" />
-                        <h3>Upgrade Information</h3>
-                        <p>Click on an upgrade to see more information about it.</p>
-                    </div>
+const BuildingsButtons: React.FC<{ selectedBuilding: Building | null }> = ({ selectedBuilding }) => {
+    return (
+        <>
+            {Object.values(Building).map((buildingElement) => (
+                <NavLink key={buildingElement} to={`/buildings/${buildingElement}`} style={linkStyle}>
+                    <NavButton
+                        icon={`buildings/${buildingElement}`}
+                        name={buildingList[buildingElement][0]}
+                        size={1.25}
+                        selected={buildingElement === selectedBuilding}
+                        tilting='none'
+                    />
+                </NavLink>
+            ))}
+        </>
+    );
+};
+
+const EmptyBuilding: React.FC = () => (
+    <div>
+        <div className='buildings-list'>
+            <BuildingsButtons selectedBuilding={null} />
+        </div>
+        <div className='building-presentation'>
+            <div className='building-title'>
+                <h1>No Building Selected</h1>
+                <h2>Select a building on the list got get it&apos;s infoirmations</h2>
+                <img className='building-image' src='' alt='No building selected' />
+            </div>
+            <div className='upgrade-list'>
+                <div>
+                    <UpgradeList building={Building.Corral} currentUpgrade={null} />
                 </div>
-            );
-        }
-        if (!upgrade)
-            return <Navigate to='/buildings/corral' replace />;
-        return (
-            <div className='upgrade-infos upgrade-infos-available'>
-                <div className='upgrade-title'>
-                    <h3>{upgrade[1]}</h3>
-                </div>
-                <div className='little-box-buildings upgrade-cost building-cost'>
-                    <img src='/assets/misc/buck.png' alt='Newbuck coin' />
-                    <div>
-                        <h3>Cost</h3>
-                        <h4>{upgrade[2]}</h4>
-                    </div>
-                </div>
-                <div className="upgrade-img">
-                    <img src={`/assets/buildings/${upgrade[0]}.png`} alt={upgrade[1]} />
-                </div>
-                <div className='upgrade-desc'>
-                    <h4>Description</h4>
-                    <p>{upgrade[3]}</p>
+                <div className='fake-border fb-0'></div>
+                <div className='fake-border fb-1'></div>
+            </div>
+            <div className='building-description'>
+                <img src='/assets/misc/pediatut.png' alt="Informations about the building" />
+            </div>
+            <div className='little-box-buildings building-cost'>
+                <img src='/assets/misc/buck.png' alt='Newbuck coin' />
+                <div>
+                    <h3>Cost</h3>
                 </div>
             </div>
-        );
-    }
+            <div className='little-box-buildings building-use'>
+                <img src='' alt='Usage' />
+                <div>
+                    <h3>Usage</h3>
+                </div>
+            </div>
+            <UpgradeInfo building={null} currentUpgrade={null} />
+        </div>
+    </div>
+);
 
-    const foundUpgrade = buildingUpgrades[activeBuilding].find(upgrade => upgrade[0] === currentUpgrade);
+export const Buildings = () => {
+    const { building: buildingName, upgrade } = useParams();
+    const building = getEnumValue(Building, buildingName) ?? Building.Corral;
+    const currentUpgrade = upgrade ?? null;
+
+    if (building === null)
+        return <EmptyBuilding />;
+
+    const foundUpgrade = buildingUpgrades[building].find(upgrade => upgrade[0] === currentUpgrade);
     const upgradeName = foundUpgrade ? foundUpgrade[1] : undefined;
     if (upgradeName)
-        document.title = `${upgradeName} (${buildingList[activeBuilding][0]}) - Slimepedia 2`;
-    else if (building)
-        document.title = buildingList[activeBuilding][0] + ' - Slimepedia 2';
+        document.title = `${upgradeName} (${buildingList[building][0]}) - Slimepedia 2`;
+    else if (buildingName)
+        document.title = buildingList[building][0] + ' - Slimepedia 2';
     else
         document.title = 'Buildings - Slimepedia 2';
 
     return (
         <div>
             <div className='buildings-list'>
-                {buildingsButtons()}
+                <BuildingsButtons selectedBuilding={null} />
             </div>
             <div className='building-presentation'>
                 <div className='building-title'>
-                    <h1>{buildingList[activeBuilding][0]}</h1>
-                    <h2>{buildingList[activeBuilding][1]}</h2>
-                    <img className='building-image' src={`/assets/buildings/${activeBuilding}.png`} alt={buildingList[activeBuilding][0]} />
+                    <h1>{buildingList[building][0]}</h1>
+                    <h2>{buildingList[building][1]}</h2>
+                    <img className='building-image' src={`/assets/buildings/${building}.png`} alt={buildingList[building][0]} />
                 </div>
                 <div className='upgrade-list'>
                     <div>
-                        {upgradeList()}
+                        <UpgradeList building={building} currentUpgrade={currentUpgrade} />
                     </div>
                     <div className='fake-border fb-0'></div>
                     <div className='fake-border fb-1'></div>
                 </div>
                 <div className='building-description'>
                     <img src='/assets/misc/pediatut.png' alt="Informations about the building" />
-                    <p>{buildingList[activeBuilding][3]}</p>
+                    <p>{buildingList[building][3]}</p>
                 </div>
                 <div className='little-box-buildings building-cost'>
                     <img src='/assets/misc/buck.png' alt='Newbuck coin' />
                     <div>
                         <h3>Cost</h3>
-                        <h4>{buildingList[activeBuilding][2]}</h4>
+                        <h4>{buildingList[building][2]}</h4>
                     </div>
                 </div>
                 <div className='little-box-buildings building-use'>
-                    <img src={`/assets/${usageList[buildingList[activeBuilding][4]][1]}.png`} alt='Usage' />
+                    <img src={`/assets/${usageList[buildingList[building][4]][1]}.png`} alt='Usage' />
                     <div>
                         <h3>Usage</h3>
-                        <h4>{usageList[buildingList[activeBuilding][4]][0]}</h4>
+                        <h4>{usageList[buildingList[building][4]][0]}</h4>
                     </div>
                 </div>
-                {upgradeInfo()}
+                <UpgradeInfo building={building} currentUpgrade={currentUpgrade} />
             </div>
         </div>
     );

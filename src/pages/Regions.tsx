@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, NavLink, useParams } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import { regionElements, regionPedia, regionsIds, regionInfos, regionsResourcesInfos, ranchIds, regionsConnections, ranchSpecials } from '../text/regions';
+import { Region, Ranch, regionElements, regionPedia, regionInfos, regionsResourcesInfos, regionsConnections, ranchSpecials, ranchInfos, ranchConnections, ranchPedia } from '../text/regions';
 import { Tab } from '../components/Tab';
 import { foodList } from '../text/food';
 import { slimesList } from '../text/slimes';
@@ -9,14 +9,83 @@ import { LabyMusicRefs, MusicRefs } from '../components/MusicPlayer';
 import '../css/MusicPlayer.css';
 import '../css/Regions.css';
 import { FaAngleDown } from 'react-icons/fa6';
+import { getEnumValue } from '../App';
 
-interface RegionDescriptionProps {
-    region: string;
-    regionDescriptionRef: React.RefObject<HTMLDivElement>;
+const regionTypeMatcher: (region: Region | Ranch) => RegionType | null = (region) => {
+    if (Object.values(Region).includes(region as Region))
+        return RegionType.Region;
+    if (Object.values(Ranch).includes(region as Ranch))
+        return RegionType.Ranch;
+    else
+        return null;
 }
 
-const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDescriptionRef }) => (
-    <div className='region-description' ref={regionDescriptionRef}>
+const RegionConnections: React.FC<{ region: Region | Ranch }> = ({ region, }) => {
+    const connections = (() => {
+        if (regionTypeMatcher(region) === RegionType.Region) {
+            return regionsConnections[region as Region];
+        }
+        else if (regionTypeMatcher(region) === RegionType.Ranch) {
+            return ranchConnections[region as Ranch];
+        }
+        else
+            return [[], []];
+    })();
+    return (
+        <div className='region-connections'>
+            <h2 className='box-title'>Region Connections</h2>
+            <div className='region-from'>
+                {connections[0].length > 0 ? connections[0].map(regionName => {
+                    if (regionTypeMatcher(regionName) === RegionType.Region)
+                        return (
+                            <NavLink to={`/regions/region/${regionName}`} key={'from-' + regionName}>
+                                <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName as Region][0]} title={regionInfos[regionName as Region][0]} />
+                            </NavLink>
+                        )
+                    if (regionTypeMatcher(regionName) === RegionType.Ranch)
+                        return (
+                            <NavLink to={`/regions/ranch/${regionName}`} key={'from-' + regionName}>
+                                <img src={`/assets/world/${regionName}.png`} alt={ranchInfos[regionName as Ranch][0]} title={ranchInfos[regionName as Ranch][0]} />
+                            </NavLink>
+                        )
+                    return (<img key={'from-' + regionName} className='no-hover' src='/assets/misc/none.png' alt='No Region' />);
+                }) : (
+                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
+                )}
+            </div>
+            <div className='region-connection-separator'>
+                <FaAngleDown />
+            </div>
+            <div>
+                <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
+            </div>
+            <div className='region-connection-separator'>
+                <FaAngleDown />
+            </div>
+            <div className='region-to'>
+                {connections[1].length > 0 ? connections[1].map(regionName => {
+                    if (regionTypeMatcher(regionName) === RegionType.Region)
+                        return (
+                            <NavLink to={`/regions/region/${regionName}`} key={'from-' + regionName}>
+                                <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName as Region][0]} title={regionInfos[regionName as Region][0]} />
+                            </NavLink>
+                        )
+                    if (regionTypeMatcher(regionName) === RegionType.Ranch)
+                        return (
+                            <NavLink to={`/regions/ranch/${regionName}`} key={'from-' + regionName}>
+                                <img src={`/assets/world/${regionName}.png`} alt={ranchInfos[regionName as Ranch][0]} title={ranchInfos[regionName as Ranch][0]} />
+                            </NavLink>
+                        )
+                    return (<img key={'from-' + regionName} className='no-hover' src='/assets/misc/none.png' alt='No Region' />);
+                }) : (
+                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
+                )}
+            </div>
+        </div>);
+};
+
+const RegionDescription: React.FC<{ region: Region }> = ({ region }) => (
+    <div className='region-description' id='region-description'>
         <OverlayScrollbarsComponent
             options={{
                 scrollbars: {
@@ -91,42 +160,7 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
                 </NavLink>
             ))}
         </OverlayScrollbarsComponent>
-        <div className='region-connections'>
-            <h2 className='box-title'>Region Connections</h2>
-            <div className='region-from'>
-                {(regionsConnections[region][0].length) ? regionsConnections[region][0].map(regionArg => {
-                    const regionName = regionArg.split("/")[1];
-                    return (
-                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
-                        </NavLink>
-                    )
-                }) : (
-                    <img className='region-no-connection' src='/assets/misc/none.png' alt='No Region' />
-                )}
-            </div>
-            <div className='region-connection-separator'>
-                <FaAngleDown />
-            </div>
-            <div>
-                <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
-            </div>
-            <div className='region-connection-separator'>
-                <FaAngleDown />
-            </div>
-            <div className='region-from'>
-                {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
-                    const regionName = regionArg.split("/")[1];
-                    return (
-                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
-                        </NavLink>
-                    )
-                }) : (
-                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
-                )}
-            </div>
-        </div>
+        <RegionConnections region={region} />
         <OverlayScrollbarsComponent
             options={{
                 scrollbars: {
@@ -176,13 +210,8 @@ const RegionDescription: React.FC<RegionDescriptionProps> = ({ region, regionDes
     </div >
 );
 
-interface RanchDescriptionProps {
-    region: string,
-    regionDescriptionRef: React.RefObject<HTMLDivElement>
-}
-
-const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescriptionRef }) => (
-    <div className={`ranch-description${region === 'conservatory' ? ' ranch-conservatory' : ''}`} ref={regionDescriptionRef}>
+const RanchDescription: React.FC<{ region: Ranch }> = ({ region }) => (
+    <div className={`ranch-description${region === 'conservatory' ? ' ranch-conservatory' : ''}`} id='ranch-description'>
         <OverlayScrollbarsComponent
             options={{
                 scrollbars: {
@@ -195,7 +224,7 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
         >
             <h2 className='box-title'>Slimepedia Entry</h2>
             <p>
-                {regionPedia[region].split("\n").map(function (item) {
+                {ranchPedia[region].split("\n").map(function (item) {
                     return (
                         <span key={item}>
                             {item}
@@ -204,55 +233,20 @@ const RanchDescription: React.FC<RanchDescriptionProps> = ({ region, regionDescr
                 })}
             </p>
         </OverlayScrollbarsComponent>
-        <div className='region-connections'>
-            <h2 className='box-title'>Ranch Connections</h2>
-            <div className='region-from'>
-                {(regionsConnections[region][0].length) ? regionsConnections[region][0].map(regionArg => {
-                    const regionName = regionArg.split("/")[1];
-                    return (
-                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
-                        </NavLink>
-                    )
-                }) : (
-                    <img className='region-no-connection' src='/assets/misc/none.png' alt='No Region' />
-                )}
-            </div>
-            <div className='region-connection-separator'>
-                <FaAngleDown />
-            </div>
-            <div>
-                <img className='no-hover' src={`/assets/world/${region}.png`} alt='Current Biome' />
-            </div>
-            <div className='region-connection-separator'>
-                <FaAngleDown />
-            </div>
-            <div className='region-from'>
-                {(regionsConnections[region][1].length) ? regionsConnections[region][1].map(regionArg => {
-                    const regionName = regionArg.split("/")[1];
-                    return (
-                        <NavLink to={`/regions/${regionArg}`} style={{ textDecoration: 'none' }} key={regionArg}>
-                            <img src={`/assets/world/${regionName}.png`} alt={regionInfos[regionName][0]} />
-                        </NavLink>
-                    )
-                }) : (
-                    <img className='no-hover' src='/assets/misc/none.png' alt='No Region' />
-                )}
-            </div>
-        </div>
+        <RegionConnections region={region} />
         <div className='ranch-box ranch-cost'>
             <h2 className='box-title'>Expansion Cost</h2>
-            <h3>{regionInfos[region][7]}</h3>
+            <h3>{ranchInfos[region][6]}</h3>
             <img src='/assets/misc/buck.png' alt='Newbucks' />
         </div>
         <div className='ranch-box ranch-slots'>
             <h2 className='box-title'>Available Slots</h2>
-            <h3>{regionInfos[region][6]}</h3>
+            <h3>{ranchInfos[region][5]}</h3>
             <img src='/assets/misc/patch.png' alt='Slots' />
         </div>
         <div className='ranch-box ranch-pods'>
             <h2 className='box-title'>Pod in this Expansion</h2>
-            <h3>{regionInfos[region][5]}</h3>
+            <h3>{ranchInfos[region][4]}</h3>
             <img src='/assets/misc/pod.png' alt='Slots' />
         </div>
         <div className='ranch-box ranch-special'>
@@ -290,77 +284,53 @@ enum RegionType {
     Ranch = 'ranch'
 }
 
-const regionFinder: (region: string) => RegionType | null = (region) => {
-    if (regionsIds.includes(region))
-        return RegionType.Region;
-    else if (ranchIds.includes(region))
-        return RegionType.Ranch;
-    else
-        return null;
-}
-
-const regionMatcher: (regionTypeName: string | undefined, regionName: string | undefined) => [RegionType | null, string | null] = (regionTypeName, regionName) => {
-    let regionType: RegionType | null = null;
-    let region: string | null = null;
-
-    if (regionTypeName !== undefined) {
-        if ('region' === regionTypeName)
-            regionType = RegionType.Region;
-        else if ('ranch' === regionTypeName)
-            regionType = RegionType.Ranch;
-        else
-            return [null, null];
-    }
-    if (regionName !== undefined) {
-        const foundRegion = regionFinder(regionName);
-        if (null !== foundRegion) {
-            region = regionName;
-            if (foundRegion !== regionType) {
-                return [null, region];
-            }
-        }
-        else
-            return [null, null];
-    }
-    else
-        return [null, null];
-    return [regionType, region];
-}
-
 export const Regions: React.FC = () => {
-    const regionDescriptionRef = useRef<HTMLDivElement>(null);
     const { regionType: regionTypeName, region: regionName } = useParams();
-    const [regionType, region] = regionMatcher(regionTypeName, regionName);
-    const [selectedTab, setSelectedTab] = useState<RegionType | null>();
+    const regionType = getEnumValue(RegionType, regionTypeName);
+    const region = (() => {
+        const foundRegion = getEnumValue(Region, regionName);
+        if (foundRegion !== null)
+            return foundRegion;
+        return getEnumValue(Ranch, regionName);
+    })();
+    const [tab, setTab] = useState<RegionType>();
 
     const mainPlayer = useRef<HTMLVideoElement>(null);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
     useEffect(() => {
-        if (regionTypeName === 'region') {
-            setSelectedTab(RegionType.Region);
-        } else if (regionTypeName === 'ranch') {
-            setSelectedTab(RegionType.Ranch);
-        } else {
-            setSelectedTab(null);
-        }
-    }, [regionTypeName]);
+        if (regionType !== null)
+            setTab(regionType);
+    }, [regionType]);
 
     if (regionType === null) {
-        if (region !== null)
-            return <Navigate to={`/regions/${regionFinder(region)}/${region}`} replace />;
-        else
-            return <Navigate to='/regions/region/fields' replace/>;
+        if (getEnumValue(Region, region as Region))
+            return <Navigate to={`/regions/region/${regionName}`} replace />;
+        if (getEnumValue(Ranch, region as Ranch))
+            return <Navigate to={`/regions/ranch/${regionName}`} replace />;
+        return <Navigate to='/regions/region/fields' replace />;
     }
     if (region === null)
         return <Navigate to='/regions/region/fields' replace />;
+    if (regionTypeName === RegionType.Region && !Object.values(Region).includes(region as Region))
+        return <Navigate to={`/regions/ranch/${region}`} replace />;
+    if (regionTypeName === RegionType.Ranch && !Object.values(Ranch).includes(region as Ranch))
+        return <Navigate to={`/regions/region/${region}`} replace />;
 
-    const scrollToSection = () => {
-        if (regionDescriptionRef.current)
-            regionDescriptionRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    };
 
-    const listOfRegions = selectedTab === 'region' ? regionsIds : ranchIds;
+
+    const zoneList = (() => {
+        if (regionType === RegionType.Region) {
+            return regionInfos[region as Region];
+        } else if (regionType === RegionType.Ranch) {
+            return ranchInfos[region as Ranch];
+        }
+        return [[], [], []];
+    })();
+
+    const zoneName = zoneList[0] as string;
+    const zoneCode = zoneList[1];
+    const zoneDescription = zoneList[2];
 
     const handleMouseEnter = async (e: React.MouseEvent<HTMLVideoElement, MouseEvent>) => {
         const video = e.target as HTMLVideoElement;
@@ -401,14 +371,15 @@ export const Regions: React.FC = () => {
         backgroundImage: `url("/assets/wait/${region}.jpg")})`
     };
 
-    document.title = regionInfos[region][0] + ' - Slimepedia 2';
+    const regionList = tab === RegionType.Region ? Object.values(Region) : Object.values(Ranch);
+    document.title = (regionType === RegionType.Region ? regionInfos[region as Region][0] : ranchInfos[region as Ranch][0]) + ' - Slimepedia 2';
 
     return (
         <div>
             <div className='region-tab-list'>
                 <div className='regions-tabs'>
-                    <Tab title='World Regions' icon='misc/world' selected={selectedTab === 'region'} action={() => setSelectedTab(RegionType.Region)} />
-                    <Tab title='Ranch' icon='misc/patch' selected={selectedTab === 'ranch'} action={() => setSelectedTab(RegionType.Ranch)} />
+                    <Tab title='World Regions' icon='misc/world' selected={tab === 'region'} action={() => setTab(RegionType.Region)} />
+                    <Tab title='Ranch' icon='misc/patch' selected={tab === 'ranch'} action={() => setTab(RegionType.Ranch)} />
                 </div>
                 <OverlayScrollbarsComponent
                     options={{
@@ -417,28 +388,28 @@ export const Regions: React.FC = () => {
                             autoHideDelay: 500,
                         },
                     }}
-                    className={'regions-list' + (selectedTab === 'region' ? ' regions-list-regions' : ' regions-list-ranch')}
+                    className={'regions-list' + (tab === 'region' ? ' regions-list-regions' : ' regions-list-ranch')}
                     defer
                 >
-                    {listOfRegions.map(regionItem => (
-                        <NavLink to={`/regions/${selectedTab}/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
+                    {regionList.map(regionItem => (
+                        <NavLink to={`/regions/${tab}/${regionItem}`} style={{ textDecoration: 'none' }} key={regionItem}>
                             <div
                                 className={'region-tab' + (regionItem === region ? ' region-selected' : '')}
-                                key={regionInfos[regionItem][0]}
+                                key={tab === RegionType.Region ? regionInfos[regionItem as Region][0] : ranchInfos[regionItem as Ranch][0]}
                             >
                                 <video
                                     ref={el => videoRefs.current[regionItem] = el}
                                     className='region-video'
-                                    src={`/assets/videos/${regionInfos[regionItem][2]}.light.webm`}
+                                    src={`/assets/videos/${tab === RegionType.Region ? regionInfos[regionItem as Region][1] : ranchInfos[regionItem as Ranch][1]}.light.webm`}
                                     onMouseEnter={e => handleMouseEnter(e)}
                                     onMouseLeave={e => { if (regionItem !== region) handleMouseLeave(e) }}
                                     autoPlay={regionItem === region}
                                     disablePictureInPicture loop muted
                                 >
-                                    {regionInfos[regionItem][0]} Video
+                                    {tab === RegionType.Region ? regionInfos[regionItem as Region][0] : ranchInfos[regionItem as Ranch][0]} Video
                                 </video>
-                                <img className='region-icon' src={`/assets/world/${regionInfos[regionItem][1]}.png`} alt={regionInfos[regionItem][0]} />
-                                <h2 className='region-name'>{regionInfos[regionItem][0]}</h2>
+                                <img className='region-icon' src={`/assets/world/${regionItem}.png`} alt={tab === RegionType.Region ? regionInfos[regionItem as Region][0] : ranchInfos[regionItem as Ranch][0]} />
+                                <h2 className='region-name'>{tab === RegionType.Region ? regionInfos[regionItem as Region][0] : ranchInfos[regionItem as Ranch][0]}</h2>
                             </div>
                         </NavLink>
                     ))}
@@ -449,7 +420,7 @@ export const Regions: React.FC = () => {
                     <video
                         ref={mainPlayer}
                         className='region-background-video'
-                        src={`/assets/videos/${regionInfos[region][2]}.webm`}
+                        src={`/assets/videos/${zoneCode}.webm`}
                         disablePictureInPicture
                         autoPlay
                         loop
@@ -463,26 +434,16 @@ export const Regions: React.FC = () => {
                     <div className='region-main-page-frame'>
                         {region === 'labyrinth' ? <LabyMusicRefs /> : <MusicRefs region={region} />}
                         <div className='region-main-page'>
-                            <img src={`/assets/world/${region}.png`} alt={regionInfos[region][0]} />
-                            <h1>{regionInfos[region][0]}</h1>
-                            <h2>{regionInfos[region][3]}</h2>
+                            <img src={`/assets/world/${region}.png`} alt={zoneName} />
+                            <h1>{zoneName}</h1>
+                            <h2>{zoneDescription}</h2>
                         </div>
-                        <a
-                            role="link"
-                            onClick={scrollToSection}
-                            onKeyDown={(e) => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    scrollToSection();
-                                }
-                            }}
-                            tabIndex={0}
-                            className='arrow-down'
-                        >
+                        <a className='arrow-down' href={`#${regionType}-description`}>
                             <FaAngleDown />
                         </a>
                     </div>
-                    {(regionType === 'ranch') ? <RanchDescription region={region} regionDescriptionRef={regionDescriptionRef} /> : <RegionDescription region={region} regionDescriptionRef={regionDescriptionRef} />}
+                    {regionType === RegionType.Region && <RegionDescription region={region as Region} />}
+                    {regionType === RegionType.Ranch && <RanchDescription region={region as Ranch} />}
                 </div>
             </div>
         </div>

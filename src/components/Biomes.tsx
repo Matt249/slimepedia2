@@ -8,11 +8,7 @@ import '../css/Biomes.css';
 const light = true;
 const animationDelay = 200;
 
-interface BiomesProps {
-    spawnList: string[];
-}
-
-export const Biomes: React.FC<BiomesProps> = ({ spawnList = [] }) => {
+export const Biomes: React.FC<{ spawnList: string[] }> = ({ spawnList = [] }) => {
     const [listHovered, setListHovered] = useState(false);
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const biomeBlacklist = ['pm'];

@@ -1,39 +1,25 @@
-export const toyNames: string[] = [
-    'ball',
-    'bomb',
-    'bouncy',
-    'moon',
-    'worm',
-    'puffer',
-    'yarn',
-    'duck',
-    'trash',
-    'fox'
-]
-
-export const toysList: {[key: string] : [string, string]} = {
-    'ball': ['Beach Ball', 'pink'],
-    'bouncy': ['Bouncy Ball', 'cotton'],
-    'yarn': ['Yarn Ball', 'tabby'],
-    'puffer': ['Plushie Puffer Fish', 'angler'],
-    'duck': ['Rubber Ducky', 'puddle'],
-    'trash': ['Trashcan', 'ringtail'],
-    'worm': ['Glowbug', 'flutter'],
-    'moon': ['Full Moon Ball', 'batty'],
-    'bomb': ['Bomb Ball', 'boom'],
-    'fox': ['Glo Glo Foxifur', 'none'],
-    'none': ['None', 'none']
-};
-
-export const toyDesc: {[key: string] : string} = {
-    'ball': 'Reduces agitation of nearby slimes, especially Pink Slimes who enjoy fun in the sun.',
-    'bouncy': 'Reduces agitation of nearby slimes, especially Cotton Slimes who see it as serious competition.',
-    'yarn': 'Reduces agitation of nearby slimes, especially Tabby Slimes. Though, they still don\'t know how to knit anymore than other slimes',
-    'puffer': 'Reduces agitation of nearby slimes, especially Angler Slimes who don\'t mind prickly playmates.',
-    'duck': 'Reduces agitation of nearby slimes, especially Puddle Slimes who are less shy when a rubber ducky buddy is around.',
-    'trash': 'Reduces agitation of nearby slimes, especially Ringtail Slimes who love to eat trash and do crimes.',
-    'worm': 'Reduces agitation of nearby slimes, especially Flutter Slimes who find it even more soothing than themselves.',
-    'moon': 'Reduces agitation of nearby slimes, especially Batty Slimes who see the night as their only true friend.',
-    'bomb': 'Reduces agitation of nearby slimes, especially Boom Slimes who probably think this sort of thing is funny.',
-    'fox': 'Greatly reduces agitation of all nearby slimes. Perfect for slimes getting into mischief.\nNote: Steam-exclusive toy.'
+export enum Toy {
+    Ball = 'ball',
+    Bomb = 'bomb',
+    Bouncy = 'bouncy',
+    Moon = 'moon',
+    Worm = 'worm',
+    Puffer = 'puffer',
+    Yarn = 'yarn',
+    Duck = 'duck',
+    Trash = 'trash',
+    Fox = 'fox'
 }
+
+export const toyNames: {[key in Toy] : [string, string]} = {
+    [Toy.Ball]: ['Beach Ball', 'Reduces agitation of nearby slimes, especially Pink Slimes who enjoy fun in the sun.'],
+    [Toy.Bomb]: ['Bomb Ball', 'Reduces agitation of nearby slimes, especially Boom Slimes who probably think this sort of thing is funny.'], 
+    [Toy.Bouncy]: ['Bouncy Ball', 'Reduces agitation of nearby slimes, especially Cotton Slimes who see it as serious competition.'], 
+    [Toy.Moon]: ['Full Moon Ball', 'Reduces agitation of nearby slimes, especially Batty Slimes who see the night as their only true friend.'], 
+    [Toy.Yarn]: ['Yarn Ball', 'Reduces agitation of nearby slimes, especially Tabby Slimes. Though, they still don\'t know how to knit anymore than other slimes'], 
+    [Toy.Worm]: ['Glowbug', 'Reduces agitation of nearby slimes, especially Flutter Slimes who find it even more soothing than themselves.'], 
+    [Toy.Puffer]: ['Plushie Puffer Fish', 'Reduces agitation of nearby slimes, especially Angler Slimes who don\'t mind prickly playmates.'], 
+    [Toy.Duck]: ['Rubber Ducky', 'Reduces agitation of nearby slimes, especially Puddle Slimes who are less shy when a rubber ducky buddy is around.'], 
+    [Toy.Trash]: ['Trashcan', 'Reduces agitation of nearby slimes, especially Ringtail Slimes who love to eat trash and do crimes.'], 
+    [Toy.Fox]: ['Glo Glo Foxifur', 'Greatly reduces agitation of all nearby slimes. Perfect for slimes getting into mischief.\nNote: Steam-exclusive toy.'],
+};

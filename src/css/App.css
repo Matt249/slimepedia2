@@ -76,6 +76,7 @@
 }
 
 .os-scrollbar {
+	cursor: pointer;
     background-color: transparent;
 }
 
@@ -100,6 +101,8 @@
 
 html {
 	font-size: 1.6vh;
+	scroll-behavior: smooth;
+	overflow: auto;
 }
 
 body {
@@ -110,7 +113,8 @@ body {
 	background-color: var(--background-color);
 	cursor: url("/assets/ui/pointer24.png"), auto;
 	color: var(--text-color);
-	overflow: hidden;
+	overflow: auto;
+	scroll-behavior: smooth;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
 		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

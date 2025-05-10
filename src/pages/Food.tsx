@@ -1,58 +1,59 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { NavLink, useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useMemo } from 'react';
+import { NavLink, useParams, Navigate } from 'react-router-dom';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { NavButton } from '../components/NavButton';
 import { Biomes } from '../components/Biomes';
-import { foodpedia, foodDescription, foodList, foodNames, foodSingular, foodTypesList } from '../text/food';
+import { foodpedia, foodDescription, foodList, Food, FoodType, foodTypeList, foodBlackList } from '../text/food';
 import { Tab } from '../components/Tab';
-import { slimesList } from '../text/slimes';
+import { Slime, slimesList } from '../text/slimes';
 import '../css/Pedia.css';
 import { FaAngleDown } from 'react-icons/fa6';
+import { getEnumValue } from '../App';
 
 interface FoodTabsProps {
-    filter: string;
-    setFilter: (filter: string) => void;
+    filter: FoodType | null;
+    setFilter: (filter: FoodType | null) => void;
 }
 
 const FoodTabs: React.FC<FoodTabsProps> = ({ filter, setFilter }) => (
     <div className='food-tabs'>
         <Tab
             title='All'
-            icon={`food/food`}
-            action={() => setFilter('any')}
-            selected={filter === 'any'}
+            icon={`food/any`}
+            action={() => setFilter(FoodType.Any)}
+            selected={filter === FoodType.Any}
         />
         <Tab
             title='Fruits'
             icon={`food/fruits`}
-            action={() => setFilter('fruits')}
-            selected={filter === 'fruits'}
+            action={() => setFilter(FoodType.Fruits)}
+            selected={filter === FoodType.Fruits}
         />
         <Tab
             title='Veggies'
             icon={`food/veggies`}
-            action={() => setFilter('veggies')}
-            selected={filter === 'veggies'}
+            action={() => setFilter(FoodType.Veggies)}
+            selected={filter === FoodType.Veggies}
         />
         <Tab
             title='Meat'
             icon={`food/meat`}
-            action={() => setFilter('meat')}
-            selected={filter === 'meat'}
+            action={() => setFilter(FoodType.Meat)}
+            selected={filter === FoodType.Meat}
         />
         <Tab
             title='Special'
             icon={`food/honey`}
-            action={() => setFilter('special')}
-            selected={filter === 'special'}
+            action={() => setFilter(null)}
+            selected={filter === null}
         />
     </div>
 );
 
 interface FoodListProps {
-    actualFoodList: string[];
+    actualFoodList: Food[];
     food: string | null;
-    filter: string;
+    filter: FoodType | null;
 }
 
 const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => (
@@ -63,7 +64,7 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => 
                 autoHideDelay: 500,
             },
         }}
-        className={`list-food${(filter === 'any' ? ' list-food-first' : '') + (filter == 'special' ? ' list-food-last' : '')}`}
+        className={`list-food${(filter === FoodType.Any ? ' list-food-first' : '') + (filter == null ? ' list-food-last' : '')}`}
         defer
     >
         {actualFoodList.map((foodId) => (
@@ -81,9 +82,18 @@ const FoodList: React.FC<FoodListProps> = ({ actualFoodList, food, filter }) => 
     </OverlayScrollbarsComponent>
 );
 
+const favSlimeCalc = (currentFood: Food | null) => {
+    if (currentFood === null)
+        return null;
+    for (const slime of Object.values(Slime))
+        if (slimesList[slime][2] === currentFood)
+            return slime;
+    return null;
+};
+
 interface FoodDetailsProps {
-    food: string | null;
-    setFilter: (filter: string) => void;
+    food: Food | null;
+    setFilter: (filter: FoodType) => void;
 }
 
 const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
@@ -115,15 +125,9 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
                 <Biomes spawnList={[]} />
             </>
         );
-    const favSlimeCalc = (currentFood: string | null) => {
-        if (currentFood === null)
-            return null;
-        for (const slime in slimesList)
-            if (slimesList[slime][2] === currentFood)
-                return slime;
-        return null;
-    };
+
     const favSlime = favSlimeCalc(food);
+
     return (
         <>
             <div className="image-title">
@@ -138,19 +142,19 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
             <a
                 role='link'
                 className='little-box food-type link-to-food'
-                onClick={() => { setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special') }}
+                onClick={() => { setFilter((foodList[food][1] !== null && [FoodType.Veggies, FoodType.Fruits, FoodType.Meat].includes(foodList[food][1])) ? foodList[food][1] : FoodType.Any) }}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
-                        setFilter(['veggies', 'meat', 'fruits'].includes(foodList[food][1]) ? foodList[food][1] : 'special');
+                        setFilter(foodList[food][1] !== null && ([FoodType.Veggies, FoodType.Fruits, FoodType.Meat].includes(foodList[food][1])) ? foodList[food][1] : FoodType.Any);
                     }
                 }}
                 tabIndex={0}
             >
-                <img src={foodList[food][1] === null ? '/assets/misc/none.png' : `/assets/food/${foodList[food][1]}.png`} alt={foodSingular[foodList[food][1]]} />
+                <img src={foodList[food][1] === null ? '/assets/misc/none.png' : `/assets/food/${foodList[food][1]}.png`} alt={foodList[food][1] === null ? 'None' : foodTypeList[foodList[food][1]][1]} />
                 <div>
                     <h3>Food type</h3>
-                    <h4>{foodSingular[foodList[food][1]]}</h4>
+                    <h4>{foodList[food][1] === null ? 'Unedible' : foodTypeList[foodList[food][1]][1]}</h4>
                 </div>
             </a>
             {favSlime === null ?
@@ -178,7 +182,7 @@ const FoodDetails: React.FC<FoodDetailsProps> = ({ food, setFilter }) => {
 };
 
 interface FoodDescriptionProps {
-    food: string | null;
+    food: Food | null;
     topBtn: boolean;
 }
 
@@ -198,7 +202,7 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
                 <p>Select a food to get it&apos;s description</p>
             </div>
         );
-    const food = foodNames.includes(foodName) ? foodName : 'carrot';
+    const food = Object.values(Food).includes(foodName) ? foodName : Food.Carrot;
     return (
         <div className={'desc ' + (topBtn ? 'shown-desc' : 'hidden-desc')}>
             <div className='desc-title'>
@@ -215,47 +219,31 @@ const FoodDescription: React.FC<FoodDescriptionProps> = ({ food: foodName, topBt
     )
 };
 
-export const Food = () => {
+export const FoodPage = () => {
     const { food: foodName } = useParams<{ food: string }>();
-    const navigate = useNavigate();
-    const [filter, setFilter] = useState('any');
-    const [food, setFood] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (foodName) {
-            if (foodName in foodTypesList) {
-                setFood(foodTypesList[foodName][1]);
-                setFilter(foodTypesList[foodName][0]);
-            }
-            else if (foodNames.includes(foodName))
-                setFood(foodName);
-            else {
-                setFood('carrot');
-                navigate('/food/carrot');
-            }
-        }
-        else {
-            setFood(null);
-            navigate('/food');
-        }
-    }, [foodName, navigate]);
-
+    const food = getEnumValue(Food, foodName);
+    const [filter, setFilter] = useState<FoodType | null>(food ? foodList[food][1] : FoodType.Any);
     const [topBtn, setTopBtn] = useState(false);
 
-    const actualFoodList = useMemo(() => {
+    const actualFoodList: Food[] = useMemo(() => {
         switch (filter) {
-            case 'fruits':
-                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'fruits');
-            case 'veggies':
-                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'veggies');
-            case 'meat':
-                return foodNames.filter(foodSearched => foodList[foodSearched][1] === 'meat');
-            case 'special':
-                return foodNames.filter(foodSearched => !['veggies', 'fruits', 'meat'].includes(foodList[foodSearched][1]));
+            case FoodType.Any:
+                return Object.values(Food).slice(0, -2);
+            case FoodType.Fruits:
+                return Object.values(Food).filter(foodSearched => foodList[foodSearched][1] === FoodType.Fruits);
+            case FoodType.Veggies:
+                return Object.values(Food).filter(foodSearched => foodList[foodSearched][1] === FoodType.Veggies);
+            case FoodType.Meat:
+                return Object.values(Food).filter(foodSearched => foodList[foodSearched][1] === FoodType.Meat);
+            case null:
+                return Object.values(Food).filter(foodSearched => foodList[foodSearched][1] === null ||  ![FoodType.Fruits, FoodType.Veggies, FoodType.Meat].includes(foodList[foodSearched][1])).slice(0, -2);
             default:
-                return foodNames;
+                return Object.values(Food).slice(0, -2);
         }
     }, [filter]);
+
+    if (food === null && foodName !== undefined || food !== null && foodBlackList.includes(food))
+        return <Navigate to='/food' replace />;
 
     document.title = food === null ? 'Food - Slimepedia' : (foodList[food][0] + ' - Slimepedia');
 
@@ -289,4 +277,4 @@ export const Food = () => {
     );
 };
 
-export default Food;
+export default FoodPage;

@@ -446,9 +446,9 @@ const RecipeMenu: React.FC = () => {
                                 >
                                     <img src={type === BlueprintType.UPGRADES ? ('/assets/upgrades/' + blueprint.replace(/[^a-zA-Z]/g, '') + '.png') : `/assets/${currentType}/${blueprint}.png`} alt='Icon of blueprint' />
                                     <p>{name}: </p>
-                                    <FaPlus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
-                                    <h3>{recipeList.current[blueprint][1]}</h3>
                                     <FaMinus onClick={() => decreaseBlueprint(blueprint, BlueprintType.DECORATIONS, 1)} />
+                                    <h3>{recipeList.current[blueprint][1]}</h3>
+                                    <FaPlus onClick={() => addToRecipeList(blueprint, BlueprintType.DECORATIONS, 1)} />
                                     <button onClick={() => resetBlueprint(blueprint)}>
                                         <img src='/assets/misc/trash.png' alt='Clear the blueprint' className='clear-item-img' />
                                     </button>

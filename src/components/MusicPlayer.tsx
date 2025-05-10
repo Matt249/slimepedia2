@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { ranchIds } from '../text/regions';
+import { Ranch, Region } from '../text/regions';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { getEnumValue } from '../App';
 
 const playAudio = (audioRef: React.MutableRefObject<HTMLAudioElement | null>, currentAudio: HTMLAudioElement | null, setCurrentAudio: React.Dispatch<React.SetStateAction<HTMLAudioElement | null>>) => {
     if (currentAudio)
@@ -52,8 +53,8 @@ const audioLabyRefsNames = [
     'dreamland-night-ambient'
 ]
 
-export const MusicRefs: React.FC<{ region: string }> = ({ region: regionName }) => {
-    const region = ranchIds.includes(regionName) ? 'conservatory' : regionName;
+export const MusicRefs: React.FC<{ region: Ranch | Region }> = ({ region: regionName }) => {
+    const region = getEnumValue(Ranch, regionName) ? Ranch.Conservatory : regionName;
     const [musicMenu, setMusicMenu] = useState(false);
     const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
 
