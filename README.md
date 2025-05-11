@@ -1,6 +1,6 @@
 # Slimepedia 2
 
-An online version of the Slimepedia present in Slime Rancher 2
+An online version of the Slimepedia from Slime Rancher 2
 
 **For now, the website is available at https://slimepedia.truitefario.fr/**
 
